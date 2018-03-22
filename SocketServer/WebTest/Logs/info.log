@@ -1,0 +1,19 @@
+﻿2018-03-22 10:46:01,568 [1] INFO  SSServer - The server instance SSServer has been started!
+2018-03-22 10:46:37,283 [1] INFO  SSServer - The server instance SSServer has been started!
+2018-03-22 10:47:20,093 [12] INFO  SSServer - Session: 116c1c8a-f604-4298-b5b7-e52549b1009f/127.0.0.1:53465
+A new session connected!
+2018-03-22 10:47:37,584 [9] INFO  SSServer - Session: 116c1c8a-f604-4298-b5b7-e52549b1009f/127.0.0.1:53465
+This session was closed for ClientClosing!
+2018-03-22 10:47:38,570 [12] INFO  SSServer - Session: 47230f29-2550-446d-a9e8-a59941b99041/127.0.0.1:53471
+A new session connected!
+2018-03-22 10:58:34,870 [1] INFO  SSServer - The server instance SSServer has been started!
+2018-03-22 10:59:48,503 [1] INFO  SSServer - The server instance SSServer has been started!
+2018-03-22 10:59:58,199 [9] INFO  SSServer - Session: 30f2e254-0819-48f4-8d3c-77b5c27e6f46/127.0.0.1:53982
+A new session connected!
+2018-03-22 11:01:28,762 [1] INFO  SSServer - The server instance SSServer has been started!
+2018-03-22 11:03:17,813 [17] INFO  SSServer - Session: 8b1277df-998b-4393-b77b-520c0d3a5c9f/127.0.0.1:54069
+A new session connected!
+2018-03-22 11:05:28,834 [26] INFO  SSServer - Session: 8b1277df-998b-4393-b77b-520c0d3a5c9f/127.0.0.1:54069
+The session will be closed for 117.457 timeout, the session start time: 2018/3/22 11:03:17, last active time: 2018/3/22 11:03:31!
+2018-03-22 11:05:28,838 [19] INFO  SSServer - Session: 8b1277df-998b-4393-b77b-520c0d3a5c9f/127.0.0.1:54069
+This session was closed for TimeOut!

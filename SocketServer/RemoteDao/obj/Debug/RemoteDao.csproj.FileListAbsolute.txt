@@ -1,0 +1,8 @@
+E:\WorkSpace\C#Space\RemoteSystem\RemoteDao\bin\Debug\RemoteDao.dll.config
+E:\WorkSpace\C#Space\RemoteSystem\RemoteDao\bin\Debug\RemoteDao.dll
+E:\WorkSpace\C#Space\RemoteSystem\RemoteDao\bin\Debug\RemoteDao.pdb
+E:\WorkSpace\C#Space\RemoteSystem\RemoteDao\bin\Debug\RemoteModel.dll
+E:\WorkSpace\C#Space\RemoteSystem\RemoteDao\bin\Debug\RemoteModel.pdb
+E:\WorkSpace\C#Space\RemoteSystem\RemoteDao\obj\Debug\RemoteDao.csprojResolveAssemblyReference.cache
+E:\WorkSpace\C#Space\RemoteSystem\RemoteDao\obj\Debug\RemoteDao.dll
+E:\WorkSpace\C#Space\RemoteSystem\RemoteDao\obj\Debug\RemoteDao.pdb
