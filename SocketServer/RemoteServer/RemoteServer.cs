@@ -61,6 +61,8 @@ namespace RemoteServer
             Console.WriteLine("断开了");
             dic.Remove(session.SessionID);
             ReceiveController.SessionClose(session.SessionID);
+
+            testIds.Remove(session.SessionID);
         }
 
         void appServer_NewSessionConnected(MySession session)
@@ -69,7 +71,7 @@ namespace RemoteServer
             dic.Add(session.SessionID, session);
             ReceiveController.SessionConnect(session.SessionID, session.StartTime);
 
-            testId = session.SessionID;
+            testIds.Add(session.SessionID);
         }
 
         private void appServer_NewRequestReceived(MySession session, MyRequestInfo requestInfo)
@@ -123,7 +125,7 @@ namespace RemoteServer
         /// <summary>
         /// for test
         /// </summary>
-        public static string testId = "";
+        public static List<string> testIds = new List<string>();
 
     }
 }

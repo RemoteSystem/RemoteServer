@@ -18,7 +18,12 @@ namespace WebTest
 
         protected void btn_Click(object sender, EventArgs e)
         {
-            this.lab.Text = SocketServer.testId == "" ? "当前没有连接" : SocketServer.testId;
+            string ids = "";
+            for (int i = 0; i < SocketServer.testIds.Count; i++)
+            {
+                ids += SocketServer.testIds[i] + ";<br />";
+            }
+            this.lab.Text = ids == "" ? "当前没有连接" : ids.Remove(ids.Length - 6);
         }
 
         protected void btnSend_Click(object sender, EventArgs e)

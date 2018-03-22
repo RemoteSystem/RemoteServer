@@ -45,7 +45,7 @@ namespace RemoteSystem
             BloodMsg blood = new BloodMsg();
             blood.oem_change = 10;
 
-            string testId = SocketServer.testId;
+            string testId = SocketServer.testIds.Count > 0 ? SocketServer.testIds[0] : "当前没有连接";
 
             ServerService service = new ServerService();
             ResultInfo ri = service.updateBloodParas(testId, blood);
