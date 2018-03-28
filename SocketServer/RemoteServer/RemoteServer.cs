@@ -78,7 +78,11 @@ namespace RemoteServer
         {
             Console.WriteLine("收到了");
             session.Send(reply2Client);
+            //if (!session.Updated)
+            //{
             ReceiveController.UpdateOrSaveSession(session.SessionID, session.StartTime, requestInfo.JsonInfo);
+            //    session.Updated = true;
+            //}
         }
 
         //一些固定消息的定义

@@ -14,7 +14,7 @@ namespace ServerController
             return result;
         }
 
-        public ResultInfo updateBloodParas(string sessionId, BloodMsg obj)
+        public ResultInfo updateBloodParas(string sessionId, JsonInfo obj)
         {
             ResultInfo result = new ResultInfo();
             try

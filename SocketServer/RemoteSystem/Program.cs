@@ -42,13 +42,13 @@ namespace RemoteSystem
 
         private static void testSend()
         {
-            BloodMsg blood = new BloodMsg();
-            blood.oem_change = 10;
+            JsonInfo info = new JsonInfo();
+            info.category.BLOOD.OEM = "10";
 
             string testId = SocketServer.testIds.Count > 0 ? SocketServer.testIds[0] : "当前没有连接";
 
             ServerService service = new ServerService();
-            ResultInfo ri = service.updateBloodParas(testId, blood);
+            ResultInfo ri = service.updateBloodParas(testId, info);
             Console.WriteLine(ri.msg);
         }
 

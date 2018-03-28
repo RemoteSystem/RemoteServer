@@ -9,6 +9,6 @@ namespace RemoteServer
 {
     class MySession : AppSession<MySession, MyRequestInfo>
     {
-        //private bool Updated = false;
+        public bool Updated = false;
     }
 }

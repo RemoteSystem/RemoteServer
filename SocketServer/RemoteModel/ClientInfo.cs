@@ -16,7 +16,7 @@ namespace RemoteModel
         /// <summary>
         /// z3201801002
         /// </summary>
-        public string SN { get; set; }
+        public string sn { get; set; }
         /// <summary>
         /// 15812345670
         /// </summary>

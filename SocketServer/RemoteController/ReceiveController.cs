@@ -16,11 +16,11 @@ namespace RemoteController
 
         public static int UpdateOrSaveSession(string id, DateTime dt, string strJson)
         {
-            ClientInfo info;
-            int clientId = 0;
+            JsonInfo info;
+            int num = 0;
             try
             {
-                info = JsonConvert.DeserializeObject<ClientInfo>(strJson);
+                info = JsonConvert.DeserializeObject<JsonInfo>(strJson.Replace("+", "_"));
             }
             catch (Exception e)
             {
@@ -32,19 +32,38 @@ namespace RemoteController
             {
                 info.sessionid = id;
                 info.starttime = dt;
-                clientId = ReceiveDao.UpdateOrSaveSession(info);
+                num = ReceiveDao.UpdateOrSaveSession(info);
+                SaveData(info);
             }
             else
             {
                 Console.WriteLine("ClientInfo 为 null.");
             }
 
-            return clientId;
+            return num;
         }
 
         public static void SessionClose(string id)
         {
             ReceiveDao.SessionClose(id);
+        }
+
+        private static void SaveData(JsonInfo info)
+        {
+            if (info.category.BLOOD != null)
+            {
+                try
+                {
+                    BloodDao.UpdateOrSaveRuntime(info);
+                    BloodDao.UpdateOrSaveCount(info);
+                    BloodDao.UpdateOrSaveReagent(info);
+                    BloodDao.UpdateOrSaveModule(info);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
         }
 
     }

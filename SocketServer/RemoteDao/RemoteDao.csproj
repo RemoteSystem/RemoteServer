@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseDao.cs" />
+    <Compile Include="BloodDao.cs" />
     <Compile Include="ReceiveDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
