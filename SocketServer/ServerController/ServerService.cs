@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using RemoteModel;
-using RemoteServer;
 using System;
 
 namespace ServerController
@@ -21,7 +20,7 @@ namespace ServerController
             {
                 string msg = JsonConvert.SerializeObject(obj, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
 
-                result = SocketServer.sendMsg(sessionId, msg);
+                result = SocketServer.SocketServer.sendMsg(sessionId, msg);
             }
             catch (Exception e)
             {

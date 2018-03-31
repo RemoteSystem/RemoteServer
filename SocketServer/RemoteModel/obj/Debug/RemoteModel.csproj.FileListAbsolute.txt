@@ -1,5 +1,4 @@
 E:\WorkSpace\C#Space\RemoteSystem\RemoteModel\bin\Debug\RemoteModel.dll
 E:\WorkSpace\C#Space\RemoteSystem\RemoteModel\bin\Debug\RemoteModel.pdb
-E:\WorkSpace\C#Space\RemoteSystem\RemoteModel\obj\Debug\RemoteModel.csprojResolveAssemblyReference.cache
 E:\WorkSpace\C#Space\RemoteSystem\RemoteModel\obj\Debug\RemoteModel.dll
 E:\WorkSpace\C#Space\RemoteSystem\RemoteModel\obj\Debug\RemoteModel.pdb

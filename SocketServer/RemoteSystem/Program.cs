@@ -1,5 +1,4 @@
 ﻿using RemoteModel;
-using RemoteServer;
 using ServerController;
 using System;
 using System.Collections.Generic;
@@ -14,7 +13,7 @@ namespace RemoteSystem
     {
         static void Main(string[] args)
         {
-            SocketServer server = new SocketServer();
+            SocketServer.SocketServer server = new SocketServer.SocketServer();
             bool bl = server.start();
 
             if (!bl)
@@ -43,9 +42,11 @@ namespace RemoteSystem
         private static void testSend()
         {
             JsonInfo info = new JsonInfo();
+            info.category = new Category();
+            info.category.BLOOD = new BLOOD();
             info.category.BLOOD.OEM = "10";
 
-            string testId = SocketServer.testIds.Count > 0 ? SocketServer.testIds[0] : "当前没有连接";
+            string testId = SocketServer.SocketServer.testIds.Count > 0 ? SocketServer.SocketServer.testIds[0] : "当前没有连接";
 
             ServerService service = new ServerService();
             ResultInfo ri = service.updateBloodParas(testId, info);

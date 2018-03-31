@@ -16,8 +16,10 @@ namespace RemoteController
 
         public static int UpdateOrSaveSession(string id, DateTime dt, string strJson)
         {
-            JsonInfo info;
             int num = 0;
+            JsonInfo info;
+
+            strJson = strJson.Trim().TrimStart('&').TrimEnd('#');
             try
             {
                 info = JsonConvert.DeserializeObject<JsonInfo>(strJson.Replace("+", "_"));
@@ -32,8 +34,11 @@ namespace RemoteController
             {
                 info.sessionid = id;
                 info.starttime = dt;
-                num = ReceiveDao.UpdateOrSaveSession(info);
-                SaveData(info);
+                if (info.category != null && info.category.BLOOD != null)
+                {
+                    num = ReceiveDao.UpdateOrSaveSession(info);
+                    SaveData(info);
+                }
             }
             else
             {

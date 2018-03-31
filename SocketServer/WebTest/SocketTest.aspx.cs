@@ -1,5 +1,4 @@
 ﻿using RemoteModel;
-using RemoteServer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,9 +18,9 @@ namespace WebTest
         protected void btn_Click(object sender, EventArgs e)
         {
             string ids = "";
-            for (int i = 0; i < SocketServer.testIds.Count; i++)
+            for (int i = 0; i < SocketServer.SocketServer.testIds.Count; i++)
             {
-                ids += SocketServer.testIds[i] + ";<br />";
+                ids += SocketServer.SocketServer.testIds[i] + ";<br />";
             }
             this.lab.Text = ids == "" ? "当前没有连接" : ids.Remove(ids.Length - 6);
         }
@@ -35,7 +34,7 @@ namespace WebTest
             }
             else
             {
-                ResultInfo info = SocketServer.sendMsg(id, this.txtMsg.Text.Trim());
+                ResultInfo info = SocketServer.SocketServer.sendMsg(id, this.txtMsg.Text.Trim());
                 this.labMsg.Text = info.msg;
             }
         }

@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+您 Web 项目的发布/打包进程将使用此文件。您可以通过编辑此 MSBuild 文件
+来自定义该进程的行为。若要了解与此相关的详细信息，请访问 http://go.microsoft.com/fwlink/?LinkID=208121。
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\Users\jumee\Desktop\web</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/App_global.asax.compiled">
+      <publishTime>03/30/2018 08:45:48</publishTime>
+    </File>
+    <File Include="bin/App_global.asax.dll">
+      <publishTime>03/30/2018 08:45:48</publishTime>
+    </File>
+    <File Include="bin/log4net.dll">
+      <publishTime>03/13/2018 23:20:16</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>03/20/2018 20:52:31</publishTime>
+    </File>
+    <File Include="bin/RemoteController.dll">
+      <publishTime>03/30/2018 08:42:00</publishTime>
+    </File>
+    <File Include="bin/RemoteDao.dll">
+      <publishTime>03/30/2018 08:42:00</publishTime>
+    </File>
+    <File Include="bin/RemoteModel.dll">
+      <publishTime>03/30/2018 08:41:59</publishTime>
+    </File>
+    <File Include="bin/RemoteServer.dll">
+      <publishTime>03/30/2018 08:42:00</publishTime>
+    </File>
+    <File Include="bin/SuperSocket.Common.dll">
+      <publishTime>03/13/2018 23:20:16</publishTime>
+    </File>
+    <File Include="bin/SuperSocket.Facility.dll">
+      <publishTime>03/13/2018 23:20:16</publishTime>
+    </File>
+    <File Include="bin/SuperSocket.SocketBase.dll">
+      <publishTime>03/13/2018 23:20:16</publishTime>
+    </File>
+    <File Include="bin/SuperSocket.SocketEngine.dll">
+      <publishTime>03/13/2018 23:20:23</publishTime>
+    </File>
+    <File Include="bin/SuperSocket.SocketService.exe">
+      <publishTime>03/13/2018 23:20:23</publishTime>
+    </File>
+    <File Include="bin/WebTest.dll">
+      <publishTime>03/30/2018 08:42:00</publishTime>
+    </File>
+    <File Include="Config/log4net.config">
+      <publishTime>03/22/2018 10:45:53</publishTime>
+    </File>
+    <File Include="Config/log4net.unix.config">
+      <publishTime>03/22/2018 10:45:53</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>03/22/2018 10:45:54</publishTime>
+    </File>
+    <File Include="PrecompiledApp.config">
+      <publishTime>03/30/2018 08:45:47</publishTime>
+    </File>
+    <File Include="SocketTest.aspx">
+      <publishTime>03/22/2018 11:40:32</publishTime>
+    </File>
+    <File Include="supersocket.cmd">
+      <publishTime>03/22/2018 10:45:53</publishTime>
+    </File>
+    <File Include="supersocket.sh">
+      <publishTime>03/22/2018 10:45:53</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>03/30/2018 08:42:01</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

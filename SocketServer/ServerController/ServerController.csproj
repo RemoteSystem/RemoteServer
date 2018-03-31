@@ -51,9 +51,9 @@
       <Project>{49c5f837-7d59-4039-a17c-471416ca0275}</Project>
       <Name>RemoteModel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\RemoteServer\RemoteServer.csproj">
-      <Project>{9ffd67a0-7eb1-4d71-9944-5403b4bbf00f}</Project>
-      <Name>RemoteServer</Name>
+    <ProjectReference Include="..\SocketServer\SocketServer.csproj">
+      <Project>{6edacf51-b52c-4895-aaa4-b7521fc829a4}</Project>
+      <Name>SocketServer</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

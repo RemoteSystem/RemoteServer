@@ -21,3 +21,5 @@ E:\WorkSpace\C#Space\RemoteSystem\ServerController\bin\Debug\log4net.xml
 E:\WorkSpace\C#Space\RemoteSystem\ServerController\bin\Debug\RemoteDao.pdb
 E:\WorkSpace\C#Space\RemoteSystem\ServerController\bin\Debug\Newtonsoft.Json.xml
 E:\WorkSpace\C#Space\RemoteSystem\ServerController\obj\Debug\ServerController.csprojResolveAssemblyReference.cache
+E:\WorkSpace\C#Space\RemoteSystem\ServerController\bin\Debug\SocketServer.dll
+E:\WorkSpace\C#Space\RemoteSystem\ServerController\bin\Debug\SocketServer.pdb

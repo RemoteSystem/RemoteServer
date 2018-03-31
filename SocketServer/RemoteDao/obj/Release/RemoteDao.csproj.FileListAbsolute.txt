@@ -1,0 +1,16 @@
+E:\WorkSpace\C#Space\RemoteSystem\RemoteDao\bin\Release\RemoteDao.dll.config
+E:\WorkSpace\C#Space\RemoteSystem\RemoteDao\bin\Release\RemoteDao.dll
+E:\WorkSpace\C#Space\RemoteSystem\RemoteDao\bin\Release\RemoteDao.pdb
+E:\WorkSpace\C#Space\RemoteSystem\RemoteDao\bin\Release\RemoteModel.dll
+E:\WorkSpace\C#Space\RemoteSystem\RemoteDao\bin\Release\RemoteModel.pdb
+E:\WorkSpace\C#Space\RemoteSystem\RemoteDao\obj\Release\RemoteDao.csprojResolveAssemblyReference.cache
+E:\WorkSpace\C#Space\RemoteSystem\RemoteDao\obj\Release\RemoteDao.dll
+E:\WorkSpace\C#Space\RemoteSystem\RemoteDao\obj\Release\RemoteDao.pdb
+E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteDao\bin\Release\RemoteDao.dll.config
+E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteDao\bin\Release\RemoteDao.dll
+E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteDao\bin\Release\RemoteDao.pdb
+E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteDao\bin\Release\RemoteModel.dll
+E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteDao\bin\Release\RemoteModel.pdb
+E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteDao\obj\Release\RemoteDao.csprojResolveAssemblyReference.cache
+E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteDao\obj\Release\RemoteDao.dll
+E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteDao\obj\Release\RemoteDao.pdb

@@ -82,13 +82,13 @@
       <Project>{49c5f837-7d59-4039-a17c-471416ca0275}</Project>
       <Name>RemoteModel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\RemoteServer\RemoteServer.csproj">
-      <Project>{9ffd67a0-7eb1-4d71-9944-5403b4bbf00f}</Project>
-      <Name>RemoteServer</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ServerController\ServerController.csproj">
       <Project>{de0aef65-6d31-4ea3-b9a2-00c291096569}</Project>
       <Name>ServerController</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SocketServer\SocketServer.csproj">
+      <Project>{6edacf51-b52c-4895-aaa4-b7521fc829a4}</Project>
+      <Name>SocketServer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

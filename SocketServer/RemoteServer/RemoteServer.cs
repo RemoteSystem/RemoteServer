@@ -24,6 +24,8 @@ namespace RemoteServer
                 ClearIdleSessionInterval = 60,
                 IdleSessionTimeOut = 90,
                 MaxRequestLength = 20480, //最大包长度
+                ReceiveBufferSize = 10000,
+                SendBufferSize = 10000,
                 Ip = "Any",
                 Port = 12315,
                 MaxConnectionNumber = 10,
@@ -58,7 +60,7 @@ namespace RemoteServer
 
         void appServer_SessionClosed(MySession session, CloseReason value)
         {
-            Console.WriteLine("断开了");
+            Console.WriteLine("断开了" + session.SessionID + " " + value.ToString());
             dic.Remove(session.SessionID);
             ReceiveController.SessionClose(session.SessionID);
 
@@ -67,7 +69,7 @@ namespace RemoteServer
 
         void appServer_NewSessionConnected(MySession session)
         {
-            Console.WriteLine("连上了");
+            Console.WriteLine("连上了" + session.SessionID);
             dic.Add(session.SessionID, session);
             ReceiveController.SessionConnect(session.SessionID, session.StartTime);
 
@@ -76,7 +78,7 @@ namespace RemoteServer
 
         private void appServer_NewRequestReceived(MySession session, MyRequestInfo requestInfo)
         {
-            Console.WriteLine("收到了");
+            Console.WriteLine("收到了" + session.SessionID);
             session.Send(reply2Client);
             //if (!session.Updated)
             //{

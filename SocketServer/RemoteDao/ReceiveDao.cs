@@ -95,7 +95,7 @@ namespace RemoteDao
                                             new MySqlParameter("?pseries", MySqlDbType.VarChar),                                            
                                             new MySqlParameter("?pmodel", MySqlDbType.VarChar)};
 
-            if (info.category.BLOOD != null)
+            if (info.category != null && info.category.BLOOD != null)
             {
                 parameters[0].Value = "血球分析仪";
                 parameters[1].Value = info.category.BLOOD.series;

@@ -1,5 +1,4 @@
-﻿using RemoteServer;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,7 +12,7 @@ namespace WebTest
 
         protected void Application_Start(object sender, EventArgs e)
         {
-            SocketServer server = new SocketServer();
+            SocketServer.SocketServer server = new SocketServer.SocketServer();
             bool bl = server.start();
         }
 

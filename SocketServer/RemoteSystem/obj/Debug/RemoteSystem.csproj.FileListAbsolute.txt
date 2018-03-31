@@ -27,3 +27,5 @@ E:\WorkSpace\C#Space\RemoteSystem\RemoteSystem\bin\Debug\RemoteDao.dll
 E:\WorkSpace\C#Space\RemoteSystem\RemoteSystem\bin\Debug\RemoteDao.pdb
 E:\WorkSpace\C#Space\RemoteSystem\RemoteSystem\bin\Debug\ServerController.dll
 E:\WorkSpace\C#Space\RemoteSystem\RemoteSystem\bin\Debug\ServerController.pdb
+E:\WorkSpace\C#Space\RemoteSystem\RemoteSystem\bin\Debug\SocketServer.dll
+E:\WorkSpace\C#Space\RemoteSystem\RemoteSystem\bin\Debug\SocketServer.pdb
