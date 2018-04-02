@@ -4,6 +4,5 @@ E:\WorkSpace\C#Space\RemoteSystem\RemoteModel\obj\Release\RemoteModel.dll
 E:\WorkSpace\C#Space\RemoteSystem\RemoteModel\obj\Release\RemoteModel.pdb
 E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteModel\bin\Release\RemoteModel.dll
 E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteModel\bin\Release\RemoteModel.pdb
-E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteModel\obj\Release\RemoteModel.csprojResolveAssemblyReference.cache
 E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteModel\obj\Release\RemoteModel.dll
 E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteModel\obj\Release\RemoteModel.pdb

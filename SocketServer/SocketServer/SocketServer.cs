@@ -60,7 +60,7 @@ namespace SocketServer
 
         void appServer_SessionClosed(ProtocolSession session, CloseReason value)
         {
-            Console.WriteLine("断开了" + session.SessionID + " " + value.ToString());
+            Console.WriteLine("断开了 " + session.SessionID + " " + value.ToString());
             dic.Remove(session.SessionID);
             ReceiveController.SessionClose(session.SessionID);
 
@@ -69,7 +69,7 @@ namespace SocketServer
 
         void appServer_NewSessionConnected(ProtocolSession session)
         {
-            Console.WriteLine("连上了" + session.SessionID);
+            Console.WriteLine("连上了 " + session.SessionID);
             dic.Add(session.SessionID, session);
             ReceiveController.SessionConnect(session.SessionID, session.StartTime);
 
@@ -78,7 +78,19 @@ namespace SocketServer
 
         private void appServer_NewRequestReceived(ProtocolSession session, ProtocolRequestInfo requestInfo)
         {
-            Console.WriteLine("收到了" + session.SessionID);
+            if (requestInfo == null)
+            {
+                Console.WriteLine("不正常包 " + session.SessionID);
+                return;
+            }
+            //心跳
+            if (requestInfo.Length == 0)
+            {
+                Console.WriteLine("心跳 " + session.SessionID);
+                return;
+            }
+
+            Console.WriteLine("收到了 " + session.SessionID);
             sendReplyMsg(session, reply2Client);
             //if (!session.Updated)
             //{
@@ -137,12 +149,13 @@ namespace SocketServer
             bool bl = dic.TryGetValue(sessionId, out session);
             if (bl)
             {
-                bl = session.TrySend(msg);
-                if (!bl)
-                {
-                    result.code = 100;
-                    result.msg = "发送消息失败.";
-                }
+                sendReplyMsg(session, msg);
+                //bl = session.TrySend(msg);
+                //if (!bl)
+                //{
+                //    result.code = 100;
+                //    result.msg = "发送消息失败.";
+                //}
             }
             else
             {

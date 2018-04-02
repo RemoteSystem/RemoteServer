@@ -9,3 +9,14 @@ E:\WorkSpace\C#Space\RemoteSystem\RemoteController\bin\Debug\Newtonsoft.Json.xml
 E:\WorkSpace\C#Space\RemoteSystem\RemoteController\obj\Debug\RemoteBll.csprojResolveAssemblyReference.cache
 E:\WorkSpace\C#Space\RemoteSystem\RemoteController\obj\Debug\RemoteController.dll
 E:\WorkSpace\C#Space\RemoteSystem\RemoteController\obj\Debug\RemoteController.pdb
+E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteController\bin\Debug\RemoteController.dll
+E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteController\bin\Debug\RemoteController.pdb
+E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteController\bin\Debug\Newtonsoft.Json.dll
+E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteController\bin\Debug\RemoteDao.dll
+E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteController\bin\Debug\RemoteModel.dll
+E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteController\bin\Debug\RemoteDao.pdb
+E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteController\bin\Debug\RemoteModel.pdb
+E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteController\bin\Debug\Newtonsoft.Json.xml
+E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteController\obj\Debug\RemoteBll.csprojResolveAssemblyReference.cache
+E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteController\obj\Debug\RemoteController.dll
+E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteController\obj\Debug\RemoteController.pdb

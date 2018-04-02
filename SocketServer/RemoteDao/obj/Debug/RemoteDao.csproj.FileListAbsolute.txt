@@ -6,3 +6,11 @@ E:\WorkSpace\C#Space\RemoteSystem\RemoteDao\bin\Debug\RemoteModel.pdb
 E:\WorkSpace\C#Space\RemoteSystem\RemoteDao\obj\Debug\RemoteDao.csprojResolveAssemblyReference.cache
 E:\WorkSpace\C#Space\RemoteSystem\RemoteDao\obj\Debug\RemoteDao.dll
 E:\WorkSpace\C#Space\RemoteSystem\RemoteDao\obj\Debug\RemoteDao.pdb
+E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteDao\bin\Debug\RemoteDao.dll.config
+E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteDao\bin\Debug\RemoteDao.dll
+E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteDao\bin\Debug\RemoteDao.pdb
+E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteDao\bin\Debug\RemoteModel.dll
+E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteDao\bin\Debug\RemoteModel.pdb
+E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteDao\obj\Debug\RemoteDao.csprojResolveAssemblyReference.cache
+E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteDao\obj\Debug\RemoteDao.dll
+E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteDao\obj\Debug\RemoteDao.pdb
