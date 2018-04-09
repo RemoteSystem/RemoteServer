@@ -46,21 +46,7 @@ namespace MSTSC.Manage.UI.Forms
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
                 (e.Item.FindControl("tr1") as HtmlTableRow).Attributes.Add("onclick", "GetDetail('" + (e.Item.FindControl("SN") as HtmlTableCell).InnerText + "')");
-
-                //int i = e.Item.ItemIndex % 2;
-                //if (i == 0)
-                //{
-                //    ((HtmlTableRow)e.Item.FindControl("trInfo")).Attributes.Add("onmouseover", "this.style.background='#CAD8FB'");
-                //    ((HtmlTableRow)e.Item.FindControl("trInfo")).Attributes.Add("onmouseout", "this.style.background='#Dfffff'");
-                //    ((HtmlTableRow)e.Item.FindControl("trInfo")).BgColor = "#Dfffff";
-
-                //}
-                //else
-                //{
-                //    ((HtmlTableRow)e.Item.FindControl("trInfo")).Attributes.Add("onmouseover", "this.style.background='#CAD8FB'");
-                //    ((HtmlTableRow)e.Item.FindControl("trInfo")).Attributes.Add("onmouseout", "this.style.background='#EBF6FA'");
-                //    ((HtmlTableRow)e.Item.FindControl("trInfo")).BgColor = "#EBF6F8";
-                //}
+  
             }
 
         }
@@ -150,6 +136,38 @@ namespace MSTSC.Manage.UI.Forms
             convalue.ReagentType = cbxReagentType.SelectedValue;
 
             return convalue;
+        }
+
+        protected void gdDeviceList_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "go")
+            {
+                try
+                {
+                    TextBox tb = (TextBox)gdDeviceList.BottomPagerRow.FindControl("inPageNum");
+                    int num = Int32.Parse(tb.Text);
+                    GridViewPageEventArgs ea = new GridViewPageEventArgs(num - 1);
+                    gdDeviceList_PageIndexChanging(null, ea);
+                }
+                catch
+                {
+                }
+            }
+        }
+
+        protected void gdDeviceList_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            try
+            {
+                gdDeviceList.PageIndex = e.NewPageIndex;
+                Query();
+
+                TextBox tb = (TextBox)gdDeviceList.BottomPagerRow.FindControl("inPageNum");
+                tb.Text = (gdDeviceList.PageIndex + 1).ToString();
+            }
+            catch
+            {
+            }
         }
     }
 }

@@ -10,3 +10,15 @@ D:\test\MSTSC.Manage\MSTSC.Manage.BLL\bin\Debug\Dapper.xml
 D:\test\MSTSC.Manage\MSTSC.Manage.BLL\obj\Debug\MSTSC.Manage.BLL.csprojResolveAssemblyReference.cache
 D:\test\MSTSC.Manage\MSTSC.Manage.BLL\obj\Debug\MSTSC.Manage.BLL.dll
 D:\test\MSTSC.Manage\MSTSC.Manage.BLL\obj\Debug\MSTSC.Manage.BLL.pdb
+D:\MSTSC\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.BLL\bin\Debug\MSTSC.Manage.BLL.dll
+D:\MSTSC\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.BLL\bin\Debug\MSTSC.Manage.BLL.pdb
+D:\MSTSC\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.BLL\bin\Debug\MSTSC.Manage.DAL.dll
+D:\MSTSC\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.BLL\bin\Debug\MSTSC.Manage.Model.dll
+D:\MSTSC\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.BLL\bin\Debug\MySql.Data.dll
+D:\MSTSC\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.BLL\bin\Debug\Dapper.dll
+D:\MSTSC\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.BLL\bin\Debug\MSTSC.Manage.DAL.pdb
+D:\MSTSC\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.BLL\bin\Debug\MSTSC.Manage.Model.pdb
+D:\MSTSC\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.BLL\bin\Debug\Dapper.xml
+D:\MSTSC\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.BLL\obj\Debug\MSTSC.Manage.BLL.csprojResolveAssemblyReference.cache
+D:\MSTSC\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.BLL\obj\Debug\MSTSC.Manage.BLL.dll
+D:\MSTSC\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.BLL\obj\Debug\MSTSC.Manage.BLL.pdb

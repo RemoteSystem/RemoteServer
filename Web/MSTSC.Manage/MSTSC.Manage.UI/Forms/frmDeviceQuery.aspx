@@ -15,12 +15,12 @@
 <body onload="load()">
     <form id="form1" runat="server">
         <div style="height: 100%;">
-            <div style="float: left;">
+            <div style="float: left;width:39%;">
                 <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                 <asp:UpdatePanel ID="updatePanel1" runat="server">
                     <ContentTemplate>
-                        <asp:Table runat="server" Width="100%" Height="100%">
-                            <asp:TableRow Height="40px">
+                        <asp:Table runat="server"  Height="100%">
+                            <asp:TableRow Height="40px" >
                                 <asp:TableCell>
                                     <h2>远程诊断系统-仪器列表</h2>
                                 </asp:TableCell>
@@ -42,10 +42,10 @@
                                 </asp:TableCell>
                             </asp:TableRow>
                             <asp:TableRow Height="30">
-                                <asp:TableCell>
+                                <asp:TableCell >
                                     产品类型<asp:DropDownList ID="cbxProSeries" runat="server" AutoPostBack="True" Width="100px" OnSelectedIndexChanged="cbxProSeries_SelectedIndexChanged" />
                                 </asp:TableCell>
-                                <asp:TableCell>
+                                <asp:TableCell >
                                     产品型号<asp:DropDownList ID="cbxProModel" runat="server" Width="110px" />
                                 </asp:TableCell>
                             </asp:TableRow>
@@ -53,81 +53,52 @@
                                 <asp:TableCell>
                                     OEM代号<asp:DropDownList runat="server" Width="100px" />
                                 </asp:TableCell>
-                                <asp:TableCell>
+                                <asp:TableCell >
                                     代理商代号<asp:DropDownList runat="server" Width="100px" />                              
                                 </asp:TableCell>
                             </asp:TableRow>
                             <asp:TableRow Height="30">
-                                <asp:TableCell>
+                                <asp:TableCell >
                                     封闭试剂类型
                                     <asp:DropDownList ID="cbxReagentType" runat="server" Width="100px">
                                         <asp:ListItem Value="open">开放</asp:ListItem>
                                         <asp:ListItem Value="close">封闭</asp:ListItem>
                                     </asp:DropDownList>
                                 </asp:TableCell>
-                                <asp:TableCell>
+                                <asp:TableCell >
                                     装机区域<asp:DropDownList runat="server" Width="100px" />                             
                                 </asp:TableCell>
                             </asp:TableRow>
-                            <asp:TableRow>
-                                <asp:TableCell ColumnSpan="2">
-                                    <asp:GridView runat="server" ID="gdDeviceList" AutoGenerateColumns="False" CellPadding="4"
-                                        ForeColor="#333333" GridLines="None"  BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px">
-                                        <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
-                                        <Columns>
-                                            <asp:BoundField HeaderText="仪器名称" DataField="Region"></asp:BoundField>
-                                            <asp:BoundField HeaderText="SIM卡号" DataField="SIM"></asp:BoundField>
-                                            <asp:BoundField HeaderText="仪器序列号" DataField="SN"></asp:BoundField>
-                                            <asp:BoundField HeaderText="产品" DataField="ProductSeries"></asp:BoundField>
-                                            <asp:BoundField HeaderText="型号" DataField="ProductModel"></asp:BoundField>
-                                            <asp:BoundField HeaderText="连接状态" DataField="SESSION_ID"></asp:BoundField>
+                        </asp:Table>
+                        <asp:GridView  runat="server" ID="gdDeviceList" AutoGenerateColumns="False" CellPadding="4" AllowPaging="true" PageSize="10"
+                                        ForeColor="#333333" GridLines="None" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" 
+                                        BorderWidth="1px" OnRowCommand="gdDeviceList_RowCommand" OnPageIndexChanging="gdDeviceList_PageIndexChanging" PagerSettings-Mode="Numeric">
+                                       
+                                      <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
+                                          <Columns>
+                                            <asp:BoundField HeaderText="仪器名称" HeaderStyle-Width="70px" DataField="Region"></asp:BoundField>
+                                            <asp:BoundField HeaderText="SIM卡号" HeaderStyle-Width="80px" DataField="SIM"></asp:BoundField>
+                                            <asp:BoundField HeaderText="仪器序列号" HeaderStyle-Width="85px" DataField="SN"></asp:BoundField>
+                                            <asp:BoundField HeaderText="产品" HeaderStyle-Width="38px" DataField="ProductSeries"></asp:BoundField>
+                                            <asp:BoundField HeaderText="型号" HeaderStyle-Width="38px" DataField="ProductModel"></asp:BoundField>
+                                            <asp:BoundField HeaderText="连接状态" HeaderStyle-Width="70px" DataField="SESSION_ID"></asp:BoundField>
                                         </Columns>
                                         <RowStyle ForeColor="#000066" />
                                         <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
                                         <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
-                                        <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
+                                         <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
+                                        <PagerTemplate>
+                                            <br />
+                                            <asp:Label ID="lblPage" runat="server" Text='<%# "第" + (((GridView)Container.NamingContainer).PageIndex + 1)  + "页/共" + (((GridView)Container.NamingContainer).PageCount) + "页" %> '></asp:Label>
+                                            <asp:LinkButton ID="lbnFirst" runat="Server" Text="首页" Enabled='<%# ((GridView)Container.NamingContainer).PageIndex != 0 %>' CommandName="Page" CommandArgument="First"></asp:LinkButton>
+                                            <asp:LinkButton ID="lbnPrev" runat="server" Text="上一页" Enabled='<%# ((GridView)Container.NamingContainer).PageIndex != 0 %>' CommandName="Page" CommandArgument="Prev"></asp:LinkButton>
+                                            <asp:LinkButton ID="lbnNext" runat="Server" Text="下一页" Enabled='<%# ((GridView)Container.NamingContainer).PageIndex != (((GridView)Container.NamingContainer).PageCount - 1) %>' CommandName="Page" CommandArgument="Next"></asp:LinkButton>
+                                            <asp:LinkButton ID="lbnLast" runat="Server" Text="尾页" Enabled='<%# ((GridView)Container.NamingContainer).PageIndex != (((GridView)Container.NamingContainer).PageCount - 1) %>' CommandName="Page" CommandArgument="Last"></asp:LinkButton>
+                                            到第<asp:TextBox runat="server" ID="inPageNum" Width="40px"></asp:TextBox>页
+                                            <asp:Button ID="Button1" CommandName="go" runat="server" Text="GO" />
+                                            <br />
+                                        </PagerTemplate>
                                     </asp:GridView>
-
-                                    <%--<asp:Repeater runat="server" ID="gdDeviceList" OnItemDataBound="gdDeviceList_ItemDataBound">
-                                        <HeaderTemplate>
-                                            <table>
-                                                <tr>
-                                                    <td>仪器名称</td>
-                                                    <td>SIM卡号</td>
-                                                    <td>仪器序列号</td>
-                                                    <td>产品</td>
-                                                    <td>型号</td>
-                                                    <td>连接状态</td>
-                                                </tr>
-                                        </HeaderTemplate>
-                                        <ItemTemplate>
-                                            <tr id="trInfo" runat="server">
-                                                <td><%# Eval("Region") %></td>
-                                                <td><%# Eval("SIM") %></td>
-                                                <td id="SN" runat="server"><%#Eval("SN") %></td>
-                                                <td><%#Eval("ProductSeries") %></td>
-                                                <td><%#Eval("ProductModel") %></td>
-                                                <td><%#Eval("SESSION_ID") %></td>
-                                            </tr>
-                                        </ItemTemplate>
-                                        <FooterTemplate>
-                                            <tr>
-                                                <td colspan="6" style="font-size: 12pt; color: #0099ff; background-color: #e6feda;">共<asp:Label ID="lblpc" runat="server" Text="Label"></asp:Label>页 当前为第  
-                                                    <asp:Label ID="lblp" runat="server" Text="Label"></asp:Label>页  
-                                                    <asp:HyperLink ID="hlfir" runat="server" Text="首页"></asp:HyperLink>
-                                                    <asp:HyperLink ID="hlp" runat="server" Text="上一页"></asp:HyperLink>
-                                                    <asp:HyperLink ID="hln" runat="server" Text="下一页"></asp:HyperLink>
-                                                    <asp:HyperLink ID="hlla" runat="server" Text="尾页"></asp:HyperLink>
-                                                    跳至第  
-                                                     <asp:DropDownList ID="ddlp" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlp_SelectedIndexChanged" />页  
-                                                </td>
-                                            </tr>
-                                            </table>
-                                        </FooterTemplate>
-                                    </asp:Repeater>--%>
-                                </asp:TableCell>
-                            </asp:TableRow>
-                        </asp:Table>
                     </ContentTemplate>
                     <Triggers>
                         <asp:AsyncPostBackTrigger ControlID="btnRefresh" EventName="Click" />
