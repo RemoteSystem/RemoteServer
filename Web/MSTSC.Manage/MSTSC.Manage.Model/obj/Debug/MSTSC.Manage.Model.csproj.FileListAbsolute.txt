@@ -1,0 +1,5 @@
+D:\test\MSTSC.Manage\MSTSC.Manage.Model\bin\Debug\MSTSC.Manage.Model.dll
+D:\test\MSTSC.Manage\MSTSC.Manage.Model\bin\Debug\MSTSC.Manage.Model.pdb
+D:\test\MSTSC.Manage\MSTSC.Manage.Model\obj\Debug\MSTSC.Manage.Model.dll
+D:\test\MSTSC.Manage\MSTSC.Manage.Model\obj\Debug\MSTSC.Manage.Model.pdb
+D:\test\MSTSC.Manage\MSTSC.Manage.Model\obj\Debug\MSTSC.Manage.Model.csprojResolveAssemblyReference.cache
