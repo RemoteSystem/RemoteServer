@@ -13,23 +13,37 @@ namespace MSTSC.Manage.BLL
 
         public List<QueryList> GetDeviceInfoBLL(QueryConditionModel conditValue)
         {
-            if (conditValue.ProduceModel == "三分类")
-            {
-                conditValue.ProduceModel = "3diff";
-            }
-            else if (conditValue.ProduceModel == "五分类")
-            {
-                conditValue.ProduceModel = "5diff";
-            }
-
-            conditValue.ReagentType = Common.UIdataToDB(conditValue.ReagentType);
-
+            conditValue.ProductSeries = Common.UIdataToDB(conditValue.ProductSeries);
             return dal.GetDeviceInfoDAL(conditValue);
         }
 
+        /// <summary>
+        /// 仪器类型信息
+        /// </summary>
+        /// <returns></returns>
         public List<ProductTypeModel> ProductTypeInfoBLL()
         {
             return dal.ProductTypeInfoDAL();
+        }
+
+        /// <summary>
+        /// 仪器详细信息
+        /// </summary>
+        /// <param name="sn"></param>
+        /// <returns></returns>
+        public dynamic GetDeviceDetialBLL(string sn)
+        {
+            return dal.GetDeviceDetialDAL(sn);
+        }
+
+        /// <summary>
+        /// 快速查询
+        /// </summary>
+        /// <param name="queryText"></param>
+        /// <returns></returns>
+        public List<QueryList> QuickQueryBLL(string queryText)
+        {
+            return dal.QuickQueryDAL(queryText);
         }
     }
 }

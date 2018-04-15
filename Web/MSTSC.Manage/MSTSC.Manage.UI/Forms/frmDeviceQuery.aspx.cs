@@ -8,6 +8,7 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
+
 namespace MSTSC.Manage.UI.Forms
 {
     
@@ -18,13 +19,11 @@ namespace MSTSC.Manage.UI.Forms
         #region 页面事件
         protected void Page_Load(object sender, EventArgs e)
         {
-            
             if (!IsPostBack)
             {
-              
                 BindProductType();
-                gdDeviceList.DataSource = new List<QueryList>();
-                gdDeviceList.DataBind();
+                BindCBX();
+                Query();
             }
         }
 
@@ -41,19 +40,19 @@ namespace MSTSC.Manage.UI.Forms
             cbxProSeries.DataBind();
         }
 
-        protected void gdDeviceList_ItemDataBound(object sender, RepeaterItemEventArgs e)
-        {
-            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
-            {
-                (e.Item.FindControl("tr1") as HtmlTableRow).Attributes.Add("onclick", "GetDetail('" + (e.Item.FindControl("SN") as HtmlTableCell).InnerText + "')");
-  
-            }
-
-        }
 
         protected void btnQuickQuery_Click(object sender, EventArgs e)
         {
-
+            if(string.IsNullOrWhiteSpace(queryText.Text))
+            {
+                System.Windows.Forms.MessageBox.Show("请输入快速查询条件！");
+            }
+            else
+            {
+                var items = bll.QuickQueryBLL(queryText.Text);
+                gdDeviceList.DataSource = items;
+                gdDeviceList.DataBind();
+            }
         }
 
         protected void btnQuery_Click(object sender, EventArgs e)
@@ -72,13 +71,20 @@ namespace MSTSC.Manage.UI.Forms
 
         protected void btnRefresh_Click(object sender, EventArgs e)
         {
-
+            if (string.IsNullOrEmpty(hdSN.Value))
+            {
+                System.Windows.Forms.MessageBox.Show("请先在左侧仪器列表选择相应仪器！");
+            }
+            else
+            {
+                BindDetial(hdSN.Value);
+            }
         }
 
-        protected void ddlp_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string pg = Convert.ToString((Convert.ToInt32(((DropDownList)sender).SelectedValue) - 1));//获取列表框当前选中项
-        }
+        //protected void ddlp_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    string pg = Convert.ToString((Convert.ToInt32(((DropDownList)sender).SelectedValue) - 1));//获取列表框当前选中项
+        //}
         #endregion
 
 
@@ -87,25 +93,17 @@ namespace MSTSC.Manage.UI.Forms
         /// </summary>
         private void BindProductType()
         {
-            var proTypeList = Global.DeviceTypeInfos.Select(o => o.ProductType).Distinct().ToList();
-            proTypeList.Insert(0, "");
-            cbxDeviceType.DataSource = proTypeList;
-            cbxDeviceType.DataBind();
+            try
+            {
+                var proTypeList = Global.DeviceTypeInfos.Select(o => o.ProductType).Distinct().ToList();
+                proTypeList.Insert(0, "");
+                cbxDeviceType.DataSource = proTypeList;
+                cbxDeviceType.DataBind();
+            }
+            catch(Exception ex)
+            { }
         }
 
-        private PagedDataSource pds()
-        {
-            var condiValue = getConditionValue();
-
-            var items = bll.GetDeviceInfoBLL(condiValue);
-
-            PagedDataSource pds = new PagedDataSource();
-            pds.DataSource = items;
-            pds.AllowPaging = true;//允许分页
-            pds.PageSize = 1;//单页显示项数  
-            pds.CurrentPageIndex = Convert.ToInt32(Request.QueryString["page"]);
-            return pds;
-        }
         private void Query()
         {
 
@@ -120,6 +118,8 @@ namespace MSTSC.Manage.UI.Forms
         {
             QueryConditionModel convalue = new QueryConditionModel();
             convalue.ProduceType = cbxDeviceType.Text.Trim();
+            convalue.ProductSeries = cbxProSeries.Text.Trim();
+            convalue.ModelType = cbxProModel.Text.Trim();
             if (allDevice.Checked)
             {
                 convalue.DeviceState = MachineState.所有仪器;
@@ -135,7 +135,29 @@ namespace MSTSC.Manage.UI.Forms
 
             convalue.ReagentType = cbxReagentType.SelectedValue;
 
+            convalue.OEM = cbxOEM.SelectedValue;
+
+            convalue.Agent = cbxAgent.SelectedValue;
+
             return convalue;
+        }
+
+        /// <summary>
+        /// 绑定OEM代号、代理商代号下拉框选项
+        /// </summary>
+        protected void BindCBX()
+        {
+            List<string> list = new List<string>();
+            for (int i = 1; i < 100; i++)
+            {
+                list.Add(i.ToString());
+            }
+            list.Insert(0, "");
+            cbxOEM.DataSource = list;
+            cbxOEM.DataBind();
+
+            cbxAgent.DataSource = list;
+            cbxAgent.DataBind();
         }
 
         protected void gdDeviceList_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -168,6 +190,94 @@ namespace MSTSC.Manage.UI.Forms
             catch
             {
             }
+        }
+
+        protected void gdDeviceList_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            //首先判断是否是数据行
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                //当鼠标停留时更改背景色
+                e.Row.Attributes.Add("onmouseover", "c=this.style.backgroundColor;this.style.backgroundColor='#eed6d6'");
+                //当鼠标移开时还原背景色
+                e.Row.Attributes.Add("onmouseout", "this.style.backgroundColor=c");
+
+                e.Row.Attributes.Add("onclick", ClientScript.GetPostBackClientHyperlink(e.Row.Cells[2].FindControl("SelectButton"), ""));
+            }
+        }
+
+        protected string BindDetial(string sn)
+        {
+            try
+            {
+                var result = bll.GetDeviceDetialBLL(sn);
+
+                foreach (var item in result)
+                {
+                    UpdateTime.Text = Convert.ToString(item.UpdateTime);
+                    SIM.Text = item.SIM;
+                    Device_SN.Text = item.SN;
+                    ProductSeries.Text = item.ProductSeries;
+                    ProductModel.Text = item.ProductModel;
+                    OEM.Text = item.OEM;
+                    Agent.Text = item.Agent;
+                    ReagentType.Text = item.ReagentType;
+                    InstallationArea.Text = item.InstallationArea;
+                    FactoryDate.Text = item.FactoryDate.ToString("yyyy-mm-dd");
+                    InstallDate.Text =item.InstallDate.ToString("yyyy-mm-dd");
+                    runtime_days.Text = item.runtime_days;
+                    runtime_opt.Text = Convert.ToString(item.runtime_opt);
+                    runtime_POWER.Text = Convert.ToString(item.runtime_power);
+                    runtime_air_supply.Text = Convert.ToString(item.runtime_air_supply);
+                    needle_times_impale.Text = Convert.ToString(item.needle_times_impale);
+                    count_times_TOTAL.Text = Convert.ToString(item.count_times_total);
+                    count_times_wb_cbc.Text = Convert.ToString(item.count_times_wb_cbc);
+                    count_times_wb_cbc_crp.Text = Convert.ToString(item.count_times_wb_cbc_crp);
+                    count_times_wb_crp.Text = Convert.ToString(item.count_times_wb_crp);
+                    count_times_pd_cbc.Text = Convert.ToString(item.count_times_pd_cbc);
+                    count_times_pd_cbc_crp.Text = Convert.ToString(item.count_times_pd_cbc_crp);
+                    count_times_pd_crp.Text = Convert.ToString(item.count_times_pd_crp);
+                    count_times_qc.Text = Convert.ToString(item.count_times_qc);
+                    reagent_dil.Text = Convert.ToString(item.reagent_dil);
+                    reagent_lh.Text = Convert.ToString(item.reagent_lh);
+                    reagent_r2.Text = Convert.ToString(item.reagent_r2);
+                    reagent_diff1.Text = Convert.ToString(item.reagent_diff1);
+                    reagent_diff2.Text = Convert.ToString(item.reagent_diff2);
+                    reagent_r1.Text = Convert.ToString(item.reagent_r1);
+                    reagent_fl1.Text = Convert.ToString(item.reagent_fl1);
+                    reagent_fl2.Text = Convert.ToString(item.reagent_fl2);
+                    reagent_fl3.Text = Convert.ToString(item.reagent_fl3);
+                    reagent_fl4.Text = Convert.ToString(item.reagent_fl4);
+                    reagent_fl5.Text = Convert.ToString(item.reagent_fl5);
+                    reagent_fl6.Text = Convert.ToString(item.reagent_fl6);
+                    hole_times_wbc.Text = Convert.ToString(item.hole_times_wbc);
+                    hole_times_rbc.Text = Convert.ToString(item.hole_times_rbc);
+                    sampling_times_fault.Text = Convert.ToString(item.sampling_times_fault);
+                    syringe_times_syringe_fault.Text = Convert.ToString(item.syringe_times_syringe_fault);
+                    inject_times_fault.Text = Convert.ToString(item.inject_times_fault);
+                    mixing_times_fault.Text = Convert.ToString(item.mixing_times_fault);
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+            return sn;
+        }
+
+
+        //protected void hdSN_ValueChanged(object sender, EventArgs e)
+        //{
+        //    if (!string.IsNullOrEmpty(hdSN.Value))
+        //    {
+        //        BindDetial(hdSN.Value);
+        //    }
+        //}
+
+        protected void SelectButton_Command(object sender, CommandEventArgs e)
+        {
+            string sn = e.CommandName;
+            hdSN.Value = sn;
+            BindDetial(sn);
         }
     }
 }

@@ -25,7 +25,7 @@ namespace MSTSC.Manage.Model
         /// <summary>
         /// 产品类型
         /// </summary>
-        public string ProduceModel { get; set; }
+        public string ProductSeries { get; set; }
 
         /// <summary>
         /// 产品型号

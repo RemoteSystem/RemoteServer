@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MSTSC.Manage.Model
 {
-    public class DeviceModel
+    public class DeviceDetialModel
     {
         /// <summary>
         /// 仪器系列号
@@ -18,9 +18,14 @@ namespace MSTSC.Manage.Model
         public string SIM { get; set; }
 
         /// <summary>
+        /// 仪器类型
+        /// </summary>
+        public string ProductSeries { get; set; }
+
+        /// <summary>
         /// 仪器型号
         /// </summary>
-        public string Model { get; set; }
+        public string ProductModel { get; set; }
 
         /// <summary>
         /// 区域

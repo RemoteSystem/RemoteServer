@@ -22,7 +22,7 @@ namespace MSTSC.Manage.DAL
 
             if (!string.IsNullOrEmpty(conditValue.ProduceType))
             {
-                whereSql.Append(@" AND p.ProductType= :proType ");
+                whereSql.Append(@" AND p.ProductType='"+ conditValue.ProduceType +"'");
             }
 
             if (conditValue.DeviceState == MachineState.已连接仪器)
@@ -34,58 +34,50 @@ namespace MSTSC.Manage.DAL
                 whereSql.Append(@" AND d.sessionid is null");
             }
 
-            if (!string.IsNullOrEmpty(conditValue.ProduceModel))
+            if (!string.IsNullOrEmpty(conditValue.ProductSeries))
             {
-                whereSql.Append(@" AND p.ProductSeries= :ProductSeries ");
+                whereSql.Append(@" AND p.ProductSeries='"+ conditValue.ProductSeries + "'");
             }
 
             if (!string.IsNullOrEmpty(conditValue.ModelType))
             {
-                whereSql.Append(@" AND p.ProductModel= :ProductModel ");
+                whereSql.Append(@" AND p.ProductModel='"+ conditValue.ModelType +"'");
             }
 
             if (!string.IsNullOrEmpty(conditValue.OEM))
             {
-                whereSql.Append(@" AND d.OEM= :oem ");
+                whereSql.Append(@" AND d.OEM='"+ conditValue.OEM + "'");
             }
 
             if (!string.IsNullOrEmpty(conditValue.Agent))
             {
-                whereSql.Append(@" AND d.Agent= :agent");
+                whereSql.Append(@" AND d.Agent='"+ conditValue.Agent + "'");
             }
 
             if (!string.IsNullOrEmpty(conditValue.ReagentType))
             {
-                whereSql.Append(@" AND d.ReagentType= :ReagentType");
+                whereSql.Append(@" AND d.ReagentType='"+ conditValue.ReagentType + "'");
             }
 
             if (!string.IsNullOrEmpty(conditValue.Region))
             {
-                whereSql.Append(@" AND d.Region=:Region ");
+                whereSql.Append(@" AND d.Region='"+ conditValue.Region + "'");
             }
 
-            var parm = new
-            {
-                proType = conditValue.ProduceType,
-                ProductSeries = conditValue.ProduceModel,
-                ProductModel = conditValue.ModelType,
-                oem = conditValue.OEM,
-                agent = conditValue.Agent,
-                ReagentType = conditValue.ReagentType,
-                Region = conditValue.Region,
-            };
+            sql = sql + whereSql.ToString();
 
             using (var conn = new MySqlConnection(strConn))
             {
-                return conn.Query<QueryList>(sql, parm).ToList();
+                return conn.Query<QueryList>(sql).ToList();
             }
         }
 
-        public List<QueryList> QuickQuery()
+        public List<QueryList> QuickQueryDAL(string queryText)
         {
-            string sql = @"SELECT d.Region, d.SIM, d.SN, p.ProductModel, d.ModelConf, d.SESSIONID
-                            FROM device_info d
-	                            LEFT JOIN producttype_info p ON d.ProductTypeID = p.ID";
+            string sql = @"SELECT d.Region, d.SIM, d.SN,p.ProductSeries,p.ProductModel, d.SESSIONID
+      FROM device_info d
+	    LEFT JOIN producttype_info p ON d.ProductTypeID = p.ID
+    where d.SN='"+ queryText + "' or d.SIM='"+ queryText + "'";
 
             using (var conn = new MySqlConnection(strConn))
             {
@@ -94,18 +86,25 @@ namespace MSTSC.Manage.DAL
         }
 
 
-        public void GetDeviceDetial(string sn)
+        public dynamic GetDeviceDetialDAL(string sn)
         {
-            string sql = @"SELECT * from device_info d
+            string sql = @"SELECT d.SIM,d.SN,pi.ProductSeries,pi.ProductModel,d.OEM,d.Agent,
+case  when reagenttype='open' then '开放' when reagenttype='close' then '封闭' else reagenttype end ReagentType ,
+d.InstallationArea,d.FactoryDate,d.InstallDate,d.UpdateTime,brt.runtime_days,brt.runtime_opt,brt.runtime_power,brt.runtime_air_supply,
+bm.needle_times_impale,bc.count_times_total,bc.count_times_wb_cbc,bc.count_times_wb_cbc_crp,bc.count_times_wb_crp,bc.count_times_pd_cbc,
+bc.count_times_pd_cbc_crp,bc.count_times_pd_crp,bc.count_times_qc,br.reagent_dil,br.reagent_lh,br.reagent_r2,br.reagent_diff1,br.reagent_diff2,
+br.reagent_r1,br.reagent_fl1,br.reagent_fl2,br.reagent_fl3,br.reagent_fl4,br.reagent_fl5,br.reagent_fl6,bm.hole_times_wbc,bm.hole_times_rbc,
+bm.sampling_times_fault,bm.syringe_times_syringe_fault,bm.inject_times_fault,bm.mixing_times_fault
+                        from device_info d
                              LEFT JOIN blood_runtime brt on d.SN=brt.device_sn 
                              left JOIN blood_count bc on d.SN=bc.device_sn
                              LEFT JOIN blood_reagent br on d.SN = br.device_sn
                              LEFT JOIN blood_module bm on d.SN=bm.device_sn
-                             left join producttype_info pi on d.SN=pi.ID
-                            where d.SN= :device_sn";
+                             left join producttype_info pi on d.ProductTypeID=pi.ID
+                            where d.SN='" + sn+"'";
             using (var conn = new MySqlConnection(strConn))
             {
-                conn.Query<QueryList>(sql, new { device_sn = sn }).ToList();
+               return conn.Query(sql);
             }
         }
 

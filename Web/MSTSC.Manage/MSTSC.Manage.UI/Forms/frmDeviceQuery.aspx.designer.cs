@@ -40,6 +40,15 @@ namespace MSTSC.Manage.UI.Forms {
         protected global::System.Web.UI.UpdatePanel updatePanel1;
         
         /// <summary>
+        /// hdSN 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdSN;
+        
+        /// <summary>
         /// cbxDeviceType 控件。
         /// </summary>
         /// <remarks>
@@ -47,6 +56,15 @@ namespace MSTSC.Manage.UI.Forms {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList cbxDeviceType;
+        
+        /// <summary>
+        /// queryText 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox queryText;
         
         /// <summary>
         /// btnQuickQuery 控件。
@@ -112,6 +130,24 @@ namespace MSTSC.Manage.UI.Forms {
         protected global::System.Web.UI.WebControls.DropDownList cbxProModel;
         
         /// <summary>
+        /// cbxOEM 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList cbxOEM;
+        
+        /// <summary>
+        /// cbxAgent 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList cbxAgent;
+        
+        /// <summary>
         /// cbxReagentType 控件。
         /// </summary>
         /// <remarks>
@@ -175,6 +211,15 @@ namespace MSTSC.Manage.UI.Forms {
         protected global::System.Web.UI.WebControls.TextBox Device_SN;
         
         /// <summary>
+        /// ProductSeries 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox ProductSeries;
+        
+        /// <summary>
         /// ProductModel 控件。
         /// </summary>
         /// <remarks>
@@ -182,15 +227,6 @@ namespace MSTSC.Manage.UI.Forms {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox ProductModel;
-        
-        /// <summary>
-        /// ModelConf 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ModelConf;
         
         /// <summary>
         /// OEM 控件。
