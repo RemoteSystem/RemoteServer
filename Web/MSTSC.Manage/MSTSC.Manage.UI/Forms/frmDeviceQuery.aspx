@@ -57,6 +57,7 @@
                                 <asp:TableCell>
                                     封闭试剂类型
                                     <asp:DropDownList ID="cbxReagentType" runat="server" Width="100px">
+                                        <asp:ListItem></asp:ListItem>
                                         <asp:ListItem Value="open">开放</asp:ListItem>
                                         <asp:ListItem Value="close">封闭</asp:ListItem>
                                     </asp:DropDownList>
