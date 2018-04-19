@@ -22,11 +22,9 @@ namespace RemoteDao
 
         public static int UpdateOrSaveSession(JsonInfo info)
         {
-            string sql = "INSERT INTO device_info(SN,SIM,Region,Hospital,Address,ModelConf,ProductTypeID,OEM,Agent,ReagentType,FactoryDate,InstallDate,SoftVersion,UpdateTime,sessionid,starttime) "
-                + "VALUES(?sn,?sim,?region,?hospoital,?address,?model,?ptypeid,?oem,?agent,?reatype,?dtfactory,?dtinstall,?version,?dtupdate,?id,?dt) "
+            string sql = "INSERT INTO device_info(SN,SIM,Region,Hospital,Address,Model,DeviceType,ProductSeries,ProductModel,OEM,Agent,ReagentType,FactoryDate,InstallDate,SoftVersion,UpdateTime,sessionid,starttime) "
+                + "VALUES(?sn,?sim,?region,?hospoital,?address,?model,'血球分析仪',?series,?pmodel,?oem,?agent,?reatype,?dtfactory,?dtinstall,?version,?dtupdate,?id,?dt) "
                 + "ON DUPLICATE KEY UPDATE ";
-
-            int ptypeid = UpdateOrSaveProductType(info);
 
             if (info.sim != null)
             {
@@ -46,14 +44,18 @@ namespace RemoteDao
             }
             if (info.model != null)
             {
-                sql += ",ModelConf = ?model";
-            }
-            if (ptypeid > 0)
-            {
-                sql += ",ProductTypeID = ?ptypeid";
+                sql += ",Model = ?model";
             }
             if (info.category != null && info.category.BLOOD != null)
             {
+                if (info.category.BLOOD.series != null)
+                {
+                    sql += ",ProductSeries = ?series";
+                }
+                if (info.category.BLOOD.product_model != null)
+                {
+                    sql += ",ProductModel = ?pmodel";
+                }
                 if (info.category.BLOOD.OEM != null)
                 {
                     sql += ",OEM = ?oem";
@@ -92,7 +94,8 @@ namespace RemoteDao
                                             new MySqlParameter("?hospoital", MySqlDbType.VarChar),
                                             new MySqlParameter("?address", MySqlDbType.VarChar),
                                             new MySqlParameter("?model", MySqlDbType.VarChar),
-                                            new MySqlParameter("?ptypeid", MySqlDbType.VarChar),
+                                            new MySqlParameter("?series", MySqlDbType.VarChar),
+                                            new MySqlParameter("?pmodel", MySqlDbType.VarChar),
                                             new MySqlParameter("?oem", MySqlDbType.VarChar),
                                             new MySqlParameter("?agent", MySqlDbType.VarChar),
                                             new MySqlParameter("?reatype", MySqlDbType.VarChar),
@@ -108,29 +111,32 @@ namespace RemoteDao
             parameters[3].Value = info.hospital;
             parameters[4].Value = info.addr;
             parameters[5].Value = info.model;
-            parameters[6].Value = ptypeid;
             if (info.category == null || info.category.BLOOD == null)
             {
-                parameters[7].Value = "";
+                parameters[6].Value = DBNull.Value;
+                parameters[7].Value = DBNull.Value;
                 parameters[8].Value = "";
                 parameters[9].Value = "";
-                parameters[10].Value = DBNull.Value;
+                parameters[10].Value = "";
                 parameters[11].Value = DBNull.Value;
-                parameters[12].Value = "";
-                parameters[13].Value = DBNull.Value;
+                parameters[12].Value = DBNull.Value;
+                parameters[13].Value = "";
+                parameters[14].Value = DBNull.Value;
             }
             else
             {
-                parameters[7].Value = info.category.BLOOD.OEM;
-                parameters[8].Value = info.category.BLOOD.agent;
-                parameters[9].Value = info.category.BLOOD.reagent_type;
-                parameters[10].Value = info.category.BLOOD.date_factory;
-                parameters[11].Value = info.category.BLOOD.date_install;
-                parameters[12].Value = info.category.BLOOD.soft_main_version;
-                parameters[13].Value = info.category.BLOOD.update_time;
+                parameters[6].Value = info.category.BLOOD.series;
+                parameters[7].Value = info.category.BLOOD.product_model;
+                parameters[8].Value = info.category.BLOOD.OEM;
+                parameters[9].Value = info.category.BLOOD.agent;
+                parameters[10].Value = info.category.BLOOD.reagent_type;
+                parameters[11].Value = info.category.BLOOD.date_factory;
+                parameters[12].Value = info.category.BLOOD.date_install;
+                parameters[13].Value = info.category.BLOOD.soft_main_version;
+                parameters[14].Value = info.category.BLOOD.update_time;
             }
-            parameters[14].Value = info.sessionid;
-            parameters[15].Value = info.starttime;
+            parameters[15].Value = info.sessionid;
+            parameters[16].Value = info.starttime;
 
             int num = MySqlHelper.ExecuteNonQuery(Conn, sql, parameters);
             return num;
@@ -143,51 +149,6 @@ namespace RemoteDao
             parameters[0].Value = id;
 
             int n = MySqlHelper.ExecuteNonQuery(Conn, sql, parameters);
-        }
-
-        public static int UpdateOrSaveProductType(JsonInfo info)
-        {
-            int id = 0;
-
-            MySqlParameter[] parameters = { new MySqlParameter("?ptype", MySqlDbType.VarChar),
-                                            new MySqlParameter("?pseries", MySqlDbType.VarChar),                                            
-                                            new MySqlParameter("?pmodel", MySqlDbType.VarChar)};
-
-            if (info.category != null && info.category.BLOOD != null)
-            {
-                parameters[0].Value = "血球分析仪";
-                parameters[1].Value = info.category.BLOOD.series;
-                parameters[2].Value = info.category.BLOOD.product_model;
-            }
-            else
-            {
-                return id;
-            }
-
-            string sql = "SELECT ID as id FROM producttype_info WHERE ProductType = ?ptype AND ProductSeries = ?pseries AND ProductModel = ?pmodel;";
-            DataRow dr = MySqlHelper.ExecuteDataRow(Conn, sql, parameters);
-
-            if (null != dr)
-            {
-                Int32.TryParse(dr["id"].ToString(), out id);
-            }
-
-            if (id > 0)
-            {
-                return id;
-            }
-
-            sql = "INSERT INTO producttype_info(ProductType,ProductSeries,ProductModel) VALUES(?ptype,?pseries,?pmodel);"
-                + "SELECT ID as id FROM producttype_info WHERE ProductType = ?ptype AND ProductSeries = ?pseries AND ProductModel = ?pmodel;";
-
-            dr = MySqlHelper.ExecuteDataRow(Conn, sql, parameters);
-
-            if (null != dr)
-            {
-                Int32.TryParse(dr["id"].ToString(), out id);
-            }
-
-            return id;
         }
 
     }
