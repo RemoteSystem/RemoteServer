@@ -1,15 +1,16 @@
-﻿<%@ Page Language="C#"  EnableEventValidation="false" AutoEventWireup="true" CodeBehind="frmDeviceList.aspx.cs" Inherits="MSTSC.Manage.UI.Forms.frmDeviceList" %>
+﻿<%@ Page Language="C#" EnableEventValidation="false" AutoEventWireup="true" CodeBehind="frmDeviceList.aspx.cs" Inherits="MSTSC.Manage.UI.Forms.frmDeviceList" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
+    <link rel="stylesheet" type="text/css" href="../CSS/QueryCss.css" />
 </head>
 <body>
     <form id="form1" runat="server">
-     <div style="height: 100%;">
+        <div style="height: 100%;">
             <asp:ScriptManager runat="server" ID="ScriptManager1"></asp:ScriptManager>
             <asp:UpdatePanel ID="updatePanel1" runat="server">
                 <ContentTemplate>
@@ -74,7 +75,7 @@
                         </asp:GridView>
                     </div>
                     <div style="width: 60%; margin-right: 1px; float: right;">
-                        <asp:Panel ID="DeviceDetialPanel" Height="530px" Width="100%" runat="server" ScrollBars="Vertical">
+                        <asp:Panel ID="DeviceDetialPanel" Height="600px" Width="100%" runat="server" ScrollBars="Vertical">
                             <asp:Table runat="server" Width="98%">
                                 <asp:TableRow>
                                     <asp:TableCell Width="50%">
@@ -158,7 +159,7 @@
                                                 装机日期
                                                 </asp:TableCell>
                                                 <asp:TableCell ColumnSpan="5">
-                                                    <asp:TextBox ID="InstallDate" Enabled="false" Width="100px"  runat="server" ReadOnly="true"></asp:TextBox>
+                                                    <asp:TextBox ID="InstallDate" Enabled="false" Width="100px" runat="server" ReadOnly="true"></asp:TextBox>
                                                 </asp:TableCell>
                                             </asp:TableRow>
                                         </asp:Table>
@@ -272,13 +273,13 @@
                                                 全血-CBC+5DIFF
                                                 </asp:TableCell>
                                                 <asp:TableCell>
-                                                <asp:TextBox ID="count_times_wb_cd" Enabled="false" runat="server" Width="80px" ReadOnly="true"/>
+                                                    <asp:TextBox ID="count_times_wb_cd" Enabled="false" runat="server" Width="80px" ReadOnly="true" />
                                                 </asp:TableCell>
                                                 <asp:TableCell>
                                                 全血-CBC+5DIFF+CRP
                                                 </asp:TableCell>
                                                 <asp:TableCell>
-                                                <asp:TextBox ID="count_times_wb_cd_crp"  Enabled="false" runat="server" Width="80px" ReadOnly="true"/>
+                                                    <asp:TextBox ID="count_times_wb_cd_crp" Enabled="false" runat="server" Width="80px" ReadOnly="true" />
                                                 </asp:TableCell>
                                                 <asp:TableCell />
                                                 <asp:TableCell />
@@ -288,13 +289,13 @@
                                                 预稀释-CBC+5DIFF
                                                 </asp:TableCell>
                                                 <asp:TableCell>
-                                                <asp:TextBox ID="count_times_pd_cd"  Enabled="false" runat="server" ReadOnly="true" Width="80px"/>
+                                                    <asp:TextBox ID="count_times_pd_cd" Enabled="false" runat="server" ReadOnly="true" Width="80px" />
                                                 </asp:TableCell>
                                                 <asp:TableCell>
                                                 预稀释-CBC+5DIFF+CRP
                                                 </asp:TableCell>
                                                 <asp:TableCell>
-                                                <asp:TextBox ID="count_times_pd_cd_crp" Enabled="false" runat="server" ReadOnly="true" Width="80px"/>
+                                                    <asp:TextBox ID="count_times_pd_cd_crp" Enabled="false" runat="server" ReadOnly="true" Width="80px" />
                                                 </asp:TableCell>
                                                 <asp:TableCell />
                                                 <asp:TableCell />

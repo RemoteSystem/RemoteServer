@@ -104,7 +104,7 @@
                         </asp:GridView>
                     </div>
                     <div style="width: 60%; margin-right: 1px; float: right;">
-                        <asp:Panel ID="DeviceDetialPanel" Height="530px" Width="100%" runat="server" ScrollBars="Vertical">
+                        <asp:Panel ID="DeviceDetialPanel" Height="600px" Width="100%" runat="server" ScrollBars="Vertical">
                             <asp:Table runat="server" Width="98%">
                                 <asp:TableRow>
                                     <asp:TableCell Width="50%">
