@@ -92,7 +92,8 @@ namespace MSTSC.Manage.DAL
 case  when reagenttype='open' then '开放' when reagenttype='close' then '封闭' else reagenttype end ReagentType ,
 d.InstallationArea,d.FactoryDate,d.InstallDate,d.UpdateTime,brt.runtime_days,brt.runtime_opt,brt.runtime_power,brt.runtime_air_supply,
 bm.needle_times_impale,bc.count_times_total,bc.count_times_wb_cbc,bc.count_times_wb_cbc_crp,bc.count_times_wb_crp,bc.count_times_pd_cbc,
-bc.count_times_pd_cbc_crp,bc.count_times_pd_crp,bc.count_times_qc,br.reagent_dil,br.reagent_lh,br.reagent_r2,br.reagent_diff1,br.reagent_diff2,
+bc.count_times_pd_cbc_crp,bc.count_times_pd_crp,bc.count_times_wb_cd,bc.count_times_wb_cd_crp,bc.count_times_pd_cd,bc.count_times_pd_cd_crp,bc.count_times_qc,
+br.reagent_dil,br.reagent_lh,br.reagent_r2,br.reagent_diff1,br.reagent_diff2,
 br.reagent_r1,br.reagent_fl1,br.reagent_fl2,br.reagent_fl3,br.reagent_fl4,br.reagent_fl5,br.reagent_fl6,bm.hole_times_wbc,bm.hole_times_rbc,
 bm.sampling_times_fault,bm.syringe_times_syringe_fault,bm.inject_times_fault,bm.mixing_times_fault
                         from device_info d

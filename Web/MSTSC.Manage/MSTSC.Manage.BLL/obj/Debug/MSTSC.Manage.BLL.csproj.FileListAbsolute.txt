@@ -22,3 +22,15 @@ D:\MSTSC\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.BLL\bin\Debug\Dapper.xml
 D:\MSTSC\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.BLL\obj\Debug\MSTSC.Manage.BLL.csprojResolveAssemblyReference.cache
 D:\MSTSC\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.BLL\obj\Debug\MSTSC.Manage.BLL.dll
 D:\MSTSC\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.BLL\obj\Debug\MSTSC.Manage.BLL.pdb
+E:\WorkSpace\GitHub\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.BLL\bin\Debug\MSTSC.Manage.BLL.dll
+E:\WorkSpace\GitHub\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.BLL\bin\Debug\MSTSC.Manage.BLL.pdb
+E:\WorkSpace\GitHub\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.BLL\bin\Debug\MSTSC.Manage.DAL.dll
+E:\WorkSpace\GitHub\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.BLL\bin\Debug\MSTSC.Manage.Model.dll
+E:\WorkSpace\GitHub\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.BLL\bin\Debug\MySql.Data.dll
+E:\WorkSpace\GitHub\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.BLL\bin\Debug\Dapper.dll
+E:\WorkSpace\GitHub\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.BLL\bin\Debug\MSTSC.Manage.DAL.pdb
+E:\WorkSpace\GitHub\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.BLL\bin\Debug\MSTSC.Manage.Model.pdb
+E:\WorkSpace\GitHub\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.BLL\bin\Debug\Dapper.xml
+E:\WorkSpace\GitHub\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.BLL\obj\Debug\MSTSC.Manage.BLL.csprojResolveAssemblyReference.cache
+E:\WorkSpace\GitHub\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.BLL\obj\Debug\MSTSC.Manage.BLL.dll
+E:\WorkSpace\GitHub\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.BLL\obj\Debug\MSTSC.Manage.BLL.pdb

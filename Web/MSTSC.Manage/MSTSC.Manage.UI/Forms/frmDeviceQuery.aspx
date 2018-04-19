@@ -302,13 +302,13 @@
                                                 全血-CBC+5DIFF
                                                 </asp:TableCell>
                                                 <asp:TableCell>
-                                                <asp:TextBox Enabled="false" runat="server" Width="80px" ReadOnly="true"/>
+                                                <asp:TextBox ID="count_times_wb_cd" Enabled="false" runat="server" Width="80px" ReadOnly="true"/>
                                                 </asp:TableCell>
                                                 <asp:TableCell>
                                                 全血-CBC+5DIFF+CRP
                                                 </asp:TableCell>
                                                 <asp:TableCell>
-                                                <asp:TextBox  Enabled="false" runat="server" Width="80px" ReadOnly="true"/>
+                                                <asp:TextBox ID="count_times_wb_cd_crp"  Enabled="false" runat="server" Width="80px" ReadOnly="true"/>
                                                 </asp:TableCell>
                                                 <asp:TableCell />
                                                 <asp:TableCell />
@@ -318,13 +318,13 @@
                                                 预稀释-CBC+5DIFF
                                                 </asp:TableCell>
                                                 <asp:TableCell>
-                                                <asp:TextBox  Enabled="false" runat="server" ReadOnly="true" Width="80px"/>
+                                                <asp:TextBox ID="count_times_pd_cd"  Enabled="false" runat="server" ReadOnly="true" Width="80px"/>
                                                 </asp:TableCell>
                                                 <asp:TableCell>
                                                 预稀释-CBC+5DIFF+CRP
                                                 </asp:TableCell>
                                                 <asp:TableCell>
-                                                <asp:TextBox  Enabled="false" runat="server" ReadOnly="true" Width="80px"/>
+                                                <asp:TextBox ID="count_times_pd_cd_crp" Enabled="false" runat="server" ReadOnly="true" Width="80px"/>
                                                 </asp:TableCell>
                                                 <asp:TableCell />
                                                 <asp:TableCell />

@@ -177,6 +177,10 @@ namespace MSTSC.Manage.UI.Forms
                     count_times_pd_cbc.Text = Convert.ToString(item.count_times_pd_cbc);
                     count_times_pd_cbc_crp.Text = Convert.ToString(item.count_times_pd_cbc_crp);
                     count_times_pd_crp.Text = Convert.ToString(item.count_times_pd_crp);
+                    count_times_wb_cd.Text = Convert.ToString(item.count_times_wb_cd);
+                    count_times_wb_cd_crp.Text = Convert.ToString(item.count_times_wb_cd_crp);
+                    count_times_pd_cd.Text = Convert.ToString(item.count_times_pd_cd);
+                    count_times_pd_cd_crp.Text = Convert.ToString(item.count_times_pd_cd_crp);
                     count_times_qc.Text = Convert.ToString(item.count_times_qc);
                     reagent_dil.Text = Convert.ToString(item.reagent_dil);
                     reagent_lh.Text = Convert.ToString(item.reagent_lh);
