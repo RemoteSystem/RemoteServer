@@ -53,6 +53,11 @@ namespace RemoteController
             ReceiveDao.SessionClose(id);
         }
 
+        public static void ServerStop()
+        {
+            ServerDao.ServerStop();
+        }
+
         private static void SaveData(JsonInfo info)
         {
             if (info.category.BLOOD != null)
@@ -63,6 +68,7 @@ namespace RemoteController
                     BloodDao.UpdateOrSaveCount(info);
                     BloodDao.UpdateOrSaveReagent(info);
                     BloodDao.UpdateOrSaveModule(info);
+                    BloodDao.SaveFault(info);
                 }
                 catch (Exception e)
                 {

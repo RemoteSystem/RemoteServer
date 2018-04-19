@@ -13,15 +13,15 @@ namespace RemoteModel
         /// </summary>
         public string encoding { get; set; }
         /// <summary>
-        /// 
+        /// 设备序列号，是设备的id
         /// </summary>
         public string sn { get; set; }
         /// <summary>
-        /// 
+        /// 设备上网卡的卡号
         /// </summary>
         public string sim { get; set; }
         /// <summary>
-        /// 
+        /// 设备型号,和model_type相同
         /// </summary>
         public string model { get; set; }
         /// <summary>
@@ -95,51 +95,51 @@ namespace RemoteModel
         /// <summary>
         /// 
         /// </summary>
-        public int count_times_TOTAL { get; set; }
+        public string count_times_TOTAL { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int count_times_WB_CBC { get; set; }
+        public string count_times_WB_CBC { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int count_times_WB_CD { get; set; }
+        public string count_times_WB_CD { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int count_times_WB_CRP { get; set; }
+        public string count_times_WB_CRP { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int count_times_WB_CBC_CRP { get; set; }
+        public string count_times_WB_CBC_CRP { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int count_times_WB_CD_CRP { get; set; }
+        public string count_times_WB_CD_CRP { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int count_times_PD_CBC { get; set; }
+        public string count_times_PD_CBC { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int count_times_PD_CD { get; set; }
+        public string count_times_PD_CD { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int count_times_PD_CRP { get; set; }
+        public string count_times_PD_CRP { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int count_times_PD_CBC_CRP { get; set; }
+        public string count_times_PD_CBC_CRP { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int count_times_PD_CD_CRP { get; set; }
+        public string count_times_PD_CD_CRP { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int count_times_QC { get; set; }
+        public string count_times_QC { get; set; }
     }
 
     public class Reagent
@@ -147,51 +147,51 @@ namespace RemoteModel
         /// <summary>
         /// 
         /// </summary>
-        public int reagent_DIL { get; set; }
+        public string reagent_DIL { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int reagent_LH { get; set; }
+        public string reagent_LH { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int reagent_R1 { get; set; }
+        public string reagent_R1 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int reagent_R2 { get; set; }
+        public string reagent_R2 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int reagent_DIFF1 { get; set; }
+        public string reagent_DIFF1 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int reagent_DIFF2 { get; set; }
+        public string reagent_DIFF2 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int reagent_FL1 { get; set; }
+        public string reagent_FL1 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int reagent_FL2 { get; set; }
+        public string reagent_FL2 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int reagent_FL3 { get; set; }
+        public string reagent_FL3 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int reagent_FL4 { get; set; }
+        public string reagent_FL4 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int reagent_FL5 { get; set; }
+        public string reagent_FL5 { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int reagent_FL6 { get; set; }
+        public string reagent_FL6 { get; set; }
     }
 
     public class FaultItem
@@ -211,31 +211,31 @@ namespace RemoteModel
         /// <summary>
         /// 
         /// </summary>
-        public int hole_times_WBC { get; set; }
+        public string hole_times_WBC { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int hole_times_RBC { get; set; }
+        public string hole_times_RBC { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int needle_times_impale { get; set; }
+        public string needle_times_impale { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int sampling_times_fault { get; set; }
+        public string sampling_times_fault { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int Syringe_times_syringe_fault { get; set; }
+        public string Syringe_times_syringe_fault { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int inject_times_fault { get; set; }
+        public string inject_times_fault { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int mixing_times_fault { get; set; }
+        public string mixing_times_fault { get; set; }
     }
 
     public class BLOOD

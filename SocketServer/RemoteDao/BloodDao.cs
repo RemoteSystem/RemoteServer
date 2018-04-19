@@ -11,17 +11,17 @@ namespace RemoteDao
     {
         public static int UpdateOrSaveRuntime(JsonInfo info)
         {
-            if (info.category.BLOOD == null) return 0;
+            if (info.category.BLOOD == null || info.category.BLOOD.runtime == null) return 0;
 
             string sql = "INSERT INTO blood_runtime(device_sn,runtime_days,runtime_power,runtime_opt,runtime_air_supply) VALUES(?sn,?days,?power,?opt,?supply) "
                 + "ON DUPLICATE KEY UPDATE ";
             if (info.category.BLOOD.runtime.runtime_DAYS != null)
                 sql += ",runtime_days = ?days";
-            if (info.category.BLOOD.runtime.runtime_POWER != 0)
+            if (info.category.BLOOD.runtime.runtime_POWER != null)
                 sql += ",runtime_power = ?power";
-            if (info.category.BLOOD.runtime.runtime_OPT != 0)
+            if (info.category.BLOOD.runtime.runtime_OPT != null)
                 sql += ",runtime_opt = ?opt";
-            if (info.category.BLOOD.runtime.runtime_AIR_SUPPLY != 0)
+            if (info.category.BLOOD.runtime.runtime_AIR_SUPPLY != null)
                 sql += ",runtime_air_supply = ?supply";
 
             sql += ";";
@@ -45,34 +45,34 @@ namespace RemoteDao
 
         public static int UpdateOrSaveCount(JsonInfo info)
         {
-            if (info.category.BLOOD.count_statistics == null) return 0;
+            if (info.category.BLOOD == null || info.category.BLOOD.count_statistics == null) return 0;
 
             string sql = "INSERT INTO blood_count(device_sn,count_times_total,count_times_wb_cbc,count_times_wb_cd,count_times_wb_crp,count_times_wb_cbc_crp,count_times_wb_cd_crp,count_times_pd_cbc,count_times_pd_cd,count_times_pd_crp,count_times_pd_cbc_crp,count_times_pd_cd_crp,count_times_qc) "
                 + "VALUES(?sn,?total,?wbcbc,?wbcd,?wbcrp,?wbcbccrp,?wbcdcrp,?pdcbc,?pdcd,?pdcrp,?pdcbccrp,?pdcdcrp,?qc) "
                 + "ON DUPLICATE KEY UPDATE ";
-            if (info.category.BLOOD.count_statistics.count_times_TOTAL != 0)
+            if (info.category.BLOOD.count_statistics.count_times_TOTAL != null)
                 sql += ",count_times_total = ?total";
-            if (info.category.BLOOD.count_statistics.count_times_WB_CBC != 0)
+            if (info.category.BLOOD.count_statistics.count_times_WB_CBC != null)
                 sql += ",count_times_wb_cbc = ?wbcbc";
-            if (info.category.BLOOD.count_statistics.count_times_WB_CD != 0)
+            if (info.category.BLOOD.count_statistics.count_times_WB_CD != null)
                 sql += ",count_times_wb_cd = ?wbcd";
-            if (info.category.BLOOD.count_statistics.count_times_WB_CRP != 0)
+            if (info.category.BLOOD.count_statistics.count_times_WB_CRP != null)
                 sql += ",count_times_wb_crp = ?wbcrp";
-            if (info.category.BLOOD.count_statistics.count_times_WB_CBC_CRP != 0)
+            if (info.category.BLOOD.count_statistics.count_times_WB_CBC_CRP != null)
                 sql += ",count_times_wb_cbc_crp = ?wbcbccrp";
-            if (info.category.BLOOD.count_statistics.count_times_WB_CD_CRP != 0)
+            if (info.category.BLOOD.count_statistics.count_times_WB_CD_CRP != null)
                 sql += ",count_times_wb_cd_crp = ?wbcdcrp";
-            if (info.category.BLOOD.count_statistics.count_times_PD_CBC != 0)
+            if (info.category.BLOOD.count_statistics.count_times_PD_CBC != null)
                 sql += ",count_times_pd_cbc = ?pdcbc";
-            if (info.category.BLOOD.count_statistics.count_times_PD_CD != 0)
+            if (info.category.BLOOD.count_statistics.count_times_PD_CD != null)
                 sql += ",count_times_pd_cd = ?pdcd";
-            if (info.category.BLOOD.count_statistics.count_times_PD_CRP != 0)
+            if (info.category.BLOOD.count_statistics.count_times_PD_CRP != null)
                 sql += ",count_times_pd_crp = ?pdcrp";
-            if (info.category.BLOOD.count_statistics.count_times_PD_CBC_CRP != 0)
+            if (info.category.BLOOD.count_statistics.count_times_PD_CBC_CRP != null)
                 sql += ",count_times_pd_cbc_crp = ?pdcbccrp";
-            if (info.category.BLOOD.count_statistics.count_times_PD_CD_CRP != 0)
+            if (info.category.BLOOD.count_statistics.count_times_PD_CD_CRP != null)
                 sql += ",count_times_pd_cd_crp = ?pdcdcrp";
-            if (info.category.BLOOD.count_statistics.count_times_QC != 0)
+            if (info.category.BLOOD.count_statistics.count_times_QC != null)
                 sql += ",count_times_qc = ?qc";
 
             sql += ";";
@@ -113,34 +113,34 @@ namespace RemoteDao
 
         public static int UpdateOrSaveReagent(JsonInfo info)
         {
-            if (info.category.BLOOD.reagent == null) return 0;
+            if (info.category.BLOOD == null || info.category.BLOOD.reagent == null) return 0;
 
             string sql = "INSERT INTO blood_reagent(device_sn,reagent_dil,reagent_lh,reagent_r1,reagent_r2,reagent_diff1,reagent_diff2,reagent_fl1,reagent_fl2,reagent_fl3,reagent_fl4,reagent_fl5,reagent_fl6) "
                 + "VALUES(?sn,?dil,?lh,?r1,?r2,?diff1,?diff2,?fl1,?fl2,?fl3,?fl4,?fl5,?fl6) "
                 + "ON DUPLICATE KEY UPDATE ";
-            if (info.category.BLOOD.reagent.reagent_DIL != 0)
+            if (info.category.BLOOD.reagent.reagent_DIL != null)
                 sql += ",reagent_dil = ?dil";
-            if (info.category.BLOOD.reagent.reagent_LH != 0)
+            if (info.category.BLOOD.reagent.reagent_LH != null)
                 sql += ",reagent_lh = ?lh";
-            if (info.category.BLOOD.reagent.reagent_R1 != 0)
+            if (info.category.BLOOD.reagent.reagent_R1 != null)
                 sql += ",reagent_r1 = ?r1";
-            if (info.category.BLOOD.reagent.reagent_R2 != 0)
+            if (info.category.BLOOD.reagent.reagent_R2 != null)
                 sql += ",reagent_r2 = ?r2";
-            if (info.category.BLOOD.reagent.reagent_DIFF1 != 0)
+            if (info.category.BLOOD.reagent.reagent_DIFF1 != null)
                 sql += ",reagent_diff1 = ?diff1";
-            if (info.category.BLOOD.reagent.reagent_DIFF2 != 0)
+            if (info.category.BLOOD.reagent.reagent_DIFF2 != null)
                 sql += ",reagent_diff2 = ?diff2";
-            if (info.category.BLOOD.reagent.reagent_FL1 != 0)
+            if (info.category.BLOOD.reagent.reagent_FL1 != null)
                 sql += ",reagent_fl1 = ?fl1";
-            if (info.category.BLOOD.reagent.reagent_FL2 != 0)
+            if (info.category.BLOOD.reagent.reagent_FL2 != null)
                 sql += ",reagent_fl2 = ?fl2";
-            if (info.category.BLOOD.reagent.reagent_FL3 != 0)
+            if (info.category.BLOOD.reagent.reagent_FL3 != null)
                 sql += ",reagent_fl3 = ?fl3";
-            if (info.category.BLOOD.reagent.reagent_FL4 != 0)
+            if (info.category.BLOOD.reagent.reagent_FL4 != null)
                 sql += ",reagent_fl4 = ?fl4";
-            if (info.category.BLOOD.reagent.reagent_FL5 != 0)
+            if (info.category.BLOOD.reagent.reagent_FL5 != null)
                 sql += ",reagent_fl5 = ?fl5";
-            if (info.category.BLOOD.reagent.reagent_FL6 != 0)
+            if (info.category.BLOOD.reagent.reagent_FL6 != null)
                 sql += ",reagent_fl6 = ?fl6";
 
             sql += ";";
@@ -181,24 +181,24 @@ namespace RemoteDao
 
         public static int UpdateOrSaveModule(JsonInfo info)
         {
-            if (info.category.BLOOD.module_statistics == null) return 0;
+            if (info.category.BLOOD == null || info.category.BLOOD.module_statistics == null) return 0;
 
             string sql = "INSERT INTO blood_module(device_sn,hole_times_wbc,hole_times_rbc,needle_times_impale,sampling_times_fault,syringe_times_syringe_fault,inject_times_fault,mixing_times_fault) "
                 + "VALUES(?sn,?wbc,?rbc,?needle,?sampling,?syringe,?inject,?mixing) "
                 + "ON DUPLICATE KEY UPDATE ";
-            if (info.category.BLOOD.module_statistics.hole_times_WBC != 0)
+            if (info.category.BLOOD.module_statistics.hole_times_WBC != null)
                 sql += ",hole_times_wbc = ?wbc";
-            if (info.category.BLOOD.module_statistics.hole_times_RBC != 0)
+            if (info.category.BLOOD.module_statistics.hole_times_RBC != null)
                 sql += ",hole_times_rbc = ?rbc";
-            if (info.category.BLOOD.module_statistics.needle_times_impale != 0)
+            if (info.category.BLOOD.module_statistics.needle_times_impale != null)
                 sql += ",needle_times_impale = ?needle";
-            if (info.category.BLOOD.module_statistics.sampling_times_fault != 0)
+            if (info.category.BLOOD.module_statistics.sampling_times_fault != null)
                 sql += ",sampling_times_fault = ?sampling";
-            if (info.category.BLOOD.module_statistics.Syringe_times_syringe_fault != 0)
+            if (info.category.BLOOD.module_statistics.Syringe_times_syringe_fault != null)
                 sql += ",syringe_times_syringe_fault = ?syringe";
-            if (info.category.BLOOD.module_statistics.inject_times_fault != 0)
+            if (info.category.BLOOD.module_statistics.inject_times_fault != null)
                 sql += ",inject_times_fault = ?inject";
-            if (info.category.BLOOD.module_statistics.mixing_times_fault != 0)
+            if (info.category.BLOOD.module_statistics.mixing_times_fault != null)
                 sql += ",mixing_times_fault = ?mixing";
 
             sql += ";";
@@ -224,6 +224,30 @@ namespace RemoteDao
 
             int num = MySqlHelper.ExecuteNonQuery(Conn, sql, parameters);
 
+            return num;
+        }
+
+        public static int SaveFault(JsonInfo info)
+        {
+            if (info.category.BLOOD == null || info.category.BLOOD.fault == null) return 0;
+
+            string sql = "INSERT INTO blood_fault(device_sn,code,dttime) "
+                + "VALUES(?sn,?code,?dttime) ";
+
+            MySqlParameter[] parameters = { new MySqlParameter("?sn", MySqlDbType.VarChar),
+                                            new MySqlParameter("?code", MySqlDbType.VarChar),
+                                            new MySqlParameter("?dttime", MySqlDbType.Timestamp)};
+
+            int num = 0;
+            for (int i = 0; i < info.category.BLOOD.fault.Count; i++)
+            {
+                parameters[0].Value = info.sn;
+                parameters[1].Value = info.category.BLOOD.fault[i].code;
+                parameters[2].Value = info.category.BLOOD.fault[i].time;
+
+                num += MySqlHelper.ExecuteNonQuery(Conn, sql, parameters);
+            }
+            
             return num;
         }
 

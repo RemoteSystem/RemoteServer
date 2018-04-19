@@ -108,6 +108,7 @@ namespace SocketServer
             {
                 appServer.Stop();
             }
+            ReceiveController.ServerStop();
         }
 
         /// <summary>

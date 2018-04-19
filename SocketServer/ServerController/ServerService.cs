@@ -31,5 +31,21 @@ namespace ServerController
             return result;
         }
 
+        public ResultInfo updateBloodParas(string sessionId, string msg)
+        {
+            ResultInfo result = new ResultInfo();
+            try
+            {
+                result = SocketServer.SocketServer.sendMsg(sessionId, msg);
+            }
+            catch (Exception e)
+            {
+                result.code = 101;
+                result.msg = "发送出错." + e.Message;
+            }
+
+            return result;
+        }
+
     }
 }

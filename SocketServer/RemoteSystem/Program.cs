@@ -30,6 +30,10 @@ namespace RemoteSystem
                 {
                     testSend();
                 }
+                if (c == 'a')
+                {
+                    senginfo();
+                }
                 Console.WriteLine();
                 continue;
             }
@@ -61,6 +65,16 @@ namespace RemoteSystem
 
             ServerService service = new ServerService();
             ResultInfo ri = service.updateBloodParas(testId, info);
+            Console.WriteLine(ri.msg);
+        }
+
+        private static void senginfo()
+        {
+            string msg = "{ \"category\" : { \"blood\" : { \"fault\" : [ { \"code\" : \"16789557\", \"time\" : \"2018-04-18 16:57:59\" }, { \"code\" : \"16789558\", \"time\" : \"2018-04-18 17:57:59\" }], \"update_time\" : \"2018-04-18 16:57:59\" } }, \"encoding\" : \"utf-8\", \"sn\" : \"201804174567\" }";
+            string testId = SocketServer.SocketServer.testIds.Count > 0 ? SocketServer.SocketServer.testIds[0] : "当前没有连接";
+
+            ServerService service = new ServerService();
+            ResultInfo ri = service.updateBloodParas(testId, msg);
             Console.WriteLine(ri.msg);
         }
 

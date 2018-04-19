@@ -24,9 +24,67 @@ namespace RemoteDao
         {
             string sql = "INSERT INTO device_info(SN,SIM,Region,Hospital,Address,ModelConf,ProductTypeID,OEM,Agent,ReagentType,FactoryDate,InstallDate,SoftVersion,UpdateTime,sessionid,starttime) "
                 + "VALUES(?sn,?sim,?region,?hospoital,?address,?model,?ptypeid,?oem,?agent,?reatype,?dtfactory,?dtinstall,?version,?dtupdate,?id,?dt) "
-                + "ON DUPLICATE KEY UPDATE SIM = ?sim,Region = ?region,Hospital = ?hospoital,Address = ?address,ModelConf = ?model,ProductTypeID = ?ptypeid,OEM = ?oem,"
-                + "Agent = ?agent,ReagentType = ?reatype,FactoryDate = ?dtfactory,InstallDate = ?dtinstall,SoftVersion = ?version,UpdateTime = ?dtupdate,"
-                + "sessionid = ?id,starttime = ?dt ;";
+                + "ON DUPLICATE KEY UPDATE ";
+
+            int ptypeid = UpdateOrSaveProductType(info);
+
+            if (info.sim != null)
+            {
+                sql += ",SIM = ?sim";
+            }
+            if (info.region != null)
+            {
+                sql += ",Region = ?region";
+            }
+            if (info.hospital != null)
+            {
+                sql += ",Hospital = ?hospoital";
+            }
+            if (info.addr != null)
+            {
+                sql += ",Address = ?address";
+            }
+            if (info.model != null)
+            {
+                sql += ",ModelConf = ?model";
+            }
+            if (ptypeid > 0)
+            {
+                sql += ",ProductTypeID = ?ptypeid";
+            }
+            if (info.category != null && info.category.BLOOD != null)
+            {
+                if (info.category.BLOOD.OEM != null)
+                {
+                    sql += ",OEM = ?oem";
+                }
+                if (info.category.BLOOD.agent != null)
+                {
+                    sql += ",Agent = ?agent";
+                }
+                if (info.category.BLOOD.reagent_type != null)
+                {
+                    sql += ",ReagentType = ?reatype";
+                }
+                if (info.category.BLOOD.date_factory != null && info.category.BLOOD.date_factory != DateTime.MinValue)
+                {
+                    sql += ",FactoryDate = ?dtfactory";
+                }
+                if (info.category.BLOOD.date_install != null && info.category.BLOOD.date_install != DateTime.MinValue)
+                {
+                    sql += ",InstallDate = ?dtinstall";
+                }
+                if (info.category.BLOOD.soft_main_version != null)
+                {
+                    sql += ",SoftVersion = ?version";
+                }
+                if (info.category.BLOOD.update_time != null && info.category.BLOOD.update_time != DateTime.MinValue)
+                {
+                    sql += ",UpdateTime = ?dtupdate";
+                }
+            }
+            sql += ",sessionid = ?id,starttime = ?dt; ";
+            sql = sql.Replace("UPDATE ,", "UPDATE ");
 
             MySqlParameter[] parameters = { new MySqlParameter("?sn", MySqlDbType.VarChar),
                                             new MySqlParameter("?sim", MySqlDbType.VarChar),                                            
@@ -50,8 +108,8 @@ namespace RemoteDao
             parameters[3].Value = info.hospital;
             parameters[4].Value = info.addr;
             parameters[5].Value = info.model;
-            parameters[6].Value = UpdateOrSaveProductType(info);
-            if (info.category.BLOOD == null)
+            parameters[6].Value = ptypeid;
+            if (info.category == null || info.category.BLOOD == null)
             {
                 parameters[7].Value = "";
                 parameters[8].Value = "";

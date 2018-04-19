@@ -6,3 +6,4 @@ E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteModel\bin\Release\RemoteMode
 E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteModel\bin\Release\RemoteModel.pdb
 E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteModel\obj\Release\RemoteModel.dll
 E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteModel\obj\Release\RemoteModel.pdb
+E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteModel\obj\Release\RemoteModel.csprojResolveAssemblyReference.cache
