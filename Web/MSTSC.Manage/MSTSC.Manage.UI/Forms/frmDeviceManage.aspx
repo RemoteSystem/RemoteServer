@@ -48,7 +48,7 @@
                             OnRowDataBound="gdDeviceList_RowDataBound" PagerSettings-Mode="Numeric" EmptyDataText="没有记录！">
                             <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
                             <Columns>
-                                <asp:BoundField HeaderText="仪器名称" HeaderStyle-Width="70px" DataField="Region"></asp:BoundField>
+                                <asp:BoundField HeaderText="仪器名称" HeaderStyle-Width="70px" DataField="DeviceName"></asp:BoundField>
                                 <asp:BoundField HeaderText="SIM卡号" HeaderStyle-Width="80px" DataField="SIM"></asp:BoundField>
                                 <asp:BoundField HeaderText="仪器序列号" HeaderStyle-Width="85px" DataField="SN"></asp:BoundField>
                                 <asp:BoundField HeaderText="产品" HeaderStyle-Width="38px" DataField="ProductSeries"></asp:BoundField>

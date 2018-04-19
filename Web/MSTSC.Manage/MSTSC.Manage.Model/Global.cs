@@ -10,6 +10,6 @@ namespace MSTSC.Manage.Model
         /// <summary>
         /// 仪器类型信息
         /// </summary>
-        public static List<ProductTypeModel> DeviceTypeInfos { get; set; }
+        //public static List<ProductTypeModel> DeviceTypeInfos { get; set; }
     }
 }

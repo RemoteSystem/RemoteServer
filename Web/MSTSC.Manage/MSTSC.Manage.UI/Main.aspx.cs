@@ -16,7 +16,6 @@ namespace MSTSC.Manage
         {
             if(!IsPostBack)
             {
-                Global.DeviceTypeInfos = bll.ProductTypeInfoBLL();
             }
         }
     }

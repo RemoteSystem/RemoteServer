@@ -13,8 +13,11 @@ namespace MSTSC.Manage.UI.Forms
     {
         private DeviceQueryBLL bll = new DeviceQueryBLL();
 
+        List<ProductTypeModel> deviceInfos = new List<ProductTypeModel>();
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            deviceInfos = bll.ProductTypeInfoBLL();
             if (!IsPostBack)
             {
                 BindProductType();
@@ -60,8 +63,7 @@ namespace MSTSC.Manage.UI.Forms
         {
             try
             {
-                var proTypeList = Global.DeviceTypeInfos.Select(o => o.ProductType).Distinct().ToList();
-                proTypeList.Insert(0, "");
+                var proTypeList = deviceInfos.Select(o => o.DeviceType).Distinct().ToList();
                 cbxDeviceType.DataSource = proTypeList;
                 cbxDeviceType.DataBind();
             }
@@ -82,7 +84,7 @@ namespace MSTSC.Manage.UI.Forms
         private QueryConditionModel getConditionValue()
         {
             QueryConditionModel convalue = new QueryConditionModel();
-            convalue.ProduceType = cbxDeviceType.Text.Trim();
+            convalue.DeviceType = cbxDeviceType.Text.Trim();
             if (allDevice.Checked)
             {
                 convalue.DeviceState = MachineState.所有仪器;

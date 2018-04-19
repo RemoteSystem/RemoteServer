@@ -74,7 +74,7 @@
 
                             <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
                             <Columns>
-                                <asp:BoundField HeaderText="仪器名称" HeaderStyle-Width="70px" DataField="Region"></asp:BoundField>
+                                <asp:BoundField HeaderText="仪器名称" HeaderStyle-Width="70px" DataField="DeviceName"></asp:BoundField>
                                 <asp:BoundField HeaderText="SIM卡号" HeaderStyle-Width="80px" DataField="SIM"></asp:BoundField>
                                 <asp:BoundField HeaderText="仪器序列号" HeaderStyle-Width="85px" DataField="SN"></asp:BoundField>
                                 <asp:BoundField HeaderText="产品" HeaderStyle-Width="38px" DataField="ProductSeries"></asp:BoundField>
@@ -104,7 +104,7 @@
                         </asp:GridView>
                     </div>
                     <div style="width: 60%; margin-right: 1px; float: right;">
-                        <asp:Panel ID="DeviceDetialPanel" Height="600px" Width="100%" runat="server" ScrollBars="Vertical">
+                        <asp:Panel ID="DeviceDetialPanel" Height="550px" Width="100%" runat="server" ScrollBars="Vertical">
                             <asp:Table runat="server" Width="98%">
                                 <asp:TableRow>
                                     <asp:TableCell Width="50%">
@@ -119,7 +119,6 @@
                                     基本信息
                                     </asp:TableCell><asp:TableCell HorizontalAlign="Right">
                                         <asp:Button runat="server" Width="60px" ID="btnRefresh" Text="刷新" OnClick="btnRefresh_Click" />
-
                                     </asp:TableCell>
                                 </asp:TableRow>
                                 <asp:TableRow>
@@ -197,8 +196,8 @@
                                 <asp:TableRow>
                                     <asp:TableCell ColumnSpan="2">
                                         <asp:Table runat="server" Width="100%">
-                                            <asp:TableRow>
-                                                <asp:TableCell ColumnSpan="6" Height="40px" VerticalAlign="Bottom">
+                                            <asp:TableRow Height="40px">
+                                                <asp:TableCell ColumnSpan="6">
                                                 仪器运行信息
                                                 </asp:TableCell>
                                             </asp:TableRow>
@@ -244,7 +243,7 @@
                                 <asp:TableRow>
                                     <asp:TableCell ColumnSpan="2">
                                         <asp:Table runat="server" Width="100%">
-                                            <asp:TableRow Height="40px" VerticalAlign="Bottom">
+                                            <asp:TableRow >
                                                 <asp:TableCell ColumnSpan="6">
                                                 计数信息统计
                                                 </asp:TableCell>
@@ -462,7 +461,7 @@
                                 <asp:TableRow>
                                     <asp:TableCell ColumnSpan="2">
                                         <asp:Table runat="server" Width="100%">
-                                            <asp:TableRow Height="40">
+                                            <asp:TableRow Height="40px">
                                                 <asp:TableCell ColumnSpan="6">
                                                  故障统计信息
                                                 </asp:TableCell>
@@ -501,7 +500,7 @@
                                 <asp:TableRow>
                                     <asp:TableCell ColumnSpan="2">
                                     <asp:Table runat="server" Width="100%">
-                                        <asp:TableRow>
+                                        <asp:TableRow Height="40px">
                                             <asp:TableCell>文件</asp:TableCell>
                                         </asp:TableRow>
                                     </asp:Table>

@@ -16,9 +16,13 @@ namespace MSTSC.Manage.UI.Forms
     {
         private DeviceQueryBLL bll = new DeviceQueryBLL();
 
+        List<ProductTypeModel> deviceInfos = new List<ProductTypeModel>();
+
         #region 页面事件
         protected void Page_Load(object sender, EventArgs e)
         {
+            deviceInfos = bll.ProductTypeInfoBLL();
+
             if (!IsPostBack)
             {
                 BindProductType();
@@ -35,7 +39,8 @@ namespace MSTSC.Manage.UI.Forms
         protected void cbxDeviceType_SelectedIndexChanged(object sender, EventArgs e)
         {
             // 根据仪器类型绑定产品类型
-            var proSeriesList = Global.DeviceTypeInfos.Where(o => o.ProductType == cbxDeviceType.Text).Select(o => Common.DBdataToUI(o.ProductSeries)).Distinct().ToList();
+            var proSeriesList = deviceInfos.Where(o => o.DeviceType == cbxDeviceType.Text).Select(o => Common.DBdataToUI(o.ProductSeries)).Distinct().ToList();
+            proSeriesList.Insert(0, "");
             cbxProSeries.DataSource = proSeriesList;
             cbxProSeries.DataBind();
         }
@@ -63,7 +68,7 @@ namespace MSTSC.Manage.UI.Forms
         protected void cbxProSeries_SelectedIndexChanged(object sender, EventArgs e)
         {
             // 根据仪器类型、产品类型绑定产品类型
-         var proModelList = Global.DeviceTypeInfos.Where(o => o.ProductType == cbxDeviceType.Text && o.ProductSeries == Common.UIdataToDB(cbxProSeries.Text))
+         var proModelList = deviceInfos.Where(o => o.DeviceType == cbxDeviceType.Text && o.ProductSeries == Common.UIdataToDB(cbxProSeries.Text))
               .Select(o => o.ProductModel).Distinct().ToList();
             cbxProModel.DataSource = proModelList;
             cbxProModel.DataBind();
@@ -95,7 +100,7 @@ namespace MSTSC.Manage.UI.Forms
         {
             try
             {
-                var proTypeList = Global.DeviceTypeInfos.Select(o => o.ProductType).Distinct().ToList();
+                var proTypeList = deviceInfos.Select(o => o.DeviceType).Distinct().ToList();
                 proTypeList.Insert(0, "");
                 cbxDeviceType.DataSource = proTypeList;
                 cbxDeviceType.DataBind();
@@ -117,7 +122,7 @@ namespace MSTSC.Manage.UI.Forms
         private QueryConditionModel getConditionValue()
         {
             QueryConditionModel convalue = new QueryConditionModel();
-            convalue.ProduceType = cbxDeviceType.Text.Trim();
+            convalue.DeviceType = cbxDeviceType.Text.Trim();
             convalue.ProductSeries = cbxProSeries.Text.Trim();
             convalue.ModelType = cbxProModel.Text.Trim();
             if (allDevice.Checked)

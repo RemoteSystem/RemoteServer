@@ -10,7 +10,7 @@ namespace MSTSC.Manage.Model
         /// <summary>
         /// 仪器名称
         /// </summary>
-        public string Region { get; set; }
+        public string DeviceName { get; set; }
 
         /// <summary>
         /// SIM卡号

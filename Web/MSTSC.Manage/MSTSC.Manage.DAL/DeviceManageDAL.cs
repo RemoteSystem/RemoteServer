@@ -15,14 +15,13 @@ namespace MSTSC.Manage.DAL
         public List<QueryList> GetDeviceInfoDAL(QueryConditionModel conditValue)
         {
             StringBuilder whereSql = new StringBuilder();
-            string sql = @"SELECT d.Region, d.SIM, d.SN,d.SESSIONID,p.ProductSeries, p.ProductModel
+            string sql = @"SELECT d.DeviceName, d.SIM, d.SN,d.SESSIONID,d.ProductSeries, d.ProductModel
                             FROM device_info d
-	                            LEFT JOIN producttype_info p ON d.ProductTypeID = p.ID
                                 where 1=1 ";
 
-            if (!string.IsNullOrEmpty(conditValue.ProduceType))
+            if (!string.IsNullOrEmpty(conditValue.DeviceType))
             {
-                whereSql.Append(@" AND p.ProductType='"+ conditValue.ProduceType +"'");
+                whereSql.Append(@" AND d.DeviceType='" + conditValue.DeviceType + "'");
             }
 
             if (conditValue.DeviceState == MachineState.已连接仪器)
@@ -36,12 +35,12 @@ namespace MSTSC.Manage.DAL
 
             if (!string.IsNullOrEmpty(conditValue.ProductSeries))
             {
-                whereSql.Append(@" AND p.ProductSeries='"+ conditValue.ProductSeries + "'");
+                whereSql.Append(@" AND d.ProductSeries='"+ conditValue.ProductSeries + "'");
             }
 
             if (!string.IsNullOrEmpty(conditValue.ModelType))
             {
-                whereSql.Append(@" AND p.ProductModel='"+ conditValue.ModelType +"'");
+                whereSql.Append(@" AND d.ProductModel='"+ conditValue.ModelType +"'");
             }
 
             if (!string.IsNullOrEmpty(conditValue.OEM))
@@ -74,10 +73,11 @@ namespace MSTSC.Manage.DAL
 
         public List<QueryList> QuickQueryDAL(string queryText)
         {
-            string sql = @"SELECT d.Region, d.SIM, d.SN,p.ProductSeries,p.ProductModel, d.SESSIONID
-      FROM device_info d
-	    LEFT JOIN producttype_info p ON d.ProductTypeID = p.ID
-    where d.SN='"+ queryText + "' or d.SIM='"+ queryText + "'";
+            string sql = @"SELECT d.Region, d.SIM, d.SN,d.ProductSeries,d.ProductModel, d.SESSIONID
+                              FROM device_info d
+                            where d.SN='"+ queryText +
+                            "' or d.devicename='"+queryText+
+                            "' or d.SIM='" + queryText + "'";
 
             using (var conn = new MySqlConnection(strConn))
             {
@@ -88,7 +88,7 @@ namespace MSTSC.Manage.DAL
 
         public dynamic GetDeviceDetialDAL(string sn)
         {
-            string sql = @"SELECT d.SIM,d.SN,pi.ProductSeries,pi.ProductModel,d.OEM,d.Agent,
+            string sql = @"SELECT d.devicename,d.SIM,d.SN,d.ProductSeries,d.ProductModel,d.OEM,d.Agent,
 case  when reagenttype='open' then '开放' when reagenttype='close' then '封闭' else reagenttype end ReagentType ,
 d.InstallationArea,d.FactoryDate,d.InstallDate,d.UpdateTime,brt.runtime_days,brt.runtime_opt,brt.runtime_power,brt.runtime_air_supply,
 bm.needle_times_impale,bc.count_times_total,bc.count_times_wb_cbc,bc.count_times_wb_cbc_crp,bc.count_times_wb_crp,bc.count_times_pd_cbc,
@@ -101,7 +101,6 @@ bm.sampling_times_fault,bm.syringe_times_syringe_fault,bm.inject_times_fault,bm.
                              left JOIN blood_count bc on d.SN=bc.device_sn
                              LEFT JOIN blood_reagent br on d.SN = br.device_sn
                              LEFT JOIN blood_module bm on d.SN=bm.device_sn
-                             left join producttype_info pi on d.ProductTypeID=pi.ID
                             where d.SN='" + sn+"'";
             using (var conn = new MySqlConnection(strConn))
             {
@@ -111,7 +110,7 @@ bm.sampling_times_fault,bm.syringe_times_syringe_fault,bm.inject_times_fault,bm.
 
         public List<ProductTypeModel> ProductTypeInfoDAL()
         {
-            var sql = @"select ID,ProductType,ProductSeries,ProductModel from producttype_info";
+            var sql = @"SELECT DISTINCT DeviceType,ProductSeries,ProductModel from device_info ";
             using (var conn = new MySqlConnection(strConn))
             {
                 return conn.Query<ProductTypeModel>(sql).ToList();

@@ -10,7 +10,7 @@ namespace MSTSC.Manage.Model
         /// <summary>
         /// 仪器类型
         /// </summary>
-        public string ProduceType { get; set; }
+        public string DeviceType { get; set; }
 
         /// <summary>
         /// 查询条件

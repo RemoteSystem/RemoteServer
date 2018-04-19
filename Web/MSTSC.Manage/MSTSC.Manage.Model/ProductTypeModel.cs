@@ -11,14 +11,9 @@ namespace MSTSC.Manage.Model
     public class ProductTypeModel
     {
         /// <summary>
-        /// 记录号
-        /// </summary>
-        public int ID { get; set; }
-
-        /// <summary>
         /// 仪器类型
         /// </summary>
-        public string ProductType { get; set; }
+        public string DeviceType { get; set; }
 
         /// <summary>
         /// 产品类型
