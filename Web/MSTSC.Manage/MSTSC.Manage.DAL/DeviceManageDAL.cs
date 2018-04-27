@@ -35,32 +35,32 @@ namespace MSTSC.Manage.DAL
 
             if (!string.IsNullOrEmpty(conditValue.ProductSeries))
             {
-                whereSql.Append(@" AND d.ProductSeries='"+ conditValue.ProductSeries + "'");
+                whereSql.Append(@" AND d.ProductSeries='" + conditValue.ProductSeries + "'");
             }
 
             if (!string.IsNullOrEmpty(conditValue.ModelType))
             {
-                whereSql.Append(@" AND d.ProductModel='"+ conditValue.ModelType +"'");
+                whereSql.Append(@" AND d.ProductModel='" + conditValue.ModelType + "'");
             }
 
             if (!string.IsNullOrEmpty(conditValue.OEM))
             {
-                whereSql.Append(@" AND d.OEM='"+ conditValue.OEM + "'");
+                whereSql.Append(@" AND d.OEM='" + conditValue.OEM + "'");
             }
 
             if (!string.IsNullOrEmpty(conditValue.Agent))
             {
-                whereSql.Append(@" AND d.Agent='"+ conditValue.Agent + "'");
+                whereSql.Append(@" AND d.Agent='" + conditValue.Agent + "'");
             }
 
             if (!string.IsNullOrEmpty(conditValue.ReagentType))
             {
-                whereSql.Append(@" AND d.ReagentType='"+ conditValue.ReagentType + "'");
+                whereSql.Append(@" AND d.ReagentType='" + conditValue.ReagentType + "'");
             }
 
             if (!string.IsNullOrEmpty(conditValue.Region))
             {
-                whereSql.Append(@" AND d.Region='"+ conditValue.Region + "'");
+                whereSql.Append(@" AND d.Region='" + conditValue.Region + "'");
             }
 
             sql = sql + whereSql.ToString();
@@ -73,10 +73,10 @@ namespace MSTSC.Manage.DAL
 
         public List<QueryList> QuickQueryDAL(string queryText)
         {
-            string sql = @"SELECT d.Region, d.SIM, d.SN,d.ProductSeries,d.ProductModel, d.SESSIONID
+            string sql = @"SELECT d.DeviceName,d.Region, d.SIM, d.SN,d.ProductSeries,d.ProductModel, d.SESSIONID
                               FROM device_info d
-                            where d.SN='"+ queryText +
-                            "' or d.devicename='"+queryText+
+                            where d.SN='" + queryText +
+                            "' or d.devicename='" + queryText +
                             "' or d.SIM='" + queryText + "'";
 
             using (var conn = new MySqlConnection(strConn))
@@ -101,10 +101,10 @@ bm.sampling_times_fault,bm.syringe_times_syringe_fault,bm.inject_times_fault,bm.
                              left JOIN blood_count bc on d.SN=bc.device_sn
                              LEFT JOIN blood_reagent br on d.SN = br.device_sn
                              LEFT JOIN blood_module bm on d.SN=bm.device_sn
-                            where d.SN='" + sn+"'";
+                            where d.SN='" + sn + "'";
             using (var conn = new MySqlConnection(strConn))
             {
-               return conn.Query(sql);
+                return conn.Query(sql);
             }
         }
 
@@ -116,5 +116,134 @@ bm.sampling_times_fault,bm.syringe_times_syringe_fault,bm.inject_times_fault,bm.
                 return conn.Query<ProductTypeModel>(sql).ToList();
             }
         }
+
+        //******************* NEW *****************//
+        public List<QueryList> GetDeviceInfoDAL(QueryConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
+        {
+            StringBuilder whereSql = new StringBuilder();
+            string sql = @"SELECT d.DeviceName, d.SIM, d.SN,d.SESSIONID,d.ProductSeries, d.ProductModel FROM device_info d INNER JOIN (SELECT SN FROM device_info ";
+
+            if (!string.IsNullOrEmpty(conditValue.DeviceType))
+            {
+                whereSql.Append(@" AND DeviceType='" + conditValue.DeviceType + "'");
+            }
+
+            if (conditValue.DeviceState == MachineState.已连接仪器)
+            {
+                whereSql.Append(@" AND sessionid is not null");
+            }
+            else if (conditValue.DeviceState == MachineState.未连接仪器)
+            {
+                whereSql.Append(@" AND sessionid is null");
+            }
+
+            if (!string.IsNullOrEmpty(conditValue.ProductSeries))
+            {
+                whereSql.Append(@" AND ProductSeries='" + conditValue.ProductSeries + "'");
+            }
+
+            if (!string.IsNullOrEmpty(conditValue.ModelType))
+            {
+                whereSql.Append(@" AND ProductModel='" + conditValue.ModelType + "'");
+            }
+
+            if (!string.IsNullOrEmpty(conditValue.OEM))
+            {
+                whereSql.Append(@" AND OEM='" + conditValue.OEM + "'");
+            }
+
+            if (!string.IsNullOrEmpty(conditValue.Agent))
+            {
+                whereSql.Append(@" AND Agent='" + conditValue.Agent + "'");
+            }
+
+            if (!string.IsNullOrEmpty(conditValue.ReagentType))
+            {
+                whereSql.Append(@" AND ReagentType='" + conditValue.ReagentType + "'");
+            }
+
+            if (!string.IsNullOrEmpty(conditValue.Region))
+            {
+                whereSql.Append(@" AND Region='" + conditValue.Region + "'");
+            }
+
+            if (!string.IsNullOrEmpty(whereSql.ToString()))
+            {
+                sql += " where "+ whereSql.ToString().Substring(4);
+            }
+            if (!string.IsNullOrEmpty(sortInfo.SortName))
+            {
+                sql += " ORDER BY " + sortInfo.SortName + " " + sortInfo.SortOrder;
+            }
+            sql += " LIMIT " + (pagerInfo.PageSize * (pagerInfo.CurrenetPageIndex - 1)) + "," + pagerInfo.PageSize;
+
+            sql += " ) AS t USING(SN);";
+
+            using (var conn = new MySqlConnection(strConn))
+            {
+                return conn.Query<QueryList>(sql).ToList();
+            }
+        }
+
+        public int getDeviceCount(QueryConditionModel conditValue)
+        {
+            StringBuilder whereSql = new StringBuilder();
+            string sql = @"SELECT count(1) FROM device_info d ";
+
+            if (!string.IsNullOrEmpty(conditValue.DeviceType))
+            {
+                whereSql.Append(@" AND d.DeviceType='" + conditValue.DeviceType + "'");
+            }
+
+            if (conditValue.DeviceState == MachineState.已连接仪器)
+            {
+                whereSql.Append(@" AND d.sessionid is not null");
+            }
+            else if (conditValue.DeviceState == MachineState.未连接仪器)
+            {
+                whereSql.Append(@" AND d.sessionid is null");
+            }
+
+            if (!string.IsNullOrEmpty(conditValue.ProductSeries))
+            {
+                whereSql.Append(@" AND d.ProductSeries='" + conditValue.ProductSeries + "'");
+            }
+
+            if (!string.IsNullOrEmpty(conditValue.ModelType))
+            {
+                whereSql.Append(@" AND d.ProductModel='" + conditValue.ModelType + "'");
+            }
+
+            if (!string.IsNullOrEmpty(conditValue.OEM))
+            {
+                whereSql.Append(@" AND d.OEM='" + conditValue.OEM + "'");
+            }
+
+            if (!string.IsNullOrEmpty(conditValue.Agent))
+            {
+                whereSql.Append(@" AND d.Agent='" + conditValue.Agent + "'");
+            }
+
+            if (!string.IsNullOrEmpty(conditValue.ReagentType))
+            {
+                whereSql.Append(@" AND d.ReagentType='" + conditValue.ReagentType + "'");
+            }
+
+            if (!string.IsNullOrEmpty(conditValue.Region))
+            {
+                whereSql.Append(@" AND d.Region='" + conditValue.Region + "'");
+            }
+
+            if (!string.IsNullOrEmpty(whereSql.ToString()))
+            {
+                sql += " where " + whereSql.ToString().Substring(4);
+            }
+
+            using (var conn = new MySqlConnection(strConn))
+            {
+                return conn.QuerySingle<int>(sql);
+            }
+        }
+
     }
 }

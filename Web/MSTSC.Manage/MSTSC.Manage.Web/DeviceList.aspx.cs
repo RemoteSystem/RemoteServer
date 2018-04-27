@@ -23,31 +23,37 @@ namespace MSTSC.Manage.Web
         /// </summary>
         /// <returns>指定对象的集合</returns>
         [WebMethod]
-        public static string getDeviceList(int rows, int page, string sort, string sortOrder)
+        public static string getDeviceList(string conditions, int rows, int page, string sort, string sortOrder)
         {
+            if (rows == 0)
+            {
+                return "{\"total\":0,\"rows\":[]}";
+            }
             DeviceQueryBLL bll = new DeviceQueryBLL();
 
-            string where = "864881027507605";
             PagerInfo pagerInfo = new PagerInfo();
             pagerInfo.CurrenetPageIndex = page;
             pagerInfo.PageSize = rows;
+
             SortInfo sortInfo = new SortInfo(sort, sortOrder);
+            QueryConditionModel conditionModel = JsonConvert.DeserializeObject<QueryConditionModel>(conditions.Replace("\"0\"", "\"\""));
+            if (conditionModel.QueryRange=="1")
+            {
+                conditionModel.DeviceState = MachineState.已连接仪器;
+            }
+            else if (conditionModel.QueryRange=="2")
+            {
+                conditionModel.DeviceState = MachineState.未连接仪器;
+            }
 
             List<QueryList> list = new List<QueryList>();
-            if (sort != null && !string.IsNullOrEmpty(sortInfo.SortName))
-            {
-                //list = baseBLL.FindWithPager(where, pagerInfo, sortInfo.SortName, sortInfo.IsDesc);
-            }
-            else
-            {
-                list = bll.QuickQueryBLL(where);
-                pagerInfo.RecordCount = list.Count;
-            }
+            list = bll.GetDeviceInfoBLL(conditionModel, pagerInfo, sortInfo);
+            pagerInfo.RecordCount = bll.getDeviceCount(conditionModel);
 
             //Json格式的要求{total:22,rows:{}}
             //构造成Json的格式传递
             var result = new { total = pagerInfo.RecordCount, rows = list };
-            return JsonConvert.SerializeObject(result).Replace("null","\"\"");
+            return JsonConvert.SerializeObject(result).Replace("null", "\"\"");
         }
 
     }

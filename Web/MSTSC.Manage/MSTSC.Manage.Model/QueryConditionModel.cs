@@ -51,5 +51,10 @@ namespace MSTSC.Manage.Model
         /// 装机区域
         /// </summary>
         public string Region { get; set; }
+
+        /// <summary>
+        /// 查询设备状态
+        /// </summary>
+        public string QueryRange { get; set; }
     }
 }

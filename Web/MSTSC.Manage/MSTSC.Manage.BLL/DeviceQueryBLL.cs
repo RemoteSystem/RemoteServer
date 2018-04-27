@@ -45,5 +45,17 @@ namespace MSTSC.Manage.BLL
         {
             return dal.QuickQueryDAL(queryText);
         }
+
+
+        //******************* NEW *****************//
+        public List<QueryList> GetDeviceInfoBLL(QueryConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
+        {
+            conditValue.ProductSeries = Common.UIdataToDB(conditValue.ProductSeries);
+            return dal.GetDeviceInfoDAL(conditValue,pagerInfo, sortInfo);
+        }
+        public int getDeviceCount(QueryConditionModel conditValue) {
+            return dal.getDeviceCount(conditValue);
+        }
+
     }
 }

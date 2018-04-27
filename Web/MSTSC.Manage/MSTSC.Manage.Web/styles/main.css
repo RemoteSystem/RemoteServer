@@ -81,13 +81,6 @@
     padding-bottom: 50px;
 }
 
-
-
-
-
-
-
-
 .margin-5 {
     margin: 5px;
 }
@@ -189,4 +182,6 @@
 
 .search-condition select {
     min-width: 60%;
+    height:30px;
+    padding:0px 5px;
 }
