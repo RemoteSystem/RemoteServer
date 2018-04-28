@@ -3,30 +3,32 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <ul class="breadcrumb margin-bottom-5">
-        <li class="active">仪器列表</li>
+    <ul class="breadcrumb nomargin">
+        <li class="active">仪器列表
+        </li>
     </ul>
-    <div class="col-lg-6 col-md-6 col-sm-11 col-xs-12">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padding-right-10">
         <div class="panel panel-info search-panel margin-bottom-10 padding-bottom-10">
-            <%--<div class="quick-search-condition padding-5">
-                <div class="form-inline">
-                    <label>产品类型</label>
+            <div class="quick-search-condition padding-5">
+                <div class="form-inline text-center">
+                    <%--<label>产品类型</label>
                     <select id="quickptype" class="form-control margin-top-5 margin-bottom-5">
                         <option value="0">请选择</option>
                         <option value="1">血球分析仪</option>
                         <option value="2">其他</option>
-                    </select>
-                    <input type="text" id="querytext" class="form-control margin-top-5 margin-bottom-5" value="" placeholder="请输入查询条件" />
-                    <button type="button" id="quickquery" class="btn btn-default margin-top-5 margin-bottom-5 margin-left-10">快速查询</button>
+                    </select>--%>
+                    <input type="text" id="querytext" class="form-control margin-top-5 margin-bottom-5" value="" style="width: 280px;" placeholder="请输入仪器名称、SIM卡号或仪器序列号" />
+                    <button type="button" id="quickquery" class="btn btn-default margin-top-5 margin-bottom-5 margin-left-10">快速定位</button>
                 </div>
             </div>
-            <hr class="nomargin" style="border-color: #cccccc;" />--%>
+            <hr class="nomargin" style="border-color: #cccccc; margin-left: 0px; margin-right: 0px;" />
             <div class="search-condition padding-5">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 nopadding form-inline">
                     <label>产品类型</label>
                     <select id="ptype" class="form-control margin-top-5 margin-bottom-5">
                         <option value="0">请选择</option>
-                        <option value="1">血球分析仪</option>
+                        <option value="1">三分类</option>
+                        <option value="1">五分类</option>
                     </select>
                 </div>
 
@@ -70,17 +72,17 @@
                 <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2 nopadding form-inline">
                     <div class="radio margin-left-20">
                         <label>
-                            <input type="radio" name="rdoconnect" id="optionsRadios1" value="0" checked="checked" />所有仪器
+                            <input type="radio" name="rdoconnect" id="optionsRadios1" value="0" checked="checked" /> 所有仪器
                         </label>
                     </div>
                     <div class="radio margin-left-20">
                         <label>
-                            <input type="radio" name="rdoconnect" id="optionsRadios2" value="1" />已连接仪器
+                            <input type="radio" name="rdoconnect" id="optionsRadios2" value="1" /> 已连接仪器
                         </label>
                     </div>
                     <div class="radio margin-left-20">
                         <label>
-                            <input type="radio" name="rdoconnect" id="optionsRadios3" value="2" />未连接仪器
+                            <input type="radio" name="rdoconnect" id="optionsRadios3" value="2" /> 未连接仪器
                         </label>
                     </div>
                     <button type="button" id="query" class="btn btn-default margin-top-5 margin-bottom-5 margin-left-20">查询</button>
@@ -93,8 +95,191 @@
             <table id="grid"></table>
         </div>
     </div>
-    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-        <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 nopadding">
+        <div class="well well-sm padding-5 margin-right-5">
+            <div class="panel panel-success nomargin">
+                <div class="panel-heading padding-5">
+                    <h3 class="panel-title">基本信息</h3>
+                </div>
+                <div class="panel-body nopadding">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>SIM卡号:</span><span class="margin-left-5">864881027507605</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>仪器序列号:</span><span class="margin-left-5">12344565789</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>产品类型:</span><span class="margin-left-5">5881</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>产品型号:</span><span class="margin-left-5">112</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>OEM代号:</span><span class="margin-left-5">21</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>代理商代号:</span><span class="margin-left-5">1</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>封闭试剂类型:</span><span class="margin-left-5">开启</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>装机区域:</span><span class="margin-left-5">12344565789</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>出厂日期:</span><span class="margin-left-5">12344565789</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>装机日期:</span><span class="margin-left-5">12344565789</span>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-success nomargin" style="margin-top: 15px;">
+                <div class="panel-heading padding-5">
+                    <h3 class="panel-title">仪器运行信息</h3>
+                </div>
+                <div class="panel-body nopadding">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>开机天数:</span><span class="margin-left-5">25</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>激光管运行时间:</span><span class="margin-left-5">36天</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>仪器运行时间:</span><span class="margin-left-5">100天</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>气源运行时间:</span><span class="margin-left-5">112</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>采样针穿刺次数:</span><span class="margin-left-5">21</span>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-success nomargin" style="margin-top: 15px;">
+                <div class="panel-heading padding-5">
+                    <h3 class="panel-title">计数信息统计</h3>
+                </div>
+                <div class="panel-body nopadding">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-5">
+                        <span>计数总次数:</span><span class="margin-left-5">25</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>全血-CBC:</span><span class="margin-left-5">236</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>全血-CBC+CRP:</span><span class="margin-left-5">25</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>全血-CRP:</span><span class="margin-left-5">201</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>预稀释-CBC:</span><span class="margin-left-5">26</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>预稀释-CBC+CRP:</span><span class="margin-left-5">100</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>预稀释-CRP:</span><span class="margin-left-5">0.3</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>全血-CBC+5DIFF:</span><span class="margin-left-5">65.3</span>
+                    </div>
+                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-6 padding-5">
+                        <span>预稀释-CBC+5DIFF:</span><span class="margin-left-5">39.2</span>
+                    </div>
+                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-6 padding-5">
+                        <span>全血-CBC+5DIFF+CRP:</span><span class="margin-left-5">23.56</span>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5">
+                        <span>预稀释-CBC+5DIFF+CRP:</span><span class="margin-left-5">56.1</span>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-5">
+                        <span>质控样本数:</span><span class="margin-left-5">123</span>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-success nomargin" style="margin-top: 15px;">
+                <div class="panel-heading padding-5">
+                    <h3 class="panel-title">试剂耗量统计</h3>
+                </div>
+                <div class="panel-body nopadding">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>稀释液:</span><span class="margin-left-5">25</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>LH溶血剂:</span><span class="margin-left-5">256</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>CRP-R2:</span><span class="margin-left-5">132</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>DIFF1:</span><span class="margin-left-5">112</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>DIFF2:</span><span class="margin-left-5">21</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>CRP-R1:</span><span class="margin-left-5">22</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>预留1:</span><span class="margin-left-5">14</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>预留2:</span><span class="margin-left-5">5</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>预留3:</span><span class="margin-left-5">6</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>预留4:</span><span class="margin-left-5">9</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>预留5:</span><span class="margin-left-5">88</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>预留6:</span><span class="margin-left-5">16</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>预留7:</span><span class="margin-left-5">25</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>预留8:</span><span class="margin-left-5">16</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>预留9:</span><span class="margin-left-5">17</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>预留10:</span><span class="margin-left-5">18</span>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-success nomargin" style="margin-top: 15px;">
+                <div class="panel-heading padding-5">
+                    <h3 class="panel-title">故障统计信息</h3>
+                </div>
+                <div class="panel-body nopadding">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>WBC堵孔次数:</span><span class="margin-left-5">25</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>RBC堵孔次数:</span><span class="margin-left-5">26</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>采样组件故障次数:</span><span class="margin-left-5">21</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>注射器故障次数:</span><span class="margin-left-5">13</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>自动进样组件故障:</span><span class="margin-left-5">21</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>混匀组件故障次数:</span><span class="margin-left-5">21</span>
+                    </div>
+                </div>
+            </div>
+            <div class="padding-5"></div>
         </div>
     </div>
 
@@ -112,10 +297,10 @@
             $("#oem").html(opts);
             $("#agent").html(opts);
 
-            //$('#quickquery').click(function () {
-            //    type = 0;
-            //    $table.bootstrapTable('refresh', { url: 'DeviceList.aspx/getDeviceList' });
-            //});
+            $('#quickquery').click(function () {
+                type = 1;
+                $table.bootstrapTable('refresh', { url: 'DeviceList.aspx/getDeviceList' });
+            });
 
             $('#query').click(function () {
                 type = 2;

@@ -173,6 +173,10 @@
     min-width: 540px;
 }
 
+.quick-search-condition {
+    background-color:#f0f0f0;
+}
+
 .quick-search-condition label, .search-condition label {
     font-weight: normal;
     min-width: 90px;

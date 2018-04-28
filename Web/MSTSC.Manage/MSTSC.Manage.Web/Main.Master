@@ -58,7 +58,7 @@
                         aria-expanded="false" aria-controls="navbar">
                         <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.html">Bootstrap</a>
+                    <a class="navbar-brand" href="index.aspx">远程管理系统</a>
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav visible-xs">
@@ -100,6 +100,7 @@
                 </asp:ContentPlaceHolder>
                 <!--我是主要内容 end-->
             </div>
+            <div class="padding-10"></div>
         </div>
         <a href="#top" id="goTop"><i class="fa fa-angle-up fa-3x"></i></a>
     </form>
