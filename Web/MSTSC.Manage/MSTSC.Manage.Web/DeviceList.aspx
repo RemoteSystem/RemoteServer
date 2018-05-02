@@ -11,64 +11,18 @@
         <div class="panel panel-info search-panel margin-bottom-10 padding-bottom-10">
             <div class="quick-search-condition padding-5">
                 <div class="form-inline text-center">
-                    <%--<label>产品类型</label>
+                    <label>产品类型</label>
                     <select id="quickptype" class="form-control margin-top-5 margin-bottom-5">
-                        <option value="0">请选择</option>
+                        <option value="0"></option>
                         <option value="1">血球分析仪</option>
                         <option value="2">其他</option>
-                    </select>--%>
+                    </select>
                     <input type="text" id="querytext" class="form-control margin-top-5 margin-bottom-5" value="" style="width: 280px;" placeholder="请输入仪器名称、SIM卡号或仪器序列号" />
                     <button type="button" id="quickquery" class="btn btn-default margin-top-5 margin-bottom-5 margin-left-10">快速定位</button>
                 </div>
             </div>
             <hr class="nomargin" style="border-color: #cccccc; margin-left: 0px; margin-right: 0px;" />
             <div class="search-condition padding-5">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 nopadding form-inline">
-                    <label>产品类型</label>
-                    <select id="ptype" class="form-control margin-top-5 margin-bottom-5">
-                        <option value="0">请选择</option>
-                        <option value="1">三分类</option>
-                        <option value="1">五分类</option>
-                    </select>
-                </div>
-
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 nopadding form-inline">
-                    <label>产品型号</label>
-                    <select id="pmodel" class="form-control margin-top-5 margin-bottom-5">
-                        <option value="0">请选择</option>
-                    </select>
-                </div>
-
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 nopadding form-inline">
-                    <label>OEM代号</label>
-                    <select id="oem" class="form-control margin-top-5 margin-bottom-5">
-                        <option value="0">请选择</option>
-                    </select>
-                </div>
-
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 nopadding form-inline">
-                    <label>代理商代号</label>
-                    <select id="agent" class="form-control margin-top-5 margin-bottom-5">
-                        <option value="0">请选择</option>
-                    </select>
-                </div>
-
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 nopadding form-inline">
-                    <label>封闭试剂类型</label>
-                    <select id="reagenttype" class="form-control margin-top-5 margin-bottom-5">
-                        <option value="0">请选择</option>
-                        <option value="open">开放</option>
-                        <option value="close">封闭</option>
-                    </select>
-                </div>
-
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 nopadding form-inline">
-                    <label>装机区域</label>
-                    <select id="region" class="form-control margin-top-5 margin-bottom-5">
-                        <option value="0">请选择</option>
-                    </select>
-                </div>
-
                 <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2 nopadding form-inline">
                     <div class="radio margin-left-20">
                         <label>
@@ -103,34 +57,34 @@
                 </div>
                 <div class="panel-body nopadding">
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>SIM卡号:</span><span class="margin-left-5">864881027507605</span>
+                        <span>SIM卡号:</span><span class="margin-left-5" id="SIM"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>仪器序列号:</span><span class="margin-left-5">12344565789</span>
+                        <span>仪器序列号:</span><span class="margin-left-5" id="SN"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>产品类型:</span><span class="margin-left-5">5881</span>
+                        <span>产品类型:</span><span class="margin-left-5" id="ProductSeries"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>产品型号:</span><span class="margin-left-5">112</span>
+                        <span>产品型号:</span><span class="margin-left-5" id="ProductModel"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>OEM代号:</span><span class="margin-left-5">21</span>
+                        <span>OEM代号:</span><span class="margin-left-5" id="OEM"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>代理商代号:</span><span class="margin-left-5">1</span>
+                        <span>代理商代号:</span><span class="margin-left-5" id="Agent"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>封闭试剂类型:</span><span class="margin-left-5">开启</span>
+                        <span>封闭试剂类型:</span><span class="margin-left-5" id="ReagentType"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>装机区域:</span><span class="margin-left-5">12344565789</span>
+                        <span>装机区域:</span><span class="margin-left-5" id="InstallationArea"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>出厂日期:</span><span class="margin-left-5">12344565789</span>
+                        <span>出厂日期:</span><span class="margin-left-5" id="FactoryDate"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>装机日期:</span><span class="margin-left-5">12344565789</span>
+                        <span>装机日期:</span><span class="margin-left-5" id="InstallDate"></span>
                     </div>
                 </div>
             </div>
@@ -140,19 +94,19 @@
                 </div>
                 <div class="panel-body nopadding">
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>开机天数:</span><span class="margin-left-5">25</span>
+                        <span>开机天数:</span><span class="margin-left-5" id="runtime_days"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>激光管运行时间:</span><span class="margin-left-5">36天</span>
+                        <span>激光管运行时间:</span><span class="margin-left-5" id="runtime_opt"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>仪器运行时间:</span><span class="margin-left-5">100天</span>
+                        <span>仪器运行时间:</span><span class="margin-left-5" id="runtime_power"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>气源运行时间:</span><span class="margin-left-5">112</span>
+                        <span>气源运行时间:</span><span class="margin-left-5" id="runtime_air_supply"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>采样针穿刺次数:</span><span class="margin-left-5">21</span>
+                        <span>采样针穿刺次数:</span><span class="margin-left-5" id="needle_times_impale"></span>
                     </div>
                 </div>
             </div>
@@ -162,40 +116,40 @@
                 </div>
                 <div class="panel-body nopadding">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-5">
-                        <span>计数总次数:</span><span class="margin-left-5">25</span>
+                        <span>计数总次数:</span><span class="margin-left-5" id="count_times_total"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>全血-CBC:</span><span class="margin-left-5">236</span>
+                        <span>全血-CBC:</span><span class="margin-left-5" id="count_times_wb_cbc"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>全血-CBC+CRP:</span><span class="margin-left-5">25</span>
+                        <span>全血-CBC+CRP:</span><span class="margin-left-5" id="count_times_wb_cbc_crp"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>全血-CRP:</span><span class="margin-left-5">201</span>
+                        <span>全血-CRP:</span><span class="margin-left-5" id="count_times_wb_crp"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预稀释-CBC:</span><span class="margin-left-5">26</span>
+                        <span>预稀释-CBC:</span><span class="margin-left-5" id="count_times_pd_cbc"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预稀释-CBC+CRP:</span><span class="margin-left-5">100</span>
+                        <span>预稀释-CBC+CRP:</span><span class="margin-left-5" id="count_times_pd_cbc_crp"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预稀释-CRP:</span><span class="margin-left-5">0.3</span>
+                        <span>预稀释-CRP:</span><span class="margin-left-5" id="count_times_pd_crp"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>全血-CBC+5DIFF:</span><span class="margin-left-5">65.3</span>
+                        <span>全血-CBC+5DIFF:</span><span class="margin-left-5" id="count_times_wb_cd"></span>
                     </div>
                     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-6 padding-5">
-                        <span>预稀释-CBC+5DIFF:</span><span class="margin-left-5">39.2</span>
+                        <span>预稀释-CBC+5DIFF:</span><span class="margin-left-5" id="count_times_pd_cd"></span>
                     </div>
                     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-6 padding-5">
-                        <span>全血-CBC+5DIFF+CRP:</span><span class="margin-left-5">23.56</span>
+                        <span>全血-CBC+5DIFF+CRP:</span><span class="margin-left-5" id="count_times_wb_cd_crp"></span>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5">
-                        <span>预稀释-CBC+5DIFF+CRP:</span><span class="margin-left-5">56.1</span>
+                        <span>预稀释-CBC+5DIFF+CRP:</span><span class="margin-left-5" id="count_times_pd_cd_crp"></span>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-5">
-                        <span>质控样本数:</span><span class="margin-left-5">123</span>
+                        <span>质控样本数:</span><span class="margin-left-5" id="count_times_qc"></span>
                     </div>
                 </div>
             </div>
@@ -205,52 +159,52 @@
                 </div>
                 <div class="panel-body nopadding">
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>稀释液:</span><span class="margin-left-5">25</span>
+                        <span>稀释液:</span><span class="margin-left-5" id="reagent_dil"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>LH溶血剂:</span><span class="margin-left-5">256</span>
+                        <span>LH溶血剂:</span><span class="margin-left-5" id="reagent_lh"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>CRP-R2:</span><span class="margin-left-5">132</span>
+                        <span>CRP-R2:</span><span class="margin-left-5" id="reagent_r2"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>DIFF1:</span><span class="margin-left-5">112</span>
+                        <span>DIFF1:</span><span class="margin-left-5" id="reagent_diff1"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>DIFF2:</span><span class="margin-left-5">21</span>
+                        <span>DIFF2:</span><span class="margin-left-5" id="reagent_diff2"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>CRP-R1:</span><span class="margin-left-5">22</span>
+                        <span>CRP-R1:</span><span class="margin-left-5" id="reagent_r1"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预留1:</span><span class="margin-left-5">14</span>
+                        <span>预留1:</span><span class="margin-left-5" id="reagent_fl1"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预留2:</span><span class="margin-left-5">5</span>
+                        <span>预留2:</span><span class="margin-left-5" id="reagent_fl2"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预留3:</span><span class="margin-left-5">6</span>
+                        <span>预留3:</span><span class="margin-left-5" id="reagent_fl3"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预留4:</span><span class="margin-left-5">9</span>
+                        <span>预留4:</span><span class="margin-left-5" id="reagent_fl4"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预留5:</span><span class="margin-left-5">88</span>
+                        <span>预留5:</span><span class="margin-left-5" id="reagent_fl5"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预留6:</span><span class="margin-left-5">16</span>
+                        <span>预留6:</span><span class="margin-left-5" id="reagent_fl6"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预留7:</span><span class="margin-left-5">25</span>
+                        <span>预留7:</span><span class="margin-left-5"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预留8:</span><span class="margin-left-5">16</span>
+                        <span>预留8:</span><span class="margin-left-5"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预留9:</span><span class="margin-left-5">17</span>
+                        <span>预留9:</span><span class="margin-left-5"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预留10:</span><span class="margin-left-5">18</span>
+                        <span>预留10:</span><span class="margin-left-5"></span>
                     </div>
                 </div>
             </div>
@@ -260,22 +214,22 @@
                 </div>
                 <div class="panel-body nopadding">
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>WBC堵孔次数:</span><span class="margin-left-5">25</span>
+                        <span>WBC堵孔次数:</span><span class="margin-left-5" id="hole_times_wbc"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>RBC堵孔次数:</span><span class="margin-left-5">26</span>
+                        <span>RBC堵孔次数:</span><span class="margin-left-5" id="hole_times_rbc"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>采样组件故障次数:</span><span class="margin-left-5">21</span>
+                        <span>采样组件故障次数:</span><span class="margin-left-5" id="sampling_times_fault"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>注射器故障次数:</span><span class="margin-left-5">13</span>
+                        <span>注射器故障次数:</span><span class="margin-left-5" id="syringe_times_syringe_fault"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>自动进样组件故障:</span><span class="margin-left-5">21</span>
+                        <span>自动进样组件故障:</span><span class="margin-left-5" id="inject_times_fault"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>混匀组件故障次数:</span><span class="margin-left-5">21</span>
+                        <span>混匀组件故障次数:</span><span class="margin-left-5" id="mixing_times_fault"></span>
                     </div>
                 </div>
             </div>
@@ -290,21 +244,18 @@
         $(document).ready(function () {
             InitMainTable();
 
-            var opts = "<option value=\"0\">请选择</option>";
-            for (var i = 1; i < 100; i++) {
-                opts += "<option value=\"" + i + "\">" + i + "</option>";
-            }
-            $("#oem").html(opts);
-            $("#agent").html(opts);
-
             $('#quickquery').click(function () {
                 type = 1;
+                if ($("#querytext").val().trim() == "") {
+                    alert("请输入仪器名称、SIM卡号或仪器序列号！");
+                    return;
+                }
                 $table.bootstrapTable('refresh', { url: 'DeviceList.aspx/getDeviceList' });
             });
 
             $('#query').click(function () {
                 type = 2;
-                $table.bootstrapTable('refresh', { url: 'DeviceList.aspx/getDeviceList' });
+                $table.bootstrapTable('refresh', { url: 'DeviceQuery.aspx/getDeviceList' });
             });
         });
         //初始化bootstrap-table的内容
@@ -342,13 +293,8 @@
                         return "{'conditions':'','rows':'0','page':'0','sort':'','sortOrder':''}";
                     }
                     var conditions = "{\"QueryRange\":\"" + $('input[name="rdoconnect"]:checked').val()
-                        + "\",\"DeviceType\":\"" + $("#ptype").val()
-                        + "\",\"ProductSeries\":\"" + $("#ptype").val()
-                        + "\",\"ModelType\":\"" + $("#pmodel").val()
-                        + "\",\"OEM\":\"" + $("#oem").val()
-                        + "\",\"Agent\":\"" + $("#agent").val()
-                        + "\",\"ReagentType\":\"" + $("#reagenttype").val()
-                        + "\",\"Region\":\"" + $("#region").val()
+                        + "\",\"DeviceType\":\"" + $("#quickptype").find("option:selected").text()
+                        + "\",\"QueryText\":\"" + $("#querytext").val()
                         + "\"}";
 
                     var temp = "{"
@@ -396,9 +342,25 @@
                     alert("数据加载失败！");
                 },
                 onDblClickRow: function (row, $element) {
-                    alert("SN是:" + row.SN);
                     $("#grid tbody tr").css("background-color", "");
                     $element.css("background-color", "#C0C0C0");
+
+                    $.ajax({
+                        type: "post",
+                        url: "DeviceList.aspx/BindDetial",
+                        data: "{'sn':'" + row.SN + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (data) {
+                            var result = eval(data.d)[0];
+                            for (attribute in result) {
+                                $("#" + attribute).html(result[attribute]);
+                            }
+                        },
+                        error:function(err){
+                            alert('error');
+                        }
+                    });
                 }
             });
         };

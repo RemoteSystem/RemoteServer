@@ -53,8 +53,26 @@ namespace MSTSC.Manage.Web
             //Json格式的要求{total:22,rows:{}}
             //构造成Json的格式传递
             var result = new { total = pagerInfo.RecordCount, rows = list };
-            return JsonConvert.SerializeObject(result).Replace("null", "\"\"");
+            var reslut= JsonConvert.SerializeObject(result).Replace("null", "\"\"");
+
+            return reslut;
         }
 
+        [WebMethod]
+        public static string BindDetial(string sn)
+        {
+            try
+            {
+                DeviceQueryBLL bll = new DeviceQueryBLL();
+                var result = bll.GetDeviceDetialBLL(sn);
+
+                var retvalue= JsonConvert.SerializeObject(result);
+                return retvalue;
+            }
+            catch (Exception ex)
+            {
+            }
+            return sn;
+        }
     }
 }

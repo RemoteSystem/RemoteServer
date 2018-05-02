@@ -133,7 +133,6 @@ D:\MSTSC\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.UI\bin\es\DevExpress.Office.
 D:\MSTSC\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.UI\bin\ja\DevExpress.Office.v15.1.Core.resources.dll
 D:\MSTSC\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.UI\bin\ru\DevExpress.Office.v15.1.Core.resources.dll
 D:\MSTSC\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.UI\obj\Debug\MSTSC.Manage.UI.csprojResolveAssemblyReference.cache
-D:\MSTSC\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.UI\obj\Debug\MSTSC.Manage.dll.licenses
 D:\MSTSC\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.UI\obj\Debug\MSTSC.Manage.dll
 D:\MSTSC\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.UI\obj\Debug\MSTSC.Manage.pdb
 E:\WorkSpace\GitHub\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.UI\bin\MSTSC.Manage.dll.config

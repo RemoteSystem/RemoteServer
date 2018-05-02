@@ -87,9 +87,9 @@
                 <ul class="nav">
                     <li><a href="Index.aspx">主页面</a></li>
                     <li><a href="DeviceList.aspx">仪器列表</a></li>
-                    <li><a href="message.html">Message库</a></li>
-                    <li><a href="ui.html">UI库</a></li>
-                    <li><a href="animate.html">Animate库</a></li>
+                    <li><a href="DeviceManage.aspx">仪器管理</a></li>
+                    <li><a href="DeviceQuery.aspx">查询</a></li>
+                    <li><a href="Statistics.aspx">统计</a></li>
                     <li><a href="carousel.html">Carousel库</a></li>
                     <li><a href="chart.html">Chart库</a></li>
                 </ul>
