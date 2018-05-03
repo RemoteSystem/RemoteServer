@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+您 Web 项目的发布/打包进程将使用此文件。您可以通过编辑此 MSBuild 文件
+来自定义该进程的行为。若要了解与此相关的详细信息，请访问 http://go.microsoft.com/fwlink/?LinkID=208121。
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\Users\jumee\Desktop\remoteweb</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Dapper.dll">
+      <publishTime>04/19/2018 10:10:12</publishTime>
+    </File>
+    <File Include="bin/MSTSC.Manage.BLL.dll">
+      <publishTime>05/03/2018 16:33:45</publishTime>
+    </File>
+    <File Include="bin/MSTSC.Manage.BLL.pdb">
+      <publishTime>05/03/2018 16:33:45</publishTime>
+    </File>
+    <File Include="bin/MSTSC.Manage.DAL.dll">
+      <publishTime>05/03/2018 16:33:45</publishTime>
+    </File>
+    <File Include="bin/MSTSC.Manage.DAL.pdb">
+      <publishTime>05/03/2018 16:33:45</publishTime>
+    </File>
+    <File Include="bin/MSTSC.Manage.Model.dll">
+      <publishTime>05/03/2018 16:33:45</publishTime>
+    </File>
+    <File Include="bin/MSTSC.Manage.Model.pdb">
+      <publishTime>05/03/2018 16:33:45</publishTime>
+    </File>
+    <File Include="bin/MSTSC.Manage.Web.dll">
+      <publishTime>05/03/2018 16:33:45</publishTime>
+    </File>
+    <File Include="bin/MSTSC.Manage.Web.pdb">
+      <publishTime>05/03/2018 16:33:45</publishTime>
+    </File>
+    <File Include="bin/MySql.Data.dll">
+      <publishTime>04/19/2018 10:10:12</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>04/26/2018 22:14:51</publishTime>
+    </File>
+    <File Include="DeviceList.aspx">
+      <publishTime>05/02/2018 22:19:11</publishTime>
+    </File>
+    <File Include="DeviceManage.aspx">
+      <publishTime>05/02/2018 22:19:11</publishTime>
+    </File>
+    <File Include="DeviceQuery.aspx">
+      <publishTime>05/03/2018 16:33:27</publishTime>
+    </File>
+    <File Include="Index.aspx">
+      <publishTime>04/28/2018 21:51:54</publishTime>
+    </File>
+    <File Include="Login.aspx">
+      <publishTime>05/03/2018 16:32:01</publishTime>
+    </File>
+    <File Include="Main.Master">
+      <publishTime>05/03/2018 16:25:50</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>04/26/2018 22:14:51</publishTime>
+    </File>
+    <File Include="PrecompiledApp.config">
+      <publishTime>05/03/2018 16:34:15</publishTime>
+    </File>
+    <File Include="scripts/bootstrap-table/bootstrap-table-zh-CN.min.js">
+      <publishTime>04/26/2018 21:24:05</publishTime>
+    </File>
+    <File Include="scripts/bootstrap-table/bootstrap-table.min.js">
+      <publishTime>04/26/2018 21:23:54</publishTime>
+    </File>
+    <File Include="scripts/bootstrap/bootstrap.min.js">
+      <publishTime>07/25/2016 15:53:30</publishTime>
+    </File>
+    <File Include="scripts/bootstrap/html5shiv.min.js">
+      <publishTime>04/25/2018 15:02:58</publishTime>
+    </File>
+    <File Include="scripts/bootstrap/respond.min.js">
+      <publishTime>04/25/2018 15:02:58</publishTime>
+    </File>
+    <File Include="scripts/default.js">
+      <publishTime>04/26/2018 00:22:46</publishTime>
+    </File>
+    <File Include="scripts/jquery-3.0.0.min.js">
+      <publishTime>04/24/2018 17:45:55</publishTime>
+    </File>
+    <File Include="scripts/jquery.extend.js">
+      <publishTime>04/25/2018 15:10:08</publishTime>
+    </File>
+    <File Include="scripts/jquery.hammer/hammer.min.js">
+      <publishTime>04/25/2018 15:09:17</publishTime>
+    </File>
+    <File Include="scripts/jquery.hammer/jquery.hammer.js">
+      <publishTime>04/25/2018 15:09:17</publishTime>
+    </File>
+    <File Include="scripts/jquery.scrolltopcontrol/scrolltopcontrol.js">
+      <publishTime>04/25/2018 15:09:47</publishTime>
+    </File>
+    <File Include="scripts/pace/pace.min.js">
+      <publishTime>04/25/2018 15:09:03</publishTime>
+    </File>
+    <File Include="Statistics.aspx">
+      <publishTime>05/02/2018 22:19:11</publishTime>
+    </File>
+    <File Include="styles/bootstrap-table/bootstrap-table.min.css">
+      <publishTime>04/26/2018 21:23:48</publishTime>
+    </File>
+    <File Include="styles/bootstrap/css/bootstrap.min.css">
+      <publishTime>06/17/2017 11:53:55</publishTime>
+    </File>
+    <File Include="styles/bootstrap/fonts/glyphicons-halflings-regular.eot">
+      <publishTime>04/24/2018 18:00:42</publishTime>
+    </File>
+    <File Include="styles/bootstrap/fonts/glyphicons-halflings-regular.svg">
+      <publishTime>04/24/2018 18:00:42</publishTime>
+    </File>
+    <File Include="styles/bootstrap/fonts/glyphicons-halflings-regular.ttf">
+      <publishTime>04/24/2018 18:00:42</publishTime>
+    </File>
+    <File Include="styles/bootstrap/fonts/glyphicons-halflings-regular.woff">
+      <publishTime>04/24/2018 18:00:42</publishTime>
+    </File>
+    <File Include="styles/bootstrap/fonts/glyphicons-halflings-regular.woff2">
+      <publishTime>04/24/2018 18:00:42</publishTime>
+    </File>
+    <File Include="styles/default.css">
+      <publishTime>04/29/2018 00:26:40</publishTime>
+    </File>
+    <File Include="styles/font-awesome.min.css">
+      <publishTime>04/25/2018 15:20:07</publishTime>
+    </File>
+    <File Include="styles/fonts/fontawesome-webfont.eot">
+      <publishTime>04/25/2018 15:19:56</publishTime>
+    </File>
+    <File Include="styles/fonts/fontawesome-webfont.svg">
+      <publishTime>04/25/2018 15:19:56</publishTime>
+    </File>
+    <File Include="styles/fonts/fontawesome-webfont.ttf">
+      <publishTime>04/25/2018 15:19:56</publishTime>
+    </File>
+    <File Include="styles/fonts/fontawesome-webfont.woff">
+      <publishTime>04/25/2018 15:19:56</publishTime>
+    </File>
+    <File Include="styles/fonts/fontawesome-webfont.woff2">
+      <publishTime>04/25/2018 15:19:56</publishTime>
+    </File>
+    <File Include="styles/fonts/FontAwesome.otf">
+      <publishTime>04/25/2018 15:19:56</publishTime>
+    </File>
+    <File Include="styles/fonts/glyphicons-halflings-regular.eot">
+      <publishTime>04/25/2018 15:19:56</publishTime>
+    </File>
+    <File Include="styles/fonts/glyphicons-halflings-regular.svg">
+      <publishTime>04/25/2018 15:19:56</publishTime>
+    </File>
+    <File Include="styles/fonts/glyphicons-halflings-regular.ttf">
+      <publishTime>04/25/2018 15:19:56</publishTime>
+    </File>
+    <File Include="styles/fonts/glyphicons-halflings-regular.woff">
+      <publishTime>04/25/2018 15:19:56</publishTime>
+    </File>
+    <File Include="styles/fonts/glyphicons-halflings-regular.woff2">
+      <publishTime>04/25/2018 15:19:56</publishTime>
+    </File>
+    <File Include="styles/login.css">
+      <publishTime>05/03/2018 16:29:44</publishTime>
+    </File>
+    <File Include="styles/main.css">
+      <publishTime>05/03/2018 10:08:33</publishTime>
+    </File>
+    <File Include="styles/pace/dataurl.css">
+      <publishTime>04/25/2018 15:11:07</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>05/03/2018 16:34:14</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

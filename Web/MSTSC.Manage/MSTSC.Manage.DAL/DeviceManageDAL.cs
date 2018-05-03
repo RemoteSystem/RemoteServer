@@ -91,7 +91,7 @@ namespace MSTSC.Manage.DAL
             string sql = @"SELECT d.devicename,d.SIM,d.SN,d.ProductSeries,d.ProductModel,d.OEM,d.Agent,
 case  when reagenttype='open' then '开放' when reagenttype='close' then '封闭' else reagenttype end ReagentType ,
 d.InstallationArea,if(d.FactoryDate='0001-01-01','',d.FactoryDate) as FactoryDate,if(d.InstallDate='0001-01-01','',d.InstallDate) as InstallDate,
-d.UpdateTime,brt.runtime_days,brt.runtime_opt,brt.runtime_power,brt.runtime_air_supply,
+date_format(d.UpdateTime,'%Y-%m-%d %T') as UpdateTime,brt.runtime_days,brt.runtime_opt,brt.runtime_power,brt.runtime_air_supply,
 bm.needle_times_impale,bc.count_times_total,bc.count_times_wb_cbc,bc.count_times_wb_cbc_crp,bc.count_times_wb_crp,bc.count_times_pd_cbc,
 bc.count_times_pd_cbc_crp,bc.count_times_pd_crp,bc.count_times_wb_cd,bc.count_times_wb_cd_crp,bc.count_times_pd_cd,bc.count_times_pd_cd_crp,bc.count_times_qc,
 br.reagent_dil,br.reagent_lh,br.reagent_r2,br.reagent_diff1,br.reagent_diff2,

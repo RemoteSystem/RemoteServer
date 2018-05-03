@@ -64,6 +64,7 @@
   <ItemGroup>
     <Content Include="DeviceManage.aspx" />
     <Content Include="DeviceQuery.aspx" />
+    <Content Include="Login.aspx" />
     <Content Include="Main.Master" />
     <Content Include="Statistics.aspx" />
     <Content Include="styles\bootstrap\fonts\glyphicons-halflings-regular.eot" />
@@ -80,6 +81,7 @@
     <Content Include="styles\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="styles\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="packages.config" />
+    <None Include="Properties\PublishProfiles\zjm.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -109,6 +111,7 @@
     <Content Include="styles\font-awesome.min.css" />
     <Content Include="styles\fonts\fontawesome-webfont.svg" />
     <Content Include="styles\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="styles\login.css" />
     <Content Include="styles\main.css" />
     <Content Include="styles\pace\dataurl.css" />
     <Content Include="Web.config" />
@@ -141,6 +144,13 @@
     </Compile>
     <Compile Include="Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Main.Master.cs">
       <DependentUpon>Main.Master</DependentUpon>
