@@ -4,8 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <ul class="breadcrumb nomargin">
-        <li class="active">仪器查询
-        </li>
+        <li class="active">仪器查询</li>
     </ul>
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padding-right-10">
         <div class="panel panel-info search-panel margin-bottom-10 padding-bottom-10">

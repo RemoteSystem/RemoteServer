@@ -11,14 +11,13 @@
         <div class="panel panel-info search-panel margin-bottom-10 padding-bottom-10">
             <div class="quick-search-condition padding-5">
                 <div class="form-inline text-center">
-                    <label>产品类型</label>
                     <select id="quickptype" class="form-control margin-top-5 margin-bottom-5">
-                        <option value="0"></option>
+                        <option value="0">请选择产品类型</option>
                         <option value="1">血球分析仪</option>
                         <option value="2">其他</option>
                     </select>
-                    <input type="text" id="querytext" class="form-control margin-top-5 margin-bottom-5" value="" style="width: 280px;" placeholder="请输入仪器名称、SIM卡号或仪器序列号" />
-                    <button type="button" id="quickquery" class="btn btn-default margin-top-5 margin-bottom-5 margin-left-10">快速定位</button>
+                    <input type="text" id="querytext" class="form-control margin-top-5 margin-bottom-5" value="" style="width: 275px;" placeholder="请输入仪器名称、SIM卡号或仪器序列号" />
+                    <button type="button" id="quickquery" class="btn btn-default btn-normal margin-top-5 margin-bottom-5 margin-left-10">快速定位</button>
                 </div>
             </div>
             <hr class="nomargin" style="border-color: #cccccc; margin-left: 0px; margin-right: 0px;" />
@@ -26,17 +25,20 @@
                 <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2 nopadding form-inline">
                     <div class="radio margin-left-20">
                         <label>
-                            <input type="radio" name="rdoconnect" id="optionsRadios1" value="0" checked="checked" /> 所有仪器
+                            <input type="radio" name="rdoconnect" id="optionsRadios1" value="0" checked="checked" />
+                            所有仪器
                         </label>
                     </div>
                     <div class="radio margin-left-20">
                         <label>
-                            <input type="radio" name="rdoconnect" id="optionsRadios2" value="1" /> 已连接仪器
+                            <input type="radio" name="rdoconnect" id="optionsRadios2" value="1" />
+                            已连接仪器
                         </label>
                     </div>
                     <div class="radio margin-left-20">
                         <label>
-                            <input type="radio" name="rdoconnect" id="optionsRadios3" value="2" /> 未连接仪器
+                            <input type="radio" name="rdoconnect" id="optionsRadios3" value="2" />
+                            未连接仪器
                         </label>
                     </div>
                     <button type="button" id="query" class="btn btn-default margin-top-5 margin-bottom-5 margin-left-20">查询</button>
@@ -51,6 +53,13 @@
     </div>
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 nopadding">
         <div class="well well-sm padding-5 margin-right-5">
+            <div class="padding-5 form-inline">
+                <span>数据更新时间:&nbsp;&nbsp;</span><span id="UpdateTime"></span>
+                <div class="pull-right">
+                    <button type="button" id="refresh" class="btn btn-default btn-small" style="padding: 1px 5px;">刷 新</button>
+                </div>
+                <span class="clearfix"></span>
+            </div>
             <div class="panel panel-success nomargin">
                 <div class="panel-heading padding-5">
                     <h3 class="panel-title">基本信息</h3>
@@ -241,8 +250,22 @@
         var $table;
         var type = 0;
         var rows = 10;
+        var page = 1;
+        var sort = "";
+        var order = "";
+        var sn = "";
+
+        var tabletimer;
+        var rowtimer;
         $(document).ready(function () {
             InitMainTable();
+
+            var opts = "<option value=\"0\">请选择</option>";
+            for (var i = 1; i < 100; i++) {
+                opts += "<option value=\"" + i + "\">" + i + "</option>";
+            }
+            $("#oemCdoe").html(opts);
+            $("#agent").html(opts);
 
             $('#quickquery').click(function () {
                 type = 1;
@@ -250,13 +273,21 @@
                     alert("请输入仪器名称、SIM卡号或仪器序列号！");
                     return;
                 }
-                $table.bootstrapTable('refresh', { url: 'DeviceList.aspx/getDeviceList' });
+                freshTable();
             });
 
             $('#query').click(function () {
                 type = 2;
-                $table.bootstrapTable('refresh', { url: 'DeviceQuery.aspx/getDeviceList' });
+                var page = 1;
+                var sort = "";
+                var order = "";
+                freshTable();
             });
+
+            $('#refresh').click(function () {
+                getRowInfo();
+            });
+
         });
         //初始化bootstrap-table的内容
         function InitMainTable() {
@@ -293,16 +324,21 @@
                         return "{'conditions':'','rows':'0','page':'0','sort':'','sortOrder':''}";
                     }
                     var conditions = "{\"QueryRange\":\"" + $('input[name="rdoconnect"]:checked').val()
-                        + "\",\"DeviceType\":\"" + $("#quickptype").find("option:selected").text()
+                        + "\",\"DeviceType\":\"" + $("#quickptype").val()
                         + "\",\"QueryText\":\"" + $("#querytext").val()
                         + "\"}";
 
+                    rows = params.limit ? params.limit : rows;
+                    page = params.limit ? (params.offset / params.limit) + 1 : page;
+                    sort = params.sort ? params.sort : sort;
+                    order = params.order ? params.order : order;
+
                     var temp = "{"
                     + "'conditions':'" + conditions + "'"
-                    + ",'rows':" + (params.limit ? params.limit : rows)                        //页面大小
-                    + ",'page':" + (params.limit ? (params.offset / params.limit) + 1 : 1)   //页码
-                    + ",'sort':'" + (params.sort ? params.sort : "")      //排序列名
-                    + "','sortOrder':'" + params.order //排位命令（desc，asc）
+                    + ",'rows':" + rows         //页面大小
+                    + ",'page':" + page         //页码
+                    + ",'sort':'" + sort        //排序列名
+                    + "','sortOrder':'" + order //排位命令（desc，asc）
                     + "'}";
                     return temp;
                 },
@@ -337,32 +373,52 @@
                         }
                     }],
                 onLoadSuccess: function () {
+                    if (type != 0) {
+                        tabletimer = setTimeout(freshTable, 30000);
+                    }
                 },
                 onLoadError: function () {
+                    clearTimeout(tabletimer);
                     alert("数据加载失败！");
                 },
                 onDblClickRow: function (row, $element) {
                     $("#grid tbody tr").css("background-color", "");
                     $element.css("background-color", "#C0C0C0");
 
-                    $.ajax({
-                        type: "post",
-                        url: "DeviceList.aspx/BindDetial",
-                        data: "{'sn':'" + row.SN + "'}",
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (data) {
-                            var result = eval(data.d)[0];
-                            for (attribute in result) {
-                                $("#" + attribute).html(result[attribute]);
-                            }
-                        },
-                        error:function(err){
-                            alert('error');
-                        }
-                    });
+                    sn = row.SN;
+                    getRowInfo();
                 }
             });
         };
+
+        function freshTable() {
+            clearTimeout(tabletimer);
+            $table.bootstrapTable('refresh', { url: 'DeviceQuery.aspx/getDeviceList' });
+        }
+
+        function getRowInfo() {
+            clearTimeout(rowtimer);
+            if (sn) {
+                $.ajax({
+                    type: "post",
+                    url: "DeviceQuery.aspx/BindDetial",
+                    data: "{'sn':'" + sn + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        var result = eval(data.d)[0];
+                        for (attribute in result) {
+                            $("#" + attribute).html(result[attribute]);
+                        }
+                        rowtimer = setTimeout(getRowInfo, 13000);
+                    },
+                    error: function (err) {
+                        alert('获取数据出错.');
+                    }
+                });
+            } else {
+                alert("请先选择需要查看的行！");
+            }
+        }
     </script>
 </asp:Content>

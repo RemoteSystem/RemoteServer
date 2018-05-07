@@ -81,11 +81,25 @@
                 <ul class="nav">
                     <%--<li><a href="Index.aspx">主页面</a></li>
                     <li><a href="DeviceList.aspx">仪器列表</a></li>
-                    <li><a href="DeviceManage.aspx">仪器管理</a></li>--%>
+                    <li><a href="DeviceManage.aspx">仪器管理</a></li>
                     <li><a href="DeviceQuery.aspx">查询</a></li>
-                    <%--<li><a href="Statistics.aspx">统计</a></li>
+                    <li><a href="Statistics.aspx">统计</a></li>
                     <li><a href="carousel.html">Carousel库</a></li>
                     <li><a href="chart.html">Chart库</a></li>--%>
+
+                    <li><a href="DeviceList.aspx">仪器列表</a></li>
+                    <li><a href="DeviceQuery.aspx">查询</a></li>
+                    <li class="has-sub">
+                        <a href="javascript:void(0);"><span>统计</span><i class="fa fa-caret-right fa-fw pull-right"></i></a>
+                        <ul class="sub-menu">
+                            <li><a href="StatisticAllDevices.aspx">所有机器</a></li>
+                            <li><a href="#">按模式统计</a></li>
+                            <li><a href="#">按区域统计</a></li>
+                            <li><a href="#">按机型统计</a></li>
+                            <li><a href="#">按封闭试剂类型统计</a></li>
+                            <li><a href="#">按OEM统计</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
             <div class="maincontent row">
