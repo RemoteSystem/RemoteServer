@@ -10,8 +10,6 @@ namespace MSTSC.Manage.DAL
 {
     public class DeviceManageDAL
     {
-        public static string strConn = "Database='remote';Data Source='120.79.244.32';User Id='root';Password='123456';charset='utf8';Convert Zero Datetime=True;pooling=true";
-
         public List<QueryList> GetDeviceInfoDAL(QueryConditionModel conditValue)
         {
             StringBuilder whereSql = new StringBuilder();
@@ -65,7 +63,7 @@ namespace MSTSC.Manage.DAL
 
             sql = sql + whereSql.ToString();
 
-            using (var conn = new MySqlConnection(strConn))
+            using (var conn = new MySqlConnection(Global.strConn))
             {
                 return conn.Query<QueryList>(sql).ToList();
             }
@@ -79,7 +77,7 @@ namespace MSTSC.Manage.DAL
                             "' or d.devicename='" + queryText +
                             "' or d.SIM='" + queryText + "'";
 
-            using (var conn = new MySqlConnection(strConn))
+            using (var conn = new MySqlConnection(Global.strConn))
             {
                 return conn.Query<QueryList>(sql).ToList();
             }
@@ -103,7 +101,7 @@ bm.sampling_times_fault,bm.syringe_times_syringe_fault,bm.inject_times_fault,bm.
                              LEFT JOIN blood_reagent br on d.SN = br.device_sn
                              LEFT JOIN blood_module bm on d.SN=bm.device_sn
                             where d.SN='" + sn + "'";
-            using (var conn = new MySqlConnection(strConn))
+            using (var conn = new MySqlConnection(Global.strConn))
             {
                 return conn.Query(sql);
             }
@@ -112,7 +110,7 @@ bm.sampling_times_fault,bm.syringe_times_syringe_fault,bm.inject_times_fault,bm.
         public List<ProductTypeModel> ProductTypeInfoDAL()
         {
             var sql = @"SELECT DISTINCT DeviceType,ProductSeries,ProductModel from device_info ";
-            using (var conn = new MySqlConnection(strConn))
+            using (var conn = new MySqlConnection(Global.strConn))
             {
                 return conn.Query<ProductTypeModel>(sql).ToList();
             }
@@ -187,7 +185,7 @@ bm.sampling_times_fault,bm.syringe_times_syringe_fault,bm.inject_times_fault,bm.
 
             sql += " ) AS t USING(SN);";
 
-            using (var conn = new MySqlConnection(strConn))
+            using (var conn = new MySqlConnection(Global.strConn))
             {
                 return conn.Query<QueryList>(sql).ToList();
             }
@@ -254,11 +252,13 @@ bm.sampling_times_fault,bm.syringe_times_syringe_fault,bm.inject_times_fault,bm.
                 sql += " where " + whereSql.ToString().Substring(4);
             }
 
-            using (var conn = new MySqlConnection(strConn))
+            using (var conn = new MySqlConnection(Global.strConn))
             {
                 return conn.QuerySingle<int>(sql);
             }
         }
 
+
+       
     }
 }
