@@ -1,6 +1,13 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="StatisticAllDevices.aspx.cs" Inherits="MSTSC.Manage.Web.StatisticAllDevices" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="StatisticByModel.aspx.cs" Inherits="MSTSC.Manage.Web.StatisticAllDevices" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+    <script src="http://cdn.hcharts.cn/highcharts/modules/no-data-to-display.js"></script>
+    <!-- 需要保存导出功能模块文件是在 highcharts.js 之后引入 -->
+    <script src="http://cdn.hcharts.cn/highcharts/modules/exporting.js"></script>
+    <!-- 客户端导出功能模块为可选选项 -->
+    <script src="http://cdn.hcharts.cn/highcharts/modules/offline-exporting.js"></script>
+    <script src="scripts/chart.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <ul class="breadcrumb nomargin">
@@ -46,6 +53,10 @@
 
     <div class="panel padding-left-5 padding-right-5">
         <table id="grid"></table>
+    </div>
+
+    <div class="padding-left-5">
+        <div id="container" style="width: 700px; height: 400px"></div>
     </div>
 
     <script type="text/javascript">
@@ -161,7 +172,10 @@
                         field: 'SESSION_ID',
                         title: '消耗CRP R2'
                     }],
-                onLoadSuccess: function () {
+                onLoadSuccess: function (data) {
+                    if (type != 0) {
+                        refreshPie(data);
+                    }
                 },
                 onLoadError: function () {
                     alert("数据加载失败！");
@@ -181,5 +195,19 @@
         function getTypes() { }
         function getSeries() { }
         function getModels() { }
+
+        function refreshPie(data) {
+            var chart = $('#container').highcharts();
+            if (!chart) {
+                initPie('container', '模式-样本数');
+                chart = $('#container').highcharts();
+            }
+            var datas = [];
+            if (data && data.rows && data.rows.length) {
+                datas = [['全血-CBC', 25], ['全血-CBC+CRP', 29], ['全血-CRP', 34], ['预稀释-CBC', 16], ['预稀释-CBC+CRP', 28], ['预稀释-CRP', 41]];
+            }
+            chart.series[0].setData(datas);
+            chart.redraw();
+        }
     </script>
 </asp:Content>
