@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="StatisticByModel.aspx.cs" Inherits="MSTSC.Manage.Web.StatisticAllDevices" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="StatisticByModel.aspx.cs" Inherits="MSTSC.Manage.Web.StatisticByModel" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
@@ -11,7 +11,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <ul class="breadcrumb nomargin">
-        <li class="active">统计结果-所有机器</li>
+        <li class="active">统计结果-按模式统计</li>
     </ul>
     <div class="panel panel-info margin-5 padding-10">
         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 padding-5">
@@ -19,8 +19,7 @@
                 <span>产品类型</span>
                 <select id="selType" class="form-control" style="min-width: 160px;">
                     <option value="0">请选择</option>
-                    <option value="1">血液分析仪</option>
-                    <option value="2">其他</option>
+                    <option value="血液细胞分析仪">血液细胞分析仪</option>
                 </select>
             </div>
         </div>
@@ -51,21 +50,20 @@
         <span class="clearfix"></span>
     </div>
 
-    <div class="panel padding-left-5 padding-right-5">
-        <table id="grid"></table>
+    <div>
+        <div class="col-lg-8 col-md-9 col-sm-10 col-xs-12 padding-5">
+            <div class="panel">
+                <table id="grid"></table>
+            </div>
+        </div>
+        <div class="col-lg-8 col-md-9 col-sm-10 col-xs-12 padding-5">
+            <div id="container" style="width: 100%; height: 400px"></div>
+        </div>
     </div>
-
-    <div class="padding-left-5">
-        <div id="container" style="width: 700px; height: 400px"></div>
-    </div>
-
     <script type="text/javascript">
         var $table;
         var type = 0;
-        var rows = 10;
-        var page = 1;
-        var sort = "";
-        var order = "";
+        var rows = 6;
 
         $(document).ready(function () {
             InitMainTable();
@@ -83,11 +81,15 @@
             $("#btnSearch").click(function () {
                 freshTable();
             });
+
+            getTypes();
+            getSeries();
+            getModels();
         });
         //初始化bootstrap-table的内容
         function InitMainTable() {
             //记录页面bootstrap-table全局变量$table，方便应用
-            var queryUrl = 'DeviceQuery.aspx/getDeviceList';
+            var queryUrl = 'StatisticByModel.aspx/getDataList';
             $table = $('#grid').bootstrapTable({
                 url: queryUrl,                      //请求后台的URL（*）
                 method: 'POST',                      //请求方式（*）
@@ -116,30 +118,16 @@
                 queryParams: function (params) {
                     //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
                     if (type == 0) {
-                        return "{'conditions':'','rows':'0','page':'0','sort':'','sortOrder':''}";
+                        return "{'conditions':'','rows':'0'}";
                     }
-                    var conditions = "{\"QueryRange\":\""
-                        + "\",\"DeviceType\":\""
-                        + "\",\"QueryText\":\""
-                        + "\",\"ProductSeries\":\""
-                        + "\",\"ModelType\":\""
-                        + "\",\"OEM\":\""
-                        + "\",\"Agent\":\""
-                        + "\",\"ReagentType\":\""
-                        + "\",\"Region\":\""
+                    var conditions = "{\"DeviceType\":\"" + $("#selType").val()
+                        + "\",\"ProductSeries\":\"" + $("#selSeries").val()
+                        + "\",\"ModelType\":\"" + $("#selModel").val()
                         + "\"}";
-
-                    rows = params.limit ? params.limit : rows;
-                    page = params.limit ? (params.offset / params.limit) + 1 : page;
-                    sort = params.sort ? params.sort : sort;
-                    order = params.order ? params.order : order;
 
                     var temp = "{"
                     + "'conditions':'" + conditions + "'"
-                    + ",'rows':" + rows         //页面大小
-                    + ",'page':" + page         //页码
-                    + ",'sort':'" + sort        //排序列名
-                    + "','sortOrder':'" + order //排位命令（desc，asc）
+                    + ",'rows':'" + rows         //页面大小                   
                     + "'}";
                     return temp;
                 },
@@ -149,28 +137,15 @@
                 },
                 columns: [
                     {
-                        field: 'DeviceName',
-                        title: '机器名'
+                        field: 'key',
+                        title: '分析模式',
+                        align: 'center',
+                        width: '60%'
                     }, {
-                        field: 'SIM',
-                        title: 'SIM卡号',
-                        sortable: true
-                    }, {
-                        field: 'SN',
-                        title: '仪器序列号',
-                        sortable: true
-                    }, {
-                        field: 'ProductSeries',
-                        title: '样本数'
-                    }, {
-                        field: 'ProductModel',
-                        title: '消耗稀释液'
-                    }, {
-                        field: 'SESSION_ID',
-                        title: '消耗溶血剂'
-                    }, {
-                        field: 'SESSION_ID',
-                        title: '消耗CRP R2'
+                        field: 'value',
+                        title: '样本数',
+                        align: 'center',
+                        width: '40%'
                     }],
                 onLoadSuccess: function (data) {
                     if (type != 0) {
@@ -189,12 +164,70 @@
 
         function freshTable() {
             type = 1;
-            $table.bootstrapTable('refresh', { url: 'DeviceQuery.aspx/getDeviceList' });
+            $table.bootstrapTable('refreshOptions', { pageNumber: 1, url: 'StatisticByModel.aspx/getDataList' });
+            //$table.bootstrapTable('refresh', { url: 'StatisticByModel.aspx/getDataList' });
         }
 
-        function getTypes() { }
-        function getSeries() { }
-        function getModels() { }
+        function getTypes() {
+            $.ajax({
+                type: "post",
+                url: "DeviceQuery.aspx/getProductType",
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    var result = eval(data.d);
+
+                    var opts = "<option value=\"0\">请选择</option>";
+                    for (res in result) {
+                        opts += "<option value=\"" + result[res]['key'] + "\">" + result[res]['value'] + "</option>";
+                    }
+                    $("#selType").html(opts);
+                },
+                error: function (err) {
+                }
+            });
+        }
+        function getSeries() {
+            $.ajax({
+                type: "post",
+                url: "DeviceQuery.aspx/getProductSeries",
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    var result = eval(data.d);
+
+                    var opts = "<option value=\"0\">请选择</option>";
+                    for (res in result) {
+                        opts += "<option value=\"" + result[res]['key'] + "\">" + result[res]['value'] + "</option>";
+                    }
+                    $("#selSeries").html(opts);
+                },
+                error: function (err) {
+                }
+            });
+        }
+        function getModels() {
+            $.ajax({
+                type: "post",
+                url: "DeviceQuery.aspx/getProductModel",
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    var result = eval(data.d);
+
+                    var opts = "<option value=\"0\">请选择</option>";
+                    for (res in result) {
+                        opts += "<option value=\"" + result[res]['key'] + "\">" + result[res]['value'] + "</option>";
+                    }
+                    $("#selModel").html(opts);
+                },
+                error: function (err) {
+                }
+            });
+        }
 
         function refreshPie(data) {
             var chart = $('#container').highcharts();
@@ -202,9 +235,13 @@
                 initPie('container', '模式-样本数');
                 chart = $('#container').highcharts();
             }
-            var datas = [];
-            if (data && data.rows && data.rows.length) {
-                datas = [['全血-CBC', 25], ['全血-CBC+CRP', 29], ['全血-CRP', 34], ['预稀释-CBC', 16], ['预稀释-CBC+CRP', 28], ['预稀释-CRP', 41]];
+            var datas = new Array();
+            if (data && data.rows) {
+                var arr = new Array();
+                for (var i = 0; i < data.rows.length; i++) {
+                    datas[i] = new Array(data.rows[i]["key"], parseInt(data.rows[i]["value"]));
+                }
+                //datas = [['全血-CBC', 25], ['全血-CBC+CRP', 29], ['全血-CRP', 34], ['预稀释-CBC', 16], ['预稀释-CBC+CRP', 28], ['预稀释-CRP', 41]];
             }
             chart.series[0].setData(datas);
             chart.redraw();

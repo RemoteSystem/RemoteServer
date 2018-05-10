@@ -8,8 +8,9 @@
 //------------------------------------------------------------------------------
 
 namespace MSTSC.Manage.Web {
-    
-    
-    public partial class StatisticAllDevices {
+
+
+    public partial class StatisticByModel
+    {
     }
 }

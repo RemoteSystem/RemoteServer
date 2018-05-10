@@ -12,8 +12,7 @@
                 <span>产品类型</span>
                 <select id="selType" class="form-control" style="min-width: 160px;">
                     <option value="0">请选择</option>
-                    <option value="1">血液分析仪</option>
-                    <option value="2">其他</option>
+                    <option value="血液细胞分析仪">血液细胞分析仪</option>
                 </select>
             </div>
         </div>
@@ -72,11 +71,15 @@
             $("#btnSearch").click(function () {
                 freshTable();
             });
+
+            getTypes();
+            getSeries();
+            getModels();
         });
         //初始化bootstrap-table的内容
         function InitMainTable() {
             //记录页面bootstrap-table全局变量$table，方便应用
-            var queryUrl = 'DeviceQuery.aspx/getDeviceList';
+            var queryUrl = 'StatisticAllDevices.aspx/getDeviceList';
             $table = $('#grid').bootstrapTable({
                 url: queryUrl,                      //请求后台的URL（*）
                 method: 'POST',                      //请求方式（*）
@@ -107,15 +110,9 @@
                     if (type == 0) {
                         return "{'conditions':'','rows':'0','page':'0','sort':'','sortOrder':''}";
                     }
-                    var conditions = "{\"QueryRange\":\""
-                        + "\",\"DeviceType\":\""
-                        + "\",\"QueryText\":\""
-                        + "\",\"ProductSeries\":\""
-                        + "\",\"ModelType\":\""
-                        + "\",\"OEM\":\""
-                        + "\",\"Agent\":\""
-                        + "\",\"ReagentType\":\""
-                        + "\",\"Region\":\""
+                    var conditions = "{\"DeviceType\":\"" + $("#selType").val()
+                        + "\",\"ProductSeries\":\"" + $("#selSeries").val()
+                        + "\",\"ModelType\":\"" + $("#selModel").val()
                         + "\"}";
 
                     rows = params.limit ? params.limit : rows;
@@ -149,16 +146,16 @@
                         title: '仪器序列号',
                         sortable: true
                     }, {
-                        field: 'ProductSeries',
+                        field: 'count_times_total',
                         title: '样本数'
                     }, {
-                        field: 'ProductModel',
+                        field: 'reagent_dil',
                         title: '消耗稀释液'
                     }, {
-                        field: 'SESSION_ID',
+                        field: 'reagent_lh',
                         title: '消耗溶血剂'
                     }, {
-                        field: 'SESSION_ID',
+                        field: 'reagent_r2',
                         title: '消耗CRP R2'
                     }],
                 onLoadSuccess: function () {
@@ -175,11 +172,69 @@
 
         function freshTable() {
             type = 1;
-            $table.bootstrapTable('refresh', { url: 'DeviceQuery.aspx/getDeviceList' });
+            $table.bootstrapTable('refreshOptions', { pageNumber: 1, url: 'StatisticAllDevices.aspx/getDeviceList' });
+            //$table.bootstrapTable('refresh', { url: 'StatisticAllDevices.aspx/getDeviceList' });
         }
 
-        function getTypes() { }
-        function getSeries() { }
-        function getModels() { }
+        function getTypes() {
+            $.ajax({
+                type: "post",
+                url: "DeviceQuery.aspx/getProductType",
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    var result = eval(data.d);
+
+                    var opts = "<option value=\"0\">请选择</option>";
+                    for (res in result) {
+                        opts += "<option value=\"" + result[res]['key'] + "\">" + result[res]['value'] + "</option>";
+                    }
+                    $("#selType").html(opts);
+                },
+                error: function (err) {
+                }
+            });
+        }
+        function getSeries() {
+            $.ajax({
+                type: "post",
+                url: "DeviceQuery.aspx/getProductSeries",
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    var result = eval(data.d);
+
+                    var opts = "<option value=\"0\">请选择</option>";
+                    for (res in result) {
+                        opts += "<option value=\"" + result[res]['key'] + "\">" + result[res]['value'] + "</option>";
+                    }
+                    $("#selSeries").html(opts);
+                },
+                error: function (err) {
+                }
+            });
+        }
+        function getModels() {
+            $.ajax({
+                type: "post",
+                url: "DeviceQuery.aspx/getProductModel",
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    var result = eval(data.d);
+
+                    var opts = "<option value=\"0\">请选择</option>";
+                    for (res in result) {
+                        opts += "<option value=\"" + result[res]['key'] + "\">" + result[res]['value'] + "</option>";
+                    }
+                    $("#selModel").html(opts);
+                },
+                error: function (err) {
+                }
+            });
+        }
     </script>
 </asp:Content>

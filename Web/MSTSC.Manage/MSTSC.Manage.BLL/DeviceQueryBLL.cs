@@ -50,11 +50,52 @@ namespace MSTSC.Manage.BLL
         //******************* NEW *****************//
         public List<QueryList> GetDeviceInfoBLL(QueryConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
         {
-            conditValue.ProductSeries = Common.UIdataToDB(conditValue.ProductSeries);
+            //conditValue.ProductSeries = Common.UIdataToDB(conditValue.ProductSeries);
             return dal.GetDeviceInfoDAL(conditValue,pagerInfo, sortInfo);
         }
         public int getDeviceCount(QueryConditionModel conditValue) {
             return dal.getDeviceCount(conditValue);
+        }
+
+        /// <summary>
+        /// 获取产品类型(DeviceType字段)
+        /// </summary>
+        /// <returns></returns>
+        public List<KeyValueModel> getProductType()
+        {
+            return dal.getProductType();
+        }
+
+        /// <summary>
+        /// 获取产品系列[3diff、5diff](ProductSeries字段)
+        /// </summary>
+        /// <returns></returns>
+        public List<KeyValueModel> getProductSeries()
+        {
+            List<KeyValueModel> list = dal.getProductSeries();
+            for (int i = 0; i < list.Count; i++)
+            {
+                list[i].value = Common.DBdataToUI(list[i].value);
+            }
+            return list;
+        }
+
+        /// <summary>
+        /// 获取产品型号[Z3、Z30、Z31、Z3CRP、Z30CRP、Z31CRP](Model字段)
+        /// </summary>
+        /// <returns></returns>
+        public List<KeyValueModel> getModel()
+        {
+            return dal.getModel();
+        }
+
+        /// <summary>
+        /// 获取产品项目[BK、VK](ProductModel字段)
+        /// </summary>
+        /// <returns></returns>
+        public List<KeyValueModel> getProductModel()
+        {
+            return dal.getProductModel();
         }
 
     }

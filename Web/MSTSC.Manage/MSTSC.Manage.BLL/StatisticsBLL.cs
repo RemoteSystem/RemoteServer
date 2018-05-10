@@ -30,6 +30,11 @@ namespace MSTSC.Manage.BLL
             return dal.getDeviceCount(conditValue);
         }
 
+        public DataTable StatisticsByModelBLL(QueryConditionModel conditValue)
+        {
+            conditValue.ProductSeries = Common.UIdataToDB(conditValue.ProductSeries);
+            return dal.StatisticsByModelBLL(conditValue);
+        }
 
         /// <summary>
         /// 按封闭试剂类型统计

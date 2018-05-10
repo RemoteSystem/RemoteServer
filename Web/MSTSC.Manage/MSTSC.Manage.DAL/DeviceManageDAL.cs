@@ -86,7 +86,7 @@ namespace MSTSC.Manage.DAL
 
         public dynamic GetDeviceDetialDAL(string sn)
         {
-            string sql = @"SELECT d.devicename,d.SIM,d.SN,d.ProductSeries,d.ProductModel,d.OEM,d.Agent,
+            string sql = @"SELECT d.devicename,d.SIM,d.SN,d.DeviceType,d.Model,d.OEM,d.Agent,
 case  when reagenttype='open' then '开放' when reagenttype='close' then '封闭' else reagenttype end ReagentType ,
 d.InstallationArea,if(d.FactoryDate='0001-01-01','',d.FactoryDate) as FactoryDate,if(d.InstallDate='0001-01-01','',d.InstallDate) as InstallDate,
 date_format(d.UpdateTime,'%Y-%m-%d %T') as UpdateTime,brt.runtime_days,brt.runtime_opt,brt.runtime_power,brt.runtime_air_supply,
@@ -120,7 +120,7 @@ bm.sampling_times_fault,bm.syringe_times_syringe_fault,bm.inject_times_fault,bm.
         public List<QueryList> GetDeviceInfoDAL(QueryConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
         {
             StringBuilder whereSql = new StringBuilder();
-            string sql = @"SELECT d.DeviceName, d.SIM, d.SN,d.SESSIONID,d.ProductSeries, d.ProductModel FROM device_info d INNER JOIN (SELECT SN FROM device_info ";
+            string sql = @"SELECT d.DeviceName, d.SIM, d.SN,d.SESSIONID,d.ProductSeries,d.Model FROM device_info d INNER JOIN (SELECT SN FROM device_info ";
 
             if (!string.IsNullOrEmpty(conditValue.DeviceType))
             {
@@ -259,6 +259,61 @@ bm.sampling_times_fault,bm.syringe_times_syringe_fault,bm.inject_times_fault,bm.
         }
 
 
+        /// <summary>
+        /// 获取产品类型(DeviceType字段)
+        /// </summary>
+        /// <returns></returns>
+        public List<KeyValueModel> getProductType()
+        {
+            string sql = "SELECT DISTINCT DeviceType 'key',DeviceType 'value' FROM device_info;";
+
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                return conn.Query<KeyValueModel>(sql).ToList();
+            }
+        }
+
+        /// <summary>
+        /// 获取产品系列[3diff、5diff](ProductSeries字段)
+        /// </summary>
+        /// <returns></returns>
+        public List<KeyValueModel> getProductSeries()
+        {
+            string sql = "SELECT DISTINCT ProductSeries 'key',ProductSeries 'value' FROM device_info;";
+
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                return conn.Query<KeyValueModel>(sql).ToList();
+            }
+        }
+
+        /// <summary>
+        /// 获取产品型号[Z3、Z30、Z31、Z3CRP、Z30CRP、Z31CRP](Model字段)
+        /// </summary>
+        /// <returns></returns>
+        public List<KeyValueModel> getModel()
+        {
+            string sql = "SELECT DISTINCT Model 'key',Model 'value' FROM device_info;";
+
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                return conn.Query<KeyValueModel>(sql).ToList();
+            }
+        }
+
+        /// <summary>
+        /// 获取产品项目[BK、VK](ProductModel字段)
+        /// </summary>
+        /// <returns></returns>
+        public List<KeyValueModel> getProductModel()
+        {
+            string sql = "SELECT DISTINCT ProductModel 'key',ProductModel 'value' FROM device_info;";
+
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                return conn.Query<KeyValueModel>(sql).ToList();
+            }
+        }
        
     }
 }

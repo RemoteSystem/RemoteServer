@@ -35,8 +35,8 @@ namespace MSTSC.Manage.Web
             SortInfo sortInfo = new SortInfo(sort, sortOrder);
             QueryConditionModel conditionModel = JsonConvert.DeserializeObject<QueryConditionModel>(conditions.Replace("\"0\"", "\"\""));
 
-            List<QueryList> list = new List<QueryList>();
-            list = bll.StatisticsAllDevicesBLL(conditionModel, pagerInfo, sortInfo);
+            //List<QueryList> list = new List<QueryList>();
+           dynamic list = bll.StatisticsAllDevicesBLL(conditionModel, pagerInfo, sortInfo);
             pagerInfo.RecordCount = bll.getDeviceCount(conditionModel);
 
             //Json格式的要求{total:22,rows:{}}

@@ -30,7 +30,7 @@ namespace MSTSC.Manage.Model
         /// <summary>
         /// 产品型号
         /// </summary>
-        public string ProductModel { get; set; }
+        public string Model { get; set; }
 
         public string SESSIONID { get; set; }
 

@@ -14,7 +14,7 @@ namespace MSTSC.Manage.Model
         /// <returns></returns>
         public static string UIdataToDB(string value)
         {
-            string retValue = string.Empty;
+            string retValue = value;
 
             if (value == "三分类")
             {
@@ -46,7 +46,7 @@ namespace MSTSC.Manage.Model
         /// <returns></returns>
         public static string DBdataToUI(string value)
         {
-            string retValue = string.Empty;
+            string retValue = value;
             if (value == "3diff")
             {
                 retValue = "三分类";

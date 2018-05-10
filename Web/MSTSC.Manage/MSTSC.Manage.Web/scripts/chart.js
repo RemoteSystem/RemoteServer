@@ -15,7 +15,7 @@
         resetZoom: "恢复缩放",
         resetZoomTitle: "恢复图表",
         shortMonths: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        thousandsSep: ",",
+        thousandsSep: "",//不用千分位逗号分开的形式
         weekdays: ["星期一", "星期二", "星期三", "星期三", "星期四", "星期五", "星期六", "星期天"]
     }
 });
@@ -38,7 +38,7 @@ function initPie(id,title) {
         },
         tooltip: {
             headerFormat: '',
-            pointFormat: '{point.name}: <b>{point.percentage:.1f}%</b>'
+            pointFormat: '{point.name} <br/><b>{point.y}</b><br/><b>{point.percentage:.1f}%</b>'
         },
         legend: {
             //控制图例显示位置
@@ -81,7 +81,9 @@ function initPie(id,title) {
                     format: '{point.percentage:.1f} %',
                     style: {
                         color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                    }
+                    },
+                    connectorPadding: 0,
+                    distance: -30
                 },
                 states: {
                     hover: {

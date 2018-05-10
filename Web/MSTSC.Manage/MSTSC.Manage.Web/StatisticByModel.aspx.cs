@@ -3,6 +3,7 @@ using MSTSC.Manage.Model;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
@@ -19,7 +20,7 @@ namespace MSTSC.Manage.Web
         }
 
         [WebMethod]
-        public static string getDeviceList(string conditions, int rows, int page, string sort, string sortOrder)
+        public static string getDataList(string conditions, int rows)
         {
             if (rows == 0)
             {
@@ -27,22 +28,34 @@ namespace MSTSC.Manage.Web
             }
 
             StatisticsBLL bll = new StatisticsBLL();
-
-            PagerInfo pagerInfo = new PagerInfo();
-            pagerInfo.CurrenetPageIndex = page;
-            pagerInfo.PageSize = rows;
-
-            SortInfo sortInfo = new SortInfo(sort, sortOrder);
             QueryConditionModel conditionModel = JsonConvert.DeserializeObject<QueryConditionModel>(conditions.Replace("\"0\"", "\"\""));
 
-            List<QueryList> list = new List<QueryList>();
-            list = bll.StatisticsAllDevicesBLL(conditionModel, pagerInfo, sortInfo);
-            pagerInfo.RecordCount = bll.getDeviceCount(conditionModel);
+            DataTable dt = bll.StatisticsByModelBLL(conditionModel);
+            List<KeyValueModel> list = new List<KeyValueModel>();
+            if (dt.Rows.Count > 0)
+            {
+                list.Add(new KeyValueModel("全血-CBC", string.IsNullOrEmpty(dt.Rows[0]["count_times_wb_cbc"].ToString()) ? "0" : dt.Rows[0]["count_times_wb_cbc"].ToString()));
+                list.Add(new KeyValueModel("全血-CBC+CRP", string.IsNullOrEmpty(dt.Rows[0]["count_times_wb_cbc_crp"].ToString()) ? "0" : dt.Rows[0]["count_times_wb_cbc_crp"].ToString()));
+                list.Add(new KeyValueModel("全血-CRP", string.IsNullOrEmpty(dt.Rows[0]["count_times_wb_crp"].ToString()) ? "0" : dt.Rows[0]["count_times_wb_crp"].ToString()));
+                list.Add(new KeyValueModel("预稀释-CBC", string.IsNullOrEmpty(dt.Rows[0]["count_times_pd_cbc"].ToString()) ? "0" : dt.Rows[0]["count_times_pd_cbc"].ToString()));
+                list.Add(new KeyValueModel("预稀释-CBC+CRP", string.IsNullOrEmpty(dt.Rows[0]["count_times_pd_cbc_crp"].ToString()) ? "0" : dt.Rows[0]["count_times_pd_cbc_crp"].ToString()));
+                list.Add(new KeyValueModel("预稀释-CRP", string.IsNullOrEmpty(dt.Rows[0]["count_times_pd_crp"].ToString()) ? "0" : dt.Rows[0]["count_times_pd_crp"].ToString()));
+            }
+            else
+            {
+                list.Add(new KeyValueModel("全血-CBC", "0"));
+                list.Add(new KeyValueModel("全血-CBC+CRP", "0"));
+                list.Add(new KeyValueModel("全血-CRP", "0"));
+                list.Add(new KeyValueModel("预稀释-CBC", "0"));
+                list.Add(new KeyValueModel("预稀释-CBC+CRP", "0"));
+                list.Add(new KeyValueModel("预稀释-CRP", "0"));
+            }
 
             //Json格式的要求{total:22,rows:{}}
             //构造成Json的格式传递
-            var result = new { total = pagerInfo.RecordCount, rows = list };
-            return JsonConvert.SerializeObject(result).Replace("null", "\"\"");
+            var result = new { total = 6, rows = list };
+            return JsonConvert.SerializeObject(result).Replace("null", "0");
         }
+
     }
 }

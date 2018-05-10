@@ -23,7 +23,7 @@ namespace RemoteDao
         public static int UpdateOrSaveSession(JsonInfo info)
         {
             string sql = "INSERT INTO device_info(SN,SIM,Region,Hospital,Address,Model,DeviceType,ProductSeries,ProductModel,OEM,Agent,ReagentType,FactoryDate,InstallDate,SoftVersion,UpdateTime,sessionid,starttime) "
-                + "VALUES(?sn,?sim,?region,?hospoital,?address,?model,'血球分析仪',?series,?pmodel,?oem,?agent,?reatype,?dtfactory,?dtinstall,?version,?dtupdate,?id,?dt) "
+                + "VALUES(?sn,?sim,?region,?hospoital,?address,?model,'血液细胞分析仪',?series,?pmodel,?oem,?agent,?reatype,?dtfactory,?dtinstall,?version,?dtupdate,?id,?dt) "
                 + "ON DUPLICATE KEY UPDATE ";
 
             if (info.sim != null)

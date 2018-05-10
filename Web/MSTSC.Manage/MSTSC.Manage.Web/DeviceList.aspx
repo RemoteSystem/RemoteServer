@@ -11,10 +11,9 @@
         <div class="panel panel-info search-panel margin-bottom-10 padding-bottom-10">
             <div class="quick-search-condition padding-5">
                 <div class="form-inline text-center">
-                    <select id="quickptype" class="form-control margin-top-5 margin-bottom-5">
+                    <select id="selType" class="form-control margin-top-5 margin-bottom-5">
                         <option value="0">请选择产品类型</option>
-                        <option value="1">血球分析仪</option>
-                        <option value="2">其他</option>
+                        <option value="血液细胞分析仪">血液细胞分析仪</option>
                     </select>
                     <input type="text" id="querytext" class="form-control margin-top-5 margin-bottom-5" value="" style="width: 275px;" placeholder="请输入仪器名称、SIM卡号或仪器序列号" />
                     <button type="button" id="quickquery" class="btn btn-default btn-normal margin-top-5 margin-bottom-5 margin-left-10">快速定位</button>
@@ -72,10 +71,10 @@
                         <span>仪器序列号:</span><span class="margin-left-5" id="SN"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>产品类型:</span><span class="margin-left-5" id="ProductSeries"></span>
+                        <span>产品类型:</span><span class="margin-left-5" id="DeviceType"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>产品型号:</span><span class="margin-left-5" id="ProductModel"></span>
+                        <span>产品型号:</span><span class="margin-left-5" id="Model"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
                         <span>OEM代号:</span><span class="margin-left-5" id="OEM"></span>
@@ -269,11 +268,12 @@
 
             $('#quickquery').click(function () {
                 type = 1;
-                if ($("#querytext").val().trim() == "") {
-                    alert("请输入仪器名称、SIM卡号或仪器序列号！");
-                    return;
-                }
-                freshTable();
+                //if ($("#querytext").val().trim() == "") {
+                //    alert("请输入仪器名称、SIM卡号或仪器序列号！");
+                //    return;
+                //}
+                clearTimeout(tabletimer);
+                $table.bootstrapTable('refreshOptions', { pageNumber: 1, url: 'DeviceQuery.aspx/getDeviceList' });
             });
 
             $('#query').click(function () {
@@ -281,18 +281,21 @@
                 var page = 1;
                 var sort = "";
                 var order = "";
-                freshTable();
+
+                clearTimeout(tabletimer);
+                $table.bootstrapTable('refreshOptions', { pageNumber: 1, url: 'DeviceQuery.aspx/getDeviceList' });
             });
 
             $('#refresh').click(function () {
                 getRowInfo();
             });
 
+            getTypes();
         });
         //初始化bootstrap-table的内容
         function InitMainTable() {
             //记录页面bootstrap-table全局变量$table，方便应用
-            var queryUrl = 'DeviceList.aspx/getDeviceList';
+            var queryUrl = 'DeviceQuery.aspx/getDeviceList';
             $table = $('#grid').bootstrapTable({
                 url: queryUrl,                      //请求后台的URL（*）
                 method: 'POST',                      //请求方式（*）
@@ -323,9 +326,9 @@
                     if (type == 0) {
                         return "{'conditions':'','rows':'0','page':'0','sort':'','sortOrder':''}";
                     }
-                    var conditions = "{\"QueryRange\":\"" + $('input[name="rdoconnect"]:checked').val()
-                        + "\",\"DeviceType\":\"" + $("#quickptype").val()
-                        + "\",\"QueryText\":\"" + $("#querytext").val()
+                    var conditions = "{\"QueryRange\":\"" + (type == 1 ? "" : $('input[name="rdoconnect"]:checked').val())
+                        + "\",\"DeviceType\":\"" + (type != 1 ? "" : $("#selType").val())
+                        + "\",\"QueryText\":\"" + (type != 1 ? "" : $("#querytext").val())
                         + "\"}";
 
                     rows = params.limit ? params.limit : rows;
@@ -362,7 +365,7 @@
                         field: 'ProductSeries',
                         title: '产品类型'
                     }, {
-                        field: 'ProductModel',
+                        field: 'Model',
                         title: '产品型号'
                     }, {
                         field: 'SESSION_ID',
@@ -381,6 +384,9 @@
                     clearTimeout(tabletimer);
                     alert("数据加载失败！");
                 },
+                onSort: function (name, order) {
+                    clearTimeout(tabletimer);
+                },
                 onDblClickRow: function (row, $element) {
                     $("#grid tbody tr").css("background-color", "");
                     $element.css("background-color", "#C0C0C0");
@@ -393,7 +399,7 @@
 
         function freshTable() {
             clearTimeout(tabletimer);
-            $table.bootstrapTable('refresh', { url: 'DeviceQuery.aspx/getDeviceList' });
+            $table.bootstrapTable('refreshOptions', { pageNumber: 1, url: 'DeviceQuery.aspx/getDeviceList' });
         }
 
         function getRowInfo() {
@@ -419,6 +425,27 @@
             } else {
                 alert("请先选择需要查看的行！");
             }
+        }
+
+        function getTypes() {
+            $.ajax({
+                type: "post",
+                url: "DeviceQuery.aspx/getProductType",
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    var result = eval(data.d);
+
+                    var opts = "<option value=\"0\">请选择</option>";
+                    for (res in result) {
+                        opts += "<option value=\"" + result[res]['key'] + "\">" + result[res]['value'] + "</option>";
+                    }
+                    $("#selType").html(opts);
+                },
+                error: function (err) {
+                }
+            });
         }
     </script>
 </asp:Content>

@@ -42,6 +42,7 @@
     <Compile Include="Common.cs" />
     <Compile Include="DeviceDetialModel.cs" />
     <Compile Include="Global.cs" />
+    <Compile Include="KeyValueModel.cs" />
     <Compile Include="MstscEnum.cs" />
     <Compile Include="PagerInfo.cs" />
     <Compile Include="ProductTypeModel.cs" />

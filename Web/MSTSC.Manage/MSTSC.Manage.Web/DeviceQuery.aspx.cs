@@ -73,5 +73,62 @@ namespace MSTSC.Manage.Web
             }
             return sn;
         }
+
+        /// <summary>
+        /// 获取产品类型(DeviceType字段)
+        /// </summary>
+        /// <returns></returns>
+        [WebMethod]
+        public static string getProductType()
+        {
+            DeviceQueryBLL bll = new DeviceQueryBLL();
+            var result = bll.getProductType();
+
+            var retvalue = JsonConvert.SerializeObject(result);
+            return retvalue;
+        }
+
+        /// <summary>
+        /// 获取产品系列[3diff、5diff](ProductSeries字段)
+        /// </summary>
+        /// <returns></returns>
+        [WebMethod]
+        public static string getProductSeries()
+        {
+            DeviceQueryBLL bll = new DeviceQueryBLL();
+            var result = bll.getProductSeries();
+
+            var retvalue = JsonConvert.SerializeObject(result);
+            return retvalue;
+        }
+
+        /// <summary>
+        /// 获取产品型号[Z3、Z30、Z31、Z3CRP、Z30CRP、Z31CRP](Model字段)
+        /// </summary>
+        /// <returns></returns>
+        [WebMethod]
+        public static string getModel()
+        {
+            DeviceQueryBLL bll = new DeviceQueryBLL();
+            var result = bll.getModel();
+
+            var retvalue = JsonConvert.SerializeObject(result);
+            return retvalue;
+        }
+
+        /// <summary>
+        /// 获取产品项目[BK、VK](ProductModel字段)
+        /// </summary>
+        /// <returns></returns>
+        [WebMethod]
+        public static string getProductModel()
+        {
+            DeviceQueryBLL bll = new DeviceQueryBLL();
+            var result = bll.getProductModel();
+
+            var retvalue = JsonConvert.SerializeObject(result);
+            return retvalue;
+        }
+
     }
 }
