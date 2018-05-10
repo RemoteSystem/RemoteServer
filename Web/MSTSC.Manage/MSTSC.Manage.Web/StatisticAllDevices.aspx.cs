@@ -3,6 +3,7 @@ using MSTSC.Manage.Model;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
@@ -36,13 +37,14 @@ namespace MSTSC.Manage.Web
             QueryConditionModel conditionModel = JsonConvert.DeserializeObject<QueryConditionModel>(conditions.Replace("\"0\"", "\"\""));
 
             //List<QueryList> list = new List<QueryList>();
-           dynamic list = bll.StatisticsAllDevicesBLL(conditionModel, pagerInfo, sortInfo);
+            DataTable dt = bll.StatisticsAllDevicesBLL(conditionModel, pagerInfo, sortInfo);
             pagerInfo.RecordCount = bll.getDeviceCount(conditionModel);
 
             //Json格式的要求{total:22,rows:{}}
             //构造成Json的格式传递
-            var result = new { total = pagerInfo.RecordCount, rows = list };
+            var result = new { total = pagerInfo.RecordCount, rows = dt };
             return JsonConvert.SerializeObject(result).Replace("null", "\"\"");
         }
+        
     }
 }

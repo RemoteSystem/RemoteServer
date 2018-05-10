@@ -19,9 +19,9 @@ namespace MSTSC.Manage.BLL
         /// <param name="pagerInfo"></param>
         /// <param name="sortInfo"></param>
         /// <returns></returns>
-        public dynamic StatisticsAllDevicesBLL(QueryConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
+        public DataTable StatisticsAllDevicesBLL(QueryConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
         {
-            conditValue.ProductSeries = Common.UIdataToDB(conditValue.ProductSeries);
+            //conditValue.ProductSeries = Common.UIdataToDB(conditValue.ProductSeries);
             return dal.StatisticsAllDevicesDAL(conditValue, pagerInfo, sortInfo);
         }
 

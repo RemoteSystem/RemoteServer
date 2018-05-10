@@ -21,7 +21,7 @@ namespace MSTSC.Manage.DAL
         /// <param name="pagerInfo"></param>
         /// <param name="sortInfo"></param>
         /// <returns></returns>
-        public dynamic StatisticsAllDevicesDAL(QueryConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
+        public DataTable StatisticsAllDevicesDAL(QueryConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
         {
             StringBuilder whereSql = new StringBuilder();
             var sql = @"SELECT d.DeviceName, d.SIM, d.SN, c.count_times_total, r.reagent_dil, r.reagent_lh, r.reagent_r2 FROM device_info d INNER JOIN ( SELECT SN FROM device_info {0} ";
@@ -51,7 +51,11 @@ namespace MSTSC.Manage.DAL
             var SqlCondit = string.Format(sql, whereSql.ToString());
             using (var conn = new MySqlConnection(Global.strConn))
             {
-                return conn.Query<dynamic>(SqlCondit).ToList();
+                MySqlDataAdapter adapter = new MySqlDataAdapter(SqlCondit, conn);
+                DataSet ds = new DataSet();
+                adapter.Fill(ds);
+                return ds.Tables[0];
+                //return conn.Query<dynamic>(SqlCondit).ToList();
             }
         }
 

@@ -66,6 +66,8 @@
     <Content Include="DeviceQuery.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Main.Master" />
+    <Content Include="scripts\bootstrap-table\bootstrap-table-export.js" />
+    <Content Include="scripts\bootstrap-table\tableExport.js" />
     <Content Include="scripts\chart.js" />
     <Content Include="StatisticByModel.aspx" />
     <Content Include="StatisticAllDevices.aspx" />

@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="StatisticAllDevices.aspx.cs" Inherits="MSTSC.Manage.Web.StatisticAllDevices" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script src="scripts/bootstrap-table/bootstrap-table-export.js"></script>
+    <script src="scripts/bootstrap-table/tableExport.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <ul class="breadcrumb nomargin">
@@ -72,6 +74,10 @@
                 freshTable();
             });
 
+            $("#btnExport").click(function () {
+                exportExcel();
+            });
+
             getTypes();
             getSeries();
             getModels();
@@ -104,6 +110,7 @@
                 //showToggle: true,                   //是否显示详细视图和列表视图的切换按钮
                 cardView: false,                    //是否显示详细视图
                 detailView: false,                  //是否显示父子表
+                exportTypes: ['excel'],             //导出文件类型 
                 //得到查询的参数
                 queryParams: function (params) {
                     //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
@@ -234,6 +241,12 @@
                 },
                 error: function (err) {
                 }
+            });
+        }
+
+        function exportExcel() {
+            $("#grid").tableExport({
+                type: "excel", escape: "true", fileName: "111111", noNumricColumns: [0, 1, 2]
             });
         }
     </script>
