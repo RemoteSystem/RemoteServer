@@ -56,35 +56,8 @@
                 </div>
                 <div class="panel-body nopadding">
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>SIM卡号:</span><span class="margin-left-5" id="SIM"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>仪器序列号:</span><span class="margin-left-5" id="SN"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>产品类型:</span><span class="margin-left-5" id="ProductSeries"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>产品型号:</span><span class="margin-left-5" id="ProductModel"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>OEM代号:</span><span class="margin-left-5" id="OEM"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>代理商代号:</span><span class="margin-left-5" id="Agent"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>封闭试剂类型:</span><span class="margin-left-5" id="ReagentType"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>装机区域:</span><span class="margin-left-5" id="InstallationArea"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>出厂日期:</span><span class="margin-left-5" id="FactoryDate"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>装机日期:</span><span class="margin-left-5" id="InstallDate"></span>
-                    </div>
+                        
+                    </div>                 
                 </div>
             </div>
             <div class="panel panel-success nomargin" style="margin-top: 15px;">
@@ -92,21 +65,7 @@
                     <h3 class="panel-title">仪器运行信息</h3>
                 </div>
                 <div class="panel-body nopadding">
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>开机天数:</span><span class="margin-left-5" id="runtime_days"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>激光管运行时间:</span><span class="margin-left-5" id="runtime_opt"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>仪器运行时间:</span><span class="margin-left-5" id="runtime_power"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>气源运行时间:</span><span class="margin-left-5" id="runtime_air_supply"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>采样针穿刺次数:</span><span class="margin-left-5" id="needle_times_impale"></span>
-                    </div>
+                   
                 </div>
             </div>
             <div class="panel panel-success nomargin" style="margin-top: 15px;">
@@ -114,42 +73,7 @@
                     <h3 class="panel-title">计数信息统计</h3>
                 </div>
                 <div class="panel-body nopadding">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-5">
-                        <span>计数总次数:</span><span class="margin-left-5" id="count_times_total"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>全血-CBC:</span><span class="margin-left-5" id="count_times_wb_cbc"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>全血-CBC+CRP:</span><span class="margin-left-5" id="count_times_wb_cbc_crp"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>全血-CRP:</span><span class="margin-left-5" id="count_times_wb_crp"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预稀释-CBC:</span><span class="margin-left-5" id="count_times_pd_cbc"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预稀释-CBC+CRP:</span><span class="margin-left-5" id="count_times_pd_cbc_crp"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预稀释-CRP:</span><span class="margin-left-5" id="count_times_pd_crp"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>全血-CBC+5DIFF:</span><span class="margin-left-5" id="count_times_wb_cd"></span>
-                    </div>
-                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-6 padding-5">
-                        <span>预稀释-CBC+5DIFF:</span><span class="margin-left-5" id="count_times_pd_cd"></span>
-                    </div>
-                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-6 padding-5">
-                        <span>全血-CBC+5DIFF+CRP:</span><span class="margin-left-5" id="count_times_wb_cd_crp"></span>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5">
-                        <span>预稀释-CBC+5DIFF+CRP:</span><span class="margin-left-5" id="count_times_pd_cd_crp"></span>
-                    </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-5">
-                        <span>质控样本数:</span><span class="margin-left-5" id="count_times_qc"></span>
-                    </div>
+                    
                 </div>
             </div>
             <div class="panel panel-success nomargin" style="margin-top: 15px;">
@@ -157,54 +81,7 @@
                     <h3 class="panel-title">试剂耗量统计</h3>
                 </div>
                 <div class="panel-body nopadding">
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>稀释液:</span><span class="margin-left-5" id="reagent_dil"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>LH溶血剂:</span><span class="margin-left-5" id="reagent_lh"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>CRP-R2:</span><span class="margin-left-5" id="reagent_r2"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>DIFF1:</span><span class="margin-left-5" id="reagent_diff1"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>DIFF2:</span><span class="margin-left-5" id="reagent_diff2"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>CRP-R1:</span><span class="margin-left-5" id="reagent_r1"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预留1:</span><span class="margin-left-5" id="reagent_fl1"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预留2:</span><span class="margin-left-5" id="reagent_fl2"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预留3:</span><span class="margin-left-5" id="reagent_fl3"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预留4:</span><span class="margin-left-5" id="reagent_fl4"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预留5:</span><span class="margin-left-5" id="reagent_fl5"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预留6:</span><span class="margin-left-5" id="reagent_fl6"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预留7:</span><span class="margin-left-5"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预留8:</span><span class="margin-left-5"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预留9:</span><span class="margin-left-5"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预留10:</span><span class="margin-left-5"></span>
-                    </div>
+                    
                 </div>
             </div>
             <div class="panel panel-success nomargin" style="margin-top: 15px;">
@@ -212,24 +89,7 @@
                     <h3 class="panel-title">故障统计信息</h3>
                 </div>
                 <div class="panel-body nopadding">
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>WBC堵孔次数:</span><span class="margin-left-5" id="hole_times_wbc"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>RBC堵孔次数:</span><span class="margin-left-5" id="hole_times_rbc"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>采样组件故障次数:</span><span class="margin-left-5" id="sampling_times_fault"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>注射器故障次数:</span><span class="margin-left-5" id="syringe_times_syringe_fault"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>自动进样组件故障:</span><span class="margin-left-5" id="inject_times_fault"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>混匀组件故障次数:</span><span class="margin-left-5" id="mixing_times_fault"></span>
-                    </div>
+                    
                 </div>
             </div>
             <div class="padding-5"></div>

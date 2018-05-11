@@ -69,6 +69,8 @@
     <Content Include="scripts\bootstrap-table\bootstrap-table-export.js" />
     <Content Include="scripts\bootstrap-table\tableExport.js" />
     <Content Include="scripts\chart.js" />
+    <Content Include="StatisticByArea.aspx" />
+    <Content Include="StatisticByClose.aspx" />
     <Content Include="StatisticByModel.aspx" />
     <Content Include="StatisticAllDevices.aspx" />
     <Content Include="styles\bootstrap\fonts\glyphicons-halflings-regular.eot" />
@@ -164,6 +166,20 @@
       <DependentUpon>Main.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StatisticByArea.aspx.cs">
+      <DependentUpon>StatisticByArea.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StatisticByArea.aspx.designer.cs">
+      <DependentUpon>StatisticByArea.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="StatisticByClose.aspx.cs">
+      <DependentUpon>StatisticByClose.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StatisticByClose.aspx.designer.cs">
+      <DependentUpon>StatisticByClose.aspx</DependentUpon>
+    </Compile>
     <Compile Include="StatisticByModel.aspx.cs">
       <DependentUpon>StatisticByModel.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

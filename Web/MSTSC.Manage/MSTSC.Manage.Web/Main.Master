@@ -96,7 +96,7 @@
                             <li><a href="StatisticByModel.aspx">按模式统计</a></li>
                             <li><a href="StatisticByArea.aspx">按区域统计</a></li>
                             <li><a href="StatisticByType.aspx">按机型统计</a></li>
-                            <li><a href="StatisticByClose.aspx">按封闭试剂类型统计</a></li>
+                            <li><a href="StatisticByClose.aspx">按试剂封闭类型统计</a></li>
                             <li><a href="StatisticByOEM.aspx">按OEM统计</a></li>
                         </ul>
                     </li>

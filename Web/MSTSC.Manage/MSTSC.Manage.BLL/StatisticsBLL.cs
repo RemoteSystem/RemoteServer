@@ -45,5 +45,24 @@ namespace MSTSC.Manage.BLL
         {
             return dal.StatisticsByReagentTypeDAL(conditValue);
         }
+
+        /// <summary>
+        /// 统计-按区域
+        /// </summary>
+        /// <param name="conditValue"></param>
+        /// <param name="pagerInfo"></param>
+        /// <param name="sortInfo"></param>
+        /// <returns></returns>
+        public DataTable StatisticsByAreaBLL(QueryConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
+        {
+            //conditValue.ProductSeries = Common.UIdataToDB(conditValue.ProductSeries);
+            return dal.StatisticsByAreaDAL(conditValue, pagerInfo, sortInfo);
+        }
+
+        public int getAreaDeviceCount(QueryConditionModel conditValue)
+        {
+            return dal.getAreaDeviceCount(conditValue);
+        }
+
     }
 }

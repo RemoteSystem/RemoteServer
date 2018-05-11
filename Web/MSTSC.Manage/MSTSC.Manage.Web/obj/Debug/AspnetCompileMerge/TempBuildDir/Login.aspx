@@ -61,7 +61,7 @@
                     success: function (data) {
                         var res = data.d;
                         if (res == '0') {
-                            window.location.href = "DeviceQuery.aspx";
+                            window.location.href = "DeviceList.aspx";
                         } else {
                             $("#logininfo").html('用户名或密码错误.');
                         }

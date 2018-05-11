@@ -154,16 +154,20 @@
                         sortable: true
                     }, {
                         field: 'count_times_total',
-                        title: '样本数'
+                        title: '样本数',
+                        align: 'center'
                     }, {
                         field: 'reagent_dil',
-                        title: '消耗稀释液'
+                        title: '消耗稀释液',
+                        align: 'center'
                     }, {
                         field: 'reagent_lh',
-                        title: '消耗溶血剂'
+                        title: '消耗溶血剂',
+                        align: 'center'
                     }, {
                         field: 'reagent_r2',
-                        title: '消耗CRP R2'
+                        title: '消耗CRP R2',
+                        align: 'center'
                     }],
                 onLoadSuccess: function () {
                 },
@@ -246,7 +250,7 @@
 
         function exportExcel() {
             $("#grid").tableExport({
-                type: "excel", escape: "true", fileName: "111111", noNumricColumns: [0, 1, 2]
+                type: "excel", escape: "true", fileName: "统计结果-所有机器", noNumricColumns: [0, 1, 2]
             });
         }
     </script>

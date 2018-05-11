@@ -24,7 +24,7 @@ namespace MSTSC.Manage.Web
         {
             if (rows == 0)
             {
-                return "{\"total\":0,\"rows\":[]}";
+                return "[]";
             }
 
             StatisticsBLL bll = new StatisticsBLL();
@@ -51,10 +51,8 @@ namespace MSTSC.Manage.Web
                 list.Add(new KeyValueModel("预稀释-CRP", "0"));
             }
 
-            //Json格式的要求{total:22,rows:{}}
             //构造成Json的格式传递
-            var result = new { total = 6, rows = list };
-            return JsonConvert.SerializeObject(result).Replace("null", "0");
+            return JsonConvert.SerializeObject(list).Replace("null", "0");
         }
 
     }

@@ -72,7 +72,7 @@ var pageInitModule = (function (mod) {
             if (_strcurrenturl.indexOf(href) > -1 || isActive) {
                 $(this).parent().addClass("active");
                 if ($(this).parents("ul").attr("class") == "sub-menu") {
-                    $(this).parents("ul").slideDown();
+                    $(this).parents("ul").show();//原来是slideDown()，有滑动效果
                     $(this).parents(".has-sub").addClass("active");
                 }
             }
