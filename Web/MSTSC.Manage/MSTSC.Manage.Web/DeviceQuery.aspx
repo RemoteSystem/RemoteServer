@@ -441,6 +441,9 @@
                 onLoadSuccess: function () {
                     if (type != 0) {
                         tabletimer = setTimeout(freshTable, 30000);
+
+                        var r = $("[data-uniqueid='" + sn + "']");
+                        r.css("background-color", "#C0C0C0");
                     }
                 },
                 onLoadError: function () {
@@ -448,6 +451,9 @@
                     alert("数据加载失败！");
                 },
                 onSort: function (name, order) {
+                    clearTimeout(tabletimer);
+                },
+                onPageChange: function (name, order) {
                     clearTimeout(tabletimer);
                 },
                 onDblClickRow: function (row, $element) {
@@ -462,7 +468,7 @@
 
         function freshTable() {
             clearTimeout(tabletimer);
-            $table.bootstrapTable('refreshOptions', { pageNumber: 1, url: 'DeviceQuery.aspx/getDeviceList' });
+            $table.bootstrapTable('refreshOptions', { url: 'DeviceQuery.aspx/getDeviceList' });
         }
 
         function getRowInfo() {

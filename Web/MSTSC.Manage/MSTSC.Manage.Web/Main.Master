@@ -113,8 +113,6 @@
     </form>
 </body>
 
-</html>
-
 <script type="text/javascript">
     $(document).ready(function () {
         $(".sidebar .nav li").click(function () {
@@ -123,3 +121,6 @@
         });
     });
 </script>
+</html>
+
+
