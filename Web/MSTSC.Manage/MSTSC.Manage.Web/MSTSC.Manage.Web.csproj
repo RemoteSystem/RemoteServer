@@ -73,6 +73,8 @@
     <Content Include="StatisticByClose.aspx" />
     <Content Include="StatisticByModel.aspx" />
     <Content Include="StatisticAllDevices.aspx" />
+    <Content Include="StatisticByOEM.aspx" />
+    <Content Include="StatisticByType.aspx" />
     <Content Include="styles\bootstrap\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="styles\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="styles\bootstrap\fonts\glyphicons-halflings-regular.woff" />
@@ -193,6 +195,20 @@
     </Compile>
     <Compile Include="StatisticAllDevices.aspx.designer.cs">
       <DependentUpon>StatisticAllDevices.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="StatisticByOEM.aspx.cs">
+      <DependentUpon>StatisticByOEM.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StatisticByOEM.aspx.designer.cs">
+      <DependentUpon>StatisticByOEM.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="StatisticByType.aspx.cs">
+      <DependentUpon>StatisticByType.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StatisticByType.aspx.designer.cs">
+      <DependentUpon>StatisticByType.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

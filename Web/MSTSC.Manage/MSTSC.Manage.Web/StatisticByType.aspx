@@ -1,12 +1,13 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="StatisticAllDevices.aspx.cs" Inherits="MSTSC.Manage.Web.StatisticAllDevices" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="StatisticByType.aspx.cs" Inherits="MSTSC.Manage.Web.StatisticByType" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <!-- 表格导出 -->
     <script src="scripts/bootstrap-table/bootstrap-table-export.js"></script>
     <script src="scripts/bootstrap-table/tableExport.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <ul class="breadcrumb nomargin">
-        <li class="active">统计结果-所有机器</li>
+        <li class="active">统计结果-按机型统计</li>
     </ul>
     <div class="panel panel-info margin-5 padding-10">
         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 padding-5">
@@ -45,10 +46,11 @@
         <span class="clearfix"></span>
     </div>
 
-    <div class="panel padding-left-5 padding-right-5">
-        <table id="grid"></table>
+    <div class="padding-5">
+        <div class="panel">
+            <table id="grid"></table>
+        </div>
     </div>
-
     <script type="text/javascript">
         var $table;
         var type = 0;
@@ -85,7 +87,7 @@
         //初始化bootstrap-table的内容
         function InitMainTable() {
             //记录页面bootstrap-table全局变量$table，方便应用
-            var queryUrl = 'StatisticAllDevices.aspx/getDeviceList';
+            var queryUrl = 'StatisticByType.aspx/getDataList';
             $table = $('#grid').bootstrapTable({
                 url: queryUrl,                      //请求后台的URL（*）
                 method: 'POST',                      //请求方式（*）
@@ -110,7 +112,6 @@
                 //showToggle: true,                   //是否显示详细视图和列表视图的切换按钮
                 cardView: false,                    //是否显示详细视图
                 detailView: false,                  //是否显示父子表
-                exportTypes: ['excel'],             //导出文件类型 
                 //得到查询的参数
                 queryParams: function (params) {
                     //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
@@ -141,22 +142,22 @@
                     return JSON.parse(res.d);
                 },
                 columns: [
+                   {
+                       field: 'Model',
+                       title: '机型',
+                       align: 'center'
+                   },
                     {
-                        field: 'DeviceName',
-                        title: '机器名'
-                    }, {
-                        field: 'SIM',
-                        title: 'SIM卡号',
-                        sortable: true
-                    }, {
-                        field: 'SN',
-                        title: '仪器序列号',
-                        sortable: true
-                    }, {
+                        field: 'device_count',
+                        title: '机器数',
+                        align: 'center'
+                    },
+                    {
                         field: 'count_times_total',
                         title: '样本数',
                         align: 'center'
-                    }, {
+                    },
+                    {
                         field: 'reagent_dil',
                         title: '消耗稀释液',
                         align: 'center'
@@ -169,7 +170,7 @@
                         title: '消耗CRP R2',
                         align: 'center'
                     }],
-                onLoadSuccess: function () {
+                onLoadSuccess: function (data) {
                 },
                 onLoadError: function () {
                     alert("数据加载失败！");
@@ -183,8 +184,8 @@
 
         function freshTable() {
             type = 1;
-            $table.bootstrapTable('refreshOptions', { pageNumber: 1, url: 'StatisticAllDevices.aspx/getDeviceList' });
-            //$table.bootstrapTable('refresh', { url: 'StatisticAllDevices.aspx/getDeviceList' });
+            $table.bootstrapTable('refreshOptions', { pageNumber: 1, url: 'StatisticByType.aspx/getDataList' });
+            //$table.bootstrapTable('refresh', { url: 'StatisticByModel.aspx/getDataList' });
         }
 
         function getTypes() {
@@ -250,7 +251,7 @@
 
         function exportExcel() {
             $("#grid").tableExport({
-                type: "excel", escape: "true", fileName: "统计结果-所有机器", noNumricColumns: [0, 1, 2]
+                type: "excel", escape: "true", fileName: "统计结果-按机型统计", noNumricColumns: [0]
             });
         }
     </script>

@@ -100,7 +100,7 @@
                 sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
                 pageNumber: 1,                      //初始化加载第一页，默认第一页,并记录
                 pageSize: rows,                     //每页的记录行数（*）
-                pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+                pageList: [],                       //可供选择的每页的行数（*）
                 search: false,                      //是否显示表格搜索
                 strictSearch: true,
                 //showColumns: true,                  //是否显示所有的列（选择显示的列）
@@ -143,7 +143,7 @@
                 },
                 columns: [
                    {
-                       field: 'InstallationArea',
+                       field: 'Region',
                        title: '区域',
                        align: 'center'
                    },

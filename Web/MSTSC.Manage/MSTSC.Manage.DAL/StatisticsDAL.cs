@@ -172,9 +172,9 @@ FROM device_info,blood_count WHERE SN = device_sn {0}";
         public DataTable StatisticsByAreaDAL(QueryConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
         {
             StringBuilder whereSql = new StringBuilder();
-            string sql = @"SELECT d.InstallationArea, COUNT(d.SN) device_count, SUM(bc.count_times_total) AS count_times_total, SUM(br.reagent_dil) AS reagent_dil, SUM(br.reagent_lh) AS reagent_lh, SUM(br.reagent_r2) AS reagent_r2 
+            string sql = @"SELECT d.Region, COUNT(d.SN) device_count, SUM(bc.count_times_total) AS count_times_total, SUM(br.reagent_dil) AS reagent_dil, SUM(br.reagent_lh) AS reagent_lh, SUM(br.reagent_r2) AS reagent_r2 
                 FROM device_info d LEFT JOIN blood_count bc ON d.SN = bc.device_sn LEFT JOIN blood_reagent br ON d.SN = br.device_sn {0} 
-                GROUP BY InstallationArea ORDER BY SN LIMIT " + (pagerInfo.PageSize * (pagerInfo.CurrenetPageIndex - 1)) + "," + pagerInfo.PageSize + ";";
+                GROUP BY Region ORDER BY SN LIMIT " + (pagerInfo.PageSize * (pagerInfo.CurrenetPageIndex - 1)) + "," + pagerInfo.PageSize + ";";
 
             if (!string.IsNullOrEmpty(conditValue.DeviceType))
             {
@@ -212,7 +212,161 @@ FROM device_info,blood_count WHERE SN = device_sn {0}";
         public int getAreaDeviceCount(QueryConditionModel conditValue)
         {
             StringBuilder whereSql = new StringBuilder();
-            string sql = @"SELECT COUNT(1) AS count FROM(SELECT InstallationArea FROM device_info d {0} GROUP BY InstallationArea)t; ";
+            string sql = @"SELECT COUNT(1) AS count FROM(SELECT Region FROM device_info d {0} GROUP BY Region)t; ";
+
+            if (!string.IsNullOrEmpty(conditValue.DeviceType))
+            {
+                whereSql.Append(@" AND d.DeviceType='" + conditValue.DeviceType + "'");
+            }
+
+            if (!string.IsNullOrEmpty(conditValue.ProductSeries))
+            {
+                whereSql.Append(@" AND d.ProductSeries='" + conditValue.ProductSeries + "'");
+            }
+
+            if (!string.IsNullOrEmpty(conditValue.ModelType))
+            {
+                whereSql.Append(@" AND d.ProductModel='" + conditValue.ModelType + "'");
+            }
+
+            if (!string.IsNullOrEmpty(whereSql.ToString()))
+            {
+                whereSql = new StringBuilder(" WHERE " + whereSql.ToString().Substring(4));
+            }
+
+            var SqlCondit = string.Format(sql, whereSql.ToString());
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                return conn.QuerySingle<int>(SqlCondit);
+            }
+        }
+
+        /// <summary>
+        /// 统计-按机型
+        /// </summary>
+        /// <param name="conditValue"></param>
+        /// <returns></returns>
+        public DataTable StatisticsByTypeDAL(QueryConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
+        {
+            StringBuilder whereSql = new StringBuilder();
+            string sql = @"SELECT d.Model, COUNT(d.SN) device_count, SUM(bc.count_times_total) AS count_times_total, SUM(br.reagent_dil) AS reagent_dil, SUM(br.reagent_lh) AS reagent_lh, SUM(br.reagent_r2) AS reagent_r2 
+                FROM device_info d LEFT JOIN blood_count bc ON d.SN = bc.device_sn LEFT JOIN blood_reagent br ON d.SN = br.device_sn {0} 
+                GROUP BY Model ORDER BY SN LIMIT " + (pagerInfo.PageSize * (pagerInfo.CurrenetPageIndex - 1)) + "," + pagerInfo.PageSize + ";";
+
+            if (!string.IsNullOrEmpty(conditValue.DeviceType))
+            {
+                whereSql.Append(@" AND DeviceType='" + conditValue.DeviceType + "'");
+            }
+
+            if (!string.IsNullOrEmpty(conditValue.ProductSeries))
+            {
+                whereSql.Append(@" AND ProductSeries='" + conditValue.ProductSeries + "'");
+            }
+
+            if (!string.IsNullOrEmpty(conditValue.ModelType))
+            {
+                whereSql.Append(@" AND ProductModel='" + conditValue.ModelType + "'");
+            }
+
+            if (!string.IsNullOrEmpty(whereSql.ToString()))
+            {
+                whereSql = new StringBuilder(" WHERE " + whereSql.ToString().Substring(4));
+            }
+
+            var SqlCondit = string.Format(sql, whereSql.ToString());
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                MySqlDataAdapter adapter = new MySqlDataAdapter(SqlCondit, conn);
+                DataSet ds = new DataSet();
+                adapter.Fill(ds);
+
+                return ds.Tables[0];
+
+                //return conn.Query<dynamic>(SqlCondit).ToList();
+            }
+        }
+
+        public int getTypeDeviceCount(QueryConditionModel conditValue)
+        {
+            StringBuilder whereSql = new StringBuilder();
+            string sql = @"SELECT COUNT(1) AS count FROM(SELECT Model FROM device_info d {0} GROUP BY Model)t; ";
+
+            if (!string.IsNullOrEmpty(conditValue.DeviceType))
+            {
+                whereSql.Append(@" AND d.DeviceType='" + conditValue.DeviceType + "'");
+            }
+
+            if (!string.IsNullOrEmpty(conditValue.ProductSeries))
+            {
+                whereSql.Append(@" AND d.ProductSeries='" + conditValue.ProductSeries + "'");
+            }
+
+            if (!string.IsNullOrEmpty(conditValue.ModelType))
+            {
+                whereSql.Append(@" AND d.ProductModel='" + conditValue.ModelType + "'");
+            }
+
+            if (!string.IsNullOrEmpty(whereSql.ToString()))
+            {
+                whereSql = new StringBuilder(" WHERE " + whereSql.ToString().Substring(4));
+            }
+
+            var SqlCondit = string.Format(sql, whereSql.ToString());
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                return conn.QuerySingle<int>(SqlCondit);
+            }
+        }
+
+        /// <summary>
+        /// 统计-按机型
+        /// </summary>
+        /// <param name="conditValue"></param>
+        /// <returns></returns>
+        public DataTable StatisticsByOEMDAL(QueryConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
+        {
+            StringBuilder whereSql = new StringBuilder();
+            string sql = @"SELECT d.OEM, COUNT(d.SN) device_count, SUM(bc.count_times_total) AS count_times_total, SUM(br.reagent_dil) AS reagent_dil, SUM(br.reagent_lh) AS reagent_lh, SUM(br.reagent_r2) AS reagent_r2 
+                FROM device_info d LEFT JOIN blood_count bc ON d.SN = bc.device_sn LEFT JOIN blood_reagent br ON d.SN = br.device_sn {0} 
+                GROUP BY OEM ORDER BY SN LIMIT " + (pagerInfo.PageSize * (pagerInfo.CurrenetPageIndex - 1)) + "," + pagerInfo.PageSize + ";";
+
+            if (!string.IsNullOrEmpty(conditValue.DeviceType))
+            {
+                whereSql.Append(@" AND DeviceType='" + conditValue.DeviceType + "'");
+            }
+
+            if (!string.IsNullOrEmpty(conditValue.ProductSeries))
+            {
+                whereSql.Append(@" AND ProductSeries='" + conditValue.ProductSeries + "'");
+            }
+
+            if (!string.IsNullOrEmpty(conditValue.ModelType))
+            {
+                whereSql.Append(@" AND ProductModel='" + conditValue.ModelType + "'");
+            }
+
+            if (!string.IsNullOrEmpty(whereSql.ToString()))
+            {
+                whereSql = new StringBuilder(" WHERE " + whereSql.ToString().Substring(4));
+            }
+
+            var SqlCondit = string.Format(sql, whereSql.ToString());
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                MySqlDataAdapter adapter = new MySqlDataAdapter(SqlCondit, conn);
+                DataSet ds = new DataSet();
+                adapter.Fill(ds);
+
+                return ds.Tables[0];
+
+                //return conn.Query<dynamic>(SqlCondit).ToList();
+            }
+        }
+
+        public int getOEMDeviceCount(QueryConditionModel conditValue)
+        {
+            StringBuilder whereSql = new StringBuilder();
+            string sql = @"SELECT COUNT(1) AS count FROM(SELECT OEM FROM device_info d {0} GROUP BY OEM)t; ";
 
             if (!string.IsNullOrEmpty(conditValue.DeviceType))
             {

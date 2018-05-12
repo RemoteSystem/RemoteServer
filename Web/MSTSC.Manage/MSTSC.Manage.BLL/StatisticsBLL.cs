@@ -64,5 +64,41 @@ namespace MSTSC.Manage.BLL
             return dal.getAreaDeviceCount(conditValue);
         }
 
+        /// <summary>
+        /// 统计-按机型
+        /// </summary>
+        /// <param name="conditValue"></param>
+        /// <param name="pagerInfo"></param>
+        /// <param name="sortInfo"></param>
+        /// <returns></returns>
+        public DataTable StatisticsByTypeBLL(QueryConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
+        {
+            //conditValue.ProductSeries = Common.UIdataToDB(conditValue.ProductSeries);
+            return dal.StatisticsByTypeDAL(conditValue, pagerInfo, sortInfo);
+        }
+
+        public int getTypeDeviceCount(QueryConditionModel conditValue)
+        {
+            return dal.getTypeDeviceCount(conditValue);
+        }
+
+        /// <summary>
+        /// 统计-按OEM
+        /// </summary>
+        /// <param name="conditValue"></param>
+        /// <param name="pagerInfo"></param>
+        /// <param name="sortInfo"></param>
+        /// <returns></returns>
+        public DataTable StatisticsByOEMBLL(QueryConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
+        {
+            //conditValue.ProductSeries = Common.UIdataToDB(conditValue.ProductSeries);
+            return dal.StatisticsByOEMDAL(conditValue, pagerInfo, sortInfo);
+        }
+
+        public int getOEMDeviceCount(QueryConditionModel conditValue)
+        {
+            return dal.getOEMDeviceCount(conditValue);
+        }
+
     }
 }

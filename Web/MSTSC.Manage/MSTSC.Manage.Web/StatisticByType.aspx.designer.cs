@@ -10,6 +10,6 @@
 namespace MSTSC.Manage.Web {
     
     
-    public partial class DeviceManage {
+    public partial class StatisticByType {
     }
 }
