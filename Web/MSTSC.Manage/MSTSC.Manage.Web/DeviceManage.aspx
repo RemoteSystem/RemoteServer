@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="DeviceManage.aspx.cs" Inherits="MSTSC.Manage.Web.DeviceManage" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -7,42 +8,44 @@
         </li>
     </ul>
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padding-right-10">
-        <div class="panel panel-info search-panel margin-bottom-10 padding-bottom-10">
-            <div class="quick-search-condition padding-5">
-                <div class="form-inline text-center">
-                    <select id="selType" class="form-control margin-top-5 margin-bottom-5">
-                        <option value="0">请选择产品类型</option>
-                        <option value="血液细胞分析仪">血液细胞分析仪</option>
-                    </select>
-                    <input type="text" id="querytext" class="form-control margin-top-5 margin-bottom-5" value="" style="width: 275px;" placeholder="请输入仪器名称、SIM卡号或仪器序列号" />
-                    <button type="button" id="quickquery" class="btn btn-default btn-normal margin-top-5 margin-bottom-5 margin-left-10">快速定位</button>
+        <div class="panel panel-info search-panel margin-bottom-10 padding-bottom-5">
+            <div class="panel-body nopadding">
+                <div class="quick-search-condition padding-5">
+                    <div class="form-inline text-center">
+                        <select id="selType" class="form-control margin-top-5 margin-bottom-5">
+                            <option value="0">请选择产品类型</option>
+                            <option value="血液细胞分析仪">血液细胞分析仪</option>
+                        </select>
+                        <input type="text" id="querytext" class="form-control margin-top-5 margin-bottom-5" value="" style="width: 275px;" placeholder="请输入仪器名称、SIM卡号或仪器序列号" />
+                        <button type="button" id="quickquery" class="btn btn-default btn-normal margin-top-5 margin-bottom-5 margin-left-10">快速定位</button>
+                    </div>
                 </div>
-            </div>
-            <hr class="nomargin" style="border-color: #cccccc; margin-left: 0px; margin-right: 0px;" />
-            <div class="search-condition padding-5">
-                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2 nopadding form-inline">
-                    <div class="radio margin-left-20">
-                        <label>
-                            <input type="radio" name="rdoconnect" id="optionsRadios1" value="0" checked="checked" />
-                            所有仪器
-                        </label>
+                <hr class="nomargin" style="border-color: #cccccc; margin-left: 0px; margin-right: 0px;" />
+                <div class="search-condition padding-5">
+                    <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2 nopadding form-inline">
+                        <div class="radio margin-left-20">
+                            <label>
+                                <input type="radio" name="rdoconnect" id="optionsRadios1" value="0" checked="checked" />
+                                所有仪器
+                            </label>
+                        </div>
+                        <div class="radio margin-left-20">
+                            <label>
+                                <input type="radio" name="rdoconnect" id="optionsRadios2" value="1" />
+                                已连接仪器
+                            </label>
+                        </div>
+                        <div class="radio margin-left-20">
+                            <label>
+                                <input type="radio" name="rdoconnect" id="optionsRadios3" value="2" />
+                                未连接仪器
+                            </label>
+                        </div>
+                        <button type="button" id="query" class="btn btn-default margin-top-5 margin-bottom-5 margin-left-20">查询</button>
                     </div>
-                    <div class="radio margin-left-20">
-                        <label>
-                            <input type="radio" name="rdoconnect" id="optionsRadios2" value="1" />
-                            已连接仪器
-                        </label>
-                    </div>
-                    <div class="radio margin-left-20">
-                        <label>
-                            <input type="radio" name="rdoconnect" id="optionsRadios3" value="2" />
-                            未连接仪器
-                        </label>
-                    </div>
-                    <button type="button" id="query" class="btn btn-default margin-top-5 margin-bottom-5 margin-left-20">查询</button>
                 </div>
+                <span class="clearfix"></span>
             </div>
-            <span class="clearfix"></span>
         </div>
 
         <div class="panel">
