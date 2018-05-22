@@ -17,10 +17,11 @@
         shortMonths: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
         thousandsSep: "",//不用千分位逗号分开的形式
         weekdays: ["星期一", "星期二", "星期三", "星期三", "星期四", "星期五", "星期六", "星期天"]
-    }
+    },
+    colors: ['#058dc7', '#ed561b', '#50b432', '#f7a35c', '#8085e9', '#f15c80', '#e4d354', '#8085e8', '#8d4653', '#91e8e1']
 });
 
-function initPie(id,title) {
+function initPie(id, title) {
     var chart = $('#' + id).highcharts({
         chart: {
             plotBackgroundColor: null,

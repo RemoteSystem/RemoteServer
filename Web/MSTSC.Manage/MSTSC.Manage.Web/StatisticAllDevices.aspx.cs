@@ -12,13 +12,8 @@ using System.Web.UI.WebControls;
 
 namespace MSTSC.Manage.Web
 {
-    public partial class StatisticAllDevices : System.Web.UI.Page
+    public partial class StatisticAllDevices : BasePage
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-
-        }
-
         [WebMethod]
         public static string getDeviceList(string conditions, int rows, int page, string sort, string sortOrder)
         {

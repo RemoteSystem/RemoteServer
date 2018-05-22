@@ -12,13 +12,8 @@ using System.Web.UI.WebControls;
 
 namespace MSTSC.Manage.Web
 {
-    public partial class StatisticByOEM : System.Web.UI.Page
+    public partial class StatisticByOEM : BasePage
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-
-        }
-
         [WebMethod]
         public static string getDataList(string conditions, int rows, int page, string sort, string sortOrder)
         {

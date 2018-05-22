@@ -62,6 +62,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="BasePage.aspx" />
     <Content Include="DeviceManage.aspx" />
     <Content Include="DeviceQuery.aspx" />
     <Content Include="Login.aspx" />
@@ -125,6 +126,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasePage.aspx.cs">
+      <DependentUpon>BasePage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BasePage.aspx.designer.cs">
+      <DependentUpon>BasePage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DeviceList.aspx.cs">
       <DependentUpon>DeviceList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -9,32 +9,35 @@
     <_PublishTargetUrl>C:\Users\jumee\Desktop\remoteweb</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
+    <File Include="BasePage.aspx">
+      <publishTime>05/14/2018 21:48:34</publishTime>
+    </File>
     <File Include="bin/Dapper.dll">
       <publishTime>04/19/2018 10:10:12</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.BLL.dll">
-      <publishTime>05/11/2018 09:43:35</publishTime>
+      <publishTime>05/22/2018 09:38:15</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.BLL.pdb">
-      <publishTime>05/11/2018 09:43:35</publishTime>
+      <publishTime>05/22/2018 09:38:15</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.DAL.dll">
-      <publishTime>05/11/2018 09:43:35</publishTime>
+      <publishTime>05/22/2018 09:38:15</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.DAL.pdb">
-      <publishTime>05/11/2018 09:43:35</publishTime>
+      <publishTime>05/22/2018 09:38:15</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.Model.dll">
-      <publishTime>05/11/2018 09:43:35</publishTime>
+      <publishTime>05/22/2018 09:38:14</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.Model.pdb">
-      <publishTime>05/11/2018 09:43:35</publishTime>
+      <publishTime>05/22/2018 09:38:14</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.Web.dll">
-      <publishTime>05/11/2018 09:43:35</publishTime>
+      <publishTime>05/22/2018 09:38:15</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.Web.pdb">
-      <publishTime>05/11/2018 09:43:35</publishTime>
+      <publishTime>05/22/2018 09:38:15</publishTime>
     </File>
     <File Include="bin/MySql.Data.dll">
       <publishTime>04/19/2018 10:10:12</publishTime>
@@ -43,28 +46,28 @@
       <publishTime>04/26/2018 22:14:51</publishTime>
     </File>
     <File Include="DeviceList.aspx">
-      <publishTime>05/11/2018 09:40:10</publishTime>
+      <publishTime>05/14/2018 16:41:31</publishTime>
     </File>
     <File Include="DeviceManage.aspx">
-      <publishTime>05/07/2018 15:50:00</publishTime>
+      <publishTime>05/14/2018 16:41:23</publishTime>
     </File>
     <File Include="DeviceQuery.aspx">
-      <publishTime>05/11/2018 09:39:14</publishTime>
+      <publishTime>05/14/2018 16:41:28</publishTime>
     </File>
     <File Include="Index.aspx">
       <publishTime>04/28/2018 21:51:54</publishTime>
     </File>
     <File Include="Login.aspx">
-      <publishTime>05/07/2018 15:53:03</publishTime>
+      <publishTime>05/14/2018 21:39:15</publishTime>
     </File>
     <File Include="Main.Master">
-      <publishTime>05/11/2018 09:42:30</publishTime>
+      <publishTime>05/22/2018 09:17:03</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>05/10/2018 23:57:03</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>05/11/2018 09:43:51</publishTime>
+      <publishTime>05/22/2018 09:38:21</publishTime>
     </File>
     <File Include="scripts/bootstrap-table/bootstrap-table-export.js">
       <publishTime>05/10/2018 20:53:03</publishTime>
@@ -88,7 +91,7 @@
       <publishTime>04/25/2018 15:02:58</publishTime>
     </File>
     <File Include="scripts/chart.js">
-      <publishTime>05/10/2018 16:44:46</publishTime>
+      <publishTime>05/11/2018 18:03:52</publishTime>
     </File>
     <File Include="scripts/default.js">
       <publishTime>05/07/2018 17:57:04</publishTime>
@@ -112,10 +115,22 @@
       <publishTime>04/25/2018 15:09:03</publishTime>
     </File>
     <File Include="StatisticAllDevices.aspx">
-      <publishTime>05/11/2018 00:55:18</publishTime>
+      <publishTime>05/22/2018 09:35:49</publishTime>
+    </File>
+    <File Include="StatisticByArea.aspx">
+      <publishTime>05/22/2018 09:37:03</publishTime>
+    </File>
+    <File Include="StatisticByClose.aspx">
+      <publishTime>05/22/2018 09:37:17</publishTime>
     </File>
     <File Include="StatisticByModel.aspx">
-      <publishTime>05/10/2018 18:12:14</publishTime>
+      <publishTime>05/22/2018 09:37:31</publishTime>
+    </File>
+    <File Include="StatisticByOEM.aspx">
+      <publishTime>05/22/2018 09:37:45</publishTime>
+    </File>
+    <File Include="StatisticByType.aspx">
+      <publishTime>05/22/2018 09:38:09</publishTime>
     </File>
     <File Include="Statistics.aspx">
       <publishTime>05/02/2018 22:19:11</publishTime>
@@ -190,7 +205,7 @@
       <publishTime>04/25/2018 15:11:07</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/11/2018 09:43:50</publishTime>
+      <publishTime>05/22/2018 09:38:21</publishTime>
     </File>
   </ItemGroup>
 </Project>

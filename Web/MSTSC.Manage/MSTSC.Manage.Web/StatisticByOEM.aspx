@@ -10,40 +10,42 @@
         <li class="active">统计结果-按OEM统计</li>
     </ul>
     <div class="panel panel-info margin-5 padding-10">
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 padding-5">
-            <div class="form-inline">
-                <span>产品类型</span>
-                <select id="selType" class="form-control" style="min-width: 160px;">
-                    <option value="0">请选择</option>
-                    <option value="血液细胞分析仪">血液细胞分析仪</option>
-                </select>
+        <div class="panel-body nopadding">
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 padding-5">
+                <div class="form-inline">
+                    <span>产品类型</span>
+                    <select id="selType" class="form-control" style="min-width: 160px;">
+                        <option value="0">请选择</option>
+                        <option value="血液细胞分析仪">血液细胞分析仪</option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 padding-5">
-            <div class="form-inline">
-                <span>产品系列</span>
-                <select id="selSeries" class="form-control" style="min-width: 160px;">
-                    <option value="0">请选择</option>
-                    <option value="3diff">三分类</option>
-                    <option value="5diff">五分类</option>
-                </select>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 padding-5">
+                <div class="form-inline">
+                    <span>产品系列</span>
+                    <select id="selSeries" class="form-control" style="min-width: 160px;">
+                        <option value="0">请选择</option>
+                        <option value="3diff">三分类</option>
+                        <option value="5diff">五分类</option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 padding-5">
-            <div class="form-inline">
-                <span>产品项目</span>
-                <select id="selModel" class="form-control" style="min-width: 160px;">
-                    <option value="0">请选择</option>
-                </select>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 padding-5">
+                <div class="form-inline">
+                    <span>产品项目</span>
+                    <select id="selModel" class="form-control" style="min-width: 160px;">
+                        <option value="0">请选择</option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 padding-5">
-            <div class="form-inline">
-                <button type="button" id="btnSearch" class="btn btn-default btn-normal margin-left-10">查 询</button>
-                <button type="button" id="btnExport" class="btn btn-default btn-normal margin-left-10">导出结果</button>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 padding-5">
+                <div class="form-inline">
+                    <button type="button" id="btnSearch" class="btn btn-default btn-normal margin-left-10">查 询</button>
+                    <button type="button" id="btnExport" class="btn btn-default btn-normal margin-left-10">导出结果</button>
+                </div>
             </div>
+            <span class="clearfix"></span>
         </div>
-        <span class="clearfix"></span>
     </div>
 
     <div class="padding-5">
@@ -251,7 +253,7 @@
 
         function exportExcel() {
             $("#grid").tableExport({
-                type: "excel", escape: "true", fileName: "统计结果-OEM统计", noNumricColumns: [0]
+                type: "excel", escape: "true", fileName: "统计结果-按OEM统计", noNumricColumns: [0]
             });
         }
     </script>

@@ -51,7 +51,7 @@
             var username = $("#username").val();
             var password = $("#password").val();
             if (username && password) {
-                $("#logininfo").html(' ');
+                $("#logininfo").html('&nbsp;');
                 $.ajax({
                     type: "post",
                     url: "Login.aspx/UserLogin",
@@ -70,7 +70,7 @@
                     }
                 });
             } else {
-                $("#logininfo").html('请输入用户名及密码');
+                $("#logininfo").html('请输入用户名和密码');
             }
         });
     });

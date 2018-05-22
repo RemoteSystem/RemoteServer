@@ -11,12 +11,8 @@ using System.Web.UI.WebControls;
 
 namespace MSTSC.Manage.Web
 {
-    public partial class DeviceList : System.Web.UI.Page
+    public partial class DeviceList : BasePage
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-
-        }
         
     }
 }

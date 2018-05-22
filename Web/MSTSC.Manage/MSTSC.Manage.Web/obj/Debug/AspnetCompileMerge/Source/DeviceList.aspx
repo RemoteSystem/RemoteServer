@@ -8,42 +8,44 @@
         </li>
     </ul>
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padding-right-10">
-        <div class="panel panel-info search-panel margin-bottom-10 padding-bottom-10">
-            <div class="quick-search-condition padding-5">
-                <div class="form-inline text-center">
-                    <select id="selType" class="form-control margin-top-5 margin-bottom-5">
-                        <option value="0">请选择产品类型</option>
-                        <option value="血液细胞分析仪">血液细胞分析仪</option>
-                    </select>
-                    <input type="text" id="querytext" class="form-control margin-top-5 margin-bottom-5" value="" style="width: 275px;" placeholder="请输入仪器名称、SIM卡号或仪器序列号" />
-                    <button type="button" id="quickquery" class="btn btn-default btn-normal margin-top-5 margin-bottom-5 margin-left-10">快速定位</button>
+        <div class="panel panel-info search-panel margin-bottom-10 padding-bottom-5">
+            <div class="panel-body nopadding">
+                <div class="quick-search-condition padding-5">
+                    <div class="form-inline text-center">
+                        <select id="selType" class="form-control margin-top-5 margin-bottom-5">
+                            <option value="0">请选择产品类型</option>
+                            <option value="血液细胞分析仪">血液细胞分析仪</option>
+                        </select>
+                        <input type="text" id="querytext" class="form-control margin-top-5 margin-bottom-5" value="" style="width: 275px;" placeholder="请输入仪器名称、SIM卡号或仪器序列号" />
+                        <button type="button" id="quickquery" class="btn btn-default btn-normal margin-top-5 margin-bottom-5 margin-left-10">快速定位</button>
+                    </div>
                 </div>
-            </div>
-            <hr class="nomargin" style="border-color: #cccccc; margin-left: 0px; margin-right: 0px;" />
-            <div class="search-condition padding-5">
-                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2 nopadding form-inline">
-                    <div class="radio margin-left-20">
-                        <label>
-                            <input type="radio" name="rdoconnect" id="optionsRadios1" value="0" checked="checked" />
-                            所有仪器
-                        </label>
+                <hr class="nomargin" style="border-color: #cccccc; margin-left: 0px; margin-right: 0px;" />
+                <div class="search-condition padding-5">
+                    <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2 nopadding form-inline">
+                        <div class="radio margin-left-20">
+                            <label>
+                                <input type="radio" name="rdoconnect" id="optionsRadios1" value="0" checked="checked" />
+                                所有仪器
+                            </label>
+                        </div>
+                        <div class="radio margin-left-20">
+                            <label>
+                                <input type="radio" name="rdoconnect" id="optionsRadios2" value="1" />
+                                已连接仪器
+                            </label>
+                        </div>
+                        <div class="radio margin-left-20">
+                            <label>
+                                <input type="radio" name="rdoconnect" id="optionsRadios3" value="2" />
+                                未连接仪器
+                            </label>
+                        </div>
+                        <button type="button" id="query" class="btn btn-default margin-top-5 margin-bottom-5 margin-left-20">查询</button>
                     </div>
-                    <div class="radio margin-left-20">
-                        <label>
-                            <input type="radio" name="rdoconnect" id="optionsRadios2" value="1" />
-                            已连接仪器
-                        </label>
-                    </div>
-                    <div class="radio margin-left-20">
-                        <label>
-                            <input type="radio" name="rdoconnect" id="optionsRadios3" value="2" />
-                            未连接仪器
-                        </label>
-                    </div>
-                    <button type="button" id="query" class="btn btn-default margin-top-5 margin-bottom-5 margin-left-20">查询</button>
                 </div>
+                <span class="clearfix"></span>
             </div>
-            <span class="clearfix"></span>
         </div>
 
         <div class="panel">
@@ -311,7 +313,7 @@
                 sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
                 pageNumber: 1,                      //初始化加载第一页，默认第一页,并记录
                 pageSize: rows,                     //每页的记录行数（*）
-                pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+                pageList: [],                       //可供选择的每页的行数（*）
                 search: false,                      //是否显示表格搜索
                 strictSearch: true,
                 //showColumns: true,                  //是否显示所有的列（选择显示的列）
@@ -385,6 +387,9 @@
                 onLoadSuccess: function () {
                     if (type != 0) {
                         tabletimer = setTimeout(freshTable, 30000);
+
+                        var r = $("[data-uniqueid='" + sn + "']");
+                        r.css("background-color", "#C0C0C0");
                     }
                 },
                 onLoadError: function () {
@@ -392,6 +397,9 @@
                     alert("数据加载失败！");
                 },
                 onSort: function (name, order) {
+                    clearTimeout(tabletimer);
+                },
+                onPageChange: function (name, order) {
                     clearTimeout(tabletimer);
                 },
                 onDblClickRow: function (row, $element) {
@@ -406,7 +414,7 @@
 
         function freshTable() {
             clearTimeout(tabletimer);
-            $table.bootstrapTable('refreshOptions', { pageNumber: 1, url: 'DeviceQuery.aspx/getDeviceList' });
+            $table.bootstrapTable('refreshOptions', { url: 'DeviceQuery.aspx/getDeviceList' });
         }
 
         function getRowInfo() {

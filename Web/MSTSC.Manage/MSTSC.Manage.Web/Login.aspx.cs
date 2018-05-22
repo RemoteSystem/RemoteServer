@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Web;
 using System.Web.Services;
+using System.Web.SessionState;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -11,7 +12,7 @@ namespace MSTSC.Manage.Web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Session.Clear();
         }
 
         [WebMethod]
@@ -19,9 +20,13 @@ namespace MSTSC.Manage.Web
         {
             if (username == "admin" && password == "123456")
             {
+                HttpSessionState session = HttpContext.Current.Session;
+                session["username"] = username;
+
                 return "0";
             }
             return "1";
         }
+
     }
 }

@@ -8,57 +8,63 @@
     <!-- 客户端导出功能模块为可选选项 -->
     <script src="http://cdn.hcharts.cn/highcharts/modules/offline-exporting.js"></script>
     <script src="scripts/chart.js"></script>
+    <!-- 表格导出 -->
+    <script src="scripts/bootstrap-table/bootstrap-table-export.js"></script>
+    <script src="scripts/bootstrap-table/tableExport.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <ul class="breadcrumb nomargin">
         <li class="active">统计结果-按模式统计</li>
     </ul>
     <div class="panel panel-info margin-5 padding-10">
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 padding-5">
-            <div class="form-inline">
-                <span>产品类型</span>
-                <select id="selType" class="form-control" style="min-width: 160px;">
-                    <option value="0">请选择</option>
-                    <option value="血液细胞分析仪">血液细胞分析仪</option>
-                </select>
+        <div class="panel-body nopadding">
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 padding-5">
+                <div class="form-inline">
+                    <span>产品类型</span>
+                    <select id="selType" class="form-control" style="min-width: 160px;">
+                        <option value="0">请选择</option>
+                        <option value="血液细胞分析仪">血液细胞分析仪</option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 padding-5">
-            <div class="form-inline">
-                <span>产品系列</span>
-                <select id="selSeries" class="form-control" style="min-width: 160px;">
-                    <option value="0">请选择</option>
-                    <option value="3diff">三分类</option>
-                    <option value="5diff">五分类</option>
-                </select>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 padding-5">
+                <div class="form-inline">
+                    <span>产品系列</span>
+                    <select id="selSeries" class="form-control" style="min-width: 160px;">
+                        <option value="0">请选择</option>
+                        <option value="3diff">三分类</option>
+                        <option value="5diff">五分类</option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 padding-5">
-            <div class="form-inline">
-                <span>产品项目</span>
-                <select id="selModel" class="form-control" style="min-width: 160px;">
-                    <option value="0">请选择</option>
-                </select>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 padding-5">
+                <div class="form-inline">
+                    <span>产品项目</span>
+                    <select id="selModel" class="form-control" style="min-width: 160px;">
+                        <option value="0">请选择</option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 padding-5">
-            <div class="form-inline">
-                <button type="button" id="btnSearch" class="btn btn-default btn-normal margin-left-10">查 询</button>
-                <button type="button" id="btnExport" class="btn btn-default btn-normal margin-left-10">导出结果</button>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 padding-5">
+                <div class="form-inline">
+                    <button type="button" id="btnSearch" class="btn btn-default btn-normal margin-left-10">查 询</button>
+                    <button type="button" id="btnExport" class="btn btn-default btn-normal margin-left-10">导出结果</button>
+                </div>
             </div>
+            <span class="clearfix"></span>
         </div>
-        <span class="clearfix"></span>
     </div>
 
     <div>
         <div class="col-lg-8 col-md-9 col-sm-10 col-xs-12 padding-5">
-            <div class="panel">
+            <div class="panel margin-bottom-5">
                 <table id="grid"></table>
             </div>
         </div>
         <div class="col-lg-8 col-md-9 col-sm-10 col-xs-12 padding-5">
             <div id="container" style="width: 100%; height: 400px"></div>
         </div>
+        <span class="clearfix"></span>
     </div>
     <script type="text/javascript">
         var $table;
@@ -82,6 +88,10 @@
                 freshTable();
             });
 
+            $("#btnExport").click(function () {
+                exportExcel();
+            });
+
             getTypes();
             getSeries();
             getModels();
@@ -96,7 +106,7 @@
                 //toolbar: '#toolbar',              //工具按钮用哪个容器
                 striped: true,                      //是否显示行间隔色
                 cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
-                pagination: true,                   //是否显示分页（*）
+                pagination: false,                   //是否显示分页（*）
                 sortable: true,                     //是否启用排序
                 sortOrder: "asc",                   //排序方式
                 sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
@@ -236,15 +246,21 @@
                 chart = $('#container').highcharts();
             }
             var datas = new Array();
-            if (data && data.rows) {
+            if (data) {
                 var arr = new Array();
-                for (var i = 0; i < data.rows.length; i++) {
-                    datas[i] = new Array(data.rows[i]["key"], parseInt(data.rows[i]["value"]));
+                for (var i = 0; i < data.length; i++) {
+                    datas[i] = new Array(data[i]["key"], parseInt(data[i]["value"]));
                 }
                 //datas = [['全血-CBC', 25], ['全血-CBC+CRP', 29], ['全血-CRP', 34], ['预稀释-CBC', 16], ['预稀释-CBC+CRP', 28], ['预稀释-CRP', 41]];
             }
             chart.series[0].setData(datas);
             chart.redraw();
+        }
+
+        function exportExcel() {
+            $("#grid").tableExport({
+                type: "excel", escape: "true", fileName: "统计结果-按模式统计", noNumricColumns: [0]
+            });
         }
     </script>
 </asp:Content>

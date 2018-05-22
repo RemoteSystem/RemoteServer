@@ -11,13 +11,8 @@ using System.Web.UI.WebControls;
 
 namespace MSTSC.Manage.Web
 {
-    public partial class DeviceQuery : System.Web.UI.Page
+    public partial class DeviceQuery : BasePage
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-
-        }
-
         /// <summary>
         /// 根据条件查询数据库,并返回对象集合(用于分页数据显示)
         /// </summary>
