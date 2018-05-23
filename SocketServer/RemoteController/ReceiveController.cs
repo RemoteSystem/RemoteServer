@@ -34,11 +34,9 @@ namespace RemoteController
             {
                 info.sessionid = id;
                 info.starttime = dt;
-                if (info.category != null && info.category.BLOOD != null)
-                {
-                    num = ReceiveDao.UpdateOrSaveSession(info);
-                    SaveData(info);
-                }
+
+                num = ReceiveDao.UpdateOrSaveSession(info);
+                SaveData(info);
             }
             else
             {
@@ -60,7 +58,7 @@ namespace RemoteController
 
         private static void SaveData(JsonInfo info)
         {
-            if (info.category.BLOOD != null)
+            if (info.category != null && info.category.BLOOD != null)
             {
                 try
                 {

@@ -25,7 +25,7 @@ namespace SocketServer
                 ClearIdleSession = true, //60秒执行一次清理90秒没数据传送的连接
                 ClearIdleSessionInterval = 60,
                 IdleSessionTimeOut = 90,
-                MaxRequestLength = 2048 * 5, //最大包长度
+                MaxRequestLength = 1024 * 2, //最大包长度
                 Ip = "Any",
                 Port = 12315,
                 MaxConnectionNumber = 10,
@@ -80,13 +80,18 @@ namespace SocketServer
         {
             if (requestInfo == null)
             {
-                Console.WriteLine("不正常包 " + session.SessionID);
+                Console.WriteLine("非正常包 " + session.SessionID);
                 return;
             }
             //心跳
             if (requestInfo.Length == 0)
             {
                 Console.WriteLine("心跳 " + session.SessionID);
+                return;
+            }
+            else if (requestInfo.Length < 0)
+            {
+                Console.WriteLine("异常数据,算作心跳 " + session.SessionID);
                 return;
             }
 
@@ -116,8 +121,10 @@ namespace SocketServer
         /// </summary>
         /// <param name="session">socket连接</param>
         /// <param name="msg">消息内容</param>
-        public static void sendReplyMsg(ProtocolSession session, string msg)
+        public static ResultInfo sendReplyMsg(ProtocolSession session, string msg)
         {
+            ResultInfo result = new ResultInfo();
+
             byte[] dataByte = Encoding.UTF8.GetBytes(msg);
             byte[] startByte = HexStrTobyte("aa 55");
             byte[] controlByte = HexStrTobyte("02");
@@ -133,7 +140,15 @@ namespace SocketServer
             Buffer.BlockCopy(dataByte, 0, b, 7, dataByte.Length);
             Buffer.BlockCopy(verfiByte, 0, b, 7 + dataByte.Length, 2);
 
-            session.Send(b, 0, b.Length);
+            bool bl = session.TrySend(b, 0, b.Length);
+            if (!bl)
+            {
+                result.code = 100;
+                result.msg = "发送消息失败.";
+            }
+
+
+            return result;
         }
 
         /// <summary>

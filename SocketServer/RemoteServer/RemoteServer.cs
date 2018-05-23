@@ -3,6 +3,7 @@ using RemoteModel;
 using SuperSocket.SocketBase;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace RemoteServer
 {
@@ -79,12 +80,14 @@ namespace RemoteServer
         private void appServer_NewRequestReceived(MySession session, MyRequestInfo requestInfo)
         {
             Console.WriteLine("收到了" + session.SessionID);
-            session.Send(reply2Client);
+            //session.Send(reply2Client);
             //if (!session.Updated)
             //{
             ReceiveController.UpdateOrSaveSession(session.SessionID, session.StartTime, requestInfo.JsonInfo);
             //    session.Updated = true;
             //}
+
+            sendMsg(session.SessionID, reply2Client);
         }
 
         //一些固定消息的定义
@@ -112,7 +115,22 @@ namespace RemoteServer
             bool bl = dic.TryGetValue(sessionId, out session);
             if (bl)
             {
-                bl = session.TrySend(msg);
+                byte[] dataByte = Encoding.UTF8.GetBytes(msg);
+                byte[] startByte = HexStrTobyte("aa 55");
+                byte[] controlByte = HexStrTobyte("02");
+                byte[] lenByte = BitConverter.GetBytes(dataByte.Length);
+                if (BitConverter.IsLittleEndian)//判断计算机结构的endian设置(高低位转换)
+                    Array.Reverse(lenByte);
+                byte[] verfiByte = HexStrTobyte("1c 1d");
+                int len = 7 + dataByte.Length + 2;
+                byte[] b = new byte[len];
+                Buffer.BlockCopy(startByte, 0, b, 0, 2);
+                Buffer.BlockCopy(controlByte, 0, b, 2, 1);
+                Buffer.BlockCopy(lenByte, 0, b, 3, 4);
+                Buffer.BlockCopy(dataByte, 0, b, 7, dataByte.Length);
+                Buffer.BlockCopy(verfiByte, 0, b, 7 + dataByte.Length, 2);
+
+                bl = session.TrySend(b, 0, b.Length);
                 if (!bl)
                 {
                     result.code = 100;
@@ -126,6 +144,22 @@ namespace RemoteServer
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// 16进制字符串转字节数组   格式为 string sendMessage = "00 01 00 00 00 06 FF 05 00 64 00 00";
+        /// </summary>
+        /// <param name="hexString">16进制字符串转</param>
+        /// <returns>字节数组</returns>
+        private static byte[] HexStrTobyte(string hexString)
+        {
+            hexString = hexString.Replace(" ", "");
+            if ((hexString.Length % 2) != 0)
+                hexString += " ";
+            byte[] returnBytes = new byte[hexString.Length / 2];
+            for (int i = 0; i < returnBytes.Length; i++)
+                returnBytes[i] = Convert.ToByte(hexString.Substring(i * 2, 2).Trim(), 16);
+            return returnBytes;
         }
 
         /// <summary>

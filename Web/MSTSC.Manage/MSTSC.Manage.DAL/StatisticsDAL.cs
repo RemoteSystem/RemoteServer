@@ -24,7 +24,7 @@ namespace MSTSC.Manage.DAL
         public DataTable StatisticsAllDevicesDAL(QueryConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
         {
             StringBuilder whereSql = new StringBuilder();
-            var sql = @"SELECT d.DeviceName, d.SIM, d.SN, c.count_times_total, r.reagent_dil, r.reagent_lh, r.reagent_r2 FROM device_info d INNER JOIN ( SELECT SN FROM device_info {0} ";
+            var sql = @"SELECT IFNULL(d.DeviceName,'') AS DeviceName, d.SIM, d.SN, c.count_times_total, r.reagent_dil, r.reagent_lh, r.reagent_r2 FROM device_info d INNER JOIN ( SELECT SN FROM device_info {0} ";
             sql += " LIMIT " + (pagerInfo.PageSize * (pagerInfo.CurrenetPageIndex - 1)) + "," + pagerInfo.PageSize;
             sql += ") AS t USING (SN) LEFT JOIN blood_count c ON d.SN = c.device_sn LEFT JOIN blood_reagent r ON d.SN = r.device_sn;";
 

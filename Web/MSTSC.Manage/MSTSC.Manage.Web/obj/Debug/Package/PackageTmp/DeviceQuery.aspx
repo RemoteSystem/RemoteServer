@@ -139,7 +139,7 @@
                         <span>封闭试剂类型:</span><span class="margin-left-5" id="ReagentType"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>装机区域:</span><span class="margin-left-5" id="InstallationArea"></span>
+                        <span>装机区域:</span><span class="margin-left-5" id="Region"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
                         <span>出厂日期:</span><span class="margin-left-5" id="FactoryDate"></span>

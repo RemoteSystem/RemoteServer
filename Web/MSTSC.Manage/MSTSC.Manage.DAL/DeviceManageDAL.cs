@@ -86,7 +86,7 @@ namespace MSTSC.Manage.DAL
 
         public dynamic GetDeviceDetialDAL(string sn)
         {
-            string sql = @"SELECT d.devicename,d.SIM,d.SN,d.DeviceType,d.Model,d.OEM,d.Agent,
+            string sql = @"SELECT d.devicename,d.SIM,d.SN,d.DeviceType,d.Model,d.OEM,d.Agent,d.Region,
 case  when reagenttype='open' then '开放' when reagenttype='close' then '封闭' else reagenttype end ReagentType ,
 d.InstallationArea,if(d.FactoryDate='0001-01-01','',d.FactoryDate) as FactoryDate,if(d.InstallDate='0001-01-01','',d.InstallDate) as InstallDate,
 date_format(d.UpdateTime,'%Y-%m-%d %T') as UpdateTime,brt.runtime_days,brt.runtime_opt,brt.runtime_power,brt.runtime_air_supply,

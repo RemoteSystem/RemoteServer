@@ -110,7 +110,7 @@ namespace RemoteDao
             parameters[2].Value = info.region;
             parameters[3].Value = info.hospital;
             parameters[4].Value = info.addr;
-            parameters[5].Value = info.model;
+            parameters[5].Value = info.model != null ? info.model.ToUpper() : null;
             if (info.category == null || info.category.BLOOD == null)
             {
                 parameters[6].Value = DBNull.Value;

@@ -7,7 +7,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <ul class="breadcrumb nomargin">
-        <li class="active">统计结果-按模式统计</li>
+        <li class="active">统计结果-按区域统计</li>
     </ul>
     <div class="panel panel-info margin-5 padding-10">
         <div class="panel-body nopadding">

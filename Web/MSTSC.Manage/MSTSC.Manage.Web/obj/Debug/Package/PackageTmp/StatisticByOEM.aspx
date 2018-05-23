@@ -253,7 +253,7 @@
 
         function exportExcel() {
             $("#grid").tableExport({
-                type: "excel", escape: "true", fileName: "统计结果-OEM统计", noNumricColumns: [0]
+                type: "excel", escape: "true", fileName: "统计结果-按OEM统计", noNumricColumns: [0]
             });
         }
     </script>
