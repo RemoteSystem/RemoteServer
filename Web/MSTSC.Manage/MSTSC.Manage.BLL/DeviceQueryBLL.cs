@@ -35,6 +35,16 @@ namespace MSTSC.Manage.BLL
         {
             return dal.GetDeviceDetialDAL(sn);
         }
+        
+        /// <summary>
+        /// 获取仪器最后一次上报的错误信息
+        /// </summary>
+        /// <param name="sn">仪器序列号</param>
+        /// <returns>仪器最后一次上报的错误信息(最多5条)</returns>
+        public dynamic GetDeviceFaultBLL(string sn)
+        {
+            return dal.GetDeviceFaultDAL(sn);
+        }
 
         /// <summary>
         /// 快速查询

@@ -69,6 +69,23 @@ namespace MSTSC.Manage.Web
             return sn;
         }
 
+        [WebMethod]
+        public static string GetDeviceFault(string sn)
+        {
+            try
+            {
+                DeviceQueryBLL bll = new DeviceQueryBLL();
+                var result = bll.GetDeviceFaultBLL(sn);
+
+                var retvalue = JsonConvert.SerializeObject(result);
+                return retvalue;
+            }
+            catch (Exception ex)
+            {
+            }
+            return sn;
+        }
+
         /// <summary>
         /// 获取产品类型(DeviceType字段)
         /// </summary>

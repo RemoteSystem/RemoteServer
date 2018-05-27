@@ -107,6 +107,21 @@ bm.sampling_times_fault,bm.syringe_times_syringe_fault,bm.inject_times_fault,bm.
             }
         }
 
+        /// <summary>
+        /// 获取仪器最后一次上报的错误信息
+        /// </summary>
+        /// <param name="sn">仪器序列号</param>
+        /// <returns>仪器最后一次上报的错误信息(最多5条)</returns>
+        public dynamic GetDeviceFaultDAL(string sn)
+        {
+            string sql = @"SELECT code,dttime FROM blood_fault WHERE dtinsert > ( SELECT DATE_ADD(dtinsert, INTERVAL -5 SECOND) FROM blood_fault WHERE device_sn = '" + sn + "' ORDER BY id DESC LIMIT 1 ) AND device_sn = '" + sn + "' ORDER BY id DESC LIMIT 5;";
+
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                return conn.Query(sql);
+            }
+        }
+
         public List<ProductTypeModel> ProductTypeInfoDAL()
         {
             var sql = @"SELECT DISTINCT DeviceType,ProductSeries,ProductModel from device_info ";

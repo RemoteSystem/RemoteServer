@@ -294,6 +294,44 @@
                     </div>
                 </div>
             </div>
+            <div class="panel panel-success nomargin" style="margin-top: 15px;">
+                <div class="panel-heading padding-5">
+                    <h3 class="panel-title">故障统计信息</h3>
+                </div>
+                <div class="panel-body nopadding">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>WBC堵孔次数:</span><span class="margin-left-5" id="hole_times_wbc"></span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>RBC堵孔次数:</span><span class="margin-left-5" id="hole_times_rbc"></span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>采样组件故障次数:</span><span class="margin-left-5" id="sampling_times_fault"></span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>注射器故障次数:</span><span class="margin-left-5" id="syringe_times_syringe_fault"></span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>自动进样组件故障:</span><span class="margin-left-5" id="inject_times_fault"></span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
+                        <span>混匀组件故障次数:</span><span class="margin-left-5" id="mixing_times_fault"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-success nomargin" style="margin-top: 15px;">
+                <div class="panel-heading padding-5">
+                    <h3 class="panel-title">错误信息</h3>
+                </div>
+                <div id="fault" class="panel-body nopadding">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
+                        <span>错误码</span>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
+                        <span>时间</span>
+                    </div>
+                </div>
+            </div>
             <div class="padding-5"></div>
         </div>
     </div>
@@ -487,6 +525,7 @@
                         for (attribute in result) {
                             $("#" + attribute).html(result[attribute]);
                         }
+                        getFault();
                         rowtimer = setTimeout(getRowInfo, 13000);
                     },
                     error: function (err) {
@@ -553,6 +592,34 @@
                         opts += "<option value=\"" + result[res]['key'] + "\">" + result[res]['value'] + "</option>";
                     }
                     $("#selModel").html(opts);
+                },
+                error: function (err) {
+                }
+            });
+        }
+
+        function getFault() {
+            $.ajax({
+                type: "post",
+                url: "DeviceQuery.aspx/GetDeviceFault",
+                data: "{'sn':'" + sn + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    var result = eval(data.d);
+                    var str = '';
+
+                    for (res in result) {
+                        str += '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-bottom-5 text-center"><span>' + result[res]['code'] + '</span></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-bottom-5 text-center"><span>' + result[res]['dttime'] + '</span></div>';
+                    }
+                    if (!str) {
+                        str = '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-5 text-center"><span>无错误信息</span></div>';
+                    } else {
+                        str = '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-top-5 text-center"><span>错误码</span></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-top-5 text-center"><span>时间</span></div>' + str;
+                        str = str.replace(/T/g, " ").replace(/Z/g, "");
+                    }
+
+                    $("#fault").html(str);
                 },
                 error: function (err) {
                 }

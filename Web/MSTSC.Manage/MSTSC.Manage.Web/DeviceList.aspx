@@ -246,6 +246,19 @@
                     </div>
                 </div>
             </div>
+            <div class="panel panel-success nomargin" style="margin-top: 15px;">
+                <div class="panel-heading padding-5">
+                    <h3 class="panel-title">错误信息</h3>
+                </div>
+                <div id="fault" class="panel-body nopadding">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
+                        <span>错误码</span>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
+                        <span>时间</span>
+                    </div>
+                </div>
+            </div>
             <div class="padding-5"></div>
         </div>
     </div>
@@ -431,6 +444,7 @@
                         for (attribute in result) {
                             $("#" + attribute).html(result[attribute]);
                         }
+                        getFault();
                         rowtimer = setTimeout(getRowInfo, 13000);
                     },
                     error: function (err) {
@@ -462,5 +476,34 @@
                 }
             });
         }
+
+        function getFault() {
+            $.ajax({
+                type: "post",
+                url: "DeviceQuery.aspx/GetDeviceFault",
+                data: "{'sn':'" + sn + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    var result = eval(data.d);
+                    var str = '';
+
+                    for (res in result) {
+                        str += '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-bottom-5 text-center"><span>' + result[res]['code'] + '</span></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-bottom-5 text-center"><span>' + result[res]['dttime'] + '</span></div>';
+                    }
+                    if (!str) {
+                        str = '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-5 text-center"><span>无错误信息</span></div>';
+                    } else {
+                        str = '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-top-5 text-center"><span>错误码</span></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-top-5 text-center"><span>时间</span></div>' + str;
+                        str = str.replace(/T/g, " ").replace(/Z/g, "");
+                    }
+
+                    $("#fault").html(str);
+                },
+                error: function (err) {
+                }
+            });
+        }
+
     </script>
 </asp:Content>
