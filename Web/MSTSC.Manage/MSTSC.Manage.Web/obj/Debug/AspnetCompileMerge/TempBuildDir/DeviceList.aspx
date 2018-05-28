@@ -489,7 +489,7 @@
                     var str = '';
 
                     for (res in result) {
-                        str += '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-bottom-5 text-center"><span>' + result[res]['code'] + '</span></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-bottom-5 text-center"><span>' + result[res]['dttime'] + '</span></div>';
+                        str += '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-bottom-5 text-center"><span>0x' + str_pad(parseInt(result[res]['code']).toString(16)) + '</span></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-bottom-5 text-center"><span>' + result[res]['dttime'] + '</span></div>';
                     }
                     if (!str) {
                         str = '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-5 text-center"><span>无错误信息</span></div>';

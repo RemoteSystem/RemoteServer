@@ -16,28 +16,28 @@
       <publishTime>04/19/2018 10:10:12</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.BLL.dll">
-      <publishTime>05/27/2018 21:17:45</publishTime>
+      <publishTime>05/28/2018 21:13:37</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.BLL.pdb">
-      <publishTime>05/27/2018 21:17:45</publishTime>
+      <publishTime>05/28/2018 21:13:37</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.DAL.dll">
-      <publishTime>05/27/2018 21:17:45</publishTime>
+      <publishTime>05/28/2018 21:13:36</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.DAL.pdb">
-      <publishTime>05/27/2018 21:17:45</publishTime>
+      <publishTime>05/28/2018 21:13:36</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.Model.dll">
-      <publishTime>05/27/2018 21:17:44</publishTime>
+      <publishTime>05/28/2018 21:13:36</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.Model.pdb">
-      <publishTime>05/27/2018 21:17:44</publishTime>
+      <publishTime>05/28/2018 21:13:36</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.Web.dll">
-      <publishTime>05/27/2018 21:17:45</publishTime>
+      <publishTime>05/28/2018 21:13:37</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.Web.pdb">
-      <publishTime>05/27/2018 21:17:45</publishTime>
+      <publishTime>05/28/2018 21:13:37</publishTime>
     </File>
     <File Include="bin/MySql.Data.dll">
       <publishTime>04/19/2018 10:10:12</publishTime>
@@ -46,13 +46,13 @@
       <publishTime>04/26/2018 22:14:51</publishTime>
     </File>
     <File Include="DeviceList.aspx">
-      <publishTime>05/27/2018 21:12:28</publishTime>
+      <publishTime>05/28/2018 21:12:52</publishTime>
     </File>
     <File Include="DeviceManage.aspx">
       <publishTime>05/23/2018 10:27:42</publishTime>
     </File>
     <File Include="DeviceQuery.aspx">
-      <publishTime>05/27/2018 21:14:25</publishTime>
+      <publishTime>05/28/2018 21:13:11</publishTime>
     </File>
     <File Include="Index.aspx">
       <publishTime>04/28/2018 21:51:54</publishTime>
@@ -67,7 +67,7 @@
       <publishTime>05/10/2018 23:57:03</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>05/27/2018 21:17:51</publishTime>
+      <publishTime>05/28/2018 21:13:43</publishTime>
     </File>
     <File Include="scripts/bootstrap-table/bootstrap-table-export.js">
       <publishTime>05/10/2018 20:53:03</publishTime>
@@ -94,7 +94,7 @@
       <publishTime>05/11/2018 18:03:52</publishTime>
     </File>
     <File Include="scripts/default.js">
-      <publishTime>05/07/2018 17:57:04</publishTime>
+      <publishTime>05/28/2018 21:06:37</publishTime>
     </File>
     <File Include="scripts/jquery-3.0.0.min.js">
       <publishTime>04/24/2018 17:45:55</publishTime>
@@ -205,7 +205,7 @@
       <publishTime>04/25/2018 15:11:07</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/27/2018 21:17:50</publishTime>
+      <publishTime>05/28/2018 21:13:43</publishTime>
     </File>
   </ItemGroup>
 </Project>
