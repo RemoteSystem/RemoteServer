@@ -3,6 +3,7 @@ using MSTSC.Manage.Model;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 
@@ -119,6 +120,24 @@ bm.sampling_times_fault,bm.syringe_times_syringe_fault,bm.inject_times_fault,bm.
             using (var conn = new MySqlConnection(Global.strConn))
             {
                 return conn.Query(sql);
+            }
+        }
+
+        /// <summary>
+        /// 获取仪器上报的错误信息
+        /// </summary>
+        /// <param name="sn">仪器序列号</param>
+        /// <returns>仪器上报的错误信息(最多1000条)</returns>
+        public DataTable GetDeviceFaultForExportDAL(string sn)
+        {
+            string sql = @"SELECT code,dttime FROM blood_fault WHERE device_sn = '" + sn + "' ORDER BY id DESC LIMIT 1000;";
+
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                MySqlDataAdapter adapter = new MySqlDataAdapter(sql, conn);
+                DataSet ds = new DataSet();
+                adapter.Fill(ds);
+                return ds.Tables[0];
             }
         }
 

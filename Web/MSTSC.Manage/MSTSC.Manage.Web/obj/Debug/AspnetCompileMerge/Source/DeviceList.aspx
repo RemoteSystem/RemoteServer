@@ -248,7 +248,10 @@
             </div>
             <div class="panel panel-success nomargin" style="margin-top: 15px;">
                 <div class="panel-heading padding-5">
-                    <h3 class="panel-title">错误信息</h3>
+                    <span class="panel-title">错误信息</span>
+                    <div class="pull-right">
+                        <button type="button" id="export" class="btn btn-default btn-small" style="padding: 1px 5px;">导 出</button>
+                    </div>
                 </div>
                 <div id="fault" class="panel-body nopadding">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
@@ -306,6 +309,12 @@
 
             $('#refresh').click(function () {
                 getRowInfo();
+            });
+
+            $('#export').click(function () {
+                if (sn) {
+                    window.location.href = "Export.ashx?Action=fault&sn=" + sn;
+                }
             });
 
             getTypes();
@@ -489,7 +498,7 @@
                     var str = '';
 
                     for (res in result) {
-                        str += '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-bottom-5 text-center"><span>0x' + str_pad(parseInt(result[res]['code']).toString(16)) + '</span></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-bottom-5 text-center"><span>' + result[res]['dttime'] + '</span></div>';
+                        str += '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-bottom-5 text-center"><span>' + result[res]['code'] + '</span></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-bottom-5 text-center"><span>' + result[res]['dttime'] + '</span></div>';
                     }
                     if (!str) {
                         str = '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-5 text-center"><span>无错误信息</span></div>';

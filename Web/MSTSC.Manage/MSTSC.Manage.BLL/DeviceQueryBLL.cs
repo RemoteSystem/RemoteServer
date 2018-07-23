@@ -2,6 +2,7 @@
 using MSTSC.Manage.Model;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 
@@ -44,6 +45,16 @@ namespace MSTSC.Manage.BLL
         public dynamic GetDeviceFaultBLL(string sn)
         {
             return dal.GetDeviceFaultDAL(sn);
+        }
+
+        /// <summary>
+        /// 获取仪器上报的错误信息
+        /// </summary>
+        /// <param name="sn">仪器序列号</param>
+        /// <returns>仪器上报的错误信息(最多1000条)</returns>
+        public DataTable GetDeviceFaultForExportBLL(string sn)
+        {
+            return dal.GetDeviceFaultForExportDAL(sn);
         }
 
         /// <summary>

@@ -90,6 +90,7 @@
     <Content Include="styles\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="styles\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="packages.config" />
+    <Content Include="Export.ashx" />
     <None Include="Properties\PublishProfiles\zjm.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -153,6 +154,9 @@
     </Compile>
     <Compile Include="DeviceQuery.aspx.designer.cs">
       <DependentUpon>DeviceQuery.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Export.ashx.cs">
+      <DependentUpon>Export.ashx</DependentUpon>
     </Compile>
     <Compile Include="Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
