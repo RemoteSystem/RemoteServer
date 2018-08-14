@@ -111,6 +111,45 @@ namespace RemoteDao
             return num;
         }
 
+        public static int InsertCountDetail(JsonInfo info)
+        {
+            if (info.category.BLOOD == null || info.category.BLOOD.count_statistics == null) return 0;
+
+            string base_sql = "INSERT INTO blood_count_detail(device_sn,device_count,device_count_type) VALUES({0},{1},{2}); ";
+            string sql="";
+            
+            if (info.category.BLOOD.count_statistics.count_times_TOTAL != null)
+                sql += string.Format(base_sql, info.sn, info.category.BLOOD.count_statistics.count_times_TOTAL, "count_times_total");
+            if (info.category.BLOOD.count_statistics.count_times_WB_CBC != null)
+                sql += string.Format(base_sql, info.sn, info.category.BLOOD.count_statistics.count_times_WB_CBC, "count_times_wb_cbc");
+            if (info.category.BLOOD.count_statistics.count_times_WB_CD != null)
+                sql += string.Format(base_sql, info.sn, info.category.BLOOD.count_statistics.count_times_WB_CD, "count_times_wb_cd");
+            if (info.category.BLOOD.count_statistics.count_times_WB_CRP != null)
+                sql += string.Format(base_sql, info.sn, info.category.BLOOD.count_statistics.count_times_WB_CRP, "count_times_wb_crp");
+            if (info.category.BLOOD.count_statistics.count_times_WB_CBC_CRP != null)
+                sql += string.Format(base_sql, info.sn, info.category.BLOOD.count_statistics.count_times_WB_CBC_CRP, "count_times_wb_cbc_crp");
+            if (info.category.BLOOD.count_statistics.count_times_WB_CD_CRP != null)
+                sql += string.Format(base_sql, info.sn, info.category.BLOOD.count_statistics.count_times_WB_CD_CRP, "count_times_wb_cd_crp");
+            if (info.category.BLOOD.count_statistics.count_times_PD_CBC != null)
+                sql += string.Format(base_sql, info.sn, info.category.BLOOD.count_statistics.count_times_PD_CBC, "count_times_pd_cbc");
+            if (info.category.BLOOD.count_statistics.count_times_PD_CD != null)
+                sql += string.Format(base_sql, info.sn, info.category.BLOOD.count_statistics.count_times_PD_CD, "count_times_pd_cd");
+            if (info.category.BLOOD.count_statistics.count_times_PD_CRP != null)
+                sql += string.Format(base_sql, info.sn, info.category.BLOOD.count_statistics.count_times_PD_CRP, "count_times_pd_crp");
+            if (info.category.BLOOD.count_statistics.count_times_PD_CBC_CRP != null)
+                sql += string.Format(base_sql, info.sn, info.category.BLOOD.count_statistics.count_times_PD_CBC_CRP, "count_times_pd_cbc_crp");
+            if (info.category.BLOOD.count_statistics.count_times_PD_CD_CRP != null)
+                sql += string.Format(base_sql, info.sn, info.category.BLOOD.count_statistics.count_times_PD_CD_CRP, "count_times_pd_cd_crp");
+            if (info.category.BLOOD.count_statistics.count_times_QC != null)
+                sql += string.Format(base_sql, info.sn, info.category.BLOOD.count_statistics.count_times_QC, "count_times_qc");
+
+            MySqlParameter[] parameters = {};            
+
+            int num = MySqlHelper.ExecuteNonQuery(Conn, sql, parameters);
+
+            return num;
+        }
+
         public static int UpdateOrSaveReagent(JsonInfo info)
         {
             if (info.category.BLOOD == null || info.category.BLOOD.reagent == null) return 0;

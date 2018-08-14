@@ -16,28 +16,28 @@
       <publishTime>04/19/2018 10:10:12</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.BLL.dll">
-      <publishTime>07/23/2018 11:04:48</publishTime>
+      <publishTime>08/14/2018 22:16:08</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.BLL.pdb">
-      <publishTime>07/23/2018 11:04:48</publishTime>
+      <publishTime>08/14/2018 22:16:08</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.DAL.dll">
-      <publishTime>07/23/2018 11:04:48</publishTime>
+      <publishTime>08/14/2018 22:16:08</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.DAL.pdb">
-      <publishTime>07/23/2018 11:04:48</publishTime>
+      <publishTime>08/14/2018 22:16:08</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.Model.dll">
-      <publishTime>07/23/2018 11:04:48</publishTime>
+      <publishTime>08/14/2018 21:55:12</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.Model.pdb">
-      <publishTime>07/23/2018 11:04:48</publishTime>
+      <publishTime>08/14/2018 21:55:12</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.Web.dll">
-      <publishTime>07/23/2018 11:07:15</publishTime>
+      <publishTime>08/14/2018 22:16:09</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.Web.pdb">
-      <publishTime>07/23/2018 11:07:15</publishTime>
+      <publishTime>08/14/2018 22:16:09</publishTime>
     </File>
     <File Include="bin/MySql.Data.dll">
       <publishTime>04/19/2018 10:10:12</publishTime>
@@ -70,7 +70,7 @@
       <publishTime>05/10/2018 23:57:03</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>07/23/2018 11:08:12</publishTime>
+      <publishTime>08/14/2018 22:36:44</publishTime>
     </File>
     <File Include="scripts/bootstrap-table/bootstrap-table-export.js">
       <publishTime>05/10/2018 20:53:03</publishTime>
@@ -118,7 +118,7 @@
       <publishTime>04/25/2018 15:09:03</publishTime>
     </File>
     <File Include="StatisticAllDevices.aspx">
-      <publishTime>05/22/2018 09:35:49</publishTime>
+      <publishTime>08/14/2018 22:35:58</publishTime>
     </File>
     <File Include="StatisticByArea.aspx">
       <publishTime>05/22/2018 09:42:17</publishTime>

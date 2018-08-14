@@ -29,6 +29,8 @@
                     </select>
                 </div>
             </div>
+
+
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 padding-5">
                 <div class="form-inline">
                     <span>产品项目</span>
@@ -39,11 +41,14 @@
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 padding-5">
                 <div class="form-inline">
-                    <button type="button" id="btnSearch" class="btn btn-default btn-normal margin-left-10">查 询</button>
+                    <button type="button" id="btnSearch" class="btn btn-default btn-normal">查 询</button>
                     <button type="button" id="btnExport" class="btn btn-default btn-normal margin-left-10">导出结果</button>
                 </div>
             </div>
-            <span class="clearfix"></span>
+            <div class="col-md-4 col-sm-6 col-xs-12 padding-5 form-inline">
+                    <button type="button" id="btnExportyb" class="btn btn-default btn-normal">导出样本</button>
+                    <button type="button" id="btnExportcw" class="btn btn-default btn-normal margin-left-10">导出错误</button>
+            </div>            
         </div>
     </div>
 
@@ -78,6 +83,14 @@
 
             $("#btnExport").click(function () {
                 exportExcel();
+            });
+
+            $('#btnExportyb').click(function () {
+                window.location.href = "Export.ashx?Action=yangben";
+            });
+
+            $('#btnExportcw').click(function () {
+                window.location.href = "Export.ashx?Action=cuowu";
             });
 
             getTypes();

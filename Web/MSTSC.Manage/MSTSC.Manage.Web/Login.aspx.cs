@@ -18,7 +18,7 @@ namespace MSTSC.Manage.Web
         [WebMethod]
         public static string UserLogin(string username, string password)
         {
-            if (username == "admin" && password == "123456")
+            if (username == "admin" && password == "bk#9876")
             {
                 HttpSessionState session = HttpContext.Current.Session;
                 session["username"] = username;

@@ -348,6 +348,40 @@ bm.sampling_times_fault,bm.syringe_times_syringe_fault,bm.inject_times_fault,bm.
                 return conn.Query<KeyValueModel>(sql).ToList();
             }
         }
+
+        /// <summary>
+        /// 获取全部样本信息(导出)
+        /// </summary>
+        /// <returns>获取全部样本信息(导出)</returns>
+        public DataTable GetDeviceSampleForExportDAL()
+        {
+            string sql = @"SELECT system_seq,device_sn,device_count,device_count_type,device_update_time FROM blood_count_detail;";
+
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                MySqlDataAdapter adapter = new MySqlDataAdapter(sql, conn);
+                DataSet ds = new DataSet();
+                adapter.Fill(ds);
+                return ds.Tables[0];
+            }
+        }
+
+        /// <summary>
+        /// 获取全部错误信息(导出)
+        /// </summary>
+        /// <returns>获取全部错误信息(导出)</returns>
+        public DataTable GetDeviceFaultForExportDAL()
+        {
+            string sql = @"SELECT code,dttime FROM blood_fault;";
+
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                MySqlDataAdapter adapter = new MySqlDataAdapter(sql, conn);
+                DataSet ds = new DataSet();
+                adapter.Fill(ds);
+                return ds.Tables[0];
+            }
+        }
        
     }
 }

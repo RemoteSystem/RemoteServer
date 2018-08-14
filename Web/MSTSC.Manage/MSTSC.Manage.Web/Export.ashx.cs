@@ -34,6 +34,16 @@ namespace MSTSC.Manage.Web
                     fileName = "错误信息";
                     headers = new string[] { "错误码", "时间" };
                     break;
+                case "yangben":
+                    dt = bll.GetDeviceSampleForExportBLL();//获取导出数据源  
+                    fileName = "样本信息";
+                    headers = new string[] { "system_seq", "仪器序列号", "计数值", "计数类型", "时间" };
+                    break;
+                case "cuowu":
+                    dt = bll.GetDeviceFaultForExportBLL();//获取导出数据源  
+                    fileName = "错误信息";
+                    headers = new string[] { "错误码", "时间" };
+                    break;
             }
             ExportExcel(context, dt, headers, fileName + sn + "_" + DateTime.Now.ToString("yyyyMMddHHmmss"));
             context.Response.Write(message);

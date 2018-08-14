@@ -64,6 +64,7 @@ namespace RemoteController
                 {
                     BloodDao.UpdateOrSaveRuntime(info);
                     BloodDao.UpdateOrSaveCount(info);
+                    BloodDao.InsertCountDetail(info);
                     BloodDao.UpdateOrSaveReagent(info);
                     BloodDao.UpdateOrSaveModule(info);
                     BloodDao.SaveFault(info);

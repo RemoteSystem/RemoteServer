@@ -119,5 +119,23 @@ namespace MSTSC.Manage.BLL
             return dal.getProductModel();
         }
 
+        /// <summary>
+        /// 获取全部样本信息(导出)
+        /// </summary>
+        /// <returns>获取全部样本信息(导出)</returns>
+        public DataTable GetDeviceSampleForExportBLL()
+        {
+            return dal.GetDeviceSampleForExportDAL();
+        }
+
+        /// <summary>
+        /// 获取全部错误信息(导出)
+        /// </summary>
+        /// <returns>获取全部错误信息(导出)</returns>
+        public DataTable GetDeviceFaultForExportBLL()
+        {
+            return dal.GetDeviceFaultForExportDAL();
+        }
+
     }
 }
