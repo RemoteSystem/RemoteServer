@@ -372,7 +372,7 @@ bm.sampling_times_fault,bm.syringe_times_syringe_fault,bm.inject_times_fault,bm.
         /// <returns>获取全部错误信息(导出)</returns>
         public DataTable GetDeviceFaultForExportDAL()
         {
-            string sql = @"SELECT code,dttime FROM blood_fault;";
+            string sql = @"SELECT id,device_sn,code,dttime FROM blood_fault;";
 
             using (var conn = new MySqlConnection(Global.strConn))
             {

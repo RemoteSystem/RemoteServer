@@ -115,7 +115,7 @@ namespace RemoteDao
         {
             if (info.category.BLOOD == null || info.category.BLOOD.count_statistics == null) return 0;
 
-            string base_sql = "INSERT INTO blood_count_detail(device_sn,device_count,device_count_type) VALUES({0},{1},{2}); ";
+            string base_sql = "INSERT INTO blood_count_detail(device_sn,device_count,device_count_type) VALUES(\"{0}\",{1},\"{2}\"); ";
             string sql="";
             
             if (info.category.BLOOD.count_statistics.count_times_TOTAL != null)

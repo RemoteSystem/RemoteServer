@@ -71,7 +71,7 @@ namespace RemoteSystem
 
         private static void senginfo()
         {
-            string msg = "{\"sn\":\"z320180509000\"}";
+            string msg = "{\"category\":{\"blood\":{\"count_statistics\":{\"count_times_wb_crp\":\"21\"},\"update_time\":\"2018-01-19 01:26:15\"}},\"encoding\":\"utf-8\",\"sn\":\"2018rhtest\"}";
             string testId = SocketServer.SocketServer.testIds.Count > 0 ? SocketServer.SocketServer.testIds[0] : "当前没有连接";
 
             ServerService service = new ServerService();

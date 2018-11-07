@@ -42,7 +42,7 @@ namespace MSTSC.Manage.Web
                 case "cuowu":
                     dt = bll.GetDeviceFaultForExportBLL();//获取导出数据源  
                     fileName = "错误信息";
-                    headers = new string[] { "错误码", "时间" };
+                    headers = new string[] { "id","仪器序列号","错误码", "时间" };
                     break;
             }
             ExportExcel(context, dt, headers, fileName + sn + "_" + DateTime.Now.ToString("yyyyMMddHHmmss"));

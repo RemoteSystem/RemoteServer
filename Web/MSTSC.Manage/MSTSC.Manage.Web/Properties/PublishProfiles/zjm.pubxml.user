@@ -16,28 +16,28 @@
       <publishTime>04/19/2018 10:10:12</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.BLL.dll">
-      <publishTime>08/14/2018 22:16:08</publishTime>
+      <publishTime>08/22/2018 14:36:13</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.BLL.pdb">
-      <publishTime>08/14/2018 22:16:08</publishTime>
+      <publishTime>08/22/2018 14:36:13</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.DAL.dll">
-      <publishTime>08/14/2018 22:16:08</publishTime>
+      <publishTime>08/22/2018 14:36:13</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.DAL.pdb">
-      <publishTime>08/14/2018 22:16:08</publishTime>
+      <publishTime>08/22/2018 14:36:13</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.Model.dll">
-      <publishTime>08/14/2018 21:55:12</publishTime>
+      <publishTime>08/22/2018 14:36:12</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.Model.pdb">
-      <publishTime>08/14/2018 21:55:12</publishTime>
+      <publishTime>08/22/2018 14:36:12</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.Web.dll">
-      <publishTime>08/14/2018 22:16:09</publishTime>
+      <publishTime>08/22/2018 14:36:13</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.Web.pdb">
-      <publishTime>08/14/2018 22:16:09</publishTime>
+      <publishTime>08/22/2018 14:36:13</publishTime>
     </File>
     <File Include="bin/MySql.Data.dll">
       <publishTime>04/19/2018 10:10:12</publishTime>
@@ -70,7 +70,7 @@
       <publishTime>05/10/2018 23:57:03</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>08/14/2018 22:36:44</publishTime>
+      <publishTime>08/22/2018 14:36:45</publishTime>
     </File>
     <File Include="scripts/bootstrap-table/bootstrap-table-export.js">
       <publishTime>05/10/2018 20:53:03</publishTime>
@@ -208,7 +208,7 @@
       <publishTime>04/25/2018 15:11:07</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/30/2018 16:18:22</publishTime>
+      <publishTime>08/22/2018 14:36:21</publishTime>
     </File>
   </ItemGroup>
 </Project>
