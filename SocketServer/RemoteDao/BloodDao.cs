@@ -9,7 +9,7 @@ namespace RemoteDao
 {
     public class BloodDao : BaseDao
     {
-        public static int UpdateOrSaveRuntime(JsonInfo info)
+        public static int UpdateOrSaveRuntime(BloodInfo info)
         {
             if (info.category.BLOOD == null || info.category.BLOOD.runtime == null) return 0;
 
@@ -43,7 +43,7 @@ namespace RemoteDao
             return num;
         }
 
-        public static int UpdateOrSaveCount(JsonInfo info)
+        public static int UpdateOrSaveCount(BloodInfo info)
         {
             if (info.category.BLOOD == null || info.category.BLOOD.count_statistics == null) return 0;
 
@@ -111,7 +111,7 @@ namespace RemoteDao
             return num;
         }
 
-        public static int InsertCountDetail(JsonInfo info)
+        public static int InsertCountDetail(BloodInfo info)
         {
             if (info.category.BLOOD == null || info.category.BLOOD.count_statistics == null) return 0;
 
@@ -150,7 +150,7 @@ namespace RemoteDao
             return num;
         }
 
-        public static int UpdateOrSaveReagent(JsonInfo info)
+        public static int UpdateOrSaveReagent(BloodInfo info)
         {
             if (info.category.BLOOD == null || info.category.BLOOD.reagent == null) return 0;
 
@@ -218,7 +218,7 @@ namespace RemoteDao
             return num;
         }
 
-        public static int UpdateOrSaveModule(JsonInfo info)
+        public static int UpdateOrSaveModule(BloodInfo info)
         {
             if (info.category.BLOOD == null || info.category.BLOOD.module_statistics == null) return 0;
 
@@ -266,7 +266,7 @@ namespace RemoteDao
             return num;
         }
 
-        public static int SaveFault(JsonInfo info)
+        public static int SaveFault(BloodInfo info)
         {
             if (info.category.BLOOD == null || info.category.BLOOD.fault == null) return 0;
 

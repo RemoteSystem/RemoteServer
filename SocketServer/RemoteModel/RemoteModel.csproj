@@ -40,7 +40,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BloodSettings.cs" />
-    <Compile Include="JsonInfo.cs" />
+    <Compile Include="BioInfo.cs" />
+    <Compile Include="BloodInfo.cs" />
     <Compile Include="ClientInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResultInfo.cs" />

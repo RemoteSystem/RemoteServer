@@ -19,8 +19,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebTest", "WebTest\WebTest.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocketServer", "SocketServer\SocketServer.csproj", "{6EDACF51-B52C-4895-AAA4-B7521FC829A4}"
 EndProject
-Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "Setup1", "Setup1\Setup1.isproj", "{56E58C7E-D29F-4192-A482-F735336D3535}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CD_ROM|Any CPU = CD_ROM|Any CPU
@@ -110,16 +108,6 @@ Global
 		{6EDACF51-B52C-4895-AAA4-B7521FC829A4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6EDACF51-B52C-4895-AAA4-B7521FC829A4}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
 		{6EDACF51-B52C-4895-AAA4-B7521FC829A4}.SingleImage|Any CPU.Build.0 = Release|Any CPU
-		{56E58C7E-D29F-4192-A482-F735336D3535}.CD_ROM|Any CPU.ActiveCfg = CD_ROM
-		{56E58C7E-D29F-4192-A482-F735336D3535}.CD_ROM|Any CPU.Build.0 = CD_ROM
-		{56E58C7E-D29F-4192-A482-F735336D3535}.Debug|Any CPU.ActiveCfg = DVD-5
-		{56E58C7E-D29F-4192-A482-F735336D3535}.Debug|Any CPU.Build.0 = DVD-5
-		{56E58C7E-D29F-4192-A482-F735336D3535}.DVD-5|Any CPU.ActiveCfg = DVD-5
-		{56E58C7E-D29F-4192-A482-F735336D3535}.DVD-5|Any CPU.Build.0 = DVD-5
-		{56E58C7E-D29F-4192-A482-F735336D3535}.Release|Any CPU.ActiveCfg = SingleImage
-		{56E58C7E-D29F-4192-A482-F735336D3535}.Release|Any CPU.Build.0 = SingleImage
-		{56E58C7E-D29F-4192-A482-F735336D3535}.SingleImage|Any CPU.ActiveCfg = SingleImage
-		{56E58C7E-D29F-4192-A482-F735336D3535}.SingleImage|Any CPU.Build.0 = SingleImage
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

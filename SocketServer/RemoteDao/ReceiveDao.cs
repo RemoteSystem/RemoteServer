@@ -11,16 +11,10 @@ namespace RemoteDao
     {
         public static void SessionConnect(string id, DateTime dt)
         {
-            //string sql = "insert into session(sessionId,startTime) values(?id,?dt)";
-            //MySqlParameter[] parameters = { new MySqlParameter("?id", MySqlDbType.VarChar),
-            //                              new MySqlParameter("?dt", MySqlDbType.Timestamp)};
-            //parameters[0].Value = id;
-            //parameters[1].Value = dt;
 
-            //int n = MySqlHelper.ExecuteNonQuery(Conn, sql, parameters);
         }
 
-        public static int UpdateOrSaveSession(JsonInfo info)
+        public static int UpdateOrSaveSession(BloodInfo info)
         {
             string sql = "INSERT INTO device_info(SN,SIM,Region,Hospital,Address,Model,DeviceType,ProductSeries,ProductModel,OEM,Agent,ReagentType,FactoryDate,InstallDate,SoftVersion,UpdateTime,sessionid,starttime) "
                 + "VALUES(?sn,?sim,?region,?hospoital,?address,?model,'血液细胞分析仪',?series,?pmodel,?oem,?agent,?reatype,?dtfactory,?dtinstall,?version,?dtupdate,?id,?dt) "
@@ -137,6 +131,63 @@ namespace RemoteDao
             }
             parameters[15].Value = info.sessionid;
             parameters[16].Value = info.starttime;
+
+            int num = MySqlHelper.ExecuteNonQuery(Conn, sql, parameters);
+            return num;
+        }
+
+        public static int UpdateOrSaveSessionForBio(BioInfo info)
+        {
+            string sql = "INSERT INTO device_info(SN,SIM,Region,Hospital,Address,Model,DeviceType,UpdateTime,sessionid,starttime) "
+                + "VALUES(?sn,?sim,?region,?hospoital,?address,?model,'生化仪',?dtupdate,?id,?dt) "
+                + "ON DUPLICATE KEY UPDATE ";
+
+            if (info.sim != null)
+            {
+                sql += ",SIM = ?sim";
+            }
+            if (info.region != null)
+            {
+                sql += ",Region = ?region";
+            }
+            if (info.hospital != null)
+            {
+                sql += ",Hospital = ?hospoital";
+            }
+            if (info.addr != null)
+            {
+                sql += ",Address = ?address";
+            }
+            if (info.model != null)
+            {
+                sql += ",Model = ?model";
+            }
+            if (info.update_time != null && info.update_time != DateTime.MinValue)
+            {
+                sql += ",UpdateTime = ?dtupdate";
+            }
+            
+            sql += ",sessionid = ?id,starttime = ?dt; ";
+            sql = sql.Replace("UPDATE ,", "UPDATE ");
+
+            MySqlParameter[] parameters = { new MySqlParameter("?sn", MySqlDbType.VarChar),
+                                            new MySqlParameter("?sim", MySqlDbType.VarChar),                                            
+                                            new MySqlParameter("?region", MySqlDbType.VarChar),                                            
+                                            new MySqlParameter("?hospoital", MySqlDbType.VarChar),
+                                            new MySqlParameter("?address", MySqlDbType.VarChar),
+                                            new MySqlParameter("?model", MySqlDbType.VarChar), 
+                                            new MySqlParameter("?dtupdate", MySqlDbType.Timestamp),
+                                            new MySqlParameter("?id", MySqlDbType.VarChar),
+                                            new MySqlParameter("?dt", MySqlDbType.Timestamp)};
+            parameters[0].Value = info.sn;
+            parameters[1].Value = info.sim;
+            parameters[2].Value = info.region;
+            parameters[3].Value = info.hospital;
+            parameters[4].Value = info.addr;
+            parameters[5].Value = info.model != null ? info.model.ToUpper() : null;
+            parameters[6].Value = info.update_time;
+            parameters[7].Value = info.sessionid;
+            parameters[8].Value = info.starttime;
 
             int num = MySqlHelper.ExecuteNonQuery(Conn, sql, parameters);
             return num;

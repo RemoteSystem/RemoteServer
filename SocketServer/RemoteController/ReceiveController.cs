@@ -17,26 +17,41 @@ namespace RemoteController
         public static int UpdateOrSaveSession(string id, DateTime dt, string strJson)
         {
             int num = 0;
-            JsonInfo info;
+            BloodInfo bloodInfo = null;
+            BioInfo bioInfo = null;
 
             strJson = strJson.Trim().TrimStart('&').TrimEnd('#');
             try
             {
-                info = JsonConvert.DeserializeObject<JsonInfo>(strJson.Replace("+", "_"));
+                if (strJson.IndexOf("\"bio\":{") >= 0)
+                {//生化仪
+                    bioInfo = JsonConvert.DeserializeObject<BioInfo>(strJson);
+                }
+                else
+                {//血液分析仪
+                    bloodInfo = JsonConvert.DeserializeObject<BloodInfo>(strJson.Replace("+", "_"));
+                }
             }
             catch (Exception e)
             {
-                info = null;
+                bloodInfo = null;
                 Console.WriteLine("Json 转 ClientInfo 出错：" + e.Message);
             }
 
-            if (info != null)
+            if (bloodInfo != null)
             {
-                info.sessionid = id;
-                info.starttime = dt;
+                bloodInfo.sessionid = id;
+                bloodInfo.starttime = dt;
 
-                num = ReceiveDao.UpdateOrSaveSession(info);
-                SaveData(info);
+                num = ReceiveDao.UpdateOrSaveSession(bloodInfo);
+                SaveBloodData(bloodInfo);
+            }
+            else if (bioInfo != null)
+            {
+                bioInfo.sessionid = id;
+                bioInfo.starttime = dt;
+                num = ReceiveDao.UpdateOrSaveSessionForBio(bioInfo);
+                SaveBioData(bioInfo);
             }
             else
             {
@@ -56,7 +71,7 @@ namespace RemoteController
             ServerDao.ServerStop();
         }
 
-        private static void SaveData(JsonInfo info)
+        private static void SaveBloodData(BloodInfo info)
         {
             if (info.category != null && info.category.BLOOD != null)
             {
@@ -73,6 +88,28 @@ namespace RemoteController
                 {
                     Console.WriteLine(e.Message);
                 }
+            }
+        }
+
+        private static void SaveBioData(BioInfo info)
+        {
+            try
+            {
+                if (info.dump != null)
+                {
+                    BioDao.InsertDump(info);
+                }
+                if (info.category != null && info.category.bio != null)
+                {
+                    BioDao.UpdateOrSaveBioItem(info);
+                    BioDao.UpdateOrSaveStatistics(info);
+                    BioDao.UpdateOrSaveStatisticsItem(info);
+                    BioDao.SaveFault(info);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
         }
 

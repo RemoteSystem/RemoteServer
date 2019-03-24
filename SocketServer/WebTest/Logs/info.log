@@ -1,2 +1,9 @@
-﻿2018-03-30 09:37:48,648 [1] INFO  SSServer - The server instance SSServer has been started!
-2018-03-30 15:02:32,165 [1] INFO  SSServer - The server instance SSServer has been started!
+﻿2019-03-23 11:40:45,541 [1] INFO  SSServer - The server instance SSServer has been started!
+2019-03-23 11:43:22,064 [1] INFO  SSServer - The server instance SSServer has been started!
+2019-03-23 11:45:49,051 [1] INFO  SSServer - The server instance SSServer has been started!
+2019-03-23 11:46:24,343 [12] INFO  SSServer - Session: d977f8b9-5f20-45a9-8480-2bc39b58cb76/127.0.0.1:29530
+A new session connected!
+2019-03-23 11:48:49,127 [13] INFO  SSServer - Session: d977f8b9-5f20-45a9-8480-2bc39b58cb76/127.0.0.1:29530
+The session will be closed for 109.359 timeout, the session start time: 2019/3/23 11:46:24, last active time: 2019/3/23 11:46:59!
+2019-03-23 11:48:49,133 [10] INFO  SSServer - Session: d977f8b9-5f20-45a9-8480-2bc39b58cb76/127.0.0.1:29530
+This session was closed for TimeOut!

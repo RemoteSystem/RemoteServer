@@ -13,7 +13,6 @@ namespace RemoteSystem
     {
         static void Main(string[] args)
         {
-            //RemoteServer.SocketServer server = new RemoteServer.SocketServer();
             SocketServer.SocketServer server = new SocketServer.SocketServer();
             bool bl = server.start();
 
@@ -71,7 +70,7 @@ namespace RemoteSystem
 
         private static void senginfo()
         {
-            string msg = "{\"category\":{\"blood\":{\"count_statistics\":{\"count_times_wb_crp\":\"21\"},\"update_time\":\"2018-01-19 01:26:15\"}},\"encoding\":\"utf-8\",\"sn\":\"2018rhtest\"}";
+            string msg = "{\"addr\":\"长沙市\",\"category\":{\"bio\":{\"fault\":[{\"code\":\"C10001\",\"time\":\"2019-01-18 15:08\"}],\"item\":[{\"blank_time\":12,\"calibration_method\":\"wer李\",\"corrected_intercept\":12.3,\"corrected_slope\":12.5,\"first_reagent_volume\":1.2,\"k_factor_value\":3.4,\"main_wavelength\":145,\"measuring_method\":\"未知\",\"num\":\"67\",\"reaction_direction\":\"1-2\",\"reaction_time\":12,\"sample_volume\":45.5,\"second_reagent_volume\":2.3,\"sub_wavelength\":245}],\"statistics\":{\"item\":[{\"R1\":5.6,\"R2\":76,\"num\":\"tyu\",\"smpl\":12}],\"sample\":89}}},\"dump\":{\"data\":\"aW50IG1haW4oKQp7CiAgICB0cnkKICAgIHsKICAgICAgICBzdGQ6OnN0cmluZyBzZXJJcCA9ICIxMjcuMC4wLjEiOwogICAgICAgIHN0ZDo6c3RyaW5nIHNlclBvcnQgPSAiODA4MSI7CiAgICAgICAgQ2VudGVyU2VydmVyIHNlcnZlciggc2VySXAsIHNlclBvcnQgKTsKICAgICAgICBzdGQ6OmNvdXQgPDwgInNlcnZlciBzdGFydCIgPDwgc3RkOjplbmRsOwogICAgICAgIHNlcnZlci5SdW4oKTsKICAgICAgICBzdGQ6OmNvdXQgPDwgInNlcnZlciBlbmQiIDw8IHN0ZDo6ZW5kbDsKICAgIH0KICAgIGNhdGNoICggc3RkOjpleGNlcHRpb24mIGUgKQogICAgewogICAgICAgIHN0ZDo6Y2VyciA8PCAiRXhjZXB0aW9uOiAiIDw8IGUud2hhdCgpIDw8ICJcbiI7CiAgICB9CiAgICAKICAgIHJldHVybiAwOwp9Cg==\",\"encoding\":\"base64\",\"filename\":\"log20190121.tar.gz\"},\"encoding\":\"utf-8\",\"hospital\":\"第四人民医院\",\"machine_type\":0,\"model\":\"ZS400\",\"region\":\"湖南省\",\"request\":\"246807df-7e49-443e-937e-342d89f6c85c\",\"sim\":\"123578910\",\"sn\":\"ZS12341234567321\",\"update_time\":\"2019-03-21 13:26:34\"}";
             string testId = SocketServer.SocketServer.testIds.Count > 0 ? SocketServer.SocketServer.testIds[0] : "当前没有连接";
 
             ServerService service = new ServerService();

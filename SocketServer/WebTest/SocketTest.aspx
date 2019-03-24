@@ -20,10 +20,10 @@
         <br />
         <br />
         <div style="padding-left: 50px;">
-            <asp:TextBox ID="txtId" runat="server"></asp:TextBox>
+            连接ID:<asp:TextBox ID="txtId" runat="server"></asp:TextBox>
             <br />
             <br />
-            <asp:TextBox ID="txtMsg" runat="server" TextMode="MultiLine" Rows="5" Columns="21"></asp:TextBox>
+            内 容: <asp:TextBox ID="txtMsg" runat="server" TextMode="MultiLine" Rows="8" Columns="120"></asp:TextBox>
             <br />
             <br />
             <asp:Button ID="btnSend" runat="server" Text="发送消息" OnClick="btnSend_Click" />

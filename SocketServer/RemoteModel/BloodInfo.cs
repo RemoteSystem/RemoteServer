@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RemoteModel
 {
-    public class JsonInfo
+    public class BloodInfo
     {
         /// <summary>
         /// 

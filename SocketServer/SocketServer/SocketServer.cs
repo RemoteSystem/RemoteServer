@@ -97,11 +97,9 @@ namespace SocketServer
 
             Console.WriteLine("收到了 " + session.SessionID);
             sendReplyMsg(session, reply2Client);
-            //if (!session.Updated)
-            //{
+
+            //报错数据
             ReceiveController.UpdateOrSaveSession(session.SessionID, session.StartTime, requestInfo.Data);
-            //    session.Updated = true;
-            //}
         }
 
         //一些固定消息的定义
