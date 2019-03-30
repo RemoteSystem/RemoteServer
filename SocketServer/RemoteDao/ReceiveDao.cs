@@ -138,8 +138,8 @@ namespace RemoteDao
 
         public static int UpdateOrSaveSessionForBio(BioInfo info)
         {
-            string sql = "INSERT INTO device_info(SN,SIM,Region,Hospital,Address,Model,DeviceType,UpdateTime,sessionid,starttime) "
-                + "VALUES(?sn,?sim,?region,?hospoital,?address,?model,'生化仪',?dtupdate,?id,?dt) "
+            string sql = "INSERT INTO device_info(SN,SIM,Region,Hospital,Address,Model,DeviceType,MachineType,UpdateTime,sessionid,starttime) "
+                + "VALUES(?sn,?sim,?region,?hospoital,?address,?model,'生化仪',?machinetype,?dtupdate,?id,?dt) "
                 + "ON DUPLICATE KEY UPDATE ";
 
             if (info.sim != null)
@@ -162,6 +162,9 @@ namespace RemoteDao
             {
                 sql += ",Model = ?model";
             }
+            if (info.machine_type != null) {
+                sql += ",MachineType = ?machinetype";
+            }
             if (info.update_time != null && info.update_time != DateTime.MinValue)
             {
                 sql += ",UpdateTime = ?dtupdate";
@@ -176,6 +179,7 @@ namespace RemoteDao
                                             new MySqlParameter("?hospoital", MySqlDbType.VarChar),
                                             new MySqlParameter("?address", MySqlDbType.VarChar),
                                             new MySqlParameter("?model", MySqlDbType.VarChar), 
+                                            new MySqlParameter("?machinetype",MySqlDbType.Int32),
                                             new MySqlParameter("?dtupdate", MySqlDbType.Timestamp),
                                             new MySqlParameter("?id", MySqlDbType.VarChar),
                                             new MySqlParameter("?dt", MySqlDbType.Timestamp)};
@@ -185,9 +189,10 @@ namespace RemoteDao
             parameters[3].Value = info.hospital;
             parameters[4].Value = info.addr;
             parameters[5].Value = info.model != null ? info.model.ToUpper() : null;
-            parameters[6].Value = info.update_time;
-            parameters[7].Value = info.sessionid;
-            parameters[8].Value = info.starttime;
+            parameters[6].Value = info.machine_type;
+            parameters[7].Value = info.update_time;
+            parameters[8].Value = info.sessionid;
+            parameters[9].Value = info.starttime;
 
             int num = MySqlHelper.ExecuteNonQuery(Conn, sql, parameters);
             return num;

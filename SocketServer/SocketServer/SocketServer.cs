@@ -27,7 +27,7 @@ namespace SocketServer
                 IdleSessionTimeOut = 90,
                 MaxRequestLength = 1024 * 2, //最大包长度
                 Ip = "Any",
-                Port = 12315,
+                Port = 65531,
                 MaxConnectionNumber = 300,
                 TextEncoding = "GBK"
             };
@@ -96,14 +96,16 @@ namespace SocketServer
             }
 
             Console.WriteLine("收到了 " + session.SessionID);
-            sendReplyMsg(session, reply2Client);
 
-            //报错数据
+            sendReplyMsg(session, getRsponseMsg(requestInfo.Data));
+
+            //保存数据
             ReceiveController.UpdateOrSaveSession(session.SessionID, session.StartTime, requestInfo.Data);
         }
 
         //一些固定消息的定义
         string reply2Client = "{\"status\":0,\"message\":\"ok\",\"data\":null}";
+        string reply2Client_bio = "{\"encoding\":\"utf-8\",\"message\":\"ok\",\"respond\":\"null\",\"status\":0}";
 
         public void stop()
         {
@@ -195,6 +197,38 @@ namespace SocketServer
                 returnBytes[i] = Convert.ToByte(hexString.Substring(i * 2, 2).Trim(), 16);
             return returnBytes;
         }
+
+        private string getRsponseMsg(string data)
+        {
+            string str = getRequestUUid(data);
+            if (str != "")
+            {
+                str = reply2Client_bio.Replace("null", str);
+            }
+            else
+            {
+                str = reply2Client;
+            }
+
+            return str;
+        }
+
+
+        private string getRequestUUid(string data)
+        {
+            string str = "";
+
+            data = data.Replace(" ", "");
+            int index = data.IndexOf("\"request\":\"");
+            if (index > 0)
+            {
+                data = data.Substring(index).Replace("\"request\":\"", "");
+                str = data.Substring(0, data.IndexOf("\""));
+            }
+
+            return str;
+        }
+
 
         /// <summary>
         /// for test

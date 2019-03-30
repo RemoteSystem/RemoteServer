@@ -28,8 +28,6 @@ E:\WorkSpace\C#Space\RemoteSystem\RemoteSystem\obj\Release\RemoteSystem.pdb
 E:\WorkSpace\C#Space\RemoteSystem\RemoteSystem\bin\Release\SocketServer.dll
 E:\WorkSpace\C#Space\RemoteSystem\RemoteSystem\bin\Release\SocketServer.pdb
 E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteSystem\bin\Release\RemoteSystem.exe.config
-E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteSystem\obj\Release\RemoteSystem.exe
-E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteSystem\obj\Release\RemoteSystem.pdb
 E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteSystem\bin\Release\RemoteSystem.exe
 E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteSystem\bin\Release\RemoteSystem.pdb
 E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteSystem\bin\Release\log4net.dll
@@ -56,3 +54,5 @@ E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteSystem\bin\Release\Newtonsof
 E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteSystem\bin\Release\RemoteController.pdb
 E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteSystem\bin\Release\RemoteDao.pdb
 E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteSystem\obj\Release\RemoteSystem.csprojResolveAssemblyReference.cache
+E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteSystem\obj\Release\RemoteSystem.exe
+E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteSystem\obj\Release\RemoteSystem.pdb

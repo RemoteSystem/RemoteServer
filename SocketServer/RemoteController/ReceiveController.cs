@@ -23,7 +23,7 @@ namespace RemoteController
             strJson = strJson.Trim().TrimStart('&').TrimEnd('#');
             try
             {
-                if (strJson.IndexOf("\"bio\":{") >= 0)
+                if (strJson.IndexOf("\"bio\"") >= 0)
                 {//生化仪
                     bioInfo = JsonConvert.DeserializeObject<BioInfo>(strJson);
                 }
