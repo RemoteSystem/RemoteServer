@@ -63,7 +63,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="BasePage.aspx" />
+    <Content Include="BioDeviceList.aspx" />
     <Content Include="DeviceManage.aspx" />
+    <Content Include="BioDeviceQuery.aspx" />
     <Content Include="DeviceQuery.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Main.Master" />
@@ -134,6 +136,13 @@
     <Compile Include="BasePage.aspx.designer.cs">
       <DependentUpon>BasePage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="BioDeviceList.aspx.cs">
+      <DependentUpon>BioDeviceList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BioDeviceList.aspx.designer.cs">
+      <DependentUpon>BioDeviceList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DeviceList.aspx.cs">
       <DependentUpon>DeviceList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -147,6 +156,13 @@
     </Compile>
     <Compile Include="DeviceManage.aspx.designer.cs">
       <DependentUpon>DeviceManage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BioDeviceQuery.aspx.cs">
+      <DependentUpon>BioDeviceQuery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BioDeviceQuery.aspx.designer.cs">
+      <DependentUpon>BioDeviceQuery.aspx</DependentUpon>
     </Compile>
     <Compile Include="DeviceQuery.aspx.cs">
       <DependentUpon>DeviceQuery.aspx</DependentUpon>

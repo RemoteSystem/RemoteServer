@@ -56,5 +56,21 @@ namespace MSTSC.Manage.Model
         /// 查询设备状态
         /// </summary>
         public string QueryRange { get; set; }
+
+        /// <summary>
+        /// 仪器型号
+        /// </summary>
+        public string Model { get; set; }
+
+        /// <summary>
+        /// 医院地址
+        /// </summary>
+        public string HosAddr { get; set; }
+
+        /// <summary>
+        /// 医院名称
+        /// </summary>
+        public string HosName { get; set; }
+
     }
 }

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="DeviceQuery.aspx.cs" Inherits="MSTSC.Manage.Web.DeviceQuery" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="BioDeviceQuery.aspx.cs" Inherits="MSTSC.Manage.Web.BioDeviceQuery" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -13,58 +13,36 @@
                     <div class="form-inline text-center">
                         <select id="selType" class="form-control margin-top-5 margin-bottom-5">
                             <option value="0">请选择产品类型</option>
-                            <option value="血液细胞分析仪">血液细胞分析仪</option>
+                            <option value="生化仪">生化仪</option>
                         </select>
                         <input type="text" id="querytext" class="form-control margin-top-5 margin-bottom-5" value="" style="width: 275px;" placeholder="请输入仪器名称、SIM卡号或仪器序列号" />
                         <button type="button" id="quickquery" class="btn btn-default btn-normal margin-top-5 margin-bottom-5 margin-left-10">快速定位</button>
                     </div>
                 </div>
                 <hr class="nomargin" style="border-color: #cccccc; margin-left: 0px; margin-right: 0px;" />
-                <div class="search-condition padding-5">
+                <div class="search-condition padding-5">                    
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 nopadding form-inline">
-                        <label>产品系列</label>
-                        <select id="selSeries" class="form-control margin-top-5 margin-bottom-5">
-                            <option value="0">请选择</option>
-                            <option value="3diff">三分类</option>
-                            <option value="5diff">五分类</option>
-                        </select>
-                    </div>
-
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 nopadding form-inline">
-                        <label>产品型号</label>
+                        <label>仪器型号</label>
                         <select id="selModel" class="form-control margin-top-5 margin-bottom-5">
                             <option value="0">请选择</option>
                         </select>
                     </div>
 
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 nopadding form-inline">
-                        <label>OEM代号</label>
-                        <select id="oemCdoe" class="form-control margin-top-5 margin-bottom-5">
-                            <option value="0">请选择</option>
-                        </select>
-                    </div>
-
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 nopadding form-inline">
-                        <label>代理商代号</label>
-                        <select id="agent" class="form-control margin-top-5 margin-bottom-5">
-                            <option value="0">请选择</option>
-                        </select>
-                    </div>
-
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 nopadding form-inline">
-                        <label>封闭试剂类型</label>
-                        <select id="reagenttype" class="form-control margin-top-5 margin-bottom-5">
-                            <option value="0">请选择</option>
-                            <option value="open">开放</option>
-                            <option value="close">封闭</option>
-                        </select>
-                    </div>
-
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 nopadding form-inline">
                         <label>装机区域</label>
-                        <select id="region" class="form-control margin-top-5 margin-bottom-5">
+                        <select id="selRegion" class="form-control margin-top-5 margin-bottom-5">
                             <option value="0">请选择</option>
                         </select>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 nopadding form-inline">
+                        <label>医院地址</label>
+                        <input id="HosAddr" />
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 nopadding form-inline">
+                        <label>医院名称</label>
+                        <input id="HosName" />
                     </div>
 
                     <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2 nopadding form-inline">
@@ -99,9 +77,6 @@
     </div>
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 nopadding">
         <div class="well well-sm padding-5 margin-right-5">
-            <%--<div class="padding-left-5" style="font-weight:bold;font-size:15pt;">
-              远程诊断系统 - <span id="devicename">仪器名称</span>
-            </div>--%>
             <div class="padding-5 form-inline">
                 <span>数据更新时间:&nbsp;&nbsp;</span><span id="UpdateTime"></span>
                 <div class="pull-right">
@@ -122,207 +97,35 @@
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
                         <span>仪器序列号:</span><span class="margin-left-5" id="SN"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>产品类型:</span><span class="margin-left-5" id="DeviceType"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>产品型号:</span><span class="margin-left-5" id="Model"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>OEM代号:</span><span class="margin-left-5" id="OEM"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>代理商代号:</span><span class="margin-left-5" id="Agent"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>封闭试剂类型:</span><span class="margin-left-5" id="ReagentType"></span>
-                    </div>
+                    </div>                   
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
                         <span>装机区域:</span><span class="margin-left-5" id="Region"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>出厂日期:</span><span class="margin-left-5" id="FactoryDate"></span>
+                        <span>医院地址:</span><span class="margin-left-5" id="Address"></span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>装机日期:</span><span class="margin-left-5" id="InstallDate"></span>
+                        <span>医院名称:</span><span class="margin-left-5" id="Hospital"></span>
                     </div>
                 </div>
             </div>
             <div class="panel panel-success nomargin" style="margin-top: 15px;">
                 <div class="panel-heading padding-5">
-                    <h3 class="panel-title">仪器运行信息</h3>
-                </div>
-                <div class="panel-body nopadding">
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>开机天数:</span><span class="margin-left-5" id="runtime_days"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>激光管运行时间:</span><span class="margin-left-5" id="runtime_opt"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>仪器运行时间:</span><span class="margin-left-5" id="runtime_power"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>气源运行时间:</span><span class="margin-left-5" id="runtime_air_supply"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>采样针穿刺次数:</span><span class="margin-left-5" id="needle_times_impale"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-success nomargin" style="margin-top: 15px;">
-                <div class="panel-heading padding-5">
-                    <h3 class="panel-title">计数信息统计</h3>
+                    <h3 class="panel-title">统计信息</h3>
                 </div>
                 <div class="panel-body nopadding">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-5">
-                        <span>计数总次数:</span><span class="margin-left-5" id="count_times_total"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>全血-CBC:</span><span class="margin-left-5" id="count_times_wb_cbc"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>全血-CBC+CRP:</span><span class="margin-left-5" id="count_times_wb_cbc_crp"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>全血-CRP:</span><span class="margin-left-5" id="count_times_wb_crp"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预稀释-CBC:</span><span class="margin-left-5" id="count_times_pd_cbc"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预稀释-CBC+CRP:</span><span class="margin-left-5" id="count_times_pd_cbc_crp"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预稀释-CRP:</span><span class="margin-left-5" id="count_times_pd_crp"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>全血-CBC+5DIFF:</span><span class="margin-left-5" id="count_times_wb_cd"></span>
-                    </div>
-                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-6 padding-5">
-                        <span>预稀释-CBC+5DIFF:</span><span class="margin-left-5" id="count_times_pd_cd"></span>
-                    </div>
-                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-6 padding-5">
-                        <span>全血-CBC+5DIFF+CRP:</span><span class="margin-left-5" id="count_times_wb_cd_crp"></span>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5">
-                        <span>预稀释-CBC+5DIFF+CRP:</span><span class="margin-left-5" id="count_times_pd_cd_crp"></span>
+                        <span>仪器已测样本总量:</span><span class="margin-left-5" id="sample"></span>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-5">
-                        <span>质控样本数:</span><span class="margin-left-5" id="count_times_qc"></span>
+                        <table id="sample_grid"></table>
                     </div>
                 </div>
-            </div>
-            <div class="panel panel-success nomargin" style="margin-top: 15px;">
-                <div class="panel-heading padding-5">
-                    <h3 class="panel-title">试剂耗量统计</h3>
-                </div>
-                <div class="panel-body nopadding">
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>稀释液:</span><span class="margin-left-5" id="reagent_dil"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>LH溶血剂:</span><span class="margin-left-5" id="reagent_lh"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>CRP-R2:</span><span class="margin-left-5" id="reagent_r2"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>DIFF1:</span><span class="margin-left-5" id="reagent_diff1"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>DIFF2:</span><span class="margin-left-5" id="reagent_diff2"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>CRP-R1:</span><span class="margin-left-5" id="reagent_r1"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预留1:</span><span class="margin-left-5" id="reagent_fl1"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预留2:</span><span class="margin-left-5" id="reagent_fl2"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预留3:</span><span class="margin-left-5" id="reagent_fl3"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预留4:</span><span class="margin-left-5" id="reagent_fl4"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预留5:</span><span class="margin-left-5" id="reagent_fl5"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预留6:</span><span class="margin-left-5" id="reagent_fl6"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预留7:</span><span class="margin-left-5"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预留8:</span><span class="margin-left-5"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预留9:</span><span class="margin-left-5"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>预留10:</span><span class="margin-left-5"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-success nomargin" style="margin-top: 15px;">
-                <div class="panel-heading padding-5">
-                    <h3 class="panel-title">故障统计信息</h3>
-                </div>
-                <div class="panel-body nopadding">
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>WBC堵孔次数:</span><span class="margin-left-5" id="hole_times_wbc"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>RBC堵孔次数:</span><span class="margin-left-5" id="hole_times_rbc"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>采样组件故障次数:</span><span class="margin-left-5" id="sampling_times_fault"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>注射器故障次数:</span><span class="margin-left-5" id="syringe_times_syringe_fault"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>自动进样组件故障:</span><span class="margin-left-5" id="inject_times_fault"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>混匀组件故障次数:</span><span class="margin-left-5" id="mixing_times_fault"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-success nomargin" style="margin-top: 15px;">
-                <div class="panel-heading padding-5">
-                    <h3 class="panel-title">故障统计信息</h3>
-                </div>
-                <div class="panel-body nopadding">
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>WBC堵孔次数:</span><span class="margin-left-5" id="hole_times_wbc"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>RBC堵孔次数:</span><span class="margin-left-5" id="hole_times_rbc"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>采样组件故障次数:</span><span class="margin-left-5" id="sampling_times_fault"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>注射器故障次数:</span><span class="margin-left-5" id="syringe_times_syringe_fault"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>自动进样组件故障:</span><span class="margin-left-5" id="inject_times_fault"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>混匀组件故障次数:</span><span class="margin-left-5" id="mixing_times_fault"></span>
-                    </div>
-                </div>
-            </div>
+            </div>            
             <div class="panel panel-success nomargin" style="margin-top: 15px;">
                 <div class="panel-heading padding-5">
                     <span class="panel-title">错误信息</span>
-                    <div class="pull-right">
+                    <div class="pull-right hidden">
                         <button type="button" id="export" class="btn btn-default btn-small" style="padding: 1px 5px;">导 出</button>
                     </div>
                 </div>
@@ -337,6 +140,71 @@
             </div>
             <div class="padding-5"></div>
         </div>
+    </div>    
+    
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        ×
+                    </button>
+                    <h5 class="modal-title">远程诊断系统--项目详情</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
+                            <label style="width: 100px; text-align: right">项目编号：</label> <label id="num" style="margin-left: 5px; width:80px; font-weight:normal;"></label>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
+                            <label style="width: 100px; text-align: right">测定方法：</label> <label id="measuring_method" style="margin-left: 5px; width:80px; font-weight:normal;"></label>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
+                            <label style="width: 100px; text-align: right">反应方向：</label> <label id="reaction_direction" style="margin-left: 5px; width:80px; font-weight:normal;"></label>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
+                            <label style="width: 100px; text-align: right">主波长：</label> <label id="main_wavelength" style="margin-left: 5px; width:80px; font-weight:normal;"></label>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
+                            <label style="width: 100px; text-align: right">次波长：</label> <label id="sub_wavelength" style="margin-left: 5px; width:80px; font-weight:normal;"></label>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
+                            <label style="width: 100px; text-align: right">样本量：</label> <label id="sample_volume" style="margin-left: 5px; width:80px; font-weight:normal;"></label>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
+                            <label style="width: 100px; text-align: right">R1试剂量：</label> <label id="first_reagent_volume" style="margin-left: 5px; width:80px; font-weight:normal;"></label>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
+                            <label style="width: 100px; text-align: right">R2试剂量：</label> <label id="second_reagent_volume" style="margin-left: 5px; width:80px; font-weight:normal;"></label>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
+                            <label style="width: 100px; text-align: right">反应时间：</label> <label id="reaction_time" style="margin-left: 5px; width:80px; font-weight:normal;"></label>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
+                            <label style="width: 100px; text-align: right">空白时间：</label> <label id="blank_time" style="margin-left: 5px; width:80px; font-weight:normal;"></label>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
+                            <label style="width: 100px; text-align: right">定标方法：</label> <label id="calibration_method" style="margin-left: 5px; width:80px; font-weight:normal;"></label>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
+                            <label style="width: 100px; text-align: right">修正斜率：</label> <label id="corrected_slope" style="margin-left: 5px; width:80px; font-weight:normal;"></label>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
+                            <label style="width: 100px; text-align: right">修正截距：</label> <label id="corrected_intercept" style="margin-left: 5px; width:80px; font-weight:normal;"></label>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
+                            <label style="width: 100px; text-align: right">K因数值：</label> <label id="k_factor_value" style="margin-left: 5px; width:80px; font-weight:normal;"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default"
+                        data-dismiss="modal">
+                        关闭
+                    </button>                    
+                </div>
+            </div>
+        </div>
     </div>
 
     <script type="text/javascript">
@@ -347,25 +215,16 @@
         var sort = "";
         var order = "";
         var sn = "";
+        var $sample_grid;
 
         var tabletimer;
         var rowtimer;
         $(document).ready(function () {
             InitMainTable();
 
-            var opts = "<option value=\"0\">请选择</option>";
-            for (var i = 1; i < 100; i++) {
-                opts += "<option value=\"" + i + "\">" + i + "</option>";
-            }
-            $("#oemCdoe").html(opts);
-            $("#agent").html(opts);
-
             $('#quickquery').click(function () {
                 type = 1;
-                //if ($("#querytext").val().trim() == "") {
-                //    alert("请输入仪器名称、SIM卡号或仪器序列号！");
-                //    return;
-                //}
+
                 clearTimeout(tabletimer);
                 $table.bootstrapTable('refreshOptions', { pageNumber: 1, url: 'DeviceQuery.aspx/getDeviceList' });
             });
@@ -390,9 +249,8 @@
                 }
             });
 
-            //getTypes();
-            getSeries();
             getModels();
+            getRegion();
         });
         //初始化bootstrap-table的内容
         function InitMainTable() {
@@ -429,14 +287,12 @@
                         return "{'conditions':'','rows':'0','page':'0','sort':'','sortOrder':''}";
                     }
                     var conditions = "{\"QueryRange\":\"" + (type == 1 ? "" : $('input[name="rdoconnect"]:checked').val())
-                        + "\",\"DeviceType\":\"血液细胞分析仪"
+                         + "\",\"DeviceType\":\"生化仪"
                         + "\",\"QueryText\":\"" + (type != 1 ? "" : $("#querytext").val())
-                        + "\",\"ProductSeries\":\"" + (type == 1 ? "" : $("#selSeries").val())
-                        + "\",\"ModelType\":\"" + (type == 1 ? "" : $("#selModel").val())
-                        + "\",\"OEM\":\"" + (type == 1 ? "" : $("#oemCdoe").val())
-                        + "\",\"Agent\":\"" + (type == 1 ? "" : $("#agent").val())
-                        + "\",\"ReagentType\":\"" + (type == 1 ? "" : $("#reagenttype").val())
-                        + "\",\"Region\":\"" + (type == 1 ? "" : $("#region").val())
+                        + "\",\"Model\":\"" + (type == 1 ? "" : $("#selModel").val())
+                        + "\",\"HosAddr\":\"" + (type == 1 ? "" : $("#HosAddr").val())
+                        + "\",\"HosName\":\"" + (type == 1 ? "" : $("#HosName").val())
+                        + "\",\"Region\":\"" + (type == 1 ? "" : $("#selRegion").val())
                         + "\"}";
 
                     rows = params.limit ? params.limit : rows;
@@ -470,15 +326,11 @@
                         title: '仪器序列号',
                         sortable: true
                     }, {
-                        field: 'ProductSeries',
-                        title: '产品系列',
-                        formatter: function (value, row, index) {
-                            var val = (value == "3diff" ? "三分类" : (value == "5diff" ? "五分类" : ""));
-                            return val;
-                        }
-                    }, {
                         field: 'Model',
-                        title: '产品型号'
+                        title: '仪器型号'
+                    }, {
+                        field: 'Region',
+                        title: '装机区域'
                     }, {
                         field: 'SESSION_ID',
                         title: '状态',
@@ -494,6 +346,7 @@
                         var r = $("[data-uniqueid='" + sn + "']");
                         r.css("background-color", "#C0C0C0");
                     }
+                    InitSampleTable();
                 },
                 onLoadError: function () {
                     clearTimeout(tabletimer);
@@ -511,9 +364,10 @@
 
                     sn = row.SN;
                     getRowInfo();
+                    freshSampleTable();
                 }
             });
-        };
+        }
 
         function freshTable() {
             clearTimeout(tabletimer);
@@ -525,7 +379,7 @@
             if (sn) {
                 $.ajax({
                     type: "post",
-                    url: "DeviceQuery.aspx/BindDetial",
+                    url: "BioDeviceQuery.aspx/getBioDeviceDetial",
                     data: "{'sn':'" + sn + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
@@ -546,50 +400,85 @@
             }
         }
 
-        function getTypes() {
-            $.ajax({
-                type: "post",
-                url: "DeviceQuery.aspx/getProductType",
-                data: "{}",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (data) {
-                    var result = eval(data.d);
-
-                    var opts = "<option value=\"0\">请选择</option>";
-                    for (res in result) {
-                        opts += "<option value=\"" + result[res]['key'] + "\">" + result[res]['value'] + "</option>";
-                    }
-                    $("#selType").html(opts);
+        //初始化bootstrap-table的内容
+        function InitSampleTable() {
+            //记录页面bootstrap-table全局变量$table，方便应用
+            var queryUrl = 'BioDeviceQuery.aspx/getDeviceSampleList';
+            $sample_grid = $('#sample_grid').bootstrapTable({
+                url: queryUrl,                      //请求后台的URL（*）
+                method: 'POST',                      //请求方式（*）
+                //toolbar: '#toolbar',              //工具按钮用哪个容器
+                striped: true,                      //是否显示行间隔色
+                cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                pagination: false,                   //是否显示分页（*）
+                sortable: true,                     //是否启用排序
+                sortOrder: "asc",                   //排序方式
+                sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+                pageNumber: 1,                      //初始化加载第一页，默认第一页,并记录
+                pageSize: rows,                     //每页的记录行数（*）
+                pageList: [],                       //可供选择的每页的行数（*）
+                search: false,                      //是否显示表格搜索
+                strictSearch: true,
+                //showColumns: true,                  //是否显示所有的列（选择显示的列）
+                //showRefresh: true,                  //是否显示刷新按钮
+                minimumCountColumns: 2,             //最少允许的列数
+                clickToSelect: true,                //是否启用点击选中行
+                //height: 500,                      //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                uniqueId: "SN",                     //每一行的唯一标识，一般为主键列
+                //showToggle: true,                   //是否显示详细视图和列表视图的切换按钮
+                cardView: false,                    //是否显示详细视图
+                detailView: false,                  //是否显示父子表
+                //得到查询的参数
+                queryParams: function (params) {
+                    var temp = "{"
+                    + "'conditions':'" + sn
+                    + "'}";
+                    return temp;
                 },
-                error: function (err) {
-                }
+                responseHandler: function (res) {
+                    return JSON.parse(res.d)["rows"];
+                },
+                columns: [
+                    {
+                        title: '序号',
+                        align: "center",
+                        width: 40,
+                        formatter: function (value, row, index) {
+                            return index + 1;
+                        }
+                    },
+                    {
+                        field: 'num',
+                        title: '项目编号'
+                    }, {
+                        field: 'smpl',
+                        title: '样本数'
+                    }, {
+                        field: 'R1',
+                        title: 'R1试剂使用量'
+                    }, {
+                        field: 'R2',
+                        title: 'R2试剂使用量'
+                    }, {
+                        field: 'num',
+                        title: '项目详情',
+                        width: 80,
+                        align: "center",
+                        formatter: function (value, row, index) {
+                            return '<a href="javascript:void(0)" onclick="showDetail(\'' + value + '\');return false;">查看</a>';
+                        }
+                    }]
             });
         }
-        function getSeries() {
-            $.ajax({
-                type: "post",
-                url: "DeviceQuery.aspx/getProductSeries",
-                data: "{}",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (data) {
-                    var result = eval(data.d);
 
-                    var opts = "<option value=\"0\">请选择</option>";
-                    for (res in result) {
-                        opts += "<option value=\"" + result[res]['key'] + "\">" + result[res]['value'] + "</option>";
-                    }
-                    $("#selSeries").html(opts);
-                },
-                error: function (err) {
-                }
-            });
+        function freshSampleTable() {
+            $sample_grid.bootstrapTable('refreshOptions', { url: 'BioDeviceQuery.aspx/getDeviceSampleList' });
         }
+
         function getModels() {
             $.ajax({
                 type: "post",
-                url: "DeviceQuery.aspx/getProductModel",
+                url: "BioDeviceQuery.aspx/getModel",
                 data: "{}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -607,10 +496,31 @@
             });
         }
 
+        function getRegion() {
+            $.ajax({
+                type: "post",
+                url: "BioDeviceQuery.aspx/getRegion",
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    var result = eval(data.d);
+
+                    var opts = "<option value=\"0\">请选择</option>";
+                    for (res in result) {
+                        opts += "<option value=\"" + result[res]['key'] + "\">" + result[res]['value'] + "</option>";
+                    }
+                    $("#selRegion").html(opts);
+                },
+                error: function (err) {
+                }
+            });
+        }
+
         function getFault() {
             $.ajax({
                 type: "post",
-                url: "DeviceQuery.aspx/GetDeviceFault",
+                url: "BioDeviceQuery.aspx/GetBioDeviceFault",
                 data: "{'sn':'" + sn + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -634,6 +544,31 @@
                 }
             });
         }
+
+        function showDetail(num) {
+            $("#myModal").attr("num", num);
+            $('#myModal').modal('show');
+        }
+
+        $('#myModal').on('show.bs.modal', function (event) {
+            var modal = $(this);
+            var num = $("#myModal").attr("num");
+            $.ajax({
+                type: "post",
+                url: "BioDeviceQuery.aspx/getNumDetail",
+                data: "{'sn':'" + sn + "','num':'" + num + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    var result = eval("[" + data.d + "]")[0];
+                    for (attribute in result) {
+                        modal.find("#" + attribute).html(result[attribute]);
+                    }
+                },
+                error: function (err) {
+                }
+            });
+        });
 
     </script>
 </asp:Content>

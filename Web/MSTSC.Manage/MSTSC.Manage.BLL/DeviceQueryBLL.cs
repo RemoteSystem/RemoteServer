@@ -137,5 +137,59 @@ namespace MSTSC.Manage.BLL
             return dal.GetDeviceFaultForExportDAL();
         }
 
+        /**********bio**********/
+        /// <summary>
+        /// 仪器详细信息
+        /// </summary>
+        /// <param name="sn"></param>
+        /// <returns></returns>
+        public dynamic GetBioDeviceDetialBLL(string sn)
+        {
+            return dal.GetBioDeviceDetialDAL(sn);
+        }
+
+        /// <summary>
+        /// 获取仪器最后一次上报的错误信息
+        /// </summary>
+        /// <param name="sn">仪器序列号</param>
+        /// <returns>仪器最后一次上报的错误信息(最多5条)</returns>
+        public dynamic GetBioDeviceFaultBLL(string sn)
+        {
+            return dal.GetBioDeviceFaultDAL(sn);
+        }
+
+        /// <summary>
+        /// 获取产品型号[Z3、Z30、Z31、Z3CRP、Z30CRP、Z31CRP](Model字段)
+        /// </summary>
+        /// <returns></returns>
+        public List<KeyValueModel> getBioModel()
+        {
+            return dal.getBioModel();
+        }
+
+      /// <summary>
+        /// 获取装机区域
+        /// </summary>
+        /// <returns></returns>
+        public List<KeyValueModel> getRegion()
+        {
+            return dal.getRegion();
+        }
+
+        public List<BioStatistics> GetDeviceInfoBLL(string sn)
+        {
+            return dal.GetDeviceInfoDAL(sn);
+        }
+
+        public BioItemDetail getNumDetail(string sn, string num)
+        {
+            List<BioItemDetail> list = dal.getNumDetail(sn, num);
+            if (list != null && list.Count > 0)
+            {
+                return list[0];
+            }
+            return null;
+        }
+
     }
 }

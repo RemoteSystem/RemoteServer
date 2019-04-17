@@ -154,7 +154,7 @@ bm.sampling_times_fault,bm.syringe_times_syringe_fault,bm.inject_times_fault,bm.
         public List<QueryList> GetDeviceInfoDAL(QueryConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
         {
             StringBuilder whereSql = new StringBuilder();
-            string sql = @"SELECT d.DeviceName, d.SIM, d.SN,d.SESSIONID,d.ProductSeries,d.Model FROM device_info d INNER JOIN (SELECT SN FROM device_info ";
+            string sql = @"SELECT d.DeviceName, d.SIM, d.SN,d.SESSIONID,d.ProductSeries,d.Model,d.Region FROM device_info d INNER JOIN (SELECT SN FROM device_info ";
 
             if (!string.IsNullOrEmpty(conditValue.DeviceType))
             {
@@ -205,6 +205,18 @@ bm.sampling_times_fault,bm.syringe_times_syringe_fault,bm.inject_times_fault,bm.
             if (!string.IsNullOrEmpty(conditValue.Region))
             {
                 whereSql.Append(@" AND Region='" + conditValue.Region + "'");
+            }
+            if (!string.IsNullOrEmpty(conditValue.Model))
+            {
+                whereSql.Append(@" AND Model='" + conditValue.Model + "'");
+            }
+            if (!string.IsNullOrEmpty(conditValue.HosAddr))
+            {
+                whereSql.Append(@" AND Address like '%" + conditValue.HosAddr + "%'");
+            }
+            if (!string.IsNullOrEmpty(conditValue.HosName))
+            {
+                whereSql.Append(@" AND Hospital like '%" + conditValue.HosName + "%'");
             }
 
             if (!string.IsNullOrEmpty(whereSql.ToString()))
@@ -299,7 +311,7 @@ bm.sampling_times_fault,bm.syringe_times_syringe_fault,bm.inject_times_fault,bm.
         /// <returns></returns>
         public List<KeyValueModel> getProductType()
         {
-            string sql = "SELECT DISTINCT DeviceType 'key',DeviceType 'value' FROM device_info;";
+            string sql = "SELECT DISTINCT DeviceType 'key',DeviceType 'value' FROM device_info where DeviceType ='血液细胞分析仪';";
 
             using (var conn = new MySqlConnection(Global.strConn))
             {
@@ -313,7 +325,7 @@ bm.sampling_times_fault,bm.syringe_times_syringe_fault,bm.inject_times_fault,bm.
         /// <returns></returns>
         public List<KeyValueModel> getProductSeries()
         {
-            string sql = "SELECT DISTINCT ProductSeries 'key',ProductSeries 'value' FROM device_info;";
+            string sql = "SELECT DISTINCT ProductSeries 'key',ProductSeries 'value' FROM device_info where DeviceType ='血液细胞分析仪';";
 
             using (var conn = new MySqlConnection(Global.strConn))
             {
@@ -327,7 +339,7 @@ bm.sampling_times_fault,bm.syringe_times_syringe_fault,bm.inject_times_fault,bm.
         /// <returns></returns>
         public List<KeyValueModel> getModel()
         {
-            string sql = "SELECT DISTINCT Model 'key',Model 'value' FROM device_info;";
+            string sql = "SELECT DISTINCT Model 'key',Model 'value' FROM device_info where DeviceType ='血液细胞分析仪';";
 
             using (var conn = new MySqlConnection(Global.strConn))
             {
@@ -341,7 +353,7 @@ bm.sampling_times_fault,bm.syringe_times_syringe_fault,bm.inject_times_fault,bm.
         /// <returns></returns>
         public List<KeyValueModel> getProductModel()
         {
-            string sql = "SELECT DISTINCT ProductModel 'key',ProductModel 'value' FROM device_info;";
+            string sql = "SELECT DISTINCT ProductModel 'key',ProductModel 'value' FROM device_info where DeviceType ='血液细胞分析仪';";
 
             using (var conn = new MySqlConnection(Global.strConn))
             {
@@ -382,6 +394,82 @@ bm.sampling_times_fault,bm.syringe_times_syringe_fault,bm.inject_times_fault,bm.
                 return ds.Tables[0];
             }
         }
-       
+
+        /************bio**********/
+        public dynamic GetBioDeviceDetialDAL(string sn)
+        {
+            string sql = @"SELECT d.devicename,d.SIM,d.SN,d.DeviceType,d.Model,d.Region,d.Address,d.Hospital,date_format(d.UpdateTime,'%Y-%m-%d %T') as UpdateTime,bs.sample
+                        from device_info d left join bio_statistics bs on bs.device_sn = d.SN where d.SN='" + sn + "'";
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                return conn.Query(sql);
+            }
+        }
+
+        /// <summary>
+        /// 获取仪器最后一次上报的错误信息
+        /// </summary>
+        /// <param name="sn">仪器序列号</param>
+        /// <returns>仪器最后一次上报的错误信息(最多5条)</returns>
+        public dynamic GetBioDeviceFaultDAL(string sn)
+        {
+            string sql = @"SELECT code,dttime FROM bio_fault WHERE dtinsert > ( SELECT DATE_ADD(dtinsert, INTERVAL -5 SECOND) FROM bio_fault WHERE device_sn = '" + sn + "' ORDER BY id DESC LIMIT 1 ) AND device_sn = '" + sn + "' ORDER BY id DESC LIMIT 5;";
+
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                return conn.Query(sql);
+            }
+        }
+
+        /// <summary>
+        /// 获取产品型号[Z3、Z30、Z31、Z3CRP、Z30CRP、Z31CRP](Model字段)
+        /// </summary>
+        /// <returns></returns>
+        public List<KeyValueModel> getBioModel()
+        {
+            string sql = "SELECT DISTINCT Model 'key',Model 'value' FROM device_info where DeviceType ='生化仪';";
+
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                return conn.Query<KeyValueModel>(sql).ToList();
+            }
+        }
+
+        /// <summary>
+        /// 获取装机区域
+        /// </summary>
+        /// <returns></returns>
+        public List<KeyValueModel> getRegion()
+        {
+            string sql = "SELECT DISTINCT Region 'key',Region 'value' FROM device_info where DeviceType ='生化仪';";
+
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                return conn.Query<KeyValueModel>(sql).ToList();
+            }
+        }
+
+        public List<BioStatistics> GetDeviceInfoDAL(string sn)
+        {
+            StringBuilder whereSql = new StringBuilder();
+            string sql = @"SELECT device_sn,num,R1,R2,smpl FROM bio_statistics_item WHERE device_sn = '" + sn + "'";
+
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                return conn.Query<BioStatistics>(sql).ToList();
+            }
+        }
+
+        public List<BioItemDetail> getNumDetail(string sn, string num)
+        {
+            StringBuilder whereSql = new StringBuilder();
+            string sql = @"SELECT * FROM bio_item WHERE num = '" + num + "' AND device_sn='" + sn + "'";
+
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                return conn.Query<BioItemDetail>(sql).ToList();
+            }
+        }
+
     }
 }

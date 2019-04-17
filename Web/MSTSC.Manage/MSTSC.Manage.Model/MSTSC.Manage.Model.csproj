@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BioItemDetail.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="DeviceDetialModel.cs" />
     <Compile Include="Global.cs" />
@@ -48,6 +49,7 @@
     <Compile Include="ProductTypeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryConditionModel.cs" />
+    <Compile Include="BioStatistics.cs" />
     <Compile Include="QueryList.cs" />
     <Compile Include="SortInfo.cs" />
   </ItemGroup>

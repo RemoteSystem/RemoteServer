@@ -15,13 +15,13 @@ D:\MSTSC\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.Web\bin\Dapper.xml
 D:\MSTSC\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.Web\obj\Debug\MSTSC.Manage.Web.csprojResolveAssemblyReference.cache
 D:\MSTSC\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.Web\obj\Debug\MSTSC.Manage.Web.dll
 D:\MSTSC\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.Web\obj\Debug\MSTSC.Manage.Web.pdb
-E:\WorkSpace\GitHub\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.Web\bin\MSTSC.Manage.DAL.dll
 E:\WorkSpace\GitHub\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.Web\bin\MSTSC.Manage.Web.dll.config
 E:\WorkSpace\GitHub\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.Web\bin\MSTSC.Manage.Web.dll
 E:\WorkSpace\GitHub\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.Web\bin\MSTSC.Manage.Web.pdb
 E:\WorkSpace\GitHub\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.Web\bin\MSTSC.Manage.BLL.dll
 E:\WorkSpace\GitHub\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.Web\bin\MSTSC.Manage.Model.dll
 E:\WorkSpace\GitHub\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.Web\bin\Newtonsoft.Json.dll
+E:\WorkSpace\GitHub\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.Web\bin\MSTSC.Manage.DAL.dll
 E:\WorkSpace\GitHub\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.Web\bin\MySql.Data.dll
 E:\WorkSpace\GitHub\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.Web\bin\Dapper.dll
 E:\WorkSpace\GitHub\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.Web\bin\MSTSC.Manage.BLL.pdb

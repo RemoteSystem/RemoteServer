@@ -1,10 +1,11 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="DeviceQuery.aspx.cs" Inherits="MSTSC.Manage.Web.DeviceQuery" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="BioDeviceList.aspx.cs" Inherits="MSTSC.Manage.Web.DeviceList" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <ul class="breadcrumb nomargin">
-        <li class="active">仪器查询</li>
+        <li class="active">仪器列表
+        </li>
     </ul>
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padding-right-10">
         <div class="panel panel-info search-panel margin-bottom-10 padding-bottom-5">
@@ -13,7 +14,7 @@
                     <div class="form-inline text-center">
                         <select id="selType" class="form-control margin-top-5 margin-bottom-5">
                             <option value="0">请选择产品类型</option>
-                            <option value="血液细胞分析仪">血液细胞分析仪</option>
+                            <option value="生化分析仪">生化分析仪</option>
                         </select>
                         <input type="text" id="querytext" class="form-control margin-top-5 margin-bottom-5" value="" style="width: 275px;" placeholder="请输入仪器名称、SIM卡号或仪器序列号" />
                         <button type="button" id="quickquery" class="btn btn-default btn-normal margin-top-5 margin-bottom-5 margin-left-10">快速定位</button>
@@ -21,52 +22,6 @@
                 </div>
                 <hr class="nomargin" style="border-color: #cccccc; margin-left: 0px; margin-right: 0px;" />
                 <div class="search-condition padding-5">
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 nopadding form-inline">
-                        <label>产品系列</label>
-                        <select id="selSeries" class="form-control margin-top-5 margin-bottom-5">
-                            <option value="0">请选择</option>
-                            <option value="3diff">三分类</option>
-                            <option value="5diff">五分类</option>
-                        </select>
-                    </div>
-
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 nopadding form-inline">
-                        <label>产品型号</label>
-                        <select id="selModel" class="form-control margin-top-5 margin-bottom-5">
-                            <option value="0">请选择</option>
-                        </select>
-                    </div>
-
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 nopadding form-inline">
-                        <label>OEM代号</label>
-                        <select id="oemCdoe" class="form-control margin-top-5 margin-bottom-5">
-                            <option value="0">请选择</option>
-                        </select>
-                    </div>
-
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 nopadding form-inline">
-                        <label>代理商代号</label>
-                        <select id="agent" class="form-control margin-top-5 margin-bottom-5">
-                            <option value="0">请选择</option>
-                        </select>
-                    </div>
-
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 nopadding form-inline">
-                        <label>封闭试剂类型</label>
-                        <select id="reagenttype" class="form-control margin-top-5 margin-bottom-5">
-                            <option value="0">请选择</option>
-                            <option value="open">开放</option>
-                            <option value="close">封闭</option>
-                        </select>
-                    </div>
-
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 nopadding form-inline">
-                        <label>装机区域</label>
-                        <select id="region" class="form-control margin-top-5 margin-bottom-5">
-                            <option value="0">请选择</option>
-                        </select>
-                    </div>
-
                     <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2 nopadding form-inline">
                         <div class="radio margin-left-20">
                             <label>
@@ -86,7 +41,7 @@
                                 未连接仪器
                             </label>
                         </div>
-                        <button type="button" id="query" class="btn btn-default btn-normal margin-top-5 margin-bottom-5 margin-left-20">查 询</button>
+                        <button type="button" id="query" class="btn btn-default margin-top-5 margin-bottom-5 margin-left-20">查询</button>
                     </div>
                 </div>
                 <span class="clearfix"></span>
@@ -99,9 +54,6 @@
     </div>
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 nopadding">
         <div class="well well-sm padding-5 margin-right-5">
-            <%--<div class="padding-left-5" style="font-weight:bold;font-size:15pt;">
-              远程诊断系统 - <span id="devicename">仪器名称</span>
-            </div>--%>
             <div class="padding-5 form-inline">
                 <span>数据更新时间:&nbsp;&nbsp;</span><span id="UpdateTime"></span>
                 <div class="pull-right">
@@ -296,31 +248,6 @@
             </div>
             <div class="panel panel-success nomargin" style="margin-top: 15px;">
                 <div class="panel-heading padding-5">
-                    <h3 class="panel-title">故障统计信息</h3>
-                </div>
-                <div class="panel-body nopadding">
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>WBC堵孔次数:</span><span class="margin-left-5" id="hole_times_wbc"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>RBC堵孔次数:</span><span class="margin-left-5" id="hole_times_rbc"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>采样组件故障次数:</span><span class="margin-left-5" id="sampling_times_fault"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>注射器故障次数:</span><span class="margin-left-5" id="syringe_times_syringe_fault"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>自动进样组件故障:</span><span class="margin-left-5" id="inject_times_fault"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
-                        <span>混匀组件故障次数:</span><span class="margin-left-5" id="mixing_times_fault"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-success nomargin" style="margin-top: 15px;">
-                <div class="panel-heading padding-5">
                     <span class="panel-title">错误信息</span>
                     <div class="pull-right">
                         <button type="button" id="export" class="btn btn-default btn-small" style="padding: 1px 5px;">导 出</button>
@@ -353,13 +280,6 @@
         $(document).ready(function () {
             InitMainTable();
 
-            var opts = "<option value=\"0\">请选择</option>";
-            for (var i = 1; i < 100; i++) {
-                opts += "<option value=\"" + i + "\">" + i + "</option>";
-            }
-            $("#oemCdoe").html(opts);
-            $("#agent").html(opts);
-
             $('#quickquery').click(function () {
                 type = 1;
                 //if ($("#querytext").val().trim() == "") {
@@ -389,10 +309,6 @@
                     window.location.href = "Export.ashx?Action=fault&sn=" + sn;
                 }
             });
-
-            //getTypes();
-            getSeries();
-            getModels();
         });
         //初始化bootstrap-table的内容
         function InitMainTable() {
@@ -429,14 +345,8 @@
                         return "{'conditions':'','rows':'0','page':'0','sort':'','sortOrder':''}";
                     }
                     var conditions = "{\"QueryRange\":\"" + (type == 1 ? "" : $('input[name="rdoconnect"]:checked').val())
-                        + "\",\"DeviceType\":\"血液细胞分析仪"
+                        + "\",\"DeviceType\":\"生化仪"
                         + "\",\"QueryText\":\"" + (type != 1 ? "" : $("#querytext").val())
-                        + "\",\"ProductSeries\":\"" + (type == 1 ? "" : $("#selSeries").val())
-                        + "\",\"ModelType\":\"" + (type == 1 ? "" : $("#selModel").val())
-                        + "\",\"OEM\":\"" + (type == 1 ? "" : $("#oemCdoe").val())
-                        + "\",\"Agent\":\"" + (type == 1 ? "" : $("#agent").val())
-                        + "\",\"ReagentType\":\"" + (type == 1 ? "" : $("#reagenttype").val())
-                        + "\",\"Region\":\"" + (type == 1 ? "" : $("#region").val())
                         + "\"}";
 
                     rows = params.limit ? params.limit : rows;
@@ -470,15 +380,11 @@
                         title: '仪器序列号',
                         sortable: true
                     }, {
-                        field: 'ProductSeries',
-                        title: '产品系列',
-                        formatter: function (value, row, index) {
-                            var val = (value == "3diff" ? "三分类" : (value == "5diff" ? "五分类" : ""));
-                            return val;
-                        }
-                    }, {
                         field: 'Model',
-                        title: '产品型号'
+                        title: '仪器型号'                        
+                    }, {
+                        field: 'Region',
+                        title: '装机区域'
                     }, {
                         field: 'SESSION_ID',
                         title: '状态',
@@ -544,68 +450,7 @@
             } else {
                 alert("请先选择需要查看的行！");
             }
-        }
-
-        function getTypes() {
-            $.ajax({
-                type: "post",
-                url: "DeviceQuery.aspx/getProductType",
-                data: "{}",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (data) {
-                    var result = eval(data.d);
-
-                    var opts = "<option value=\"0\">请选择</option>";
-                    for (res in result) {
-                        opts += "<option value=\"" + result[res]['key'] + "\">" + result[res]['value'] + "</option>";
-                    }
-                    $("#selType").html(opts);
-                },
-                error: function (err) {
-                }
-            });
-        }
-        function getSeries() {
-            $.ajax({
-                type: "post",
-                url: "DeviceQuery.aspx/getProductSeries",
-                data: "{}",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (data) {
-                    var result = eval(data.d);
-
-                    var opts = "<option value=\"0\">请选择</option>";
-                    for (res in result) {
-                        opts += "<option value=\"" + result[res]['key'] + "\">" + result[res]['value'] + "</option>";
-                    }
-                    $("#selSeries").html(opts);
-                },
-                error: function (err) {
-                }
-            });
-        }
-        function getModels() {
-            $.ajax({
-                type: "post",
-                url: "DeviceQuery.aspx/getProductModel",
-                data: "{}",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (data) {
-                    var result = eval(data.d);
-
-                    var opts = "<option value=\"0\">请选择</option>";
-                    for (res in result) {
-                        opts += "<option value=\"" + result[res]['key'] + "\">" + result[res]['value'] + "</option>";
-                    }
-                    $("#selModel").html(opts);
-                },
-                error: function (err) {
-                }
-            });
-        }
+        }        
 
         function getFault() {
             $.ajax({

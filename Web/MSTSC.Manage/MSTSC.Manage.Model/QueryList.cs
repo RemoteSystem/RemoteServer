@@ -32,6 +32,11 @@ namespace MSTSC.Manage.Model
         /// </summary>
         public string Model { get; set; }
 
+        /// <summary>
+        /// 装机区域
+        /// </summary>
+        public string Region { get; set; }
+
         public string SESSIONID { get; set; }
 
         public string SESSION_ID
