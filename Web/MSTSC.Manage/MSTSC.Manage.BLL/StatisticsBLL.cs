@@ -100,5 +100,72 @@ namespace MSTSC.Manage.BLL
             return dal.getOEMDeviceCount(conditValue);
         }
 
+        /***********bio***********/
+
+        public DataTable StatisticsAllBioDevicesBLL(QueryConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
+        {
+            return dal.StatisticsAllBioDevicesDAL(conditValue, pagerInfo, sortInfo);
+        }
+
+        public int getBioDeviceCount(QueryConditionModel conditValue)
+        {
+            return dal.getBioDeviceCount(conditValue);
+        }
+
+        public DataTable BioStatisticsByAreaBLL(QueryConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
+        {
+            return dal.BioStatisticsByAreaDAL(conditValue, pagerInfo, sortInfo);
+        }
+
+        public int getAreaBioDeviceCount(QueryConditionModel conditValue)
+        {
+            return dal.getAreaBioDeviceCount(conditValue);
+        }
+
+        public DataTable BioStatisticsByTypeBLL(QueryConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
+        {
+            return dal.BioStatisticsByTypeDAL(conditValue, pagerInfo, sortInfo);
+        }
+
+        public int getTypeBioDeviceCount(QueryConditionModel conditValue)
+        {
+            return dal.getTypeBioDeviceCount(conditValue);
+        }
+
+        public DataTable StatisticsAllBioDevicesForExportBLL(string model)
+        {
+            QueryConditionModel conditValue = new QueryConditionModel();
+            conditValue.Model = model;
+
+            PagerInfo pagerInfo = new PagerInfo();
+            pagerInfo.CurrenetPageIndex = 1;
+            pagerInfo.PageSize = 65530;
+
+            return dal.StatisticsAllBioDevicesDAL(conditValue, pagerInfo, null);
+        }
+
+        public DataTable BioStatisticsByAreaForExportBLL(string model)
+        {
+            QueryConditionModel conditValue = new QueryConditionModel();
+            conditValue.Model = model;
+
+            PagerInfo pagerInfo = new PagerInfo();
+            pagerInfo.CurrenetPageIndex = 1;
+            pagerInfo.PageSize = 65530;
+
+            return dal.BioStatisticsByAreaDAL(conditValue, pagerInfo, null);
+        }
+
+        public DataTable BioStatisticsByTypeForExportBLL(string model)
+        {
+            QueryConditionModel conditValue = new QueryConditionModel();
+            conditValue.Model = model;
+
+            PagerInfo pagerInfo = new PagerInfo();
+            pagerInfo.CurrenetPageIndex = 1;
+            pagerInfo.PageSize = 65530;
+            return dal.BioStatisticsByTypeDAL(conditValue, pagerInfo, null);
+        }
+
     }
 }

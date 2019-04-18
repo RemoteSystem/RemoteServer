@@ -32,6 +32,10 @@ namespace MSTSC.Manage.DAL
             {
                 whereSql.Append(@" AND DeviceType='" + conditValue.DeviceType + "'");
             }
+            else
+            {
+                whereSql.Append(@" AND DeviceType ='血液细胞分析仪'");
+            }
 
             if (!string.IsNullOrEmpty(conditValue.ProductSeries))
             {
@@ -62,11 +66,15 @@ namespace MSTSC.Manage.DAL
         public int getDeviceCount(QueryConditionModel conditValue)
         {
             StringBuilder whereSql = new StringBuilder();
-            string sql = @"SELECT count(1) FROM device_info d ";
+            string sql = @"SELECT count(1) FROM device_info d where ";
 
             if (!string.IsNullOrEmpty(conditValue.DeviceType))
             {
                 whereSql.Append(@" AND d.DeviceType='" + conditValue.DeviceType + "'");
+            }
+            else
+            {
+                whereSql.Append(@" AND d.DeviceType ='血液细胞分析仪'");
             }
 
             if (!string.IsNullOrEmpty(conditValue.ProductSeries))
@@ -100,6 +108,10 @@ FROM device_info,blood_count WHERE SN = device_sn {0}";
             if (!string.IsNullOrEmpty(conditValue.DeviceType))
             {
                 whereSql.Append(@" AND DeviceType='" + conditValue.DeviceType + "'");
+            }
+            else
+            {
+                whereSql.Append(@" AND DeviceType ='血液细胞分析仪'");
             }
 
             if (!string.IsNullOrEmpty(conditValue.ProductSeries))
@@ -139,6 +151,10 @@ FROM device_info,blood_count WHERE SN = device_sn {0}";
             if (!string.IsNullOrEmpty(conditValue.DeviceType))
             {
                 whereSql.Append(@" AND DeviceType='" + conditValue.DeviceType + "'");
+            }
+            else
+            {
+                whereSql.Append(@" AND DeviceType ='血液细胞分析仪'");
             }
 
             if (!string.IsNullOrEmpty(conditValue.ProductSeries))
@@ -180,6 +196,10 @@ FROM device_info,blood_count WHERE SN = device_sn {0}";
             {
                 whereSql.Append(@" AND DeviceType='" + conditValue.DeviceType + "'");
             }
+            else
+            {
+                whereSql.Append(@" AND DeviceType ='血液细胞分析仪'");
+            }
 
             if (!string.IsNullOrEmpty(conditValue.ProductSeries))
             {
@@ -217,6 +237,10 @@ FROM device_info,blood_count WHERE SN = device_sn {0}";
             if (!string.IsNullOrEmpty(conditValue.DeviceType))
             {
                 whereSql.Append(@" AND d.DeviceType='" + conditValue.DeviceType + "'");
+            }
+            else
+            {
+                whereSql.Append(@" AND d.DeviceType ='血液细胞分析仪'");
             }
 
             if (!string.IsNullOrEmpty(conditValue.ProductSeries))
@@ -257,6 +281,10 @@ FROM device_info,blood_count WHERE SN = device_sn {0}";
             {
                 whereSql.Append(@" AND DeviceType='" + conditValue.DeviceType + "'");
             }
+            else
+            {
+                whereSql.Append(@" AND DeviceType ='血液细胞分析仪'");
+            }
 
             if (!string.IsNullOrEmpty(conditValue.ProductSeries))
             {
@@ -294,6 +322,10 @@ FROM device_info,blood_count WHERE SN = device_sn {0}";
             if (!string.IsNullOrEmpty(conditValue.DeviceType))
             {
                 whereSql.Append(@" AND d.DeviceType='" + conditValue.DeviceType + "'");
+            }
+            else
+            {
+                whereSql.Append(@" AND d.DeviceType ='血液细胞分析仪'");
             }
 
             if (!string.IsNullOrEmpty(conditValue.ProductSeries))
@@ -334,6 +366,10 @@ FROM device_info,blood_count WHERE SN = device_sn {0}";
             {
                 whereSql.Append(@" AND DeviceType='" + conditValue.DeviceType + "'");
             }
+            else
+            {
+                whereSql.Append(@" AND DeviceType ='血液细胞分析仪'");
+            }
 
             if (!string.IsNullOrEmpty(conditValue.ProductSeries))
             {
@@ -372,6 +408,10 @@ FROM device_info,blood_count WHERE SN = device_sn {0}";
             {
                 whereSql.Append(@" AND d.DeviceType='" + conditValue.DeviceType + "'");
             }
+            else
+            {
+                whereSql.Append(@" AND d.DeviceType ='血液细胞分析仪'");
+            }
 
             if (!string.IsNullOrEmpty(conditValue.ProductSeries))
             {
@@ -382,6 +422,189 @@ FROM device_info,blood_count WHERE SN = device_sn {0}";
             {
                 whereSql.Append(@" AND d.ProductModel='" + conditValue.ModelType + "'");
             }
+
+            if (!string.IsNullOrEmpty(whereSql.ToString()))
+            {
+                whereSql = new StringBuilder(" WHERE " + whereSql.ToString().Substring(4));
+            }
+
+            var SqlCondit = string.Format(sql, whereSql.ToString());
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                return conn.QuerySingle<int>(SqlCondit);
+            }
+        }
+
+        /***********bio***********/
+
+        public DataTable StatisticsAllBioDevicesDAL(QueryConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
+        {
+            StringBuilder whereSql = new StringBuilder();
+            var sql = @"SELECT IFNULL(d.DeviceName,'') AS DeviceName, d.SIM, d.SN, d.Model, c.smpl, c.R1, c.R2 FROM device_info d INNER JOIN ( SELECT SN FROM device_info {0} ";
+            sql += " LIMIT " + (pagerInfo.PageSize * (pagerInfo.CurrenetPageIndex - 1)) + "," + pagerInfo.PageSize;
+            sql += ") AS t USING (SN) LEFT JOIN bio_statistics_item c ON d.SN = c.device_sn;";
+
+            if (!string.IsNullOrEmpty(conditValue.Model))
+            {
+                whereSql.Append(@" AND Model='" + conditValue.Model + "'");
+            }
+
+            whereSql = new StringBuilder(" WHERE DeviceType ='生化仪' " + whereSql.ToString());
+
+            var SqlCondit = string.Format(sql, whereSql.ToString());
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                MySqlDataAdapter adapter = new MySqlDataAdapter(SqlCondit, conn);
+                DataSet ds = new DataSet();
+                adapter.Fill(ds);
+                return ds.Tables[0];
+                //return conn.Query<dynamic>(SqlCondit).ToList();
+            }
+        }
+
+        public int getBioDeviceCount(QueryConditionModel conditValue)
+        {
+            StringBuilder whereSql = new StringBuilder();
+            string sql = @"SELECT count(1) FROM device_info d ";
+
+            if (!string.IsNullOrEmpty(conditValue.Model))
+            {
+                whereSql.Append(@" AND d.Model='" + conditValue.Model + "'");
+            }
+
+            sql += " WHERE DeviceType ='生化仪' " + whereSql.ToString();
+
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                return conn.QuerySingle<int>(sql);
+            }
+        }
+
+
+        public DataTable BioStatisticsByAreaDAL(QueryConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
+        {
+            StringBuilder whereSql = new StringBuilder();
+            string sql = @"SELECT d.Region, COUNT(d.SN) device_count, SUM(bc.smpl) AS smpl, SUM(bc.R1) AS R1, SUM(bc.R2) AS R2 
+                FROM device_info d LEFT JOIN bio_statistics_item bc ON d.SN = bc.device_sn {0} 
+                GROUP BY Region ORDER BY SN LIMIT " + (pagerInfo.PageSize * (pagerInfo.CurrenetPageIndex - 1)) + "," + pagerInfo.PageSize + ";";
+
+            if (!string.IsNullOrEmpty(conditValue.DeviceType))
+            {
+                whereSql.Append(@" AND DeviceType='" + conditValue.DeviceType + "'");
+            }
+            else
+            {
+                whereSql.Append(@" AND DeviceType ='生化仪'");
+            }
+
+            if (!string.IsNullOrEmpty(conditValue.Model))
+            {
+                whereSql.Append(@" AND Model='" + conditValue.Model + "'");
+            }            
+
+            if (!string.IsNullOrEmpty(whereSql.ToString()))
+            {
+                whereSql = new StringBuilder(" WHERE " + whereSql.ToString().Substring(4));
+            }
+
+            var SqlCondit = string.Format(sql, whereSql.ToString());
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                MySqlDataAdapter adapter = new MySqlDataAdapter(SqlCondit, conn);
+                DataSet ds = new DataSet();
+                adapter.Fill(ds);
+
+                return ds.Tables[0];
+            }
+        }
+
+        public int getAreaBioDeviceCount(QueryConditionModel conditValue)
+        {
+            StringBuilder whereSql = new StringBuilder();
+            string sql = @"SELECT COUNT(1) AS count FROM(SELECT Region FROM device_info d {0} GROUP BY Region)t; ";
+
+            if (!string.IsNullOrEmpty(conditValue.DeviceType))
+            {
+                whereSql.Append(@" AND d.DeviceType='" + conditValue.DeviceType + "'");
+            }
+            else
+            {
+                whereSql.Append(@" AND d.DeviceType ='生化仪'");
+            }
+
+            if (!string.IsNullOrEmpty(conditValue.Model))
+            {
+                whereSql.Append(@" AND d.Model='" + conditValue.Model + "'");
+            }
+
+            if (!string.IsNullOrEmpty(whereSql.ToString()))
+            {
+                whereSql = new StringBuilder(" WHERE " + whereSql.ToString().Substring(4));
+            }
+
+            var SqlCondit = string.Format(sql, whereSql.ToString());
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                return conn.QuerySingle<int>(SqlCondit);
+            }
+        }
+
+        public DataTable BioStatisticsByTypeDAL(QueryConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
+        {
+            StringBuilder whereSql = new StringBuilder();
+            string sql = @"SELECT case d.MachineType when 0 then '标准机' when 1 then '招标机' else '其他' end AS MachineType, 
+                COUNT(d.SN) device_count, SUM(bc.smpl) AS smpl, SUM(bc.R1) AS R1, SUM(bc.R2) AS R2 
+                FROM device_info d LEFT JOIN bio_statistics_item bc ON d.SN = bc.device_sn {0} 
+                GROUP BY MachineType ORDER BY SN LIMIT " + (pagerInfo.PageSize * (pagerInfo.CurrenetPageIndex - 1)) + "," + pagerInfo.PageSize + ";";
+
+            if (!string.IsNullOrEmpty(conditValue.DeviceType))
+            {
+                whereSql.Append(@" AND DeviceType='" + conditValue.DeviceType + "'");
+            }
+            else
+            {
+                whereSql.Append(@" AND DeviceType ='生化仪'");
+            }
+
+            if (!string.IsNullOrEmpty(conditValue.Model))
+            {
+                whereSql.Append(@" AND Model='" + conditValue.Model + "'");
+            }
+
+            if (!string.IsNullOrEmpty(whereSql.ToString()))
+            {
+                whereSql = new StringBuilder(" WHERE " + whereSql.ToString().Substring(4));
+            }
+
+            var SqlCondit = string.Format(sql, whereSql.ToString());
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                MySqlDataAdapter adapter = new MySqlDataAdapter(SqlCondit, conn);
+                DataSet ds = new DataSet();
+                adapter.Fill(ds);
+
+                return ds.Tables[0];
+            }
+        }
+
+        public int getTypeBioDeviceCount(QueryConditionModel conditValue)
+        {
+            StringBuilder whereSql = new StringBuilder();
+            string sql = @"SELECT COUNT(1) AS count FROM(SELECT MachineType FROM device_info d {0} GROUP BY MachineType)t; ";
+
+            if (!string.IsNullOrEmpty(conditValue.DeviceType))
+            {
+                whereSql.Append(@" AND d.DeviceType='" + conditValue.DeviceType + "'");
+            }
+            else
+            {
+                whereSql.Append(@" AND d.DeviceType ='生化仪'");
+            }
+
+            if (!string.IsNullOrEmpty(conditValue.Model))
+            {
+                whereSql.Append(@" AND d.Model='" + conditValue.Model + "'");
+            }           
 
             if (!string.IsNullOrEmpty(whereSql.ToString()))
             {

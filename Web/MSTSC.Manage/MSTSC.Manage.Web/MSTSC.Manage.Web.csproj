@@ -64,6 +64,8 @@
   <ItemGroup>
     <Content Include="BasePage.aspx" />
     <Content Include="BioDeviceList.aspx" />
+    <Content Include="BioStatisticByType.aspx" />
+    <Content Include="BioStatisticByArea.aspx" />
     <Content Include="DeviceManage.aspx" />
     <Content Include="BioDeviceQuery.aspx" />
     <Content Include="DeviceQuery.aspx" />
@@ -72,6 +74,7 @@
     <Content Include="scripts\bootstrap-table\bootstrap-table-export.js" />
     <Content Include="scripts\bootstrap-table\tableExport.js" />
     <Content Include="scripts\chart.js" />
+    <Content Include="BioStatisticAllDevices.aspx" />
     <Content Include="StatisticByArea.aspx" />
     <Content Include="StatisticByClose.aspx" />
     <Content Include="StatisticByModel.aspx" />
@@ -143,6 +146,20 @@
     <Compile Include="BioDeviceList.aspx.designer.cs">
       <DependentUpon>BioDeviceList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="BioStatisticByType.aspx.cs">
+      <DependentUpon>BioStatisticByType.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BioStatisticByType.aspx.designer.cs">
+      <DependentUpon>BioStatisticByType.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BioStatisticByArea.aspx.cs">
+      <DependentUpon>BioStatisticByArea.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BioStatisticByArea.aspx.designer.cs">
+      <DependentUpon>BioStatisticByArea.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DeviceList.aspx.cs">
       <DependentUpon>DeviceList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -196,6 +213,13 @@
       <DependentUpon>Main.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="BioStatisticAllDevices.aspx.cs">
+      <DependentUpon>BioStatisticAllDevices.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BioStatisticAllDevices.aspx.designer.cs">
+      <DependentUpon>BioStatisticAllDevices.aspx</DependentUpon>
+    </Compile>
     <Compile Include="StatisticByArea.aspx.cs">
       <DependentUpon>StatisticByArea.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

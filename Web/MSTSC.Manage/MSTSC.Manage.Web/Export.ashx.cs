@@ -22,8 +22,11 @@ namespace MSTSC.Manage.Web
             string Action = context.Request["Action"];
             //params
             string sn = context.Request["sn"] ?? "";
+            string model = context.Request["model"] ?? "";
+            model = model.Replace("0", "");
 
             DeviceQueryBLL bll = new DeviceQueryBLL();
+            StatisticsBLL staticBll = new StatisticsBLL();
             DataTable dt = new DataTable();
             string fileName = "";
             string[] headers = new string[] { };
@@ -43,6 +46,21 @@ namespace MSTSC.Manage.Web
                     dt = bll.GetDeviceFaultForExportBLL();//获取导出数据源  
                     fileName = "错误信息";
                     headers = new string[] { "id","仪器序列号","错误码", "时间" };
+                    break;
+                case "bio_all":
+                    dt = staticBll.StatisticsAllBioDevicesForExportBLL(model);
+                    fileName = "生化仪统计_所有机器";
+                    headers = new string[] { "仪器名", "SIM卡号", "仪器序列号", "仪器型号", "样本数", "R1消耗量", "R2消耗量" };
+                    break;
+                case "bio_area":
+                    dt = staticBll.BioStatisticsByAreaForExportBLL(model);
+                    fileName = "生化仪统计_按区域";
+                    headers = new string[] { "装机区域", "仪器总数", "样本数", "R1消耗量", "R2消耗量" };
+                    break;
+                case "bio_type":
+                    dt = staticBll.BioStatisticsByTypeForExportBLL(model);
+                    fileName = "生化仪统计_按机型";
+                    headers = new string[] { "机型", "仪器总数", "样本数", "R1消耗量", "R2消耗量" };
                     break;
             }
             ExportExcel(context, dt, headers, fileName + sn + "_" + DateTime.Now.ToString("yyyyMMddHHmmss"));

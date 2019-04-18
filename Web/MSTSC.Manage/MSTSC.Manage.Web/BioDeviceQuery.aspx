@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <hr class="nomargin" style="border-color: #cccccc; margin-left: 0px; margin-right: 0px;" />
-                <div class="search-condition padding-5">                    
+                <div class="search-condition padding-5">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 nopadding form-inline">
                         <label>仪器型号</label>
                         <select id="selModel" class="form-control margin-top-5 margin-bottom-5">
@@ -97,7 +97,7 @@
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
                         <span>仪器序列号:</span><span class="margin-left-5" id="SN"></span>
-                    </div>                   
+                    </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 padding-5">
                         <span>装机区域:</span><span class="margin-left-5" id="Region"></span>
                     </div>
@@ -121,7 +121,7 @@
                         <table id="sample_grid"></table>
                     </div>
                 </div>
-            </div>            
+            </div>
             <div class="panel panel-success nomargin" style="margin-top: 15px;">
                 <div class="panel-heading padding-5">
                     <span class="panel-title">错误信息</span>
@@ -140,8 +140,8 @@
             </div>
             <div class="padding-5"></div>
         </div>
-    </div>    
-    
+    </div>
+
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -154,46 +154,60 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
-                            <label style="width: 100px; text-align: right">项目编号：</label> <label id="num" style="margin-left: 5px; width:80px; font-weight:normal;"></label>
+                            <label style="width: 100px; text-align: right">项目编号：</label>
+                            <label id="num" style="margin-left: 5px; width: 80px; font-weight: normal;"></label>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
-                            <label style="width: 100px; text-align: right">测定方法：</label> <label id="measuring_method" style="margin-left: 5px; width:80px; font-weight:normal;"></label>
+                            <label style="width: 100px; text-align: right">测定方法：</label>
+                            <label id="measuring_method" style="margin-left: 5px; width: 80px; font-weight: normal;"></label>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
-                            <label style="width: 100px; text-align: right">反应方向：</label> <label id="reaction_direction" style="margin-left: 5px; width:80px; font-weight:normal;"></label>
+                            <label style="width: 100px; text-align: right">反应方向：</label>
+                            <label id="reaction_direction" style="margin-left: 5px; width: 80px; font-weight: normal;"></label>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
-                            <label style="width: 100px; text-align: right">主波长：</label> <label id="main_wavelength" style="margin-left: 5px; width:80px; font-weight:normal;"></label>
+                            <label style="width: 100px; text-align: right">主波长：</label>
+                            <label id="main_wavelength" style="margin-left: 5px; width: 80px; font-weight: normal;"></label>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
-                            <label style="width: 100px; text-align: right">次波长：</label> <label id="sub_wavelength" style="margin-left: 5px; width:80px; font-weight:normal;"></label>
+                            <label style="width: 100px; text-align: right">次波长：</label>
+                            <label id="sub_wavelength" style="margin-left: 5px; width: 80px; font-weight: normal;"></label>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
-                            <label style="width: 100px; text-align: right">样本量：</label> <label id="sample_volume" style="margin-left: 5px; width:80px; font-weight:normal;"></label>
+                            <label style="width: 100px; text-align: right">样本量：</label>
+                            <label id="sample_volume" style="margin-left: 5px; width: 80px; font-weight: normal;"></label>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
-                            <label style="width: 100px; text-align: right">R1试剂量：</label> <label id="first_reagent_volume" style="margin-left: 5px; width:80px; font-weight:normal;"></label>
+                            <label style="width: 100px; text-align: right">R1试剂量：</label>
+                            <label id="first_reagent_volume" style="margin-left: 5px; width: 80px; font-weight: normal;"></label>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
-                            <label style="width: 100px; text-align: right">R2试剂量：</label> <label id="second_reagent_volume" style="margin-left: 5px; width:80px; font-weight:normal;"></label>
+                            <label style="width: 100px; text-align: right">R2试剂量：</label>
+                            <label id="second_reagent_volume" style="margin-left: 5px; width: 80px; font-weight: normal;"></label>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
-                            <label style="width: 100px; text-align: right">反应时间：</label> <label id="reaction_time" style="margin-left: 5px; width:80px; font-weight:normal;"></label>
+                            <label style="width: 100px; text-align: right">反应时间：</label>
+                            <label id="reaction_time" style="margin-left: 5px; width: 80px; font-weight: normal;"></label>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
-                            <label style="width: 100px; text-align: right">空白时间：</label> <label id="blank_time" style="margin-left: 5px; width:80px; font-weight:normal;"></label>
+                            <label style="width: 100px; text-align: right">空白时间：</label>
+                            <label id="blank_time" style="margin-left: 5px; width: 80px; font-weight: normal;"></label>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
-                            <label style="width: 100px; text-align: right">定标方法：</label> <label id="calibration_method" style="margin-left: 5px; width:80px; font-weight:normal;"></label>
+                            <label style="width: 100px; text-align: right">定标方法：</label>
+                            <label id="calibration_method" style="margin-left: 5px; width: 80px; font-weight: normal;"></label>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
-                            <label style="width: 100px; text-align: right">修正斜率：</label> <label id="corrected_slope" style="margin-left: 5px; width:80px; font-weight:normal;"></label>
+                            <label style="width: 100px; text-align: right">修正斜率：</label>
+                            <label id="corrected_slope" style="margin-left: 5px; width: 80px; font-weight: normal;"></label>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
-                            <label style="width: 100px; text-align: right">修正截距：</label> <label id="corrected_intercept" style="margin-left: 5px; width:80px; font-weight:normal;"></label>
+                            <label style="width: 100px; text-align: right">修正截距：</label>
+                            <label id="corrected_intercept" style="margin-left: 5px; width: 80px; font-weight: normal;"></label>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
-                            <label style="width: 100px; text-align: right">K因数值：</label> <label id="k_factor_value" style="margin-left: 5px; width:80px; font-weight:normal;"></label>
+                            <label style="width: 100px; text-align: right">K因数值：</label>
+                            <label id="k_factor_value" style="margin-left: 5px; width: 80px; font-weight: normal;"></label>
                         </div>
                     </div>
                 </div>
@@ -201,7 +215,7 @@
                     <button type="button" class="btn btn-default"
                         data-dismiss="modal">
                         关闭
-                    </button>                    
+                    </button>
                 </div>
             </div>
         </div>

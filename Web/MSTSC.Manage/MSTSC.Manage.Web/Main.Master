@@ -116,6 +116,15 @@
                         </li>
                     </ul>
                 </div>
+                <div>
+                    <ul style="background-color: #81b5db; height: 1px;"></ul>
+                    <ul class="nav-header">
+                        <li>用户管理</li>
+                    </ul>
+                    <ul class="nav">
+                        <li><a href="User.aspx">用户列表</a></li>                        
+                    </ul>
+                </div>
             </div>
             <div class="maincontent row">
                 <!--我是主要内容 start-->
