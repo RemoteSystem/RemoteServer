@@ -66,6 +66,7 @@
     <Content Include="BioDeviceList.aspx" />
     <Content Include="BioStatisticByType.aspx" />
     <Content Include="BioStatisticByArea.aspx" />
+    <Content Include="UserInfo.aspx" />
     <Content Include="DeviceManage.aspx" />
     <Content Include="BioDeviceQuery.aspx" />
     <Content Include="DeviceQuery.aspx" />
@@ -159,6 +160,13 @@
     </Compile>
     <Compile Include="BioStatisticByArea.aspx.designer.cs">
       <DependentUpon>BioStatisticByArea.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserInfo.aspx.cs">
+      <DependentUpon>UserInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserInfo.aspx.designer.cs">
+      <DependentUpon>UserInfo.aspx</DependentUpon>
     </Compile>
     <Compile Include="DeviceList.aspx.cs">
       <DependentUpon>DeviceList.aspx</DependentUpon>
