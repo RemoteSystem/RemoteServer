@@ -57,6 +57,58 @@
         </div>
     </div>
 
+    <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        ×
+                    </button>
+                    <h5 class="modal-title">新增用户</h5>
+                    <input id="userId" type="hidden" />
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12 padding-20">
+                            <label style="width: 100px; text-align: right">用户名：</label>
+                            <input id="userName" type="text" class="margin-left-10 padding-left-10" style="width: 180px;" />
+                        </div>
+                        <div class="col-lg-12 padding-20">
+                            <label style="width: 100px; text-align: right">姓名：</label>
+                            <input id="realname" type="text" class="margin-left-10 padding-left-10" style="width: 180px;" />
+                        </div>
+                        <div class="col-lg-12 padding-20 form-inline">
+                            <label style="width: 100px; text-align: right">性别：</label>
+                            <select id="sex" class="form-control margin-left-10" style="width: 180px;">
+                                <option value="1">男</option>
+                                <option value="2">女</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-12 padding-20">
+                            <label style="width: 100px; text-align: right">年龄：</label>
+                            <input id="age" type="text" class="margin-left-10 padding-left-10" style="width: 180px;" />
+                        </div>
+                        <div class="col-lg-12 padding-20 form-inline">
+                            <label style="width: 100px; text-align: right">管理员：</label>
+                            <select id="isAdmin" class="form-control margin-left-10" style="width: 180px;">
+                                <option value="0">否</option>
+                                <option value="1">是</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="saveUser" type="button" class="btn btn-success">
+                        保存
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        关闭
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script type="text/javascript">
         var $table;
         var rows = 10;
@@ -72,8 +124,22 @@
             });
 
             $('#addUser').click(function () {
-                alert("新增用户");
+                $("#userId").val("");
+
+                $("#userName").removeAttr("disabled");
+                $("#userName").val("");
+                $("#realname").val("");
+                $("#sex").val(1);
+                $("#age").val("");
+                $("#isAdmin").val(0);
+
+                $('#userModal').modal('show');
             });
+
+            $("#saveUser").click(function () {
+                saveUser();
+            });
+
         });
         //初始化bootstrap-table的内容
         function InitMainTable() {
@@ -125,7 +191,6 @@
                     return temp;
                 },
                 responseHandler: function (res) {
-                    //在ajax请求成功后，填充数据之前可以对返回的数据进行处理  
                     return JSON.parse(res.d);
                 },
                 columns: [
@@ -153,13 +218,25 @@
                             return val;
                         }
                     }, {
+                        field: 'isDel',
+                        title: '有效',
+                        formatter: function (value, row, index) {
+                            var val = (value == "1" ? "已删除" : "有效");
+                            return val;
+                        }
+                    }, {
                         field: 'id',
                         title: '操作',
                         width: 200,
                         formatter: function (value, row, index) {
                             var opt = ' <a href="javascript:void(0)" onclick="edituser(\'' + value + '\');return false;">编辑</a> &nbsp;';
-                            opt += ' <a href="javascript:void(0)" onclick="changepwd(\'' + value + '\');return false;">修改密码</a> &nbsp;';
-                            if (value != '1') { opt += ' <a href="javascript:void(0)" onclick="deluser(\'' + value + '\');return false;">删除</a>'; }
+                            opt += ' <a href="javascript:void(0)" onclick="resetpwd(\'' + value + '\');return false;">重置密码</a> &nbsp;';
+                            if (value == '1') { opt += ''; }
+                            else if (row["isDel"]) {
+                                opt += ' <a href="javascript:void(0)" onclick="enableuser(\'' + value + '\');return false;">启用</a>';
+                            } else {
+                                opt += ' <a href="javascript:void(0)" onclick="deluser(\'' + value + '\');return false;">删除</a>';
+                            }
                             return opt;
                         }
                     }],
@@ -180,18 +257,109 @@
         };
 
         function freshTable() {
-            clearTimeout(tabletimer);
             $table.bootstrapTable('refreshOptions', { url: 'UserInfo.aspx/getUserList' });
         }
 
         function edituser(id) {
-            alert("编辑用户" + id);
+            $("#userId").val(id);
+            $.ajax({
+                type: "post",
+                url: "UserInfo.aspx/getUser",
+                data: "{'id':'" + id + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    var result = eval("[" + data.d + "]")[0];
+                    $("#userName").attr("disabled", "disabled");
+                    $("#userName").val(result["userName"]);
+                    $("#realname").val(result["name"]);
+                    $("#sex").val(result["sex"]);
+                    $("#age").val(result["age"]);
+                    $("#isAdmin").val(result["isAdmin"] == "True" ? 1 : 0);
+                },
+                error: function (err) {
+                    console.info('获取用户出错.');
+                }
+            });
+            $('#userModal').modal('show');
         }
+
+        function saveUser() {
+            $.ajax({
+                type: "post",
+                url: "UserInfo.aspx/saveUser",
+                data: "{'id':'" + $("#userId").val() + "',"
+                    + "'userName':'" + $("#userName").val() + "',"
+                    + "'name':'" + $("#realname").val() + "',"
+                    + "'sex':'" + $("#sex").val() + "',"
+                    + "'age':'" + $("#age").val() + "',"
+                    + "'isAdmin':'" + $("#isAdmin").val() + "'"
+                    + "}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    alert(eval(data.d));
+                    if (data.d.indexOf("成功") >= 0) $('#query').click();
+                },
+                error: function (err) {
+                    alert('保存出错.');
+                }
+            });
+        }
+
         function deluser(id) {
-            alert("删除用户" + id);
+            var r = confirm("确定要删除用户吗?")
+            if (r == true) {
+                $.ajax({
+                    type: "post",
+                    url: "UserInfo.aspx/delUser",
+                    data: "{'id':'" + id + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        $('#query').click();
+                    },
+                    error: function (err) {
+                        console.info('删除用户出错.');
+                    }
+                });
+            }
         }
-        function changepwd(id) {
-            alert("修改密码" + id);
+
+        function resetpwd(id) {
+            var r = confirm("确定要重置用户密码吗?")
+            if (r == true) {
+                $.ajax({
+                    type: "post",
+                    url: "UserInfo.aspx/resetPwd",
+                    data: "{'id':'" + id + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        alert(eval(data.d));
+                    },
+                    error: function (err) {
+                        console.info('重置用户密码出错.');
+                    }
+                });
+            }
+        }
+
+        function enableuser(id) {
+            $.ajax({
+                type: "post",
+                url: "UserInfo.aspx/enableUser",
+                data: "{'id':'" + id + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    alert(eval(data.d));
+                    $('#query').click();
+                },
+                error: function (err) {
+                    console.info('启用用户出错.');
+                }
+            });
         }
 
     </script>

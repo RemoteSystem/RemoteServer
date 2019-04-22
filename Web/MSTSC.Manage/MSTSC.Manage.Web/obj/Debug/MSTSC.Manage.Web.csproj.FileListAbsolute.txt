@@ -32,3 +32,5 @@ E:\WorkSpace\GitHub\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.Web\bin\Dapper.xm
 E:\WorkSpace\GitHub\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.Web\obj\Debug\MSTSC.Manage.Web.csprojResolveAssemblyReference.cache
 E:\WorkSpace\GitHub\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.Web\obj\Debug\MSTSC.Manage.Web.dll
 E:\WorkSpace\GitHub\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.Web\obj\Debug\MSTSC.Manage.Web.pdb
+E:\WorkSpace\GitHub\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.Web\bin\MSTSC.Manage.Utils.dll
+E:\WorkSpace\GitHub\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.Web\bin\MSTSC.Manage.Utils.pdb

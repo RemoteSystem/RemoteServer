@@ -1,4 +1,7 @@
-﻿using System;
+﻿using MSTSC.Manage.BLL;
+using MSTSC.Manage.Model;
+using MSTSC.Manage.Utils;
+using System;
 using System.Collections.Generic;
 using System.Web;
 using System.Web.Services;
@@ -18,15 +21,33 @@ namespace MSTSC.Manage.Web
         [WebMethod]
         public static string UserLogin(string username, string password)
         {
-            if (username == "admin" && password == "bk#9876")
+            UserBLL bll = new UserBLL();
+
+            password = EncyptHelper.MD5(password);
+            User user = bll.getUserByUserNameAndPwd(username, password);
+            //if (username == "admin" && password == "bk#9876")
+            if (null != user)
             {
                 HttpSessionState session = HttpContext.Current.Session;
                 session["username"] = username;
+                session["userid"] = user.id;
+                session["name"] = user.name;
 
                 return "0";
             }
             return "1";
         }
+
+        [WebMethod]
+        public static void Logout(string username, string password)
+        {
+
+            HttpSessionState session = HttpContext.Current.Session;
+            session["username"] = "";
+            session["userid"] = "";
+            session.Clear();
+        }
+
 
     }
 }

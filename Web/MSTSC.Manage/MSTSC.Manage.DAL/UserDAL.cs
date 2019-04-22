@@ -29,7 +29,7 @@ namespace MSTSC.Manage.DAL
             if (!string.IsNullOrEmpty(conditValue.name))
             {
                 whereSql.Append(@" AND name like '%" + conditValue.name + "%'");
-            }           
+            }
 
             if (!string.IsNullOrEmpty(conditValue.sex))
             {
@@ -60,7 +60,6 @@ namespace MSTSC.Manage.DAL
                 DataSet ds = new DataSet();
                 adapter.Fill(ds);
                 return ds.Tables[0];
-                //return conn.Query<dynamic>(SqlCondit).ToList();
             }
         }
 
@@ -92,6 +91,83 @@ namespace MSTSC.Manage.DAL
             using (var conn = new MySqlConnection(Global.strConn))
             {
                 return conn.QuerySingle<int>(sql);
+            }
+        }
+
+
+        public int insertUser(User user)
+        {
+            string sql = @"INSERT INTO `user` ( userName, password, NAME, sex, age, isAdmin, isDel ) VALUES (";
+            sql += "'" + user.userName + "','" + user.password + "','" + user.name + "'," + user.sex + "," + user.age + "," + user.isAdmin + "," + "0";
+            sql += ");";
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                return conn.Execute(sql);
+            }
+        }
+
+        public int updateUser(User user)
+        {
+            string sql = @"UPDATE `user` set ";
+            sql += " name ='" + user.name + "', sex = " + user.sex + ", age = " + user.age + ", isAdmin = " + user.isAdmin + " where id = " + user.id;
+            sql += ");";
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                return conn.Execute(sql);
+            }
+        }
+
+        public User getUser(string id)
+        {
+            string sql = @"SELECT * FROM `user` where id = " + id;
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                return conn.QuerySingleOrDefault<User>(sql);
+            }
+        }
+
+        public User getUserByUserName(string userName)
+        {
+            string sql = @"SELECT * FROM `user` where userName = '" + userName + "'";
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                return conn.QuerySingleOrDefault<User>(sql);
+            }
+        }
+
+        public User getUserByUserNameAndPwd(string userName, string pwd)
+        {
+            string sql = @"SELECT * FROM `user` where userName = '" + userName + "' and password = '" + pwd + "'";
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                return conn.QuerySingleOrDefault<User>(sql);
+            }
+        }
+
+        public int delUser(string id)
+        {
+            string sql = @"UPDATE `user` set isDel = 1 where id = " + id;
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                return conn.Execute(sql);
+            }
+        }
+
+        public int enableUser(string id)
+        {
+            string sql = @"UPDATE `user` set isDel = 0 where id = " + id;
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                return conn.Execute(sql);
+            }
+        }
+
+        public int changePwd(string id, string pwd)
+        {
+            string sql = @"UPDATE `user` set password = '" + pwd + "' where id = " + id;
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                return conn.Execute(sql);
             }
         }
 

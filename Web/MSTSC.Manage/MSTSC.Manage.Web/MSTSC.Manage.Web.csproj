@@ -66,6 +66,7 @@
     <Content Include="BioDeviceList.aspx" />
     <Content Include="BioStatisticByType.aspx" />
     <Content Include="BioStatisticByArea.aspx" />
+    <Content Include="ChangePwd.aspx" />
     <Content Include="UserInfo.aspx" />
     <Content Include="DeviceManage.aspx" />
     <Content Include="BioDeviceQuery.aspx" />
@@ -160,6 +161,13 @@
     </Compile>
     <Compile Include="BioStatisticByArea.aspx.designer.cs">
       <DependentUpon>BioStatisticByArea.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ChangePwd.aspx.cs">
+      <DependentUpon>ChangePwd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ChangePwd.aspx.designer.cs">
+      <DependentUpon>ChangePwd.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserInfo.aspx.cs">
       <DependentUpon>UserInfo.aspx</DependentUpon>
@@ -279,6 +287,10 @@
     <ProjectReference Include="..\MSTSC.Manage.Model\MSTSC.Manage.Model.csproj">
       <Project>{a8fa07d8-f597-4875-b107-eda6015bee75}</Project>
       <Name>MSTSC.Manage.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MSTSC.Manage.Utils\MSTSC.Manage.Utils.csproj">
+      <Project>{d7832e50-02c2-45a6-a741-e7489b374080}</Project>
+      <Name>MSTSC.Manage.Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
