@@ -29,10 +29,6 @@ CREATE TABLE `bio_fault` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- ----------------------------
--- Records of bio_fault
--- ----------------------------
-
--- ----------------------------
 -- Table structure for `bio_item`
 -- ----------------------------
 DROP TABLE IF EXISTS `bio_item`;
@@ -57,10 +53,6 @@ CREATE TABLE `bio_item` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- ----------------------------
--- Records of bio_item
--- ----------------------------
-
--- ----------------------------
 -- Table structure for `bio_statistics`
 -- ----------------------------
 DROP TABLE IF EXISTS `bio_statistics`;
@@ -70,10 +62,6 @@ CREATE TABLE `bio_statistics` (
   `dtinsert` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`device_sn`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
--- ----------------------------
--- Records of bio_statistics
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for `bio_statistics_item`
@@ -89,9 +77,6 @@ CREATE TABLE `bio_statistics_item` (
   PRIMARY KEY (`num`,`device_sn`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
--- ----------------------------
--- Records of bio_statistics_item
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for `dump`
@@ -108,5 +93,31 @@ CREATE TABLE `dump` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- ----------------------------
--- Records of dump
+-- Table structure for `user`
 -- ----------------------------
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `userName` varchar(200) COLLATE utf8mb4_bin DEFAULT NULL,
+  `password` varchar(200) COLLATE utf8mb4_bin DEFAULT NULL,
+  `name` varchar(200) COLLATE utf8mb4_bin DEFAULT NULL,
+  `sex` int(1) DEFAULT NULL,
+  `age` int(11) DEFAULT NULL,
+  `birthday` date DEFAULT NULL,
+  `idCard` varchar(20) CHARACTER SET latin1 DEFAULT NULL,
+  `dtInsert` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `isAdmin` tinyint(1) DEFAULT '0',
+  `isDel` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+-- ----------------------------
+-- Table structure for `user_rights`
+-- ----------------------------
+DROP TABLE IF EXISTS `user_rights`;
+CREATE TABLE `user_rights` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `userId` int(11) NOT NULL,
+  `rights` varchar(500) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;

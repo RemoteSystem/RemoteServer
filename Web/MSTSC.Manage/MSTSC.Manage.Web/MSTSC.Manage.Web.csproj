@@ -67,6 +67,15 @@
     <Content Include="BioStatisticByType.aspx" />
     <Content Include="BioStatisticByArea.aspx" />
     <Content Include="ChangePwd.aspx" />
+    <Content Include="scripts\ztree\jquery.ztree.core.js" />
+    <Content Include="scripts\ztree\jquery.ztree.excheck.js" />
+    <Content Include="scripts\ztree\jquery.ztree.exedit.js" />
+    <Content Include="styles\bootstrapStyle\bootstrapStyle.css" />
+    <Content Include="styles\bootstrapStyle\img\bootstrap.gif" />
+    <Content Include="styles\bootstrapStyle\img\bootstrap.png" />
+    <Content Include="styles\bootstrapStyle\img\line_conn.png" />
+    <Content Include="styles\bootstrapStyle\img\loading.gif" />
+    <Content Include="UserRights.aspx" />
     <Content Include="UserInfo.aspx" />
     <Content Include="DeviceManage.aspx" />
     <Content Include="BioDeviceQuery.aspx" />
@@ -168,6 +177,13 @@
     </Compile>
     <Compile Include="ChangePwd.aspx.designer.cs">
       <DependentUpon>ChangePwd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserRights.aspx.cs">
+      <DependentUpon>UserRights.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserRights.aspx.designer.cs">
+      <DependentUpon>UserRights.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserInfo.aspx.cs">
       <DependentUpon>UserInfo.aspx</DependentUpon>

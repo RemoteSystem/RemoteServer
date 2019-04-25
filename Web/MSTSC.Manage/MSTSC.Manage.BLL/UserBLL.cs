@@ -43,9 +43,9 @@ namespace MSTSC.Manage.BLL
             return dal.getUserByUserName(userName);
         }
 
-        public User getUserByUserNameAndPwd(string userName, string pwd)
+        public User getUserByUserNameAndPwd(string userName, string pwd, string isDel)
         {
-            return dal.getUserByUserNameAndPwd(userName, pwd);
+            return dal.getUserByUserNameAndPwd(userName, pwd, isDel);
         }
 
         public int delUser(string id)
@@ -58,9 +58,19 @@ namespace MSTSC.Manage.BLL
             return dal.enableUser(id);
         }
 
-        public int changePwd(string id,string pwd)
+        public int changePwd(string id, string pwd)
         {
-            return dal.changePwd(id,pwd);
+            return dal.changePwd(id, pwd);
+        }
+
+        public int saveUserRights(string id, string rights)
+        {
+            return dal.saveUserRights(id, rights);
+        }
+
+        public string getUserRights(string id)
+        {
+            return dal.getUserRights(id);
         }
 
 

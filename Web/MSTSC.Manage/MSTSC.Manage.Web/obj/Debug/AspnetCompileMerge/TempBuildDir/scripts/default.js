@@ -57,8 +57,14 @@ var pageInitModule = (function (mod) {
         });
         $(".has-sub>a").click(function () {
             $(this).parent().siblings().find(".sub-menu").slideUp();
+            $(this).parent().parent().siblings().find(".sub-menu").slideUp();
             $(this).parent().find(".sub-menu").slideToggle();
-        })
+        });
+
+        $(".nav-header").click(function () {
+            $(this).parent().find(".nav").slideToggle();
+        });
+
         var _strcurrenturl = window.location.href.toLowerCase();
         $(".navbar-nav a[href],.sidebar a[href]").each(function () {
             var href = $(this).attr("href").toLowerCase();
@@ -69,7 +75,7 @@ var pageInitModule = (function (mod) {
                     return false;
                 }
             })
-            if (_strcurrenturl.indexOf(href) > -1 || isActive) {
+            if (_strcurrenturl.indexOf("/" + href) > -1 || isActive) {
                 $(this).parent().addClass("active");
                 if ($(this).parents("ul").attr("class") == "sub-menu") {
                     $(this).parents("ul").show();//原来是slideDown()，有滑动效果

@@ -135,9 +135,14 @@ namespace MSTSC.Manage.DAL
             }
         }
 
-        public User getUserByUserNameAndPwd(string userName, string pwd)
+        public User getUserByUserNameAndPwd(string userName, string pwd, string isDel)
         {
             string sql = @"SELECT * FROM `user` where userName = '" + userName + "' and password = '" + pwd + "'";
+            if (!string.IsNullOrEmpty(isDel))
+            {
+                sql += " and isDel = " + isDel;
+            }
+
             using (var conn = new MySqlConnection(Global.strConn))
             {
                 return conn.QuerySingleOrDefault<User>(sql);
@@ -168,6 +173,26 @@ namespace MSTSC.Manage.DAL
             using (var conn = new MySqlConnection(Global.strConn))
             {
                 return conn.Execute(sql);
+            }
+        }
+
+        public int saveUserRights(string id, string rights)
+        {
+            string sql = @"DELETE FROM user_rights WHERE userId = " + id + ";";
+            sql += " INSERT INTO user_rights(userId,rights) VALUES(" + id + ",'" + rights + "');";
+
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                return conn.Execute(sql);
+            }
+        }
+
+        public string getUserRights(string id)
+        {
+            string sql = @"SELECT rights FROM user_rights where userId = " + id;
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                return conn.QuerySingleOrDefault<string>(sql);
             }
         }
 

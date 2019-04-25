@@ -16,28 +16,34 @@
       <publishTime>04/19/2018 10:10:12</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.BLL.dll">
-      <publishTime>08/22/2018 14:36:13</publishTime>
+      <publishTime>04/25/2019 21:54:20</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.BLL.pdb">
-      <publishTime>08/22/2018 14:36:13</publishTime>
+      <publishTime>04/25/2019 21:54:20</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.DAL.dll">
-      <publishTime>08/22/2018 14:36:13</publishTime>
+      <publishTime>04/25/2019 21:54:19</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.DAL.pdb">
-      <publishTime>08/22/2018 14:36:13</publishTime>
+      <publishTime>04/25/2019 21:54:19</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.Model.dll">
-      <publishTime>08/22/2018 14:36:12</publishTime>
+      <publishTime>04/25/2019 21:54:19</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.Model.pdb">
-      <publishTime>08/22/2018 14:36:12</publishTime>
+      <publishTime>04/25/2019 21:54:18</publishTime>
+    </File>
+    <File Include="bin/MSTSC.Manage.Utils.dll">
+      <publishTime>04/25/2019 21:54:19</publishTime>
+    </File>
+    <File Include="bin/MSTSC.Manage.Utils.pdb">
+      <publishTime>04/25/2019 21:54:18</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.Web.dll">
-      <publishTime>08/22/2018 14:36:13</publishTime>
+      <publishTime>04/25/2019 21:54:20</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.Web.pdb">
-      <publishTime>08/22/2018 14:36:13</publishTime>
+      <publishTime>04/25/2019 21:54:20</publishTime>
     </File>
     <File Include="bin/MySql.Data.dll">
       <publishTime>04/19/2018 10:10:12</publishTime>
@@ -45,32 +51,50 @@
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>04/26/2018 22:14:51</publishTime>
     </File>
+    <File Include="BioDeviceList.aspx">
+      <publishTime>04/22/2019 22:25:27</publishTime>
+    </File>
+    <File Include="BioDeviceQuery.aspx">
+      <publishTime>04/21/2019 21:56:14</publishTime>
+    </File>
+    <File Include="BioStatisticAllDevices.aspx">
+      <publishTime>04/18/2019 23:15:11</publishTime>
+    </File>
+    <File Include="BioStatisticByArea.aspx">
+      <publishTime>04/18/2019 23:12:29</publishTime>
+    </File>
+    <File Include="BioStatisticByType.aspx">
+      <publishTime>04/18/2019 23:11:18</publishTime>
+    </File>
+    <File Include="ChangePwd.aspx">
+      <publishTime>04/22/2019 21:36:06</publishTime>
+    </File>
     <File Include="DeviceList.aspx">
-      <publishTime>05/30/2018 16:05:28</publishTime>
+      <publishTime>04/14/2019 18:51:16</publishTime>
     </File>
     <File Include="DeviceManage.aspx">
       <publishTime>05/23/2018 10:27:42</publishTime>
     </File>
     <File Include="DeviceQuery.aspx">
-      <publishTime>05/30/2018 16:10:09</publishTime>
+      <publishTime>04/14/2019 18:56:17</publishTime>
     </File>
     <File Include="Export.ashx">
       <publishTime>05/30/2018 15:02:03</publishTime>
     </File>
     <File Include="Index.aspx">
-      <publishTime>04/28/2018 21:51:54</publishTime>
+      <publishTime>04/25/2019 22:47:15</publishTime>
     </File>
     <File Include="Login.aspx">
       <publishTime>05/14/2018 21:39:15</publishTime>
     </File>
     <File Include="Main.Master">
-      <publishTime>05/22/2018 09:17:03</publishTime>
+      <publishTime>04/24/2019 23:32:38</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>05/10/2018 23:57:03</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>08/22/2018 14:36:45</publishTime>
+      <publishTime>04/25/2019 22:49:18</publishTime>
     </File>
     <File Include="scripts/bootstrap-table/bootstrap-table-export.js">
       <publishTime>05/10/2018 20:53:03</publishTime>
@@ -97,7 +121,7 @@
       <publishTime>05/11/2018 18:03:52</publishTime>
     </File>
     <File Include="scripts/default.js">
-      <publishTime>05/30/2018 10:06:17</publishTime>
+      <publishTime>04/14/2019 18:24:13</publishTime>
     </File>
     <File Include="scripts/jquery-3.0.0.min.js">
       <publishTime>04/24/2018 17:45:55</publishTime>
@@ -116,6 +140,15 @@
     </File>
     <File Include="scripts/pace/pace.min.js">
       <publishTime>04/25/2018 15:09:03</publishTime>
+    </File>
+    <File Include="scripts/ztree/jquery.ztree.core.js">
+      <publishTime>04/23/2019 22:10:24</publishTime>
+    </File>
+    <File Include="scripts/ztree/jquery.ztree.excheck.js">
+      <publishTime>04/23/2019 22:10:24</publishTime>
+    </File>
+    <File Include="scripts/ztree/jquery.ztree.exedit.js">
+      <publishTime>04/23/2019 22:10:24</publishTime>
     </File>
     <File Include="StatisticAllDevices.aspx">
       <publishTime>08/14/2018 22:35:58</publishTime>
@@ -159,11 +192,26 @@
     <File Include="styles/bootstrap/fonts/glyphicons-halflings-regular.woff2">
       <publishTime>04/24/2018 18:00:42</publishTime>
     </File>
+    <File Include="styles/bootstrapStyle/bootstrapStyle.css">
+      <publishTime>04/23/2019 22:09:58</publishTime>
+    </File>
+    <File Include="styles/bootstrapStyle/img/bootstrap.gif">
+      <publishTime>04/23/2019 22:09:58</publishTime>
+    </File>
+    <File Include="styles/bootstrapStyle/img/bootstrap.png">
+      <publishTime>04/23/2019 22:09:58</publishTime>
+    </File>
+    <File Include="styles/bootstrapStyle/img/line_conn.png">
+      <publishTime>04/23/2019 22:09:58</publishTime>
+    </File>
+    <File Include="styles/bootstrapStyle/img/loading.gif">
+      <publishTime>04/23/2019 22:09:58</publishTime>
+    </File>
     <File Include="styles/default.css">
-      <publishTime>05/07/2018 17:41:30</publishTime>
+      <publishTime>04/25/2019 22:15:06</publishTime>
     </File>
     <File Include="styles/font-awesome.min.css">
-      <publishTime>04/25/2018 15:20:07</publishTime>
+      <publishTime>04/22/2019 22:02:39</publishTime>
     </File>
     <File Include="styles/fonts/fontawesome-webfont.eot">
       <publishTime>04/25/2018 15:19:56</publishTime>
@@ -207,8 +255,14 @@
     <File Include="styles/pace/dataurl.css">
       <publishTime>04/25/2018 15:11:07</publishTime>
     </File>
+    <File Include="UserInfo.aspx">
+      <publishTime>04/25/2019 22:48:36</publishTime>
+    </File>
+    <File Include="UserRights.aspx">
+      <publishTime>04/24/2019 22:37:56</publishTime>
+    </File>
     <File Include="Web.config">
-      <publishTime>08/22/2018 14:36:21</publishTime>
+      <publishTime>04/25/2019 22:16:31</publishTime>
     </File>
   </ItemGroup>
 </Project>

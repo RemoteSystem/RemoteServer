@@ -23,8 +23,8 @@
     <!--font-awesome字体库-->
     <link href="styles/font-awesome.min.css" rel="stylesheet" />
     <!--页面加载进度条-->
-    <link href="styles/pace/dataurl.css" rel="stylesheet" />
-    <script src="scripts/pace/pace.min.js"></script>
+    <%--<link href="styles/pace/dataurl.css" rel="stylesheet" />
+    <script src="scripts/pace/pace.min.js"></script>--%>
     <!--jquery.hammer手势插件-->
     <script src="scripts/jquery.hammer/hammer.min.js"></script>
     <script src="scripts/jquery.hammer/jquery.hammer.js"></script>
@@ -65,9 +65,10 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                aria-expanded="false"><i class="fa fa-user fa-fw"></i>&nbsp;管理员&nbsp;<span class="caret"></span></a>
+                                aria-expanded="false"><i class="fa fa-user fa-fw"></i>&nbsp;<%=Session["name"].ToString()%>&nbsp;<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="Login.aspx"><i class="fa fa-sign-out fa-fw"></i>&nbsp;退 出</a></li>
+                                <li><a href="ChangePwd.aspx"><i class="fa fa-sign-out fa-fw"></i>&nbsp;修改密码</a></li>
+                                <li><a href="javascript:void(0)" onclick="logout();return false;"><i class="fa fa-sign-out fa-fw"></i>&nbsp;退 出</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -75,32 +76,57 @@
             </div>
         </nav>
         <div class="container-fluid all">
-            <div class="sidebar">
-                <ul class="nav">
-                    <%--<li><a href="Index.aspx">主页面</a></li>
-                    <li><a href="DeviceList.aspx">仪器列表</a></li>
-                    <li><a href="DeviceManage.aspx">仪器管理</a></li>
-                    <li><a href="DeviceQuery.aspx">查询</a></li>
-                    <li><a href="Statistics.aspx">统计</a></li>
-                    <li><a href="carousel.html">Carousel库</a></li>
-                    <li><a href="chart.html">Chart库</a></li>--%>
-
-                    <li><a href="DeviceList.aspx">仪器列表</a></li>
-                    <%--<li><a href="DeviceManage.aspx">仪器管理</a></li>--%>
-                    <li><a href="DeviceQuery.aspx">查询</a></li>
-                    <li class="has-sub">
-                        <a href="javascript:void(0);"><span>统计</span><i class="fa fa-caret-right fa-fw pull-right"></i></a>
-                        <ul class="sub-menu">
-                            <li><a href="StatisticAllDevices.aspx">所有机器</a></li>
-                            <li><a href="StatisticByModel.aspx">按模式统计</a></li>
-                            <li><a href="StatisticByArea.aspx">按区域统计</a></li>
-                            <li><a href="StatisticByType.aspx">按机型统计</a></li>
-                            <li><a href="StatisticByClose.aspx">按试剂封闭类型统计</a></li>
-                            <li><a href="StatisticByOEM.aspx">按OEM统计</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+            <%=menuText %>
+            <%--<div class="sidebar">
+                <div>
+                    <ul class="nav-header">
+                        <li>血球仪</li>
+                    </ul>
+                    <ul class="nav">
+                        <li><a href="DeviceList.aspx">仪器列表</a></li>
+                        <li><a href="DeviceQuery.aspx">查询</a></li>
+                        <li class="has-sub">
+                            <a href="javascript:void(0);"><span>统计</span><i class="fa fa-caret-right fa-fw pull-right"></i></a>
+                            <ul class="sub-menu">
+                                <li><a href="StatisticAllDevices.aspx">所有机器</a></li>
+                                <li><a href="StatisticByModel.aspx">按模式统计</a></li>
+                                <li><a href="StatisticByArea.aspx">按区域统计</a></li>
+                                <li><a href="StatisticByType.aspx">按机型统计</a></li>
+                                <li><a href="StatisticByClose.aspx">按试剂封闭类型统计</a></li>
+                                <li><a href="StatisticByOEM.aspx">按OEM统计</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <ul style="background-color: #81b5db; height: 1px;"></ul>
+                    <ul class="nav-header">
+                        <li>生化仪</li>
+                    </ul>
+                    <ul class="nav">
+                        <li><a href="BioDeviceList.aspx">仪器列表</a></li>
+                        <li><a href="BioDeviceQuery.aspx">仪器查询</a></li>
+                        <li class="has-sub">
+                            <a href="javascript:void(0);"><span>统计</span><i class="fa fa-caret-right fa-fw pull-right"></i></a>
+                            <ul class="sub-menu">
+                                <li><a href="BioStatisticAllDevices.aspx">所有机器</a></li>
+                                <li><a href="BioStatisticByArea.aspx">按区域统计</a></li>
+                                <li><a href="BioStatisticByType.aspx">按机型统计</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <ul style="background-color: #81b5db; height: 1px;"></ul>
+                    <ul class="nav-header">
+                        <li>用户管理</li>
+                    </ul>
+                    <ul class="nav">
+                        <li><a href="UserInfo.aspx">用户列表</a></li>
+                        <li><a href="UserRights.aspx">权限管理</a></li>
+                    </ul>
+                </div>
+            </div>--%>
             <div class="maincontent row">
                 <!--我是主要内容 start-->
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
@@ -120,6 +146,25 @@
             $(this).addClass("active");
         });
     });
+
+    function logout() {
+        var r = confirm("退出系统")
+        if (r == true) {
+            $.ajax({
+                type: "post",
+                url: "Login.aspx/Logout",
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                },
+                error: function (err) {
+                }
+            });
+
+            window.location.href = "Login.aspx";
+        }
+    }
 </script>
 </html>
 

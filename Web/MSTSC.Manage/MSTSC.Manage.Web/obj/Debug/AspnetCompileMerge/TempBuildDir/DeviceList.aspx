@@ -317,7 +317,7 @@
                 }
             });
 
-            getTypes();
+            //getTypes();
         });
         //初始化bootstrap-table的内容
         function InitMainTable() {
@@ -354,7 +354,7 @@
                         return "{'conditions':'','rows':'0','page':'0','sort':'','sortOrder':''}";
                     }
                     var conditions = "{\"QueryRange\":\"" + (type == 1 ? "" : $('input[name="rdoconnect"]:checked').val())
-                        + "\",\"DeviceType\":\"" + (type != 1 ? "" : $("#selType").val())
+                        + "\",\"DeviceType\":\"血液细胞分析仪"
                         + "\",\"QueryText\":\"" + (type != 1 ? "" : $("#querytext").val())
                         + "\"}";
 

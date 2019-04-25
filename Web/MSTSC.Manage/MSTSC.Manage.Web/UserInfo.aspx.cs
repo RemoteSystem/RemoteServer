@@ -112,7 +112,7 @@ namespace MSTSC.Manage.Web
             oldPwd = EncyptHelper.MD5(oldPwd);
             newPwd = EncyptHelper.MD5(newPwd);
 
-            User user = bll.getUserByUserNameAndPwd(userName, oldPwd);
+            User user = bll.getUserByUserNameAndPwd(userName, oldPwd, "");
             if (null != user)
             {
                 bll.changePwd(user.id, newPwd);

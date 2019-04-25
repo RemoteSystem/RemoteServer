@@ -24,7 +24,7 @@ namespace MSTSC.Manage.Web
             UserBLL bll = new UserBLL();
 
             password = EncyptHelper.MD5(password);
-            User user = bll.getUserByUserNameAndPwd(username, password);
+            User user = bll.getUserByUserNameAndPwd(username, password, "0");
             //if (username == "admin" && password == "bk#9876")
             if (null != user)
             {
