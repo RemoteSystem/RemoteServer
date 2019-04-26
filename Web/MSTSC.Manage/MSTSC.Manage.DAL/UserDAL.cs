@@ -110,7 +110,7 @@ namespace MSTSC.Manage.DAL
         {
             string sql = @"UPDATE `user` set ";
             sql += " name ='" + user.name + "', sex = " + user.sex + ", age = " + user.age + ", isAdmin = " + user.isAdmin + " where id = " + user.id;
-            sql += ");";
+            sql += ";";
             using (var conn = new MySqlConnection(Global.strConn))
             {
                 return conn.Execute(sql);

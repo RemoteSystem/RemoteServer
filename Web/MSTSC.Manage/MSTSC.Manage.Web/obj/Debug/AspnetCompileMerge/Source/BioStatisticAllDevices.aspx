@@ -32,7 +32,7 @@
                     <button type="button" id="btnSearch" class="btn btn-default btn-normal">查 询</button>
                     <button type="button" id="btnExport" class="btn btn-default btn-normal margin-left-10">导出结果</button>
                 </div>
-            </div>         
+            </div>
         </div>
     </div>
 
@@ -50,7 +50,7 @@
 
         $(document).ready(function () {
             InitMainTable();
-            
+
             $("#selModel").change(function () {
                 freshTable();
             });
@@ -139,15 +139,17 @@
                         title: '机器名'
                     }, {
                         field: 'SIM',
-                        title: 'SIM卡号',
-                        sortable: true
+                        title: 'SIM卡号'
                     }, {
                         field: 'SN',
-                        title: '仪器序列号',
-                        sortable: true
+                        title: '仪器序列号'
                     }, {
                         field: 'Model',
                         title: '仪器型号',
+                        align: 'center'
+                    }, {
+                        field: 'num',
+                        title: '项目编号',
                         align: 'center'
                     }, {
                         field: 'smpl',
@@ -179,7 +181,7 @@
             $table.bootstrapTable('refreshOptions', { pageNumber: 1, url: 'BioStatisticAllDevices.aspx/getDeviceList' });
             //$table.bootstrapTable('refresh', { url: 'StatisticAllDevices.aspx/getDeviceList' });
         }
-       
+
         function getModels() {
             $.ajax({
                 type: "post",

@@ -90,7 +90,7 @@ namespace MSTSC.Manage.Web
                     }
                     if (rights.IndexOf(",12") >= 0)
                     {
-                        menuText += "<li><a href='DeviceQuery.aspx'>查询</a></li>";
+                        menuText += "<li><a href='DeviceQuery.aspx'>仪器查询</a></li>";
                     }
                     if (rights.IndexOf(",13") >= 0)
                     {
@@ -131,7 +131,7 @@ namespace MSTSC.Manage.Web
                     menuText += @"<ul style='background-color: #81b5db; height: 1px;'></ul>
                     <div>
                     <ul class='nav-header'>
-                        <li>血球仪</li>
+                        <li>生化仪</li>
                     </ul>
                     <ul class='nav'>";
                     if (rights.IndexOf(",21") >= 0)

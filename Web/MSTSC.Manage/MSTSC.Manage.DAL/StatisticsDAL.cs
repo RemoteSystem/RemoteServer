@@ -440,39 +440,34 @@ FROM device_info,blood_count WHERE SN = device_sn {0}";
         public DataTable StatisticsAllBioDevicesDAL(QueryConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
         {
             StringBuilder whereSql = new StringBuilder();
-            var sql = @"SELECT IFNULL(d.DeviceName,'') AS DeviceName, d.SIM, d.SN, d.Model, c.smpl, c.R1, c.R2 FROM device_info d INNER JOIN ( SELECT SN FROM device_info {0} ";
-            sql += " LIMIT " + (pagerInfo.PageSize * (pagerInfo.CurrenetPageIndex - 1)) + "," + pagerInfo.PageSize;
-            sql += ") AS t USING (SN) LEFT JOIN bio_statistics_item c ON d.SN = c.device_sn;";
-
-            if (!string.IsNullOrEmpty(conditValue.Model))
-            {
-                whereSql.Append(@" AND Model='" + conditValue.Model + "'");
-            }
-
-            whereSql = new StringBuilder(" WHERE DeviceType ='生化仪' " + whereSql.ToString());
-
-            var SqlCondit = string.Format(sql, whereSql.ToString());
-            using (var conn = new MySqlConnection(Global.strConn))
-            {
-                MySqlDataAdapter adapter = new MySqlDataAdapter(SqlCondit, conn);
-                DataSet ds = new DataSet();
-                adapter.Fill(ds);
-                return ds.Tables[0];
-                //return conn.Query<dynamic>(SqlCondit).ToList();
-            }
-        }
-
-        public int getBioDeviceCount(QueryConditionModel conditValue)
-        {
-            StringBuilder whereSql = new StringBuilder();
-            string sql = @"SELECT count(1) FROM device_info d ";
+            string sql = @"SELECT IFNULL(d.DeviceName, '') AS DeviceName,d.SIM,d.Model,d.SN,c.num,c.smpl,c.R1,c.R2
+	                FROM device_info d LEFT OUTER JOIN bio_statistics_item c
+		            ON d.SN = c.device_sn WHERE d.DeviceType='生化仪' {0}
+	                LIMIT " + (pagerInfo.PageSize * (pagerInfo.CurrenetPageIndex - 1)) + "," + pagerInfo.PageSize; ;
 
             if (!string.IsNullOrEmpty(conditValue.Model))
             {
                 whereSql.Append(@" AND d.Model='" + conditValue.Model + "'");
             }
 
-            sql += " WHERE DeviceType ='生化仪' " + whereSql.ToString();
+            string SqlCondit = string.Format(sql, whereSql.ToString());
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                MySqlDataAdapter adapter = new MySqlDataAdapter(SqlCondit, conn);
+                DataSet ds = new DataSet();
+                adapter.Fill(ds);
+                return ds.Tables[0];
+            }
+        }
+
+        public int getBioDeviceCount(QueryConditionModel conditValue)
+        {
+            string sql = @"SELECT count(1) FROM device_info d LEFT OUTER JOIN bio_statistics_item c ON d.SN = c.device_sn WHERE d.DeviceType='生化仪' ";
+
+            if (!string.IsNullOrEmpty(conditValue.Model))
+            {
+                sql += @" AND d.Model='" + conditValue.Model + "'";
+            }
 
             using (var conn = new MySqlConnection(Global.strConn))
             {

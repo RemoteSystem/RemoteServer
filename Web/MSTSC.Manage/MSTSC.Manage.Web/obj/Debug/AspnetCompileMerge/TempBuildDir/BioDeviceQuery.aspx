@@ -37,12 +37,12 @@
 
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 nopadding form-inline">
                         <label>医院地址</label>
-                        <input id="HosAddr" />
+                        <input id="HosAddr" class="form-control" />
                     </div>
 
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 nopadding form-inline">
                         <label>医院名称</label>
-                        <input id="HosName" />
+                        <input id="HosName" class="form-control" />
                     </div>
 
                     <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2 nopadding form-inline">

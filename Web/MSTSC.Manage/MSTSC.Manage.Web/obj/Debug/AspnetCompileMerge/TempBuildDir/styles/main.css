@@ -184,8 +184,8 @@
         margin-bottom: 0px;
     }
 
-.search-condition select {
-    min-width: 60%;
+.search-condition .form-control {
+    width: 60% !important;
     height: 30px;
     padding: 0px 5px;
 }
