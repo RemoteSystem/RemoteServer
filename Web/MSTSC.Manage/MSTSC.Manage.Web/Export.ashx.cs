@@ -23,7 +23,7 @@ namespace MSTSC.Manage.Web
             //params
             string sn = context.Request["sn"] ?? "";
             string model = context.Request["model"] ?? "";
-            model = model.Replace("0", "");
+            if (model.Trim() == "0") model = "";
 
             DeviceQueryBLL bll = new DeviceQueryBLL();
             StatisticsBLL staticBll = new StatisticsBLL();
@@ -45,12 +45,12 @@ namespace MSTSC.Manage.Web
                 case "cuowu":
                     dt = bll.GetDeviceFaultForExportBLL();//获取导出数据源  
                     fileName = "错误信息";
-                    headers = new string[] { "id","仪器序列号","错误码", "时间" };
+                    headers = new string[] { "id", "仪器序列号", "错误码", "时间" };
                     break;
                 case "bio_all":
                     dt = staticBll.StatisticsAllBioDevicesForExportBLL(model);
                     fileName = "生化仪统计_所有机器";
-                    headers = new string[] { "仪器名", "SIM卡号", "仪器序列号", "仪器型号", "样本数", "R1消耗量", "R2消耗量" };
+                    headers = new string[] { "仪器名", "SIM卡号", "仪器序列号", "仪器型号", "项目编号", "样本数", "R1消耗量", "R2消耗量" };
                     break;
                 case "bio_area":
                     dt = staticBll.BioStatisticsByAreaForExportBLL(model);

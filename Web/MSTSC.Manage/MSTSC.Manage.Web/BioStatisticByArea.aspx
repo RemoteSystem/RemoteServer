@@ -21,7 +21,7 @@
 
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 padding-5">
                 <div class="form-inline">
-                    <span>产品项目</span>
+                    <span>仪器型号</span>
                     <select id="selModel" class="form-control" style="min-width: 160px;">
                         <option value="0">请选择</option>
                     </select>
@@ -32,7 +32,7 @@
                     <button type="button" id="btnSearch" class="btn btn-default btn-normal">查 询</button>
                     <button type="button" id="btnExport" class="btn btn-default btn-normal margin-left-10">导出结果</button>
                 </div>
-            </div>         
+            </div>
         </div>
     </div>
 
@@ -50,7 +50,7 @@
 
         $(document).ready(function () {
             InitMainTable();
-            
+
             $("#selModel").change(function () {
                 freshTable();
             });
@@ -136,23 +136,43 @@
                     }, {
                         field: 'Region',
                         title: '装机区域',
-                        sortable: true
+                        align: 'center'
+                    }, {
+                        field: 'num',
+                        title: '项目编号',
+                        align: 'center'
                     }, {
                         field: 'device_count',
                         title: '仪器总数',
-                        align: 'center'
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            if (!value) value = "0";
+                            return value;
+                        }
                     }, {
                         field: 'smpl',
                         title: '样本数',
-                        align: 'center'
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            if (!value) value = "0";
+                            return value;
+                        }
                     }, {
                         field: 'R1',
                         title: 'R1消耗量',
-                        align: 'center'
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            if (!value) value = "0";
+                            return value;
+                        }
                     }, {
                         field: 'R2',
                         title: 'R2消耗量',
-                        align: 'center'
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            if (!value) value = "0";
+                            return value;
+                        }
                     }],
                 onLoadSuccess: function () {
                 },
@@ -171,7 +191,7 @@
             $table.bootstrapTable('refreshOptions', { pageNumber: 1, url: 'BioStatisticByArea.aspx/getDeviceList' });
             //$table.bootstrapTable('refresh', { url: 'StatisticAllDevices.aspx/getDeviceList' });
         }
-       
+
         function getModels() {
             $.ajax({
                 type: "post",

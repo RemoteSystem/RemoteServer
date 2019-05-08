@@ -77,7 +77,7 @@ namespace MSTSC.Manage.Web
             DeviceQueryBLL bll = new DeviceQueryBLL();
             var result = bll.getBioModel();
 
-            var retvalue = JsonConvert.SerializeObject(result);
+            var retvalue = JsonConvert.SerializeObject(result).Replace("null","\"\"");
             return retvalue;
         }
 
@@ -91,7 +91,7 @@ namespace MSTSC.Manage.Web
             DeviceQueryBLL bll = new DeviceQueryBLL();
             var result = bll.getRegion();
 
-            var retvalue = JsonConvert.SerializeObject(result);
+            var retvalue = JsonConvert.SerializeObject(result).Replace("null", "\"\""); ;
             return retvalue;
         }
 
@@ -103,7 +103,7 @@ namespace MSTSC.Manage.Web
                 DeviceQueryBLL bll = new DeviceQueryBLL();
                 var result = bll.GetBioDeviceDetialBLL(sn);
 
-                var retvalue = JsonConvert.SerializeObject(result);
+                var retvalue = JsonConvert.SerializeObject(result).Replace("null", "\"\""); ;
                 return retvalue;
             }
             catch (Exception ex)
@@ -120,7 +120,7 @@ namespace MSTSC.Manage.Web
                 DeviceQueryBLL bll = new DeviceQueryBLL();
                 var result = bll.GetBioDeviceFaultBLL(sn);
 
-                var retvalue = JsonConvert.SerializeObject(result);
+                var retvalue = JsonConvert.SerializeObject(result).Replace("null", "\"\""); ;
                 return retvalue;
             }
             catch (Exception ex)
@@ -132,14 +132,12 @@ namespace MSTSC.Manage.Web
         [WebMethod]
         public static string getNumDetail(string sn, string num)
         {
-            //for test
-            num = "6700";
             try
             {
                 DeviceQueryBLL bll = new DeviceQueryBLL();
                 var result = bll.getNumDetail(sn, num);
 
-                var retvalue = JsonConvert.SerializeObject(result);
+                var retvalue = JsonConvert.SerializeObject(result).Replace("null", "\"\""); ;
                 return retvalue;
             }
             catch (Exception ex)

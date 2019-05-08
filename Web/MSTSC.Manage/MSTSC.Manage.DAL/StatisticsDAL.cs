@@ -479,9 +479,9 @@ FROM device_info,blood_count WHERE SN = device_sn {0}";
         public DataTable BioStatisticsByAreaDAL(QueryConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
         {
             StringBuilder whereSql = new StringBuilder();
-            string sql = @"SELECT d.Region, COUNT(d.SN) device_count, SUM(bc.smpl) AS smpl, SUM(bc.R1) AS R1, SUM(bc.R2) AS R2 
+            string sql = @"SELECT d.Region,bc.num, COUNT(d.SN) device_count, SUM(bc.smpl) AS smpl, SUM(bc.R1) AS R1, SUM(bc.R2) AS R2 
                 FROM device_info d LEFT JOIN bio_statistics_item bc ON d.SN = bc.device_sn {0} 
-                GROUP BY Region ORDER BY SN LIMIT " + (pagerInfo.PageSize * (pagerInfo.CurrenetPageIndex - 1)) + "," + pagerInfo.PageSize + ";";
+                GROUP BY Region,bc.num ORDER BY SN LIMIT " + (pagerInfo.PageSize * (pagerInfo.CurrenetPageIndex - 1)) + "," + pagerInfo.PageSize + ";";
 
             if (!string.IsNullOrEmpty(conditValue.DeviceType))
             {
@@ -547,10 +547,10 @@ FROM device_info,blood_count WHERE SN = device_sn {0}";
         public DataTable BioStatisticsByTypeDAL(QueryConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
         {
             StringBuilder whereSql = new StringBuilder();
-            string sql = @"SELECT case d.MachineType when 0 then '标准机' when 1 then '招标机' else '其他' end AS MachineType, 
+            string sql = @"SELECT case d.MachineType when 0 then '标准机' when 1 then '招标机' else '其他' end AS MachineType, bc.num,
                 COUNT(d.SN) device_count, SUM(bc.smpl) AS smpl, SUM(bc.R1) AS R1, SUM(bc.R2) AS R2 
                 FROM device_info d LEFT JOIN bio_statistics_item bc ON d.SN = bc.device_sn {0} 
-                GROUP BY MachineType ORDER BY SN LIMIT " + (pagerInfo.PageSize * (pagerInfo.CurrenetPageIndex - 1)) + "," + pagerInfo.PageSize + ";";
+                GROUP BY MachineType,bc.num ORDER BY SN LIMIT " + (pagerInfo.PageSize * (pagerInfo.CurrenetPageIndex - 1)) + "," + pagerInfo.PageSize + ";";
 
             if (!string.IsNullOrEmpty(conditValue.DeviceType))
             {

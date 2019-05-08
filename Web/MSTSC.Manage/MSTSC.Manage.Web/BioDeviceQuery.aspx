@@ -12,7 +12,7 @@
                 <div class="quick-search-condition padding-5">
                     <div class="form-inline text-center">
                         <select id="selType" class="form-control margin-top-5 margin-bottom-5">
-                            <option value="0">请选择产品类型</option>
+                            <%--<option value="0">请选择产品类型</option>--%>
                             <option value="生化仪">生化仪</option>
                         </select>
                         <input type="text" id="querytext" class="form-control margin-top-5 margin-bottom-5" value="" style="width: 275px;" placeholder="请输入仪器名称、SIM卡号或仪器序列号" />
@@ -237,6 +237,7 @@
 
             $('#quickquery').click(function () {
                 type = 1;
+                sn = "";
 
                 clearTimeout(tabletimer);
                 $table.bootstrapTable('refreshOptions', { pageNumber: 1, url: 'DeviceQuery.aspx/getDeviceList' });
@@ -247,6 +248,7 @@
                 var page = 1;
                 var sort = "";
                 var order = "";
+                sn = "";
 
                 clearTimeout(tabletimer);
                 $table.bootstrapTable('refreshOptions', { pageNumber: 1, url: 'DeviceQuery.aspx/getDeviceList' });
@@ -324,7 +326,12 @@
                 },
                 responseHandler: function (res) {
                     //在ajax请求成功后，填充数据之前可以对返回的数据进行处理  
-                    return JSON.parse(res.d);
+                    var json = JSON.parse(res.d);
+                    if (!sn && json && json.rows.length) {
+                        sn = json.rows[0].SN;
+                        getRowInfo();
+                    }
+                    return json;
                 },
                 columns: [
                     {
@@ -358,6 +365,10 @@
 
                         var r = $("[data-uniqueid='" + sn + "']");
                         r.css("background-color", "#C0C0C0");
+                        if (r.length == 0) {
+                            sn = "";
+                            clearInfo();
+                        }
                     }
                     InitSampleTable();
                 },
@@ -409,7 +420,7 @@
                     }
                 });
             } else {
-                alert("请先选择需要查看的行！");
+                clearInfo();
             }
         }
 
@@ -531,6 +542,9 @@
         }
 
         function getFault() {
+            if (!sn) { 
+                return;
+            }
             $.ajax({
                 type: "post",
                 url: "BioDeviceQuery.aspx/GetBioDeviceFault",
@@ -573,6 +587,9 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
+                    if (data.d == "null") {
+                        $("#myModal .row div").find("label:last").html("");
+                    }
                     var result = eval("[" + data.d + "]")[0];
                     for (attribute in result) {
                         modal.find("#" + attribute).html(result[attribute]);
@@ -582,6 +599,13 @@
                 }
             });
         });
+
+        function clearInfo() {
+            $(".margin-left-5").html("");
+            $("#UpdateTime").html("");
+            freshSampleTable();
+            $("#fault").html('<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-5 text-center"><span>无错误信息</span></div>');
+        }
 
     </script>
 </asp:Content>

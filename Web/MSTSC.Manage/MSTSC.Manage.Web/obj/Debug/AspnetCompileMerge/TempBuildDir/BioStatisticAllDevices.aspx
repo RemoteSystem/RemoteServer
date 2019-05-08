@@ -21,7 +21,7 @@
 
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 padding-5">
                 <div class="form-inline">
-                    <span>产品项目</span>
+                    <span>仪器型号</span>
                     <select id="selModel" class="form-control" style="min-width: 160px;">
                         <option value="0">请选择</option>
                     </select>
@@ -30,7 +30,7 @@
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 padding-5">
                 <div class="form-inline">
                     <button type="button" id="btnSearch" class="btn btn-default btn-normal">查 询</button>
-                    <button type="button" id="btnExport" class="btn btn-default btn-normal margin-left-10">导出结果</button>
+                    <button type="button" id="btnExportyb" class="btn btn-default btn-normal margin-left-10">导出结果</button>
                 </div>
             </div>
         </div>
@@ -64,7 +64,8 @@
             });
 
             $('#btnExportyb').click(function () {
-                window.location.href = "Export.ashx?Action=bio_all&model=" + $("#selModel").val();
+                window.open("Export.ashx?Action=bio_all&model=" + $("#selModel").val(),"_blank");  
+                //window.location.href = "Export.ashx?Action=bio_all&model=" + $("#selModel").val();
             });
 
             getModels();
@@ -136,13 +137,16 @@
                     },
                     {
                         field: 'DeviceName',
-                        title: '机器名'
+                        title: '机器名',
+                        align: 'center'
                     }, {
                         field: 'SIM',
-                        title: 'SIM卡号'
+                        title: 'SIM卡号',
+                        align: 'center'
                     }, {
                         field: 'SN',
-                        title: '仪器序列号'
+                        title: '仪器序列号',
+                        align: 'center'
                     }, {
                         field: 'Model',
                         title: '仪器型号',
@@ -154,15 +158,27 @@
                     }, {
                         field: 'smpl',
                         title: '样本数',
-                        align: 'center'
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            if (!value) value = "0";
+                            return value;
+                        }
                     }, {
                         field: 'R1',
                         title: 'R1消耗量',
-                        align: 'center'
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            if (!value) value = "0";
+                            return value;
+                        }
                     }, {
                         field: 'R2',
                         title: 'R2消耗量',
-                        align: 'center'
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            if (!value) value = "0";
+                            return value;
+                        }
                     }],
                 onLoadSuccess: function () {
                 },

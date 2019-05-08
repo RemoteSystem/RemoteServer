@@ -25,10 +25,10 @@ namespace SocketServer
                 ClearIdleSession = true, //60秒执行一次清理90秒没数据传送的连接
                 ClearIdleSessionInterval = 60,
                 IdleSessionTimeOut = 90,
-                MaxRequestLength = 1024 * 2, //最大包长度
+                MaxRequestLength = 1024 * 10, //最大包长度
                 Ip = "Any",
                 Port = 65531,
-                MaxConnectionNumber = 300,
+                MaxConnectionNumber = 1000,
                 TextEncoding = "GBK"
             };
 

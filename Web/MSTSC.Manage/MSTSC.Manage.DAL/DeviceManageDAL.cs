@@ -292,6 +292,18 @@ bm.sampling_times_fault,bm.syringe_times_syringe_fault,bm.inject_times_fault,bm.
             {
                 whereSql.Append(@" AND d.Region='" + conditValue.Region + "'");
             }
+            if (!string.IsNullOrEmpty(conditValue.Model))
+            {
+                whereSql.Append(@" AND Model='" + conditValue.Model + "'");
+            }
+            if (!string.IsNullOrEmpty(conditValue.HosAddr))
+            {
+                whereSql.Append(@" AND Address like '%" + conditValue.HosAddr + "%'");
+            }
+            if (!string.IsNullOrEmpty(conditValue.HosName))
+            {
+                whereSql.Append(@" AND Hospital like '%" + conditValue.HosName + "%'");
+            }
 
             if (!string.IsNullOrEmpty(whereSql.ToString()))
             {

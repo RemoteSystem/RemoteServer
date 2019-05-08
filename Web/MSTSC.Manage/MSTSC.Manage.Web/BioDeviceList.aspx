@@ -214,6 +214,7 @@
             $('#quickquery').click(function () {
                 type = 1;
 
+                sn = "";
                 clearTimeout(tabletimer);
                 $table.bootstrapTable('refreshOptions', { pageNumber: 1, url: 'DeviceQuery.aspx/getDeviceList' });
             });
@@ -223,6 +224,7 @@
                 var page = 1;
                 var sort = "";
                 var order = "";
+                sn = "";
 
                 clearTimeout(tabletimer);
                 $table.bootstrapTable('refreshOptions', { pageNumber: 1, url: 'DeviceQuery.aspx/getDeviceList' });
@@ -277,7 +279,7 @@
                     }
                     var conditions = "{\"QueryRange\":\"" + (type == 1 ? "" : $('input[name="rdoconnect"]:checked').val())
                          + "\",\"DeviceType\":\"生化仪"
-                        + "\",\"QueryText\":\"" + (type != 1 ? "" : $("#querytext").val())                       
+                        + "\",\"QueryText\":\"" + (type != 1 ? "" : $("#querytext").val())
                         + "\"}";
 
                     rows = params.limit ? params.limit : rows;
@@ -296,7 +298,12 @@
                 },
                 responseHandler: function (res) {
                     //在ajax请求成功后，填充数据之前可以对返回的数据进行处理  
-                    return JSON.parse(res.d);
+                    var json = JSON.parse(res.d);
+                    if (!sn && json && json.rows.length) {
+                        sn = json.rows[0].SN;
+                        getRowInfo();
+                    }
+                    return json;
                 },
                 columns: [
                     {
@@ -330,6 +337,10 @@
 
                         var r = $("[data-uniqueid='" + sn + "']");
                         r.css("background-color", "#C0C0C0");
+                        if (r.length == 0) {
+                            sn = "";
+                            clearInfo();
+                        }
                     }
                     InitSampleTable();
                 },
@@ -381,7 +392,7 @@
                     }
                 });
             } else {
-                alert("请先选择需要查看的行！");
+                clearInfo();
             }
         }
 
@@ -503,6 +514,9 @@
         }
 
         function getFault() {
+            if (!sn) {
+                return;
+            }
             $.ajax({
                 type: "post",
                 url: "BioDeviceQuery.aspx/GetBioDeviceFault",
@@ -531,6 +545,7 @@
         }
 
         function showDetail(num) {
+            console.info(num);
             $("#myModal").attr("num", num);
             $('#myModal').modal('show');
         }
@@ -554,6 +569,13 @@
                 }
             });
         });
+
+        function clearInfo() {
+            $(".margin-left-5").html("");
+            $("#UpdateTime").html("");
+            freshSampleTable();
+            $("#fault").html('<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-5 text-center"><span>无错误信息</span></div>');
+        }
 
     </script>
 </asp:Content>

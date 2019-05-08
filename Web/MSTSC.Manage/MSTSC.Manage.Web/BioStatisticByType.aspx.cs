@@ -38,7 +38,7 @@ namespace MSTSC.Manage.Web
             //Json格式的要求{total:22,rows:{}}
             //构造成Json的格式传递
             var result = new { total = pagerInfo.RecordCount, rows = dt };
-            return JsonConvert.SerializeObject(result).Replace("null", "0");
+            return JsonConvert.SerializeObject(result).Replace("null", "\"\"");
         }
         
     }
