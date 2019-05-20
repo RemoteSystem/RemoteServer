@@ -52,6 +52,7 @@ namespace RemoteController
                 bioInfo.starttime = dt;
                 num = ReceiveDao.UpdateOrSaveSessionForBio(bioInfo);
                 SaveBioData(bioInfo);
+                SaveLog(bioInfo.sn, strJson);
             }
             else
             {
@@ -111,6 +112,11 @@ namespace RemoteController
             {
                 Console.WriteLine(e.Message);
             }
+        }
+
+        private static void SaveLog(string sn, string info)
+        {
+            BioDao.SaveLog(sn, info);
         }
 
     }

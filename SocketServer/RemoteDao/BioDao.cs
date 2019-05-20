@@ -203,5 +203,22 @@ namespace RemoteDao
             return num;
         }
 
+        public static int SaveLog(string sn, string info)
+        {
+            if (string.IsNullOrEmpty(sn) || string.IsNullOrEmpty(info)) return 0;
+
+            string sql = "insert into device_log(device_sn,content) values(?sn,?data);";
+
+            MySqlParameter[] parameters = { new MySqlParameter("?sn", MySqlDbType.VarChar),                                           
+                                            new MySqlParameter("?data", MySqlDbType.MediumText)};
+
+            parameters[0].Value = sn;
+            parameters[1].Value = info;
+
+            int num = MySqlHelper.ExecuteNonQuery(Conn, sql, parameters);
+
+            return num;
+        }
+
     }
 }

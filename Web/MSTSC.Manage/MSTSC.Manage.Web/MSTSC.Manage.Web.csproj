@@ -64,12 +64,18 @@
   <ItemGroup>
     <Content Include="BasePage.aspx" />
     <Content Include="BioDeviceList.aspx" />
+    <Content Include="DeviceLog.aspx" />
     <Content Include="BioStatisticByType.aspx" />
     <Content Include="BioStatisticByArea.aspx" />
     <Content Include="ChangePwd.aspx" />
+    <Content Include="scripts\bootstrap-datetimepicker\bootstrap-datetimepicker.js" />
+    <Content Include="scripts\bootstrap-datetimepicker\bootstrap-datetimepicker.min.js" />
+    <Content Include="scripts\bootstrap-datetimepicker\bootstrap-datetimepicker.zh-CN.js" />
     <Content Include="scripts\ztree\jquery.ztree.core.js" />
     <Content Include="scripts\ztree\jquery.ztree.excheck.js" />
     <Content Include="scripts\ztree\jquery.ztree.exedit.js" />
+    <Content Include="styles\bootstrap-datetimepicker\bootstrap-datetimepicker.css" />
+    <Content Include="styles\bootstrap-datetimepicker\bootstrap-datetimepicker.min.css" />
     <Content Include="styles\bootstrapStyle\bootstrapStyle.css" />
     <Content Include="styles\bootstrapStyle\img\bootstrap.gif" />
     <Content Include="styles\bootstrapStyle\img\bootstrap.png" />
@@ -156,6 +162,13 @@
     </Compile>
     <Compile Include="BioDeviceList.aspx.designer.cs">
       <DependentUpon>BioDeviceList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DeviceLog.aspx.cs">
+      <DependentUpon>DeviceLog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DeviceLog.aspx.designer.cs">
+      <DependentUpon>DeviceLog.aspx</DependentUpon>
     </Compile>
     <Compile Include="BioStatisticByType.aspx.cs">
       <DependentUpon>BioStatisticByType.aspx</DependentUpon>

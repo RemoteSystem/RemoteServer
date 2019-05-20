@@ -59,6 +59,15 @@ namespace MSTSC.Manage.Web
                         <li><a href='UserRights.aspx'>权限管理</a></li>
                     </ul>
                 </div>
+                <div>
+                    <ul style='background-color: #81b5db; height: 1px;'></ul>
+                    <ul class='nav-header'>
+                        <li>日志</li>
+                    </ul>
+                    <ul class='nav'>
+                        <li><a href='DeviceLog.aspx'>日志查询</a></li>
+                    </ul>
+                </div>
             </div>";
 
         protected void Page_Load(object sender, EventArgs e)
@@ -180,6 +189,20 @@ namespace MSTSC.Manage.Web
                     {
                         menuText += "<li><a href='UserRights.aspx'>权限管理</a></li>";
                     }
+                    menuText += @"</ul></div>";
+                }
+                if (rights.IndexOf(",4") >= 0)
+                {
+                    menuText += @"<ul style='background-color: #81b5db; height: 1px;'></ul>
+                    <div>
+                    <ul class='nav-header'>
+                        <li>日志</li>
+                    </ul>
+                    <ul class='nav'>";
+                    if (rights.IndexOf(",41") >= 0)
+                    {
+                        menuText += "<li><a href='DeviceLog.aspx'>日志查询</a></li>";
+                    }                    
                     menuText += @"</ul></div>";
                 }
             }

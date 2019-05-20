@@ -269,7 +269,10 @@
 
         { id: 3, pId: 0, name: "用户管理", open: true, chkDisabled: false },
         { id: 31, pId: 3, name: "用户列表", chkDisabled: false },
-        { id: 32, pId: 3, name: "权限管理", chkDisabled: false }
+        { id: 32, pId: 3, name: "权限管理", chkDisabled: false },
+
+        { id: 4, pId: 0, name: "日志", open: true, chkDisabled: false },
+        { id: 41, pId: 4, name: "日志查询", chkDisabled: false },
         ];
 
         ///////////////////////////////////

@@ -30,7 +30,7 @@
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 padding-5">
                 <div class="form-inline">
                     <button type="button" id="btnSearch" class="btn btn-default btn-normal">查 询</button>
-                    <button type="button" id="btnExport" class="btn btn-default btn-normal margin-left-10">导出结果</button>
+                    <button type="button" id="btnExportyb" class="btn btn-default btn-normal margin-left-10">导出结果</button>
                 </div>
             </div>
         </div>
@@ -64,7 +64,8 @@
             });
 
             $('#btnExportyb').click(function () {
-                window.location.href = "Export.ashx?Action=bio_area&model=" + $("#selModel").val();
+                //window.location.href = "Export.ashx?Action=bio_area&model=" + $("#selModel").val();
+                window.open("Export.ashx?Action=bio_area&model=" + $("#selModel").val(), "_blank");
             });
 
             getModels();
@@ -131,7 +132,7 @@
                         align: "center",
                         width: 40,
                         formatter: function (value, row, index) {
-                            return index + 1;
+                            return (page - 1) * rows + index + 1;
                         }
                     }, {
                         field: 'Region',

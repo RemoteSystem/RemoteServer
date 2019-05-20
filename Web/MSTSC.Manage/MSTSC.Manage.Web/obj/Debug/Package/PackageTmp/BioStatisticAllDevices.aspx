@@ -132,7 +132,7 @@
                         align: "center",
                         width: 40,
                         formatter: function (value, row, index) {
-                            return index + 1;
+                            return (page - 1) * rows + index + 1;
                         }
                     },
                     {

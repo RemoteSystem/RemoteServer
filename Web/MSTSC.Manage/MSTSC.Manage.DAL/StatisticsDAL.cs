@@ -440,7 +440,7 @@ FROM device_info,blood_count WHERE SN = device_sn {0}";
         public DataTable StatisticsAllBioDevicesDAL(QueryConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
         {
             StringBuilder whereSql = new StringBuilder();
-            string sql = @"SELECT IFNULL(d.DeviceName, '') AS DeviceName,d.SIM,d.Model,d.SN,c.num,c.smpl,c.R1,c.R2
+            string sql = @"SELECT IFNULL(d.DeviceName, '') AS DeviceName,d.SIM,d.SN,d.Model,c.num,c.smpl,c.R1,c.R2
 	                FROM device_info d LEFT OUTER JOIN bio_statistics_item c
 		            ON d.SN = c.device_sn WHERE d.DeviceType='生化仪' {0}
 	                LIMIT " + (pagerInfo.PageSize * (pagerInfo.CurrenetPageIndex - 1)) + "," + pagerInfo.PageSize; ;
@@ -516,7 +516,8 @@ FROM device_info,blood_count WHERE SN = device_sn {0}";
         public int getAreaBioDeviceCount(QueryConditionModel conditValue)
         {
             StringBuilder whereSql = new StringBuilder();
-            string sql = @"SELECT COUNT(1) AS count FROM(SELECT Region FROM device_info d {0} GROUP BY Region)t; ";
+            string sql = @"SELECT COUNT(1) AS count FROM(SELECT d.Region,bc.num FROM device_info d 
+                           LEFT JOIN bio_statistics_item bc ON d.SN = bc.device_sn {0} GROUP BY Region,bc.num)t; ";
 
             if (!string.IsNullOrEmpty(conditValue.DeviceType))
             {
@@ -585,7 +586,8 @@ FROM device_info,blood_count WHERE SN = device_sn {0}";
         public int getTypeBioDeviceCount(QueryConditionModel conditValue)
         {
             StringBuilder whereSql = new StringBuilder();
-            string sql = @"SELECT COUNT(1) AS count FROM(SELECT MachineType FROM device_info d {0} GROUP BY MachineType)t; ";
+            string sql = @"SELECT COUNT(1) AS count FROM(SELECT d.MachineType, bc.num FROM device_info d 
+                           LEFT JOIN bio_statistics_item bc ON d.SN = bc.device_sn {0} GROUP BY MachineType,bc.num)t; ";
 
             if (!string.IsNullOrEmpty(conditValue.DeviceType))
             {
@@ -600,6 +602,135 @@ FROM device_info,blood_count WHERE SN = device_sn {0}";
             {
                 whereSql.Append(@" AND d.Model='" + conditValue.Model + "'");
             }           
+
+            if (!string.IsNullOrEmpty(whereSql.ToString()))
+            {
+                whereSql = new StringBuilder(" WHERE " + whereSql.ToString().Substring(4));
+            }
+
+            var SqlCondit = string.Format(sql, whereSql.ToString());
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                return conn.QuerySingle<int>(SqlCondit);
+            }
+        }
+
+
+        public DataTable StatisticsLogsDAL(LogConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
+        {
+            StringBuilder whereSql = new StringBuilder();
+            string sql = @"SELECT d.DeviceName,d.SIM,d.SN,d.DeviceType,d.Model,dl.dtinsert,dl.content
+                            FROM device_log dl LEFT JOIN device_info d ON dl.device_sn = d.SN {0}
+                            ORDER BY dl.dtinsert DESC, dl.id LIMIT " + (pagerInfo.PageSize * (pagerInfo.CurrenetPageIndex - 1)) + "," + pagerInfo.PageSize + ";";
+
+            if (!string.IsNullOrEmpty(conditValue.DeviceType))
+            {
+                whereSql.Append(@" AND DeviceType='" + conditValue.DeviceType + "'");
+            }
+            else
+            {
+                whereSql.Append(@" AND DeviceType ='生化仪'");
+            }
+
+            if (!string.IsNullOrEmpty(conditValue.Model))
+            {
+                whereSql.Append(@" AND Model='" + conditValue.Model + "'");
+            }
+
+            if (!string.IsNullOrEmpty(conditValue.Region))
+            {
+                whereSql.Append(@" AND Region='" + conditValue.Region + "'");
+            }
+
+            if (!string.IsNullOrEmpty(conditValue.DeviceName))
+            {
+                whereSql.Append(@" AND DeviceName='" + conditValue.DeviceName + "'");
+            }
+
+            if (!string.IsNullOrEmpty(conditValue.SIM))
+            {
+                whereSql.Append(@" AND SIM='" + conditValue.SIM + "'");
+            }
+
+            if (!string.IsNullOrEmpty(conditValue.SN))
+            {
+                whereSql.Append(@" AND SN='" + conditValue.SN + "'");
+            }
+
+            if (!string.IsNullOrEmpty(conditValue.dtStart))
+            {
+                whereSql.Append(@" AND dtInsert >='" + conditValue.dtStart + "'");
+            }
+
+            if (!string.IsNullOrEmpty(conditValue.dtEnd))
+            {
+                whereSql.Append(@" AND dtInsert <='" + conditValue.dtEnd + "'");
+            }
+
+            if (!string.IsNullOrEmpty(whereSql.ToString()))
+            {
+                whereSql = new StringBuilder(" WHERE " + whereSql.ToString().Substring(4));
+            }
+
+            var SqlCondit = string.Format(sql, whereSql.ToString());
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                MySqlDataAdapter adapter = new MySqlDataAdapter(SqlCondit, conn);
+                DataSet ds = new DataSet();
+                adapter.Fill(ds);
+
+                return ds.Tables[0];
+            }
+        }
+
+        public int getLogCount(LogConditionModel conditValue)
+        {
+            StringBuilder whereSql = new StringBuilder();
+            string sql = @"SELECT COUNT(1) AS count FROM(SELECT dl.device_sn FROM device_log dl LEFT JOIN device_info d ON dl.device_sn = d.SN {0})t; ";
+
+            if (!string.IsNullOrEmpty(conditValue.DeviceType))
+            {
+                whereSql.Append(@" AND DeviceType='" + conditValue.DeviceType + "'");
+            }
+            else
+            {
+                whereSql.Append(@" AND DeviceType ='生化仪'");
+            }
+
+            if (!string.IsNullOrEmpty(conditValue.Model))
+            {
+                whereSql.Append(@" AND Model='" + conditValue.Model + "'");
+            }
+
+            if (!string.IsNullOrEmpty(conditValue.Region))
+            {
+                whereSql.Append(@" AND Region='" + conditValue.Region + "'");
+            }
+
+            if (!string.IsNullOrEmpty(conditValue.DeviceName))
+            {
+                whereSql.Append(@" AND DeviceName='" + conditValue.DeviceName + "'");
+            }
+
+            if (!string.IsNullOrEmpty(conditValue.SIM))
+            {
+                whereSql.Append(@" AND SIM='" + conditValue.SIM + "'");
+            }
+
+            if (!string.IsNullOrEmpty(conditValue.SN))
+            {
+                whereSql.Append(@" AND SN='" + conditValue.SN + "'");
+            }
+
+            if (!string.IsNullOrEmpty(conditValue.dtStart))
+            {
+                whereSql.Append(@" AND dtInsert >='" + conditValue.dtStart + "'");
+            }
+
+            if (!string.IsNullOrEmpty(conditValue.dtEnd))
+            {
+                whereSql.Append(@" AND dtInsert <='" + conditValue.dtEnd + "'");
+            }
 
             if (!string.IsNullOrEmpty(whereSql.ToString()))
             {

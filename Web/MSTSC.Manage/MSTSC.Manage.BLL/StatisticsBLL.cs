@@ -132,6 +132,16 @@ namespace MSTSC.Manage.BLL
             return dal.getTypeBioDeviceCount(conditValue);
         }
 
+        public DataTable StatisticsLogsBLL(LogConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
+        {
+            return dal.StatisticsLogsDAL(conditValue, pagerInfo, sortInfo);
+        }
+
+        public int getLogCount(LogConditionModel conditValue)
+        {
+            return dal.getLogCount(conditValue);
+        }
+
         public DataTable StatisticsAllBioDevicesForExportBLL(string model)
         {
             QueryConditionModel conditValue = new QueryConditionModel();
@@ -165,6 +175,14 @@ namespace MSTSC.Manage.BLL
             pagerInfo.CurrenetPageIndex = 1;
             pagerInfo.PageSize = 65530;
             return dal.BioStatisticsByTypeDAL(conditValue, pagerInfo, null);
+        }
+
+        public DataTable StatisticsLogsForExportBLL(LogConditionModel conditValue)
+        {
+            PagerInfo pagerInfo = new PagerInfo();
+            pagerInfo.CurrenetPageIndex = 1;
+            pagerInfo.PageSize = 65530;
+            return dal.StatisticsLogsDAL(conditValue, pagerInfo, null);
         }
 
     }

@@ -388,7 +388,6 @@
 
                     sn = row.SN;
                     getRowInfo();
-                    freshSampleTable();
                 }
             });
         }
@@ -413,6 +412,7 @@
                             $("#" + attribute).html(result[attribute]);
                         }
                         getFault();
+                        freshSampleTable();
                         rowtimer = setTimeout(getRowInfo, 13000);
                     },
                     error: function (err) {

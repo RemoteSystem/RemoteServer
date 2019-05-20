@@ -1,4 +1,6 @@
 ﻿using MSTSC.Manage.BLL;
+using MSTSC.Manage.Model;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -24,6 +26,8 @@ namespace MSTSC.Manage.Web
             string sn = context.Request["sn"] ?? "";
             string model = context.Request["model"] ?? "";
             if (model.Trim() == "0") model = "";
+
+            string conditions = context.Request["conditions"] ?? "";
 
             DeviceQueryBLL bll = new DeviceQueryBLL();
             StatisticsBLL staticBll = new StatisticsBLL();
@@ -55,12 +59,18 @@ namespace MSTSC.Manage.Web
                 case "bio_area":
                     dt = staticBll.BioStatisticsByAreaForExportBLL(model);
                     fileName = "生化仪统计_按区域";
-                    headers = new string[] { "装机区域", "仪器总数", "样本数", "R1消耗量", "R2消耗量" };
+                    headers = new string[] { "装机区域", "项目编号", "仪器总数", "样本数", "R1消耗量", "R2消耗量" };
                     break;
                 case "bio_type":
                     dt = staticBll.BioStatisticsByTypeForExportBLL(model);
                     fileName = "生化仪统计_按机型";
-                    headers = new string[] { "机型", "仪器总数", "样本数", "R1消耗量", "R2消耗量" };
+                    headers = new string[] { "机型", "项目编号", "仪器总数", "样本数", "R1消耗量", "R2消耗量" };
+                    break;
+                case "bio_log":
+                    LogConditionModel conditionModel = JsonConvert.DeserializeObject<LogConditionModel>(conditions.Replace("\"0\"", "\"\""));
+                    dt = staticBll.StatisticsLogsForExportBLL(conditionModel);
+                    fileName = "日志查询";
+                    headers = new string[] { "仪器名称", "SIM卡号", "仪器序列号", "仪器类型", "仪器型号", "发生时间", "日志内容" };
                     break;
             }
             ExportExcel(context, dt, headers, fileName + sn + "_" + DateTime.Now.ToString("yyyyMMddHHmmss"));
@@ -108,11 +118,11 @@ namespace MSTSC.Manage.Web
                 {
                     if (i == (cl - 1))
                     {
-                        ls_item += row[i].ToString() + "\n";
+                        ls_item += row[i].ToString().Replace("\n","").Replace("\t","") + "\n";
                     }
                     else
                     {
-                        ls_item += row[i].ToString() + "\t";
+                        ls_item += "=\"" + row[i].ToString() + "\"\t";
                     }
                 }
                 context.Response.Output.Write(ls_item);
