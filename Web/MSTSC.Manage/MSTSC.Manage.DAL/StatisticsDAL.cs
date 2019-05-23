@@ -66,7 +66,7 @@ namespace MSTSC.Manage.DAL
         public int getDeviceCount(QueryConditionModel conditValue)
         {
             StringBuilder whereSql = new StringBuilder();
-            string sql = @"SELECT count(1) FROM device_info d where ";
+            string sql = @"SELECT count(1) FROM device_info d ";
 
             if (!string.IsNullOrEmpty(conditValue.DeviceType))
             {

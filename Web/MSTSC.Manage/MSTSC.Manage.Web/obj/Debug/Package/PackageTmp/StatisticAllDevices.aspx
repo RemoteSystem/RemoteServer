@@ -86,11 +86,11 @@
             });
 
             $('#btnExportyb').click(function () {
-                window.location.href = "Export.ashx?Action=yangben";
+                window.open("Export.ashx?Action=yangben","_blank");
             });
 
             $('#btnExportcw').click(function () {
-                window.location.href = "Export.ashx?Action=cuowu";
+                window.open("Export.ashx?Action=cuowu", "_blank");
             });
 
             getTypes();
