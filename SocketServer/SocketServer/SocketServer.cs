@@ -28,7 +28,7 @@ namespace SocketServer
                 MaxRequestLength = 1024 * 10, //最大包长度
                 Ip = "Any",
                 Port = 65531,
-                MaxConnectionNumber = 1000,
+                MaxConnectionNumber = 10000,
                 TextEncoding = "GBK"
             };
 

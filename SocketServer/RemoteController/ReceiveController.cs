@@ -19,6 +19,7 @@ namespace RemoteController
             int num = 0;
             BloodInfo bloodInfo = null;
             BioInfo bioInfo = null;
+            PoctInfo poctInfo = null;
 
             strJson = strJson.Trim().TrimStart('&').TrimEnd('#');
             try
@@ -26,6 +27,10 @@ namespace RemoteController
                 if (strJson.IndexOf("\"bio\"") >= 0)
                 {//生化仪
                     bioInfo = JsonConvert.DeserializeObject<BioInfo>(strJson);
+                }
+                else if (strJson.IndexOf("\"poct\"") >= 0)
+                {//POCT
+                    poctInfo = JsonConvert.DeserializeObject<PoctInfo>(strJson);
                 }
                 else
                 {//血液分析仪
@@ -53,6 +58,14 @@ namespace RemoteController
                 num = ReceiveDao.UpdateOrSaveSessionForBio(bioInfo);
                 SaveBioData(bioInfo);
                 SaveLog(bioInfo.sn, strJson);
+            }
+            else if (poctInfo != null)
+            {
+                poctInfo.sessionid = id;
+                poctInfo.starttime = dt;
+                num = ReceiveDao.UpdateOrSaveSessionForPoct(poctInfo);
+                SavePoctData(poctInfo);
+                SaveLog(poctInfo.sn, strJson);
             }
             else
             {
@@ -106,6 +119,28 @@ namespace RemoteController
                     BioDao.UpdateOrSaveStatistics(info);
                     BioDao.UpdateOrSaveStatisticsItem(info);
                     BioDao.SaveFault(info);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        private static void SavePoctData(PoctInfo info)
+        {
+            try
+            {
+                if (info.dump != null)
+                {
+                    PoctDao.InsertDump(info);
+                }
+                if (info.category != null && info.category.poct != null)
+                {
+                    PoctDao.UpdateOrSavePoctItem(info);
+                    PoctDao.UpdateOrSaveStatistics(info);
+                    PoctDao.UpdateOrSaveStatisticsItem(info);
+                    PoctDao.SaveFault(info);
                 }
             }
             catch (Exception e)
