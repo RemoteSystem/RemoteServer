@@ -16,34 +16,34 @@
       <publishTime>04/19/2018 10:10:12</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.BLL.dll">
-      <publishTime>05/23/2019 23:18:01</publishTime>
+      <publishTime>08/04/2019 12:00:41</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.BLL.pdb">
-      <publishTime>05/23/2019 23:18:01</publishTime>
+      <publishTime>08/04/2019 12:00:41</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.DAL.dll">
-      <publishTime>05/23/2019 23:18:01</publishTime>
+      <publishTime>08/04/2019 12:00:41</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.DAL.pdb">
-      <publishTime>05/23/2019 23:18:01</publishTime>
+      <publishTime>08/04/2019 12:00:41</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.Model.dll">
-      <publishTime>05/23/2019 23:18:01</publishTime>
+      <publishTime>08/04/2019 12:00:41</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.Model.pdb">
-      <publishTime>05/23/2019 23:18:01</publishTime>
+      <publishTime>08/04/2019 12:00:41</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.Utils.dll">
-      <publishTime>05/23/2019 22:22:08</publishTime>
+      <publishTime>08/04/2019 12:00:41</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.Utils.pdb">
-      <publishTime>05/23/2019 22:22:08</publishTime>
+      <publishTime>08/04/2019 12:00:41</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.Web.dll">
-      <publishTime>05/23/2019 23:18:02</publishTime>
+      <publishTime>08/04/2019 12:00:42</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.Web.pdb">
-      <publishTime>05/23/2019 23:18:02</publishTime>
+      <publishTime>08/04/2019 12:00:42</publishTime>
     </File>
     <File Include="bin/MySql.Data.dll">
       <publishTime>04/19/2018 10:10:12</publishTime>
@@ -94,10 +94,10 @@
       <publishTime>04/24/2019 23:32:38</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>05/10/2018 23:57:03</publishTime>
+      <publishTime>08/04/2019 12:00:23</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>05/23/2019 23:18:30</publishTime>
+      <publishTime>08/04/2019 12:00:43</publishTime>
     </File>
     <File Include="scripts/bootstrap-datetimepicker/bootstrap-datetimepicker.js">
       <publishTime>05/10/2019 23:45:06</publishTime>
@@ -280,7 +280,7 @@
       <publishTime>05/10/2019 23:49:20</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/11/2019 16:37:27</publishTime>
+      <publishTime>08/04/2019 12:00:42</publishTime>
     </File>
   </ItemGroup>
 </Project>
