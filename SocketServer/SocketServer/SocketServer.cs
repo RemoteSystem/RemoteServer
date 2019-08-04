@@ -60,6 +60,7 @@ namespace SocketServer
 
         void appServer_SessionClosed(ProtocolSession session, CloseReason value)
         {
+            Console.Write(DateTime.Now.ToString() + "   ");
             Console.WriteLine("断开了 " + session.SessionID + " " + value.ToString());
             dic.Remove(session.SessionID);
             ReceiveController.SessionClose(session.SessionID);
@@ -69,6 +70,7 @@ namespace SocketServer
 
         void appServer_NewSessionConnected(ProtocolSession session)
         {
+            Console.Write(DateTime.Now.ToString() + "   ");
             Console.WriteLine("连上了 " + session.SessionID);
             dic.Add(session.SessionID, session);
             ReceiveController.SessionConnect(session.SessionID, session.StartTime);
@@ -80,21 +82,24 @@ namespace SocketServer
         {
             if (requestInfo == null)
             {
+                Console.Write(DateTime.Now.ToString() + "   ");
                 Console.WriteLine("非正常包 " + session.SessionID);
                 return;
             }
             //心跳
             if (requestInfo.Length == 0)
             {
+                Console.Write(DateTime.Now.ToString() + "   ");
                 Console.WriteLine("心跳 " + session.SessionID);
                 return;
             }
             else if (requestInfo.Length < 0)
             {
+                Console.Write(DateTime.Now.ToString() + "   ");
                 Console.WriteLine("异常数据,算作心跳 " + session.SessionID);
                 return;
             }
-
+            Console.Write(DateTime.Now.ToString() + "   ");
             Console.WriteLine("收到了 " + session.SessionID);
 
             sendReplyMsg(session, getRsponseMsg(requestInfo.Data));

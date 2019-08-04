@@ -19,13 +19,15 @@ namespace RemoteDao
             {
                 item = info.category.bio.item[i];
 
-                string sql = @"INSERT INTO bio_item(num,device_sn,blank_time,calibration_method,corrected_intercept,corrected_slope,first_reagent_volume,k_factor_value,
-                                                         main_wavelength,measuring_method,reaction_direction,reaction_time,sample_volume,second_reagent_volume,sub_wavelength) 
-                                           VALUES(?num,?sn,?blank_time,?calibration_method,?corrected_intercept,?corrected_slope,?first_reagent_volume,?k_factor_value,
-                                                  ?main_wavelength,?measuring_method,?reaction_direction,?reaction_time,?sample_volume,?second_reagent_volume,?sub_wavelength) "
+                string sql = @"INSERT INTO bio_item(num,device_sn,blank_time_begin,blank_time_end,calibration_method,corrected_intercept,corrected_slope,first_reagent_volume,k_factor_value,
+                                                         main_wavelength,measuring_method,reaction_direction,reaction_time_begin,reaction_time_end,sample_volume,second_reagent_volume,sub_wavelength) 
+                                           VALUES(?num,?sn,?blank_time_begin,?blank_time_end,?calibration_method,?corrected_intercept,?corrected_slope,?first_reagent_volume,?k_factor_value,
+                                                  ?main_wavelength,?measuring_method,?reaction_direction,?reaction_time_begin,?reaction_time_end,?sample_volume,?second_reagent_volume,?sub_wavelength) "
                             + "ON DUPLICATE KEY UPDATE ";
-                if (item.blank_time != null)
-                    sql += ",blank_time = ?blank_time";
+                if (item.blank_time_begin != null)
+                    sql += ",blank_time_begin = ?blank_time_begin";
+                if (item.blank_time_end != null)
+                    sql += ",blank_time_end = ?blank_time_end";
                 if (item.calibration_method != null)
                     sql += ",calibration_method = ?calibration_method";
                 if (item.corrected_intercept != null)
@@ -42,8 +44,10 @@ namespace RemoteDao
                     sql += ",measuring_method = ?measuring_method";
                 if (item.reaction_direction != null)
                     sql += ",reaction_direction = ?reaction_direction";
-                if (item.reaction_time != null)
-                    sql += ",reaction_time = ?reaction_time";
+                if (item.reaction_time_begin != null)
+                    sql += ",reaction_time_begin = ?reaction_time_begin";
+                if (item.reaction_time_end != null)
+                    sql += ",reaction_time_end = ?reaction_time_end";
                 if (item.sample_volume != null)
                     sql += ",sample_volume = ?sample_volume";
                 if (item.second_reagent_volume != null)
@@ -57,7 +61,8 @@ namespace RemoteDao
                 MySqlParameter[] parameters = { 
                                     new MySqlParameter("?num", MySqlDbType.VarChar),
                                     new MySqlParameter("?sn", MySqlDbType.VarChar),
-                                    new MySqlParameter("?blank_time", MySqlDbType.Int32),
+                                    new MySqlParameter("?blank_time_begin", MySqlDbType.Int32),
+                                    new MySqlParameter("?blank_time_end", MySqlDbType.Int32),
                                     new MySqlParameter("?calibration_method", MySqlDbType.VarChar),
                                     new MySqlParameter("?corrected_intercept", MySqlDbType.Float),
                                     new MySqlParameter("?corrected_slope", MySqlDbType.Float),
@@ -66,26 +71,29 @@ namespace RemoteDao
                                     new MySqlParameter("?main_wavelength", MySqlDbType.Int32),
                                     new MySqlParameter("?measuring_method", MySqlDbType.VarChar),
                                     new MySqlParameter("?reaction_direction", MySqlDbType.VarChar),
-                                    new MySqlParameter("?reaction_time", MySqlDbType.Int32),
+                                    new MySqlParameter("?reaction_time_begin", MySqlDbType.Int32),
+                                    new MySqlParameter("?reaction_time_end", MySqlDbType.Int32),
                                     new MySqlParameter("?sample_volume", MySqlDbType.Float),
                                     new MySqlParameter("?second_reagent_volume", MySqlDbType.Float),
                                     new MySqlParameter("?sub_wavelength", MySqlDbType.Int32)};
 
                 parameters[0].Value = item.num;
                 parameters[1].Value = info.sn;
-                parameters[2].Value = item.blank_time;
-                parameters[3].Value = item.calibration_method;
-                parameters[4].Value = item.corrected_intercept;
-                parameters[5].Value = item.corrected_slope;
-                parameters[6].Value = item.first_reagent_volume;
-                parameters[7].Value = item.k_factor_value;
-                parameters[8].Value = item.main_wavelength;
-                parameters[9].Value = item.measuring_method;
-                parameters[10].Value = item.reaction_direction;
-                parameters[11].Value = item.reaction_time;
-                parameters[12].Value = item.sample_volume;
-                parameters[13].Value = item.second_reagent_volume;
-                parameters[14].Value = item.sub_wavelength;
+                parameters[2].Value = item.blank_time_begin;
+                parameters[3].Value = item.blank_time_end;
+                parameters[4].Value = item.calibration_method;
+                parameters[5].Value = item.corrected_intercept;
+                parameters[6].Value = item.corrected_slope;
+                parameters[7].Value = item.first_reagent_volume;
+                parameters[8].Value = item.k_factor_value;
+                parameters[9].Value = item.main_wavelength;
+                parameters[10].Value = item.measuring_method;
+                parameters[11].Value = item.reaction_direction;
+                parameters[12].Value = item.reaction_time_begin;
+                parameters[13].Value = item.reaction_time_end;
+                parameters[14].Value = item.sample_volume;
+                parameters[15].Value = item.second_reagent_volume;
+                parameters[16].Value = item.sub_wavelength;
 
                 num += MySqlHelper.ExecuteNonQuery(Conn, sql, parameters);
             }

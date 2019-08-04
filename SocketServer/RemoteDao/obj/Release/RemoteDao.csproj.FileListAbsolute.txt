@@ -14,3 +14,4 @@ E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteDao\bin\Release\RemoteModel.
 E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteDao\obj\Release\RemoteDao.csprojResolveAssemblyReference.cache
 E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteDao\obj\Release\RemoteDao.dll
 E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteDao\obj\Release\RemoteDao.pdb
+E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteDao\bin\Release\MySql.Data.dll

@@ -56,3 +56,4 @@ E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteSystem\bin\Release\RemoteDao
 E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteSystem\obj\Release\RemoteSystem.csprojResolveAssemblyReference.cache
 E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteSystem\obj\Release\RemoteSystem.exe
 E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteSystem\obj\Release\RemoteSystem.pdb
+E:\WorkSpace\GitHub\RemoteServer\SocketServer\RemoteSystem\bin\Release\MySql.Data.dll
