@@ -16,8 +16,8 @@ namespace RemoteDao
 
         public static int UpdateOrSaveSession(BloodInfo info)
         {
-            string sql = "INSERT INTO device_info(SN,SIM,Region,Hospital,Address,Model,DeviceType,ProductSeries,ProductModel,OEM,Agent,ReagentType,FactoryDate,InstallDate,SoftVersion,UpdateTime,sessionid,starttime) "
-                + "VALUES(?sn,?sim,?region,?hospoital,?address,?model,'血液细胞分析仪',?series,?pmodel,?oem,?agent,?reatype,?dtfactory,?dtinstall,?version,?dtupdate,?id,?dt) "
+            string sql = "INSERT INTO device_info(SN,SIM,Region,Hospital,Address,Model,DeviceType,ProductSeries,ProductModel,OEM,Agent,ReagentType,FactoryDate,InstallDate,SoftVersion,last_poweroff_time,last_poweron_time,UpdateTime,sessionid,starttime) "
+                + "VALUES(?sn,?sim,?region,?hospoital,?address,?model,'血液细胞分析仪',?series,?pmodel,?oem,?agent,?reatype,?dtfactory,?dtinstall,?version,?last_poweroff_time,?last_poweron_time,?dtupdate,?id,?dt) "
                 + "ON DUPLICATE KEY UPDATE ";
 
             if (info.sim != null)
@@ -74,6 +74,14 @@ namespace RemoteDao
                 {
                     sql += ",SoftVersion = ?version";
                 }
+                if (info.category.BLOOD.last_poweroff_time != null)
+                {
+                    sql += ",last_poweroff_time = ?last_poweroff_time";
+                }
+                if (info.category.BLOOD.last_poweron_time != null)
+                {
+                    sql += ",last_poweron_time = ?last_poweron_time";
+                }
                 if (info.category.BLOOD.update_time != null && info.category.BLOOD.update_time != DateTime.MinValue)
                 {
                     sql += ",UpdateTime = ?dtupdate";
@@ -96,6 +104,8 @@ namespace RemoteDao
                                             new MySqlParameter("?dtfactory", MySqlDbType.Timestamp),
                                             new MySqlParameter("?dtinstall", MySqlDbType.Timestamp),
                                             new MySqlParameter("?version", MySqlDbType.VarChar),
+                                            new MySqlParameter("?last_poweroff_time", MySqlDbType.VarChar),
+                                            new MySqlParameter("?last_poweron_time", MySqlDbType.VarChar),
                                             new MySqlParameter("?dtupdate", MySqlDbType.Timestamp),
                                             new MySqlParameter("?id", MySqlDbType.VarChar),
                                             new MySqlParameter("?dt", MySqlDbType.Timestamp)};
@@ -115,7 +125,9 @@ namespace RemoteDao
                 parameters[11].Value = DBNull.Value;
                 parameters[12].Value = DBNull.Value;
                 parameters[13].Value = "";
-                parameters[14].Value = DBNull.Value;
+                parameters[14].Value = "";
+                parameters[15].Value = "";
+                parameters[16].Value = DBNull.Value;
             }
             else
             {
@@ -127,10 +139,12 @@ namespace RemoteDao
                 parameters[11].Value = info.category.BLOOD.date_factory;
                 parameters[12].Value = info.category.BLOOD.date_install;
                 parameters[13].Value = info.category.BLOOD.soft_main_version;
-                parameters[14].Value = info.category.BLOOD.update_time;
+                parameters[14].Value = info.category.BLOOD.last_poweroff_time;
+                parameters[15].Value = info.category.BLOOD.last_poweron_time;
+                parameters[16].Value = info.category.BLOOD.update_time;
             }
-            parameters[15].Value = info.sessionid;
-            parameters[16].Value = info.starttime;
+            parameters[17].Value = info.sessionid;
+            parameters[18].Value = info.starttime;
 
             int num = MySqlHelper.ExecuteNonQuery(Conn, sql, parameters);
             return num;

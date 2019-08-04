@@ -47,7 +47,7 @@ namespace RemoteDao
         {
             if (info.category.BLOOD == null || info.category.BLOOD.count_statistics == null) return 0;
 
-            string sql = "INSERT INTO blood_count(device_sn,count_times_total,count_times_wb_cbc,count_times_wb_cd,count_times_wb_crp,count_times_wb_cbc_crp,count_times_wb_cd_crp,count_times_pd_cbc,count_times_pd_cd,count_times_pd_crp,count_times_pd_cbc_crp,count_times_pd_cd_crp,count_times_qc) "
+            string sql = "INSERT INTO blood_count(device_sn,count_times_total,count_times_wb_cbc,count_times_wb_cd,count_times_wb_crp,count_times_wb_cbc_crp,count_times_wb_cd_crp,count_times_pd_cbc,count_times_pd_cd,count_times_pd_crp,count_times_pd_cbc_crp,count_times_pd_cd_crp,count_times_tipwb_cbc,count_times_tipwb_cd,count_times_qc) "
                 + "VALUES(?sn,?total,?wbcbc,?wbcd,?wbcrp,?wbcbccrp,?wbcdcrp,?pdcbc,?pdcd,?pdcrp,?pdcbccrp,?pdcdcrp,?qc) "
                 + "ON DUPLICATE KEY UPDATE ";
             if (info.category.BLOOD.count_statistics.count_times_TOTAL != null)
@@ -72,6 +72,10 @@ namespace RemoteDao
                 sql += ",count_times_pd_cbc_crp = ?pdcbccrp";
             if (info.category.BLOOD.count_statistics.count_times_PD_CD_CRP != null)
                 sql += ",count_times_pd_cd_crp = ?pdcdcrp";
+            if (info.category.BLOOD.count_statistics.count_times_tipwb_cbc != null)
+                sql += ",count_times_tipwb_cbc = ?count_times_tipwb_cbc";
+            if (info.category.BLOOD.count_statistics.count_times_tipwb_cd != null)
+                sql += ",count_times_tipwb_cd = ?count_times_tipwb_cd";
             if (info.category.BLOOD.count_statistics.count_times_QC != null)
                 sql += ",count_times_qc = ?qc";
 
@@ -90,6 +94,8 @@ namespace RemoteDao
                                             new MySqlParameter("?pdcrp", MySqlDbType.VarChar),
                                             new MySqlParameter("?pdcbccrp", MySqlDbType.VarChar),
                                             new MySqlParameter("?pdcdcrp", MySqlDbType.VarChar),
+                                            new MySqlParameter("?count_times_tipwb_cbc", MySqlDbType.VarChar),
+                                            new MySqlParameter("?count_times_tipwb_cd", MySqlDbType.VarChar),
                                             new MySqlParameter("?qc", MySqlDbType.VarChar)};
 
             parameters[0].Value = info.sn;
@@ -104,7 +110,9 @@ namespace RemoteDao
             parameters[9].Value = info.category.BLOOD.count_statistics.count_times_PD_CRP;
             parameters[10].Value = info.category.BLOOD.count_statistics.count_times_PD_CBC_CRP;
             parameters[11].Value = info.category.BLOOD.count_statistics.count_times_PD_CD_CRP;
-            parameters[12].Value = info.category.BLOOD.count_statistics.count_times_QC;
+            parameters[12].Value = info.category.BLOOD.count_statistics.count_times_tipwb_cbc;
+            parameters[13].Value = info.category.BLOOD.count_statistics.count_times_tipwb_cd;
+            parameters[14].Value = info.category.BLOOD.count_statistics.count_times_QC;
 
             int num = MySqlHelper.ExecuteNonQuery(Conn, sql, parameters);
 
@@ -140,6 +148,10 @@ namespace RemoteDao
                 sql += string.Format(base_sql, info.sn, info.category.BLOOD.count_statistics.count_times_PD_CBC_CRP, "count_times_pd_cbc_crp");
             if (info.category.BLOOD.count_statistics.count_times_PD_CD_CRP != null)
                 sql += string.Format(base_sql, info.sn, info.category.BLOOD.count_statistics.count_times_PD_CD_CRP, "count_times_pd_cd_crp");
+            if (info.category.BLOOD.count_statistics.count_times_tipwb_cbc != null)
+                sql += string.Format(base_sql, info.sn, info.category.BLOOD.count_statistics.count_times_tipwb_cbc, "count_times_tipwb_cbc");
+            if (info.category.BLOOD.count_statistics.count_times_tipwb_cd != null)
+                sql += string.Format(base_sql, info.sn, info.category.BLOOD.count_statistics.count_times_tipwb_cd, "count_times_tipwb_cd");
             if (info.category.BLOOD.count_statistics.count_times_QC != null)
                 sql += string.Format(base_sql, info.sn, info.category.BLOOD.count_statistics.count_times_QC, "count_times_qc");
 
@@ -154,9 +166,11 @@ namespace RemoteDao
         {
             if (info.category.BLOOD == null || info.category.BLOOD.reagent == null) return 0;
 
-            string sql = "INSERT INTO blood_reagent(device_sn,reagent_dil,reagent_lh,reagent_r1,reagent_r2,reagent_diff1,reagent_diff2,reagent_fl1,reagent_fl2,reagent_fl3,reagent_fl4,reagent_fl5,reagent_fl6) "
-                + "VALUES(?sn,?dil,?lh,?r1,?r2,?diff1,?diff2,?fl1,?fl2,?fl3,?fl4,?fl5,?fl6) "
+            string sql = "INSERT INTO blood_reagent(device_sn,reagent_type,reagent_dil,reagent_lh,reagent_r1,reagent_r2,reagent_diff1,reagent_diff2,reagent_fl1,reagent_fl2,reagent_fl3,reagent_fl4,reagent_fl5,reagent_fl6) "
+                + "VALUES(?sn,?reagent_type,?dil,?lh,?r1,?r2,?diff1,?diff2,?fl1,?fl2,?fl3,?fl4,?fl5,?fl6) "
                 + "ON DUPLICATE KEY UPDATE ";
+            if (info.category.BLOOD.reagent.reagent_type != null)
+                sql += ",reagent_type = ?reagent_type";
             if (info.category.BLOOD.reagent.reagent_DIL != null)
                 sql += ",reagent_dil = ?dil";
             if (info.category.BLOOD.reagent.reagent_LH != null)
@@ -186,6 +200,7 @@ namespace RemoteDao
             sql = sql.Replace("UPDATE ,", "UPDATE ");
 
             MySqlParameter[] parameters = { new MySqlParameter("?sn", MySqlDbType.VarChar),
+                                            new MySqlParameter("?reagent_type", MySqlDbType.VarChar),
                                             new MySqlParameter("?dil", MySqlDbType.VarChar),
                                             new MySqlParameter("?lh", MySqlDbType.VarChar),
                                             new MySqlParameter("?r1", MySqlDbType.VarChar),
@@ -200,18 +215,19 @@ namespace RemoteDao
                                             new MySqlParameter("?fl6", MySqlDbType.VarChar)};
 
             parameters[0].Value = info.sn;
-            parameters[1].Value = info.category.BLOOD.reagent.reagent_DIL;
-            parameters[2].Value = info.category.BLOOD.reagent.reagent_LH;
-            parameters[3].Value = info.category.BLOOD.reagent.reagent_R1;
-            parameters[4].Value = info.category.BLOOD.reagent.reagent_R2;
-            parameters[5].Value = info.category.BLOOD.reagent.reagent_DIFF1;
-            parameters[6].Value = info.category.BLOOD.reagent.reagent_DIFF2;
-            parameters[7].Value = info.category.BLOOD.reagent.reagent_FL1;
-            parameters[8].Value = info.category.BLOOD.reagent.reagent_FL2;
-            parameters[9].Value = info.category.BLOOD.reagent.reagent_FL3;
-            parameters[10].Value = info.category.BLOOD.reagent.reagent_FL4;
-            parameters[11].Value = info.category.BLOOD.reagent.reagent_FL5;
-            parameters[12].Value = info.category.BLOOD.reagent.reagent_FL6;
+            parameters[1].Value = info.category.BLOOD.reagent.reagent_type;
+            parameters[2].Value = info.category.BLOOD.reagent.reagent_DIL;
+            parameters[3].Value = info.category.BLOOD.reagent.reagent_LH;
+            parameters[4].Value = info.category.BLOOD.reagent.reagent_R1;
+            parameters[5].Value = info.category.BLOOD.reagent.reagent_R2;
+            parameters[6].Value = info.category.BLOOD.reagent.reagent_DIFF1;
+            parameters[7].Value = info.category.BLOOD.reagent.reagent_DIFF2;
+            parameters[8].Value = info.category.BLOOD.reagent.reagent_FL1;
+            parameters[9].Value = info.category.BLOOD.reagent.reagent_FL2;
+            parameters[10].Value = info.category.BLOOD.reagent.reagent_FL3;
+            parameters[11].Value = info.category.BLOOD.reagent.reagent_FL4;
+            parameters[12].Value = info.category.BLOOD.reagent.reagent_FL5;
+            parameters[13].Value = info.category.BLOOD.reagent.reagent_FL6;
 
             int num = MySqlHelper.ExecuteNonQuery(Conn, sql, parameters);
 

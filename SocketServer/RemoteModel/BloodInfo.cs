@@ -79,15 +79,15 @@ namespace RemoteModel
         /// <summary>
         /// 
         /// </summary>
-        public double runtime_POWER { get; set; }
+        public double? runtime_POWER { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public double runtime_OPT { get; set; }
+        public double? runtime_OPT { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public double runtime_AIR_SUPPLY { get; set; }
+        public double? runtime_AIR_SUPPLY { get; set; }
     }
 
     public class Count_statistics
@@ -137,6 +137,14 @@ namespace RemoteModel
         /// </summary>
         public string count_times_PD_CD_CRP { get; set; }
         /// <summary>
+        /// 末梢全血- CBC模式计数次数
+        /// </summary>
+        public string count_times_tipwb_cbc { get; set; }
+        /// <summary>
+        /// 末梢全血-CD模式计数次数（cbc+5diff）
+        /// </summary>
+        public string count_times_tipwb_cd { get; set; }
+        /// <summary>
         /// 
         /// </summary>
         public string count_times_QC { get; set; }
@@ -144,6 +152,10 @@ namespace RemoteModel
 
     public class Reagent
     {
+        /// <summary>
+        /// 试剂类型
+        /// </summary>
+        public string reagent_type { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -273,9 +285,17 @@ namespace RemoteModel
         /// </summary>
         public DateTime date_install { get; set; }
         /// <summary>
-        /// 
+        /// 软件主版本号
         /// </summary>
         public string soft_main_version { get; set; }
+        /// <summary>
+        /// 关机时间
+        /// </summary>
+        public string last_poweroff_time { get; set; }
+        /// <summary>
+        /// 开机时间
+        /// </summary>
+        public string last_poweron_time { get; set; }
         /// <summary>
         /// 
         /// </summary>
