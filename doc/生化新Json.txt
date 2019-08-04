@@ -1,0 +1,67 @@
+BIO Json: 
+{
+	"addr" : "广州市",
+	"category" :
+	{
+		"bio" :
+		{
+			"fault" :
+			[
+				{
+					"code" : "C10009",
+					"time" : "2019-05-08 08:55:56"
+				}
+			],
+			"item" :
+			[
+				{
+					"blank_time_begin" : 12,  //新加字段，去掉原有 "blank_time" 字段
+					"blank_time_end" : 14,   //新加字段
+					"calibration_method" : "方法",
+					"corrected_intercept" : 12.3,
+					"corrected_slope" : 12.5,
+					"first_reagent_volume" : 1.2,
+					"k_factor_value" : 3.3,
+					"main_wavelength" : 145,
+					"measuring_method" : "方法",
+					"num" : "6900",
+					"reaction_direction" : "下降",
+					"reaction_time_begin" : 12,  //新加字段, 去掉原有 "reaction_time" 字段
+					"reaction_time_end" : 16,    //新加字段
+					"sample_volume" : 45.5,
+					"second_reagent_volume" : 2.2,
+					"sub_wavelength" : 245
+				}
+				   
+			],
+			"statistics" :
+			{
+				"item" :
+				[
+					{
+						"R1" : 5.5,
+						"R2" : 76.0,
+						"num" : "6900",
+						"smpl" : 12
+					}
+				],
+				"sample" : 20
+			}
+		}
+	},
+	"dump" :
+	{
+		"data" : "HJldHVybiAwOwp9Cg==",
+		"encoding" : "base64",
+		"filename" : "log20190121.tar.gz"
+	},
+	"encoding" : "utf-8",
+	"hospital" : "第一医院",
+	"machine_type" : 0,
+	"model" : "ZS400",
+	"region" : "广东省",
+	"request" : "bfb82fa6-8587-4f8f-ac69-120017581343",
+	"sim" : "M1235789100888",
+	"sn" : "ZS1234123456732800888",
+	"update_time" : "2019-08-02 17:32:03"
+}
