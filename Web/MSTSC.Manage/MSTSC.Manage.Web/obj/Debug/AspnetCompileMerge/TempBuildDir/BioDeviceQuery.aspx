@@ -187,11 +187,19 @@
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
                             <label style="width: 100px; text-align: right">反应时间：</label>
-                            <label id="reaction_time" style="margin-left: 5px; width: 80px; font-weight: normal;"></label>
+                            <label style="margin-left: 5px; width: 80px; font-weight: normal;">
+                                <span id="reaction_time_begin"></span>
+                                -
+                                <span id="reaction_time_end"></span>
+                            </label>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
                             <label style="width: 100px; text-align: right">空白时间：</label>
-                            <label id="blank_time" style="margin-left: 5px; width: 80px; font-weight: normal;"></label>
+                            <label style="margin-left: 5px; width: 80px; font-weight: normal;">
+                                <span id="blank_time_begin"></span>
+                                -
+                                <span id="blank_time_end"></span>
+                            </label>                            
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
                             <label style="width: 100px; text-align: right">定标方法：</label>
@@ -542,7 +550,7 @@
         }
 
         function getFault() {
-            if (!sn) { 
+            if (!sn) {
                 return;
             }
             $.ajax({

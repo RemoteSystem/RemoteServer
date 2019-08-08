@@ -10,7 +10,11 @@ namespace MSTSC.Manage.Model
         /// <summary>
         /// 
         /// </summary>
-        public int? blank_time { get; set; }
+        public int? blank_time_begin { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public int? blank_time_end { get; set; }
         /// <summary>
         /// wer李
         /// </summary>
@@ -50,7 +54,11 @@ namespace MSTSC.Manage.Model
         /// <summary>
         /// 
         /// </summary>
-        public int? reaction_time { get; set; }
+        public int? reaction_time_begin { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public int? reaction_time_end { get; set; }
         /// <summary>
         /// 
         /// </summary>

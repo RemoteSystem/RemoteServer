@@ -16,34 +16,34 @@
       <publishTime>04/19/2018 10:10:12</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.BLL.dll">
-      <publishTime>08/04/2019 12:00:41</publishTime>
+      <publishTime>08/08/2019 21:08:04</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.BLL.pdb">
-      <publishTime>08/04/2019 12:00:41</publishTime>
+      <publishTime>08/08/2019 21:08:04</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.DAL.dll">
-      <publishTime>08/04/2019 12:00:41</publishTime>
+      <publishTime>08/08/2019 21:08:04</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.DAL.pdb">
-      <publishTime>08/04/2019 12:00:41</publishTime>
+      <publishTime>08/08/2019 21:08:04</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.Model.dll">
-      <publishTime>08/04/2019 12:00:41</publishTime>
+      <publishTime>08/08/2019 21:08:03</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.Model.pdb">
-      <publishTime>08/04/2019 12:00:41</publishTime>
+      <publishTime>08/08/2019 21:08:03</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.Utils.dll">
-      <publishTime>08/04/2019 12:00:41</publishTime>
+      <publishTime>08/08/2019 21:08:04</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.Utils.pdb">
-      <publishTime>08/04/2019 12:00:41</publishTime>
+      <publishTime>08/08/2019 21:08:04</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.Web.dll">
-      <publishTime>08/04/2019 12:00:42</publishTime>
+      <publishTime>08/08/2019 21:08:04</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.Web.pdb">
-      <publishTime>08/04/2019 12:00:42</publishTime>
+      <publishTime>08/08/2019 21:08:04</publishTime>
     </File>
     <File Include="bin/MySql.Data.dll">
       <publishTime>04/19/2018 10:10:12</publishTime>
@@ -52,10 +52,10 @@
       <publishTime>04/26/2018 22:14:51</publishTime>
     </File>
     <File Include="BioDeviceList.aspx">
-      <publishTime>05/10/2019 20:47:15</publishTime>
+      <publishTime>08/08/2019 21:07:04</publishTime>
     </File>
     <File Include="BioDeviceQuery.aspx">
-      <publishTime>05/10/2019 20:46:11</publishTime>
+      <publishTime>08/08/2019 21:06:41</publishTime>
     </File>
     <File Include="BioStatisticAllDevices.aspx">
       <publishTime>05/11/2019 16:42:41</publishTime>
@@ -97,7 +97,7 @@
       <publishTime>08/04/2019 12:00:23</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>08/04/2019 12:00:43</publishTime>
+      <publishTime>08/08/2019 21:08:29</publishTime>
     </File>
     <File Include="scripts/bootstrap-datetimepicker/bootstrap-datetimepicker.js">
       <publishTime>05/10/2019 23:45:06</publishTime>
@@ -280,7 +280,7 @@
       <publishTime>05/10/2019 23:49:20</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/04/2019 12:00:42</publishTime>
+      <publishTime>08/08/2019 21:08:11</publishTime>
     </File>
   </ItemGroup>
 </Project>
