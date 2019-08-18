@@ -124,10 +124,18 @@
             </div>
             <div class="panel panel-success nomargin" style="margin-top: 15px;">
                 <div class="panel-heading padding-5">
-                    <span class="panel-title">错误信息</span>
-                    <div class="pull-right hidden">
-                        <button type="button" id="export" class="btn btn-default btn-small" style="padding: 1px 5px;">导 出</button>
+                    <span class="panel-title">故障信息</span>
+                </div>
+                <div class="padding-top-10 padding-bottom-10" style="background-color: #d9eaf9;">
+                    <div class="pull-right">
+                        故障发生时间：  
+                        <input type="text" id="dtstart" style="width: 120px;" />
+                        -
+                        <input type="text" id="dtend" style="width: 120px;" />
+                        <button type="button" id="faultSearch" class="btn btn-default btn-small margin-left-10" style="padding: 1px 5px;">查询</button>
+                        <button type="button" id="faultExport" class="btn btn-default btn-small margin-left-5" style="padding: 1px 5px;">导 出</button>
                     </div>
+                    <span class="clearfix"></span>
                 </div>
                 <div id="fault" class="panel-body nopadding">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
@@ -242,6 +250,11 @@
         var rowtimer;
         $(document).ready(function () {
             InitMainTable();
+            $('#dtstart').datetimepicker({ format: 'YYYY-MM-DD HH:mm' });
+            $('#dtend').datetimepicker({ format: 'YYYY-MM-DD HH:mm' });
+            var now = new Date();
+            $('#dtstart').val(now.Format("yyyy-MM-dd") + " 00:00");
+            $('#dtend').val(now.Format("yyyy-MM-dd") + " 23:59");
 
             $('#quickquery').click(function () {
                 type = 1;
@@ -266,10 +279,17 @@
                 getRowInfo();
             });
 
-            $('#export').click(function () {
+            $('#faultExport').click(function () {
                 if (sn) {
-                    window.location.href = "Export.ashx?Action=fault&sn=" + sn;
+                    var dtstart = $('#dtstart').val();
+                    var dtend = $('#dtend').val();
+                    var conditions = "{'sn':'" + sn + "','dtstart':'" + dtstart + "','dtend':'" + dtend + "'}";
+                    window.open("Export.ashx?Action=bio_fault&conditions=" + conditions, "_blank");
                 }
+            });
+
+            $("#faultSearch").click(function () {
+                getFault();
             });
 
             getModels();
@@ -395,6 +415,9 @@
                     $element.css("background-color", "#C0C0C0");
 
                     sn = row.SN;
+                    var now = new Date();
+                    $('#dtstart').val(now.Format("yyyy-MM-dd") + " 00:00");
+                    $('#dtend').val(now.Format("yyyy-MM-dd") + " 23:59");
                     getRowInfo();
                 }
             });
@@ -406,7 +429,7 @@
         }
 
         function getRowInfo() {
-            clearTimeout(rowtimer);
+            clearTimeout(rowtimer);           
             if (sn) {
                 $.ajax({
                     type: "post",
@@ -553,23 +576,27 @@
             if (!sn) {
                 return;
             }
+            var dtstart = $('#dtstart').val();
+            var dtend = $('#dtend').val();
             $.ajax({
                 type: "post",
                 url: "BioDeviceQuery.aspx/GetBioDeviceFault",
-                data: "{'sn':'" + sn + "'}",
+                data: "{'sn':'" + sn + "','dtstart':'" + dtstart + "','dtend':'" + dtend + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
                     var result = eval(data.d);
                     var str = '';
 
+                    var i = 1;
                     for (res in result) {
-                        str += '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-bottom-5 text-center"><span>' + result[res]['code'] + '</span></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-bottom-5 text-center"><span>' + result[res]['dttime'] + '</span></div>';
+                        str += '<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 padding-bottom-5 text-center">' + i + '</div><div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 padding-bottom-5 text-center"><span>' + result[res]['code'] + '</span></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-bottom-5 text-center"><span>' + result[res]['dttime'] + '</span></div>';
+                        i += 1;
                     }
                     if (!str) {
                         str = '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-5 text-center"><span>无错误信息</span></div>';
                     } else {
-                        str = '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-top-5 text-center"><span>错误码</span></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-top-5 text-center"><span>时间</span></div>' + str;
+                        str = '<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 padding-bottom-5 text-center">序号</div><div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 padding-top-5 text-center"><span>错误码</span></div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-top-5 text-center"><span>时间</span></div>' + str;
                         str = str.replace(/T/g, " ").replace(/Z/g, "");
                     }
 
@@ -602,6 +629,12 @@
                     for (attribute in result) {
                         modal.find("#" + attribute).html(result[attribute]);
                     }
+
+                    if ($("#blank_time_begin").val() == "-1") $("#blank_time_begin").val("");
+                    if ($("#blank_time_end").val() == "-1") $("#blank_time_end").val("");
+                    if ($("#calibration_method").val() == "K因数法" && $("#k_factor_value").val() == "0") $("#k_factor_value").val("");
+                    if ($("#second_reagent_volume").val() == "0") $("#second_reagent_volume").val("");
+                    if ($("#sub_wavelength").val() == "0") $("#sub_wavelength").val("");
                 },
                 error: function (err) {
                 }

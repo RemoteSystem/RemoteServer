@@ -36,7 +36,7 @@ namespace MSTSC.Manage.BLL
         {
             return dal.GetDeviceDetialDAL(sn);
         }
-        
+
         /// <summary>
         /// 获取仪器最后一次上报的错误信息
         /// </summary>
@@ -72,9 +72,10 @@ namespace MSTSC.Manage.BLL
         public List<QueryList> GetDeviceInfoBLL(QueryConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
         {
             //conditValue.ProductSeries = Common.UIdataToDB(conditValue.ProductSeries);
-            return dal.GetDeviceInfoDAL(conditValue,pagerInfo, sortInfo);
+            return dal.GetDeviceInfoDAL(conditValue, pagerInfo, sortInfo);
         }
-        public int getDeviceCount(QueryConditionModel conditValue) {
+        public int getDeviceCount(QueryConditionModel conditValue)
+        {
             return dal.getDeviceCount(conditValue);
         }
 
@@ -138,6 +139,8 @@ namespace MSTSC.Manage.BLL
         }
 
         /**********bio**********/
+        #region bio 生化仪
+
         /// <summary>
         /// 仪器详细信息
         /// </summary>
@@ -153,9 +156,9 @@ namespace MSTSC.Manage.BLL
         /// </summary>
         /// <param name="sn">仪器序列号</param>
         /// <returns>仪器最后一次上报的错误信息(最多5条)</returns>
-        public dynamic GetBioDeviceFaultBLL(string sn)
+        public DataTable GetBioDeviceFaultBLL(string sn, string dtstart, string dtend)
         {
-            return dal.GetBioDeviceFaultDAL(sn);
+            return dal.GetBioDeviceFaultDAL(sn, dtstart, dtend);
         }
 
         /// <summary>
@@ -167,7 +170,7 @@ namespace MSTSC.Manage.BLL
             return dal.getBioModel();
         }
 
-      /// <summary>
+        /// <summary>
         /// 获取装机区域
         /// </summary>
         /// <returns></returns>
@@ -190,6 +193,70 @@ namespace MSTSC.Manage.BLL
             }
             return null;
         }
+
+        #endregion
+
+        /**********POCT**********/
+        #region  POCT
+
+        /// <summary>
+        /// 仪器详细信息
+        /// </summary>
+        /// <param name="sn"></param>
+        /// <returns></returns>
+        public dynamic GetPoctDeviceDetialBLL(string sn)
+        {
+            return dal.GetPoctDeviceDetialDAL(sn);
+        }
+
+        /// <summary>
+        /// 获取仪器最后一次上报的错误信息
+        /// </summary>
+        /// <param name="sn">仪器序列号</param>
+        /// <returns>仪器最后一次上报的错误信息(最多5条)</returns>
+        public DataTable GetPoctDeviceFaultBLL(string sn, string dtstart, string dtend)
+        {
+            return dal.GetPoctDeviceFaultDAL(sn, dtstart, dtend);
+        }
+
+        /// <summary>
+        /// 获取产品型号(Model字段)
+        /// </summary>
+        /// <returns></returns>
+        public List<KeyValueModel> GetPoctModel()
+        {
+            return dal.GetPoctModel();
+        }
+
+        /// <summary>
+        /// 获取装机区域
+        /// </summary>
+        /// <returns></returns>
+        public List<KeyValueModel> GetPoctRegion()
+        {
+            return dal.GetPoctRegion();
+        }
+
+        public List<PoctStatistics> GetPoctDeviceInfoBLL(string sn)
+        {
+            return dal.GetPoctDeviceInfoDAL(sn);
+        }
+
+        public PoctItemDetail GetPoctNumDetail(string sn, string num, string lot)
+        {
+            List<PoctItemDetail> list = dal.GetPoctNumDetail(sn, num, lot);
+            if (list != null && list.Count > 0)
+            {
+                return list[0];
+            }
+            return null;
+        }
+        public List<KeyValueModel> getNumLotList(string sn, string num)
+        {
+            List<KeyValueModel> list = dal.getNumLotList(sn, num);
+            return list;
+        }
+        #endregion
 
     }
 }

@@ -113,12 +113,12 @@ namespace MSTSC.Manage.Web
         }
 
         [WebMethod]
-        public static string GetBioDeviceFault(string sn)
+        public static string GetBioDeviceFault(string sn, string dtstart, string dtend)
         {
             try
             {
                 DeviceQueryBLL bll = new DeviceQueryBLL();
-                var result = bll.GetBioDeviceFaultBLL(sn);
+                var result = bll.GetBioDeviceFaultBLL(sn, dtstart, dtend);
 
                 var retvalue = JsonConvert.SerializeObject(result).Replace("null", "\"\""); ;
                 return retvalue;

@@ -12,19 +12,34 @@
         <div class="panel-body nopadding">
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 padding-5">
                 <div class="form-inline">
-                    <span>仪器类型</span>
+                    <span>机型</span>
                     <select id="selType" class="form-control" style="min-width: 160px;">
-                        <option value="生化仪">生化仪</option>
+                        <option value="">请选择</option>
+                        <option value="1">标准机</option>
+                        <option value="2">招标机</option>
+                        <option value="3">其他</option>
                     </select>
                 </div>
             </div>
-
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 padding-5">
                 <div class="form-inline">
                     <span>仪器型号</span>
                     <select id="selModel" class="form-control" style="min-width: 160px;">
                         <option value="0">请选择</option>
                     </select>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 padding-5">
+                <div class="form-inline">
+                    <span>项目编号</span>
+                    <input id="num" class="form-control" />
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 padding-5">
+                <div class="form-inline">
+                    <span>统计时间</span>
+                    <input id="dtstart" class="form-control" style="width:150px;" /> — 
+                    <input id="dtend" class="form-control" style="width:150px;" />
                 </div>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 padding-5">
@@ -50,6 +65,11 @@
 
         $(document).ready(function () {
             InitMainTable();
+            $('#dtstart').datetimepicker({ format: 'YYYY-MM-DD HH:mm' });
+            $('#dtend').datetimepicker({ format: 'YYYY-MM-DD HH:mm' });
+            var now = new Date();
+            $('#dtstart').val(now.Format("yyyy-MM-dd") + " 00:00");
+            $('#dtend').val(now.Format("yyyy-MM-dd") + " 23:59");
             
             $("#selModel").change(function () {
                 freshTable();
@@ -105,8 +125,12 @@
                     if (type == 0) {
                         return "{'conditions':'','rows':'0','page':'0','sort':'','sortOrder':''}";
                     }
-                    var conditions = "{\"DeviceType\":\"" + $("#selType").val()
+                    var conditions = "{\"DeviceType\":\"bio"
                         + "\",\"Model\":\"" + $("#selModel").val()
+                        + "\",\"ProductSeries\":\"" + $("#selType").val()
+                        + "\",\"Num\":\"" + $("#num").val()
+                        + "\",\"dtStart\":\"" + $("#dtstart").val()
+                        + "\",\"dtEnd\":\"" + $("#dtend").val()
                         + "\"}";
 
                     rows = params.limit ? params.limit : rows;

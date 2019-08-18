@@ -10,6 +10,6 @@
 namespace MSTSC.Manage.Web {
     
     
-    public partial class DeviceList {
+    public partial class BioDeviceList {
     }
 }

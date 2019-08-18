@@ -31,6 +31,7 @@ namespace MSTSC.Manage.Web
 
             DeviceQueryBLL bll = new DeviceQueryBLL();
             StatisticsBLL staticBll = new StatisticsBLL();
+            QueryConditionModel condition;
             DataTable dt = new DataTable();
             string fileName = "";
             string[] headers = new string[] { };
@@ -51,6 +52,12 @@ namespace MSTSC.Manage.Web
                     fileName = "错误信息";
                     headers = new string[] { "id", "仪器序列号", "错误码", "时间" };
                     break;
+                case "bio_fault":
+                    condition = JsonConvert.DeserializeObject<QueryConditionModel>(conditions.Replace("\"0\"", "\"\""));
+                    dt = bll.GetBioDeviceFaultBLL(condition.SN, condition.dtStart, condition.dtEnd);
+                    fileName = "生化仪统计_故障信息";
+                    headers = new string[] { "错误码", "时间" };
+                    break;
                 case "bio_all":
                     dt = staticBll.StatisticsAllBioDevicesForExportBLL(model);
                     fileName = "生化仪统计_所有机器";
@@ -65,6 +72,12 @@ namespace MSTSC.Manage.Web
                     dt = staticBll.BioStatisticsByTypeForExportBLL(model);
                     fileName = "生化仪统计_按机型";
                     headers = new string[] { "机型", "项目编号", "仪器总数", "样本数", "R1消耗量", "R2消耗量" };
+                    break;
+                case "poct_fault":
+                    condition = JsonConvert.DeserializeObject<QueryConditionModel>(conditions.Replace("\"0\"", "\"\""));
+                    dt = bll.GetPoctDeviceFaultBLL(condition.SN, condition.dtStart, condition.dtEnd);
+                    fileName = "POCT统计_故障信息";
+                    headers = new string[] { "错误码", "时间" };
                     break;
                 case "bio_log":
                     LogConditionModel conditionModel = JsonConvert.DeserializeObject<LogConditionModel>(conditions.Replace("\"0\"", "\"\""));

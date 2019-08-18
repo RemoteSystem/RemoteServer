@@ -221,7 +221,7 @@ bm.sampling_times_fault,bm.syringe_times_syringe_fault,bm.inject_times_fault,bm.
 
             if (!string.IsNullOrEmpty(whereSql.ToString()))
             {
-                sql += " where "+ whereSql.ToString().Substring(4);
+                sql += " where " + whereSql.ToString().Substring(4);
             }
             if (!string.IsNullOrEmpty(sortInfo.SortName))
             {
@@ -408,6 +408,8 @@ bm.sampling_times_fault,bm.syringe_times_syringe_fault,bm.inject_times_fault,bm.
         }
 
         /************bio**********/
+        #region bio 生化仪
+
         public dynamic GetBioDeviceDetialDAL(string sn)
         {
             string sql = @"SELECT d.devicename,d.SIM,d.SN,d.DeviceType,d.Model,d.Region,d.Address,d.Hospital,date_format(d.UpdateTime,'%Y-%m-%d %T') as UpdateTime,bs.sample
@@ -423,13 +425,16 @@ bm.sampling_times_fault,bm.syringe_times_syringe_fault,bm.inject_times_fault,bm.
         /// </summary>
         /// <param name="sn">仪器序列号</param>
         /// <returns>仪器最后一次上报的错误信息(最多5条)</returns>
-        public dynamic GetBioDeviceFaultDAL(string sn)
+        public DataTable GetBioDeviceFaultDAL(string sn, string dtstart, string dtend)
         {
-            string sql = @"SELECT code,dttime FROM bio_fault WHERE dtinsert > ( SELECT DATE_ADD(dtinsert, INTERVAL -5 SECOND) FROM bio_fault WHERE device_sn = '" + sn + "' ORDER BY id DESC LIMIT 1 ) AND device_sn = '" + sn + "' ORDER BY id DESC LIMIT 5;";
+            string sql = @"SELECT code,dttime FROM bio_fault WHERE device_sn= '" + sn + "' AND dttime >= '" + dtstart + "' AND dttime <= '" + dtend + "' ORDER BY id DESC;";
 
             using (var conn = new MySqlConnection(Global.strConn))
             {
-                return conn.Query(sql);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(sql, conn);
+                DataSet ds = new DataSet();
+                adapter.Fill(ds);
+                return ds.Tables[0];
             }
         }
 
@@ -482,6 +487,109 @@ bm.sampling_times_fault,bm.syringe_times_syringe_fault,bm.inject_times_fault,bm.
                 return conn.Query<BioItemDetail>(sql).ToList();
             }
         }
+
+        #endregion
+
+        /************POCT**********/
+        #region POCT
+
+        public dynamic GetPoctDeviceDetialDAL(string sn)
+        {
+            string sql = @"SELECT d.devicename,d.SIM,d.SN,d.DeviceType,d.Model,d.Region,d.Address,d.Hospital,date_format(d.UpdateTime,'%Y-%m-%d %T') as UpdateTime,bs.sample
+                        from device_info d left join poct_statistics bs on bs.device_sn = d.SN where d.SN='" + sn + "'";
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                return conn.Query(sql);
+            }
+        }
+
+        /// <summary>
+        /// 获取仪器最后一次上报的错误信息
+        /// </summary>
+        /// <param name="sn">仪器序列号</param>
+        /// <returns>仪器最后一次上报的错误信息(最多5条)</returns>
+        public DataTable GetPoctDeviceFaultDAL(string sn, string dtstart, string dtend)
+        {
+            string sql = @"SELECT code,dttime FROM poct_fault WHERE device_sn= '" + sn + "' AND dttime >= '" + dtstart + "' AND dttime <= '" + dtend + "' ORDER BY id DESC;";
+
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                MySqlDataAdapter adapter = new MySqlDataAdapter(sql, conn);
+                DataSet ds = new DataSet();
+                adapter.Fill(ds);
+                return ds.Tables[0];
+            }
+        }
+
+        /// <summary>
+        /// 获取产品型号(Model字段)
+        /// </summary>
+        /// <returns></returns>
+        public List<KeyValueModel> GetPoctModel()
+        {
+            string sql = "SELECT DISTINCT Model 'key',Model 'value' FROM device_info where DeviceType ='POCT';";
+
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                return conn.Query<KeyValueModel>(sql).ToList();
+            }
+        }
+
+        /// <summary>
+        /// 获取装机区域
+        /// </summary>
+        /// <returns></returns>
+        public List<KeyValueModel> GetPoctRegion()
+        {
+            string sql = "SELECT DISTINCT Region 'key',Region 'value' FROM device_info where DeviceType ='POCT';";
+
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                return conn.Query<KeyValueModel>(sql).ToList();
+            }
+        }
+
+        public List<PoctStatistics> GetPoctDeviceInfoDAL(string sn)
+        {
+            StringBuilder whereSql = new StringBuilder();
+            string sql = @"SELECT device_sn,num,card_consume,smpl FROM poct_statistics_item WHERE device_sn = '" + sn + "'";
+
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                return conn.Query<PoctStatistics>(sql).ToList();
+            }
+        }
+
+        public List<PoctItemDetail> GetPoctNumDetail(string sn, string num, string lot)
+        {
+            StringBuilder whereSql = new StringBuilder();
+            string sql = @"SELECT * FROM poct_item WHERE num = '" + num + "' AND device_sn='" + sn + "'";
+            if (!String.IsNullOrEmpty(lot))
+            {
+                sql += " AND card_lot='" + lot + "'";
+            }
+            else {
+                sql += " limit 1";
+            }
+
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                return conn.Query<PoctItemDetail>(sql).ToList();
+            }
+        }
+
+        public List<KeyValueModel> getNumLotList(string sn, string num)
+        {
+            string sql = "SELECT DISTINCT card_lot 'key', card_lot 'value' FROM poct_item WHERE device_sn = '" + sn + "' AND num = '" + num + "'";
+
+            using (var conn = new MySqlConnection(Global.strConn))
+            {
+                return conn.Query<KeyValueModel>(sql).ToList();
+            }
+        }
+
+        #endregion
+
 
     }
 }

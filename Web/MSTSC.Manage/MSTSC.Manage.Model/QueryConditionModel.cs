@@ -72,5 +72,30 @@ namespace MSTSC.Manage.Model
         /// </summary>
         public string HosName { get; set; }
 
+        /// <summary>
+        /// 序列号
+        /// </summary>
+        public string SN { get; set; }
+
+        /// <summary>
+        /// 项目编号
+        /// </summary>
+        public string Num { get; set; }
+
+        /// <summary>
+        /// 测试项目
+        /// </summary>
+        public string Card { get; set; }
+
+        /// <summary>
+        /// 开始时间
+        /// </summary>
+        public string dtStart { get; set; }
+
+        /// <summary>
+        /// 结束时间
+        /// </summary>
+        public string dtEnd { get; set; }
+
     }
 }

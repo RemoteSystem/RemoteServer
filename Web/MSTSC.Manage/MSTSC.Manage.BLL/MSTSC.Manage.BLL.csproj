@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="DeviceQueryBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PoctStatisticsBLL.cs" />
     <Compile Include="UserBLL.cs" />
     <Compile Include="StatisticsBLL.cs" />
   </ItemGroup>

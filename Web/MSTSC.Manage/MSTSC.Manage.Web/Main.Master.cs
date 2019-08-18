@@ -52,6 +52,25 @@ namespace MSTSC.Manage.Web
                 <div>
                     <ul style='background-color: #81b5db; height: 1px;'></ul>
                     <ul class='nav-header'>
+                        <li>POCT</li>
+                    </ul>
+                    <ul class='nav'>
+                        <li><a href='PoctDeviceList.aspx'>仪器列表</a></li>
+                        <li><a href='PoctDeviceQuery.aspx'>仪器查询</a></li>
+                        <li class='has-sub'>
+                            <a href='javascript:void(0);'><span>统计</span><i class='fa fa-caret-right fa-fw pull-right'></i></a>
+                            <ul class='sub-menu'>
+                                <li><a href='PoctStatisticAllDevices.aspx'>所有机器</a></li>
+                                <li><a href='PoctStatisticByArea.aspx'>按区域统计</a></li>
+                                <li><a href='PoctStatisticByType.aspx'>按机型统计</a></li>
+                                <li><a href='PoctStatisticAll.aspx'>总量统计</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <ul style='background-color: #81b5db; height: 1px;'></ul>
+                    <ul class='nav-header'>
                         <li>用户管理</li>
                     </ul>
                     <ul class='nav'>
@@ -178,20 +197,62 @@ namespace MSTSC.Manage.Web
                     menuText += @"<ul style='background-color: #81b5db; height: 1px;'></ul>
                     <div>
                     <ul class='nav-header'>
-                        <li>用户管理</li>
+                        <li>POCT</li>
                     </ul>
                     <ul class='nav'>";
                     if (rights.IndexOf(",31") >= 0)
                     {
-                        menuText += "<li><a href='UserInfo.aspx'>用户列表</a></li>";
+                        menuText += "<li><a href='BioDeviceList.aspx'>仪器列表</a></li>";
                     }
                     if (rights.IndexOf(",32") >= 0)
+                    {
+                        menuText += "<li><a href='BioDeviceQuery.aspx'>仪器查询</a></li>";
+                    }
+                    if (rights.IndexOf(",33") >= 0)
+                    {
+                        menuText += @"<li class='has-sub'>
+                           <a href='javascript:void(0);'><span>统计</span><i class='fa fa-caret-right fa-fw pull-right'></i></a>
+                           <ul class='sub-menu'>";
+                        if (rights.IndexOf(",331") >= 0)
+                        {
+                            menuText += "<li><a href='BioStatisticAllDevices.aspx'>所有机器</a></li>";
+                        }
+                        if (rights.IndexOf(",332") >= 0)
+                        {
+                            menuText += "<li><a href='BioStatisticByArea.aspx'>按区域统计</a></li>";
+                        }
+                        if (rights.IndexOf(",333") >= 0)
+                        {
+                            menuText += "<li><a href='BioStatisticByType.aspx'>按机型统计</a></li>";
+                        }
+                        if (rights.IndexOf(",334") >= 0)
+                        {
+                            menuText += "<li><a href='PoctStatisticAll.aspx'>总量统计</a></li>";
+                        }
+
+                        menuText += @"</ul></li>";
+                    }
+                    menuText += @"</ul></div>";
+                }
+                if (rights.IndexOf(",8") >= 0)
+                {
+                    menuText += @"<ul style='background-color: #81b5db; height: 1px;'></ul>
+                    <div>
+                    <ul class='nav-header'>
+                        <li>用户管理</li>
+                    </ul>
+                    <ul class='nav'>";
+                    if (rights.IndexOf(",81") >= 0)
+                    {
+                        menuText += "<li><a href='UserInfo.aspx'>用户列表</a></li>";
+                    }
+                    if (rights.IndexOf(",82") >= 0)
                     {
                         menuText += "<li><a href='UserRights.aspx'>权限管理</a></li>";
                     }
                     menuText += @"</ul></div>";
                 }
-                if (rights.IndexOf(",4") >= 0)
+                if (rights.IndexOf(",9") >= 0)
                 {
                     menuText += @"<ul style='background-color: #81b5db; height: 1px;'></ul>
                     <div>
@@ -199,10 +260,10 @@ namespace MSTSC.Manage.Web
                         <li>日志</li>
                     </ul>
                     <ul class='nav'>";
-                    if (rights.IndexOf(",41") >= 0)
+                    if (rights.IndexOf(",91") >= 0)
                     {
                         menuText += "<li><a href='DeviceLog.aspx'>日志查询</a></li>";
-                    }                    
+                    }
                     menuText += @"</ul></div>";
                 }
             }

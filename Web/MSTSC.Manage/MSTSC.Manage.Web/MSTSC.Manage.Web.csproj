@@ -67,6 +67,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="BasePage.aspx" />
+    <Content Include="PoctStatisticAll.aspx" />
+    <Content Include="PoctStatisticByType.aspx" />
+    <Content Include="PoctStatisticByArea.aspx" />
+    <Content Include="PoctStatisticAllDevices.aspx" />
+    <Content Include="PoctDeviceQuery.aspx" />
+    <Content Include="PoctDeviceList.aspx" />
     <Content Include="BioDeviceList.aspx" />
     <Content Include="DeviceLog.aspx" />
     <Content Include="BioStatisticByType.aspx" />
@@ -159,6 +165,48 @@
     </Compile>
     <Compile Include="BasePage.aspx.designer.cs">
       <DependentUpon>BasePage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PoctStatisticAll.aspx.cs">
+      <DependentUpon>PoctStatisticAll.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PoctStatisticAll.aspx.designer.cs">
+      <DependentUpon>PoctStatisticAll.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PoctStatisticByType.aspx.cs">
+      <DependentUpon>PoctStatisticByType.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PoctStatisticByType.aspx.designer.cs">
+      <DependentUpon>PoctStatisticByType.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PoctStatisticByArea.aspx.cs">
+      <DependentUpon>PoctStatisticByArea.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PoctStatisticByArea.aspx.designer.cs">
+      <DependentUpon>PoctStatisticByArea.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PoctStatisticAllDevices.aspx.cs">
+      <DependentUpon>PoctStatisticAllDevices.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PoctStatisticAllDevices.aspx.designer.cs">
+      <DependentUpon>PoctStatisticAllDevices.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PoctDeviceQuery.aspx.cs">
+      <DependentUpon>PoctDeviceQuery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PoctDeviceQuery.aspx.designer.cs">
+      <DependentUpon>PoctDeviceQuery.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PoctDeviceList.aspx.cs">
+      <DependentUpon>PoctDeviceList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PoctDeviceList.aspx.designer.cs">
+      <DependentUpon>PoctDeviceList.aspx</DependentUpon>
     </Compile>
     <Compile Include="BioDeviceList.aspx.cs">
       <DependentUpon>BioDeviceList.aspx</DependentUpon>
