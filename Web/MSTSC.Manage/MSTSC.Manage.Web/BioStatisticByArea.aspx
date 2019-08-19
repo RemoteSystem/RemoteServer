@@ -79,8 +79,14 @@
             });
 
             $('#btnExportyb').click(function () {
-                //window.location.href = "Export.ashx?Action=bio_area&model=" + $("#selModel").val();
-                window.open("Export.ashx?Action=bio_area&model=" + $("#selModel").val(), "_blank");
+                var conditions = "{\"DeviceType\":\"bio"
+                        + "\",\"Model\":\"" + $("#selModel").val()
+                        + "\",\"Region\":\"" + $("#region").val()
+                        + "\",\"Num\":\"" + $("#num").val()
+                        + "\",\"dtStart\":\"" + $("#dtstart").val()
+                        + "\",\"dtEnd\":\"" + $("#dtend").val()
+                        + "\"}";
+                window.open("Export.ashx?Action=bio_area&conditions=" + conditions, "_blank");
             });
 
             getModels();

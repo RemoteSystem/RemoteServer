@@ -169,6 +169,10 @@
     margin: 0px;
 }
 
+.sidebar {
+    overflow: hidden;
+}
+
 .search-panel {
     min-width: 540px;
 }

@@ -16,34 +16,34 @@
       <publishTime>04/19/2018 10:10:12</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.BLL.dll">
-      <publishTime>08/08/2019 21:08:04</publishTime>
+      <publishTime>08/19/2019 23:25:08</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.BLL.pdb">
-      <publishTime>08/08/2019 21:08:04</publishTime>
+      <publishTime>08/19/2019 23:25:08</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.DAL.dll">
-      <publishTime>08/08/2019 21:08:04</publishTime>
+      <publishTime>08/19/2019 21:14:49</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.DAL.pdb">
-      <publishTime>08/08/2019 21:08:04</publishTime>
+      <publishTime>08/19/2019 21:14:49</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.Model.dll">
-      <publishTime>08/08/2019 21:08:03</publishTime>
+      <publishTime>08/18/2019 21:21:09</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.Model.pdb">
-      <publishTime>08/08/2019 21:08:03</publishTime>
+      <publishTime>08/18/2019 21:21:09</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.Utils.dll">
-      <publishTime>08/08/2019 21:08:04</publishTime>
+      <publishTime>08/18/2019 14:59:21</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.Utils.pdb">
-      <publishTime>08/08/2019 21:08:04</publishTime>
+      <publishTime>08/18/2019 14:59:21</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.Web.dll">
-      <publishTime>08/08/2019 21:08:04</publishTime>
+      <publishTime>08/19/2019 23:26:18</publishTime>
     </File>
     <File Include="bin/MSTSC.Manage.Web.pdb">
-      <publishTime>08/08/2019 21:08:04</publishTime>
+      <publishTime>08/19/2019 23:26:18</publishTime>
     </File>
     <File Include="bin/MySql.Data.dll">
       <publishTime>04/19/2018 10:10:12</publishTime>
@@ -52,19 +52,19 @@
       <publishTime>04/26/2018 22:14:51</publishTime>
     </File>
     <File Include="BioDeviceList.aspx">
-      <publishTime>08/08/2019 21:07:04</publishTime>
+      <publishTime>08/18/2019 23:53:55</publishTime>
     </File>
     <File Include="BioDeviceQuery.aspx">
-      <publishTime>08/08/2019 21:06:41</publishTime>
+      <publishTime>08/18/2019 23:53:20</publishTime>
     </File>
     <File Include="BioStatisticAllDevices.aspx">
-      <publishTime>05/11/2019 16:42:41</publishTime>
+      <publishTime>08/19/2019 13:36:23</publishTime>
     </File>
     <File Include="BioStatisticByArea.aspx">
-      <publishTime>05/11/2019 16:42:32</publishTime>
+      <publishTime>08/19/2019 13:39:14</publishTime>
     </File>
     <File Include="BioStatisticByType.aspx">
-      <publishTime>05/11/2019 16:41:47</publishTime>
+      <publishTime>08/19/2019 13:40:39</publishTime>
     </File>
     <File Include="ChangePwd.aspx">
       <publishTime>04/22/2019 21:36:06</publishTime>
@@ -85,19 +85,37 @@
       <publishTime>05/30/2018 15:02:03</publishTime>
     </File>
     <File Include="Index.aspx">
-      <publishTime>04/25/2019 22:47:15</publishTime>
+      <publishTime>08/11/2019 10:05:06</publishTime>
     </File>
     <File Include="Login.aspx">
       <publishTime>04/26/2019 23:20:22</publishTime>
     </File>
     <File Include="Main.Master">
-      <publishTime>04/24/2019 23:32:38</publishTime>
+      <publishTime>08/18/2019 15:45:10</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>08/04/2019 12:00:23</publishTime>
     </File>
+    <File Include="PoctDeviceList.aspx">
+      <publishTime>08/18/2019 23:55:29</publishTime>
+    </File>
+    <File Include="PoctDeviceQuery.aspx">
+      <publishTime>08/18/2019 23:55:44</publishTime>
+    </File>
+    <File Include="PoctStatisticAll.aspx">
+      <publishTime>08/19/2019 23:38:48</publishTime>
+    </File>
+    <File Include="PoctStatisticAllDevices.aspx">
+      <publishTime>08/19/2019 23:17:49</publishTime>
+    </File>
+    <File Include="PoctStatisticByArea.aspx">
+      <publishTime>08/19/2019 23:15:40</publishTime>
+    </File>
+    <File Include="PoctStatisticByType.aspx">
+      <publishTime>08/18/2019 23:06:50</publishTime>
+    </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>08/08/2019 21:08:29</publishTime>
+      <publishTime>08/19/2019 23:41:18</publishTime>
     </File>
     <File Include="scripts/bootstrap-datetimepicker/bootstrap-datetimepicker.js">
       <publishTime>05/10/2019 23:45:06</publishTime>
@@ -133,7 +151,7 @@
       <publishTime>05/11/2018 18:03:52</publishTime>
     </File>
     <File Include="scripts/default.js">
-      <publishTime>04/14/2019 18:24:13</publishTime>
+      <publishTime>08/18/2019 16:02:17</publishTime>
     </File>
     <File Include="scripts/jquery-3.0.0.min.js">
       <publishTime>04/24/2018 17:45:55</publishTime>
@@ -226,7 +244,7 @@
       <publishTime>04/23/2019 22:09:58</publishTime>
     </File>
     <File Include="styles/default.css">
-      <publishTime>04/25/2019 22:15:06</publishTime>
+      <publishTime>08/18/2019 21:30:16</publishTime>
     </File>
     <File Include="styles/font-awesome.min.css">
       <publishTime>04/22/2019 22:02:39</publishTime>
@@ -268,7 +286,7 @@
       <publishTime>05/03/2018 16:29:44</publishTime>
     </File>
     <File Include="styles/main.css">
-      <publishTime>04/26/2019 21:49:57</publishTime>
+      <publishTime>08/15/2019 20:58:58</publishTime>
     </File>
     <File Include="styles/pace/dataurl.css">
       <publishTime>04/25/2018 15:11:07</publishTime>
@@ -277,7 +295,7 @@
       <publishTime>04/25/2019 22:48:36</publishTime>
     </File>
     <File Include="UserRights.aspx">
-      <publishTime>05/10/2019 23:49:20</publishTime>
+      <publishTime>08/15/2019 21:48:50</publishTime>
     </File>
     <File Include="Web.config">
       <publishTime>08/08/2019 21:08:11</publishTime>

@@ -84,8 +84,14 @@
             });
 
             $('#btnExportyb').click(function () {
-                //window.location.href = "Export.ashx?Action=bio_type&model=" + $("#selModel").val();
-                window.open("Export.ashx?Action=bio_type&model=" + $("#selModel").val(), "_blank");
+                var conditions = "{\"DeviceType\":\"bio"
+                        + "\",\"Model\":\"" + $("#selModel").val()
+                        + "\",\"ProductSeries\":\"" + $("#selType").val()
+                        + "\",\"Num\":\"" + $("#num").val()
+                        + "\",\"dtStart\":\"" + $("#dtstart").val()
+                        + "\",\"dtEnd\":\"" + $("#dtend").val()
+                        + "\"}";
+                window.open("Export.ashx?Action=bio_type&conditions=" + conditions, "_blank");
             });
 
             getModels();

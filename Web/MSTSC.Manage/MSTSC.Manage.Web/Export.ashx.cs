@@ -31,6 +31,7 @@ namespace MSTSC.Manage.Web
 
             DeviceQueryBLL bll = new DeviceQueryBLL();
             StatisticsBLL staticBll = new StatisticsBLL();
+            PoctStatisticsBLL poctStaticBll = new PoctStatisticsBLL();
             QueryConditionModel condition;
             DataTable dt = new DataTable();
             string fileName = "";
@@ -59,17 +60,20 @@ namespace MSTSC.Manage.Web
                     headers = new string[] { "错误码", "时间" };
                     break;
                 case "bio_all":
-                    dt = staticBll.StatisticsAllBioDevicesForExportBLL(model);
+                    condition = JsonConvert.DeserializeObject<QueryConditionModel>(conditions.Replace("\"0\"", "\"\""));
+                    dt = staticBll.StatisticsAllBioDevicesForExportBLL(condition);
                     fileName = "生化仪统计_所有机器";
                     headers = new string[] { "仪器名", "SIM卡号", "仪器序列号", "仪器型号", "项目编号", "样本数", "R1消耗量", "R2消耗量" };
                     break;
                 case "bio_area":
-                    dt = staticBll.BioStatisticsByAreaForExportBLL(model);
+                    condition = JsonConvert.DeserializeObject<QueryConditionModel>(conditions.Replace("\"0\"", "\"\""));
+                    dt = staticBll.BioStatisticsByAreaForExportBLL(condition);
                     fileName = "生化仪统计_按区域";
                     headers = new string[] { "装机区域", "项目编号", "仪器总数", "样本数", "R1消耗量", "R2消耗量" };
                     break;
                 case "bio_type":
-                    dt = staticBll.BioStatisticsByTypeForExportBLL(model);
+                    condition = JsonConvert.DeserializeObject<QueryConditionModel>(conditions.Replace("\"0\"", "\"\""));
+                    dt = staticBll.BioStatisticsByTypeForExportBLL(condition);
                     fileName = "生化仪统计_按机型";
                     headers = new string[] { "机型", "项目编号", "仪器总数", "样本数", "R1消耗量", "R2消耗量" };
                     break;
@@ -78,6 +82,30 @@ namespace MSTSC.Manage.Web
                     dt = bll.GetPoctDeviceFaultBLL(condition.SN, condition.dtStart, condition.dtEnd);
                     fileName = "POCT统计_故障信息";
                     headers = new string[] { "错误码", "时间" };
+                    break;
+                case "poct_all":
+                    condition = JsonConvert.DeserializeObject<QueryConditionModel>(conditions.Replace("\"0\"", "\"\""));
+                    dt = poctStaticBll.StatisticsAllPoctDevicesForExportBLL(condition);
+                    fileName = "POCT统计_所有机器";
+                    headers = new string[] { "机器名", "SIM卡号", "仪器序列号", "仪器型号", "项目编号", "样本数", "测试卡消耗数" };
+                    break;
+                case "poct_area":
+                    condition = JsonConvert.DeserializeObject<QueryConditionModel>(conditions.Replace("\"0\"", "\"\""));
+                    dt = poctStaticBll.PoctStatisticsByAreaForExportBLL(condition);
+                    fileName = "POCT统计_按区域";
+                    headers = new string[] { "装机区域", "项目编号", "仪器总数", "样本数", "测试卡消耗数" };
+                    break;
+                case "poct_type":
+                    condition = JsonConvert.DeserializeObject<QueryConditionModel>(conditions.Replace("\"0\"", "\"\""));
+                    dt = poctStaticBll.PoctStatisticsByTypeForExportBLL(condition);
+                    fileName = "POCT统计_按机型";
+                    headers = new string[] { "机型", "项目编号", "仪器总数", "样本数", "测试卡消耗数" };
+                    break;
+                case "poct_all_num":
+                    condition = JsonConvert.DeserializeObject<QueryConditionModel>(conditions.Replace("\"0\"", "\"\""));
+                    dt = poctStaticBll.StatisticsAllPoctNumForExportBLL(condition);
+                    fileName = "POCT统计_总量统计";
+                    headers = new string[] { "仪器型号", "测试项目", "项目编号", "样本数", "测试卡消耗数" };
                     break;
                 case "bio_log":
                     LogConditionModel conditionModel = JsonConvert.DeserializeObject<LogConditionModel>(conditions.Replace("\"0\"", "\"\""));

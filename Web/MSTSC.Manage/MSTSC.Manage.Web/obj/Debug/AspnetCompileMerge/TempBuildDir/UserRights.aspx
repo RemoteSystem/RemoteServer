@@ -203,7 +203,10 @@
                         width: 200,
                         formatter: function (value, row, index) {
                             var opt = '';
-                            if (value != '1') { opt += '<a href="javascript:void(0)" onclick="editUserRights(\'' + value + '\');return false;">设置权限</a> &nbsp;'; }
+                            if (value != '1' && !row.isDel) { opt += '<a href="javascript:void(0)" onclick="editUserRights(\'' + value + '\');return false;">设置权限</a> &nbsp;'; }
+                            else if (row.isDel) {
+                                opt = '<span style="color:#999;">不可操作</span>';
+                            }
 
                             return opt;
                         }
@@ -267,12 +270,21 @@
         { id: 232, pId: 23, name: "按区域统计", chkDisabled: false },
         { id: 233, pId: 23, name: "按机型统计", chkDisabled: false },
 
-        { id: 3, pId: 0, name: "用户管理", open: true, chkDisabled: false },
-        { id: 31, pId: 3, name: "用户列表", chkDisabled: false },
-        { id: 32, pId: 3, name: "权限管理", chkDisabled: false },
+        { id: 3, pId: 0, name: "POCT", open: true, chkDisabled: false },
+        { id: 31, pId: 3, name: "仪器列表", chkDisabled: false },
+        { id: 32, pId: 3, name: "查询", chkDisabled: false },
+        { id: 33, pId: 3, name: "统计", open: true, chkDisabled: false },
+        { id: 331, pId: 33, name: "所有机器", chkDisabled: false },
+        { id: 332, pId: 33, name: "按区域统计", chkDisabled: false },
+        { id: 333, pId: 33, name: "按机型统计", chkDisabled: false },
+        { id: 334, pId: 33, name: "总量统计", chkDisabled: false },
 
-        { id: 4, pId: 0, name: "日志", open: true, chkDisabled: false },
-        { id: 41, pId: 4, name: "日志查询", chkDisabled: false },
+        { id: 8, pId: 0, name: "用户管理", open: true, chkDisabled: false },
+        { id: 81, pId: 8, name: "用户列表", chkDisabled: false },
+        { id: 82, pId: 8, name: "权限管理", chkDisabled: false },
+
+        { id: 9, pId: 0, name: "日志", open: true, chkDisabled: false },
+        { id: 91, pId: 9, name: "日志查询", chkDisabled: false },
         ];
 
         ///////////////////////////////////

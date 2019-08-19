@@ -142,11 +142,8 @@ namespace MSTSC.Manage.BLL
             return dal.getLogCount(conditValue);
         }
 
-        public DataTable StatisticsAllBioDevicesForExportBLL(string model)
+        public DataTable StatisticsAllBioDevicesForExportBLL(QueryConditionModel conditValue)
         {
-            QueryConditionModel conditValue = new QueryConditionModel();
-            conditValue.Model = model;
-
             PagerInfo pagerInfo = new PagerInfo();
             pagerInfo.CurrenetPageIndex = 1;
             pagerInfo.PageSize = 65530;
@@ -154,11 +151,8 @@ namespace MSTSC.Manage.BLL
             return dal.StatisticsAllBioDevicesDAL(conditValue, pagerInfo, null);
         }
 
-        public DataTable BioStatisticsByAreaForExportBLL(string model)
+        public DataTable BioStatisticsByAreaForExportBLL(QueryConditionModel conditValue)
         {
-            QueryConditionModel conditValue = new QueryConditionModel();
-            conditValue.Model = model;
-
             PagerInfo pagerInfo = new PagerInfo();
             pagerInfo.CurrenetPageIndex = 1;
             pagerInfo.PageSize = 65530;
@@ -166,11 +160,8 @@ namespace MSTSC.Manage.BLL
             return dal.BioStatisticsByAreaDAL(conditValue, pagerInfo, null);
         }
 
-        public DataTable BioStatisticsByTypeForExportBLL(string model)
+        public DataTable BioStatisticsByTypeForExportBLL(QueryConditionModel conditValue)
         {
-            QueryConditionModel conditValue = new QueryConditionModel();
-            conditValue.Model = model;
-
             PagerInfo pagerInfo = new PagerInfo();
             pagerInfo.CurrenetPageIndex = 1;
             pagerInfo.PageSize = 65530;

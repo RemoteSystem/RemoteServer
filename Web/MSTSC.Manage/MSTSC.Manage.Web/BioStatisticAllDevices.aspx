@@ -79,8 +79,14 @@
             });
 
             $('#btnExportyb').click(function () {
-                window.open("Export.ashx?Action=bio_all&model=" + $("#selModel").val(),"_blank");  
-                //window.location.href = "Export.ashx?Action=bio_all&model=" + $("#selModel").val();
+                var conditions = "{\"DeviceType\":\"bio"
+                       + "\",\"Model\":\"" + $("#selModel").val()
+                       + "\",\"SN\":\"" + $("#sn").val()
+                       + "\",\"Num\":\"" + $("#num").val()
+                       + "\",\"dtStart\":\"" + $("#dtstart").val()
+                       + "\",\"dtEnd\":\"" + $("#dtend").val()
+                       + "\"}";
+                window.open("Export.ashx?Action=bio_all&conditions=" + conditions, "_blank");
             });
 
             getModels();

@@ -52,11 +52,8 @@ namespace MSTSC.Manage.BLL
             return dal.getPoctAllCount(conditValue);
         }
 
-         public DataTable StatisticsAllPoctDevicesForExportBLL(string model)
+        public DataTable StatisticsAllPoctDevicesForExportBLL(QueryConditionModel conditValue)
         {
-            QueryConditionModel conditValue = new QueryConditionModel();
-            conditValue.Model = model;
-
             PagerInfo pagerInfo = new PagerInfo();
             pagerInfo.CurrenetPageIndex = 1;
             pagerInfo.PageSize = 65530;
@@ -64,11 +61,8 @@ namespace MSTSC.Manage.BLL
             return dal.StatisticsAllPoctDevicesDAL(conditValue, pagerInfo, null);
         }
 
-        public DataTable PoctStatisticsByAreaForExportBLL(string model)
+        public DataTable PoctStatisticsByAreaForExportBLL(QueryConditionModel conditValue)
         {
-            QueryConditionModel conditValue = new QueryConditionModel();
-            conditValue.Model = model;
-
             PagerInfo pagerInfo = new PagerInfo();
             pagerInfo.CurrenetPageIndex = 1;
             pagerInfo.PageSize = 65530;
@@ -76,15 +70,21 @@ namespace MSTSC.Manage.BLL
             return dal.PoctStatisticsByAreaDAL(conditValue, pagerInfo, null);
         }
 
-        public DataTable PoctStatisticsByTypeForExportBLL(string model)
+        public DataTable PoctStatisticsByTypeForExportBLL(QueryConditionModel conditValue)
         {
-            QueryConditionModel conditValue = new QueryConditionModel();
-            conditValue.Model = model;
-
             PagerInfo pagerInfo = new PagerInfo();
             pagerInfo.CurrenetPageIndex = 1;
             pagerInfo.PageSize = 65530;
             return dal.PoctStatisticsByTypeDAL(conditValue, pagerInfo, null);
+        }
+
+        public DataTable StatisticsAllPoctNumForExportBLL(QueryConditionModel conditValue)
+        {
+            PagerInfo pagerInfo = new PagerInfo();
+            pagerInfo.CurrenetPageIndex = 1;
+            pagerInfo.PageSize = 65530;
+
+            return dal.StatisticsAllPoctDAL(conditValue, pagerInfo, null);
         }
                
     }
