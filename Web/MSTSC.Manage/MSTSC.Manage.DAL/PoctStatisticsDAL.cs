@@ -17,10 +17,18 @@ namespace MSTSC.Manage.DAL
         public DataTable StatisticsAllPoctDevicesDAL(QueryConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
         {
             StringBuilder whereSql = new StringBuilder();
-            string sql = @"SELECT IFNULL(d.DeviceName, '') AS DeviceName,d.SIM,d.SN,d.Model,c.num,c.smpl,c.card_consume
+            //            string sql = @"SELECT CONCAT(IFNULL(d.Hospital,''),'_',IFNULL(d.Model,'')) as DeviceName,d.dtupdate,d.SIM,d.SN,SUM(c.smpl) AS smpl, SUM(c.card_consume) AS card_consume
+            //	                FROM device_info d LEFT OUTER JOIN poct_statistics_item c
+            //		            ON d.SN = c.device_sn WHERE d.DeviceType='POCT' {0} GROUP BY SN
+            //	                LIMIT " + (pagerInfo.PageSize * (pagerInfo.CurrenetPageIndex - 1)) + "," + pagerInfo.PageSize;
+
+            //            if (!string.IsNullOrEmpty(conditValue.SN))
+            //            {
+            string sql = @"SELECT CONCAT(IFNULL(d.Hospital,''),'_',IFNULL(d.Model,'')) as DeviceName,c.dtinsert as dtupdate,d.SIM,d.SN,c.smpl, c.card_consume
 	                FROM device_info d LEFT OUTER JOIN poct_statistics_item c
-		            ON d.SN = c.device_sn WHERE d.DeviceType='POCT' {0}
-	                LIMIT " + (pagerInfo.PageSize * (pagerInfo.CurrenetPageIndex - 1)) + "," + pagerInfo.PageSize; ;
+		            ON d.SN = c.device_sn WHERE d.DeviceType='POCT' {0} ORDER BY c.dtinsert DESC
+	                LIMIT " + (pagerInfo.PageSize * (pagerInfo.CurrenetPageIndex - 1)) + "," + pagerInfo.PageSize;
+            //}
 
             if (!string.IsNullOrEmpty(conditValue.Model))
             {
@@ -55,32 +63,42 @@ namespace MSTSC.Manage.DAL
 
         public int getPoctDeviceCount(QueryConditionModel conditValue)
         {
-            string sql = @"SELECT count(1) FROM device_info d LEFT OUTER JOIN poct_item c ON d.SN = c.device_sn WHERE d.DeviceType='POCT' ";
+            StringBuilder whereSql = new StringBuilder();
+            //            string sql = @"SELECT count(1) FROM (SELECT d.DeviceName,d.SIM,d.SN,SUM(c.smpl) AS smpl, SUM(c.card_consume) AS card_consume
+            //	                FROM device_info d LEFT OUTER JOIN poct_statistics_item c
+            //		            ON d.SN = c.device_sn WHERE d.DeviceType='POCT' {0} GROUP BY SN)t ";
+
+            //            if (!string.IsNullOrEmpty(conditValue.SN))
+            //            {
+            string sql = @"SELECT count(1) FROM (SELECT c.dtinsert,d.SN FROM device_info d LEFT OUTER JOIN poct_statistics_item c
+		            ON d.SN = c.device_sn WHERE d.DeviceType='POCT' {0} )t ";
+            //}
 
             if (!string.IsNullOrEmpty(conditValue.Model))
             {
-                sql += @" AND d.Model='" + conditValue.Model + "'";
+                whereSql.Append(@" AND d.Model='" + conditValue.Model + "'");
             }
             if (!string.IsNullOrEmpty(conditValue.SN))
             {
-                sql += @" AND d.SN='" + conditValue.SN + "'";
+                whereSql.Append(@" AND d.SN = '" + conditValue.SN + "'");
             }
             if (!string.IsNullOrEmpty(conditValue.Card))
             {
-                sql += @" AND d.SN in(SELECT device_sn FROM poct_item WHERE card_name = '" + conditValue.Card + "')";
+                whereSql.Append(@" AND d.SN in(SELECT device_sn FROM poct_item WHERE card_name = '" + conditValue.Card + "')");
             }
             if (!string.IsNullOrEmpty(conditValue.dtStart))
             {
-                sql += @" AND c.dtinsert>='" + conditValue.dtStart + "'";
+                whereSql.Append(@" AND c.dtinsert>='" + conditValue.dtStart + "'");
             }
             if (!string.IsNullOrEmpty(conditValue.dtEnd))
             {
-                sql += @" AND c.dtinsert<='" + conditValue.dtEnd + "'";
+                whereSql.Append(@" AND c.dtinsert<='" + conditValue.dtEnd + "'");
             }
 
+            string SqlCondit = string.Format(sql, whereSql.ToString());
             using (var conn = new MySqlConnection(Global.strConn))
             {
-                return conn.QuerySingle<int>(sql);
+                return conn.QuerySingle<int>(SqlCondit);
             }
         }
 
@@ -88,9 +106,9 @@ namespace MSTSC.Manage.DAL
         public DataTable PoctStatisticsByAreaDAL(QueryConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
         {
             StringBuilder whereSql = new StringBuilder();
-            string sql = @"SELECT d.Region,bc.num, COUNT(d.SN) device_count, SUM(bc.smpl) AS smpl, SUM(bc.card_consume) AS card_consume
+            string sql = @"SELECT d.Region, COUNT(d.SN) device_count, SUM(bc.smpl) AS smpl, SUM(bc.card_consume) AS card_consume
                 FROM device_info d LEFT JOIN poct_statistics_item bc ON d.SN = bc.device_sn where DeviceType ='POCT' {0} 
-                GROUP BY Region,bc.num ORDER BY SN LIMIT " + (pagerInfo.PageSize * (pagerInfo.CurrenetPageIndex - 1)) + "," + pagerInfo.PageSize + ";";
+                GROUP BY Region ORDER BY SN LIMIT " + (pagerInfo.PageSize * (pagerInfo.CurrenetPageIndex - 1)) + "," + pagerInfo.PageSize + ";";
 
             if (!string.IsNullOrEmpty(conditValue.Model))
             {
@@ -127,8 +145,8 @@ namespace MSTSC.Manage.DAL
         public int getAreaPoctDeviceCount(QueryConditionModel conditValue)
         {
             StringBuilder whereSql = new StringBuilder();
-            string sql = @"SELECT COUNT(1) AS count FROM(SELECT d.Region,bc.num FROM device_info d 
-                           LEFT JOIN poct_statistics_item bc ON d.SN = bc.device_sn  WHERE d.DeviceType ='POCT' {0} GROUP BY Region,bc.num)t; ";
+            string sql = @"SELECT COUNT(1) AS count FROM(SELECT d.Region FROM device_info d 
+                           LEFT JOIN poct_statistics_item bc ON d.SN = bc.device_sn  WHERE d.DeviceType ='POCT' {0} GROUP BY Region)t; ";
 
             if (!string.IsNullOrEmpty(conditValue.Model))
             {
@@ -161,17 +179,17 @@ namespace MSTSC.Manage.DAL
         public DataTable PoctStatisticsByTypeDAL(QueryConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
         {
             StringBuilder whereSql = new StringBuilder();
-            string sql = @"SELECT case d.MachineType when 0 then '标准机' when 1 then '招标机' else '其他' end AS MachineType, bc.num,
+            string sql = @"SELECT case d.MachineType when 0 then '标准机' when 1 then '招标机' else '其他' end AS MachineType, 
                 COUNT(d.SN) device_count, SUM(bc.smpl) AS smpl, SUM(bc.card_consume) AS card_consume 
                 FROM device_info d LEFT JOIN poct_statistics_item bc ON d.SN = bc.device_sn WHERE DeviceType ='POCT' {0} 
-                GROUP BY MachineType,bc.num ORDER BY SN LIMIT " + (pagerInfo.PageSize * (pagerInfo.CurrenetPageIndex - 1)) + "," + pagerInfo.PageSize + ";";
+                GROUP BY MachineType ORDER BY SN LIMIT " + (pagerInfo.PageSize * (pagerInfo.CurrenetPageIndex - 1)) + "," + pagerInfo.PageSize + ";";
 
             if (!string.IsNullOrEmpty(conditValue.Model))
             {
                 whereSql.Append(@" AND d.Model='" + conditValue.Model + "'");
             }
 
-            if (!string.IsNullOrEmpty(conditValue.ProductSeries) && conditValue.ProductSeries=="1")//标准机
+            if (!string.IsNullOrEmpty(conditValue.ProductSeries) && conditValue.ProductSeries == "1")//标准机
             {
                 whereSql.Append(@" AND d.MachineType=0");
             }
@@ -211,8 +229,8 @@ namespace MSTSC.Manage.DAL
         public int getTypePoctDeviceCount(QueryConditionModel conditValue)
         {
             StringBuilder whereSql = new StringBuilder();
-            string sql = @"SELECT COUNT(1) AS count FROM(SELECT d.MachineType, bc.num FROM device_info d 
-                           LEFT JOIN poct_statistics_item bc ON d.SN = bc.device_sn WHERE DeviceType ='POCT' {0} GROUP BY MachineType,bc.num)t; ";
+            string sql = @"SELECT COUNT(1) AS count FROM(SELECT d.MachineType FROM device_info d 
+                           LEFT JOIN poct_statistics_item bc ON d.SN = bc.device_sn WHERE DeviceType ='POCT' {0} GROUP BY MachineType)t; ";
 
             if (!string.IsNullOrEmpty(conditValue.Model))
             {
@@ -254,8 +272,8 @@ namespace MSTSC.Manage.DAL
         public DataTable StatisticsAllPoctDAL(QueryConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
         {
             StringBuilder whereSql = new StringBuilder();
-            string sql = @"SELECT t.*,c.num,c.smpl,c.card_consume FROM (SELECT DISTINCT d.SN,d.Model,p.card_name FROM device_info d,poct_item p WHERE d.DeviceType='POCT' 
-                    AND d.SN = p.device_sn {0} )t LEFT OUTER JOIN poct_statistics_item c ON t.SN = c.device_sn ORDER BY t.SN
+            string sql = @"SELECT t.Model,t.card_name,SUM(c.smpl) AS smpl, SUM(c.card_consume) AS card_consume FROM (SELECT DISTINCT d.SN,d.Model,p.card_name FROM device_info d,poct_item p WHERE d.DeviceType='POCT' 
+                    AND d.SN = p.device_sn {0} )t LEFT OUTER JOIN poct_statistics_item c ON t.SN = c.device_sn group by t.Model,t.card_name ORDER BY t.Model
 	                LIMIT " + (pagerInfo.PageSize * (pagerInfo.CurrenetPageIndex - 1)) + "," + pagerInfo.PageSize; ;
 
             if (!string.IsNullOrEmpty(conditValue.Model))
@@ -288,8 +306,8 @@ namespace MSTSC.Manage.DAL
         public int getPoctAllCount(QueryConditionModel conditValue)
         {
             StringBuilder whereSql = new StringBuilder();
-            string sql = @"SELECT count(1) FROM (SELECT DISTINCT d.SN,d.Model,p.card_name FROM device_info d,poct_item p WHERE d.DeviceType='POCT' 
-                          AND d.SN = p.device_sn {0} )t LEFT OUTER JOIN poct_statistics_item c ON t.SN = c.device_sn";
+            string sql = @"SELECT count(cn) FROM(SELECT count(1)cn FROM (SELECT DISTINCT d.SN,d.Model,p.card_name FROM device_info d,poct_item p WHERE d.DeviceType='POCT' 
+                          AND d.SN = p.device_sn {0} )t LEFT OUTER JOIN poct_statistics_item c ON t.SN = c.device_sn GROUP BY t.Model,t.card_name)m ";
 
             if (!string.IsNullOrEmpty(conditValue.Model))
             {

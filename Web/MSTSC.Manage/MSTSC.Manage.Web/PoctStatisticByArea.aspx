@@ -3,51 +3,59 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script src="scripts/bootstrap-table/bootstrap-table-export.js"></script>
     <script src="scripts/bootstrap-table/tableExport.js"></script>
+    <link href="https://cdn.bootcss.com/toastr.js/2.1.4/toastr.min.css" rel="stylesheet" />
+    <script src="https://cdn.bootcss.com/toastr.js/2.1.4/toastr.min.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <ul class="breadcrumb nomargin">
         <li class="active">统计 -- 按装机区域统计</li>
     </ul>
-    <div class="panel panel-info margin-5 padding-10">
-        <div class="panel-body nopadding">
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 padding-5">
-                <div class="form-inline">
-                    <span>仪器型号</span>
-                    <select id="selModel" class="form-control" style="min-width: 160px;">
-                        <option value="0">请选择</option>
-                    </select>
+    <div class="col-lg-11 col-md-11 col-sm-11 col-xs-12">
+        <div class="panel panel-info margin-5 padding-10">
+            <div class="panel-body nopadding">
+                <div class="pull-left padding-right-20 padding-bottom-10">
+                    <div class="form-inline">
+                        <span>仪器型号</span>
+                        <select id="selModel" class="form-control" style="width: 140px;">
+                            <option value="Q7">Q7</option>
+                            <option value="Q8">Q8</option>
+                        </select>
+                    </div>
                 </div>
-            </div>            
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 padding-5">
-                <div class="form-inline">
-                    <span>测试项目</span>
-                    <input id="card" class="form-control" />
+                <div class="pull-left padding-right-20 padding-bottom-10">
+                    <div class="form-inline">
+                        <span>装机区域</span>
+                        <select id="region" class="form-control" style="width: 140px;">
+                            <option value="0">请选择</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 padding-5">
-                <div class="form-inline">
-                    <span>装机区域</span>
-                    <input id="region" class="form-control" />
+                <div class="pull-left padding-right-20 padding-bottom-10">
+                    <div class="form-inline">
+                        <span>测试项目<span style="color: orangered">*</span></span>
+                        <input id="card" class="form-control" style="width: 140px;" />
+                    </div>
+                </div>                
+                 <div class="pull-left padding-right-20 padding-bottom-10">
+                    <div class="form-inline">
+                        <span>统计时间</span>
+                        <input id="dtstart" class="form-control" placeholder="开始时间" style="width: 140px;" />
+                        -
+                    <input id="dtend" class="form-control" placeholder="结束时间" style="width: 140px;" />
+                    </div>
                 </div>
-            </div>
-             <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 padding-5">
-                <div class="form-inline">
-                    <span>统计时间</span>
-                    <input id="dtstart" class="form-control" style="width:150px;" /> — 
-                    <input id="dtend" class="form-control" style="width:150px;" />
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 padding-5">
-                <div class="form-inline">
-                    <button type="button" id="btnSearch" class="btn btn-default btn-normal">查 询</button>
-                    <button type="button" id="btnExportyb" class="btn btn-default btn-normal margin-left-10">导出结果</button>
+                <div class="pull-left padding-right-20 padding-bottom-10">
+                    <div class="form-inline">
+                        <button type="button" id="btnSearch" class="btn btn-default btn-normal">查 询</button>
+                        <button type="button" id="btnExportyb" class="btn btn-default btn-normal margin-left-10">导出结果</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="panel padding-left-5 padding-right-5">
-        <table id="grid"></table>
+        <div class="panel padding-left-5 padding-right-5">
+            <table id="grid"></table>
+        </div>
     </div>
 
     <script type="text/javascript">
@@ -60,6 +68,9 @@
 
         $(document).ready(function () {
             InitMainTable();
+            toastr.options.positionClass = 'toast-top-center';
+            InitDateTimePicker();
+
             $('#dtstart').datetimepicker({ format: 'YYYY-MM-DD HH:mm' });
             $('#dtend').datetimepicker({ format: 'YYYY-MM-DD HH:mm' });
             var now = new Date();
@@ -67,11 +78,19 @@
             $('#dtend').val(now.Format("yyyy-MM-dd") + " 23:59");
 
             $("#selModel").change(function () {
-                freshTable();
+                //freshTable();
+            });
+
+            $("#region").change(function () {
+                //freshTable();
             });
 
             $("#btnSearch").click(function () {
-                freshTable();
+                if ($("#card").val()) {
+                    freshTable();
+                } else {
+                    toastr.error('请输入测试项目');
+                }
             });
 
             $("#btnExport").click(function () {
@@ -89,7 +108,8 @@
                 window.open("Export.ashx?Action=poct_area&conditions=" + conditions, "_blank");
             });
 
-            getModels();
+            //getModels();
+            getRegion();
         });
         //初始化bootstrap-table的内容
         function InitMainTable() {
@@ -127,7 +147,7 @@
                         return "{'conditions':'','rows':'0','page':'0','sort':'','sortOrder':''}";
                     }
                     var conditions = "{\"DeviceType\":\"POCT"
-                        + "\",\"Model\":\"" + $("#selModel").val()                        
+                        + "\",\"Model\":\"" + $("#selModel").val()
                         + "\",\"Card\":\"" + $("#card").val()
                         + "\",\"Region\":\"" + $("#region").val()
                         + "\",\"dtStart\":\"" + $("#dtstart").val()
@@ -162,10 +182,6 @@
                     }, {
                         field: 'Region',
                         title: '装机区域',
-                        align: 'center'
-                    }, {
-                        field: 'num',
-                        title: '项目编号',
                         align: 'center'
                     }, {
                         field: 'device_count',
@@ -224,6 +240,27 @@
                         opts += "<option value=\"" + result[res]['key'] + "\">" + result[res]['value'] + "</option>";
                     }
                     $("#selModel").html(opts);
+                },
+                error: function (err) {
+                }
+            });
+        }
+
+        function getRegion() {
+            $.ajax({
+                type: "post",
+                url: "BioDeviceQuery.aspx/getRegion",
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    var result = eval(data.d);
+
+                    var opts = "<option value=\"0\">请选择</option>";
+                    for (res in result) {
+                        opts += "<option value=\"" + result[res]['key'] + "\">" + result[res]['value'] + "</option>";
+                    }
+                    $("#region").html(opts);
                 },
                 error: function (err) {
                 }

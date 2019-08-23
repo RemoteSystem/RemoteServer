@@ -136,17 +136,17 @@ namespace RemoteDao
             {
                 item = info.category.bio.statistics.item[i];
 
-                string sql = "INSERT INTO bio_statistics_item(num,device_sn,R1,R2,smpl) VALUES(?num,?sn,?r1,?r2,?smpl) "
-                           + "ON DUPLICATE KEY UPDATE ";
-                if (item.R1 != null)
-                    sql += ",R1 = ?r1";
-                if (item.R2 != null)
-                    sql += ",R2 = ?r2";
-                if (item.smpl != null)
-                    sql += ",smpl = ?smpl";
+                string sql = "INSERT INTO bio_statistics_item(num,device_sn,R1,R2,smpl) VALUES(?num,?sn,?r1,?r2,?smpl) ";
+                //           + "ON DUPLICATE KEY UPDATE ";
+                //if (item.R1 != null)
+                //    sql += ",R1 = ?r1";
+                //if (item.R2 != null)
+                //    sql += ",R2 = ?r2";
+                //if (item.smpl != null)
+                //    sql += ",smpl = ?smpl";
 
-                sql += ";";
-                sql = sql.Replace("UPDATE ,", "UPDATE ");
+                //sql += ";";
+                //sql = sql.Replace("UPDATE ,", "UPDATE ");
 
                 MySqlParameter[] parameters = { new MySqlParameter("?num", MySqlDbType.VarChar),
                                                 new MySqlParameter("?sn", MySqlDbType.VarChar),

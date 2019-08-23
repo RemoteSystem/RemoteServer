@@ -12,7 +12,6 @@
                 <div class="quick-search-condition padding-5">
                     <div class="form-inline text-center">
                         <select id="selType" class="form-control margin-top-5 margin-bottom-5">
-                            <%--<option value="0">请选择产品类型</option>--%>
                             <option value="生化仪">生化仪</option>
                         </select>
                         <input type="text" id="querytext" class="form-control margin-top-5 margin-bottom-5" value="" style="width: 275px;" placeholder="请输入仪器名称、SIM卡号或仪器序列号" />
@@ -25,6 +24,8 @@
                         <label>仪器型号</label>
                         <select id="selModel" class="form-control margin-top-5 margin-bottom-5">
                             <option value="0">请选择</option>
+                            <option value="ZS200">ZS200</option>
+                            <option value="ZS400">ZS400</option>
                         </select>
                     </div>
 
@@ -129,16 +130,19 @@
                 <div class="padding-top-10 padding-bottom-10" style="background-color: #d9eaf9;">
                     <div class="pull-right">
                         故障发生时间：  
-                        <input type="text" id="dtstart" style="width: 120px;" />
+                        <input type="text" id="dtstart" placeholder="开始时间" style="width: 120px;" />
                         -
-                        <input type="text" id="dtend" style="width: 120px;" />
+                        <input type="text" id="dtend" placeholder="结束时间" style="width: 120px;" />
                         <button type="button" id="faultSearch" class="btn btn-default btn-small margin-left-10" style="padding: 1px 5px;">查询</button>
                         <button type="button" id="faultExport" class="btn btn-default btn-small margin-left-5" style="padding: 1px 5px;">导 出</button>
                     </div>
                     <span class="clearfix"></span>
                 </div>
                 <div id="fault" class="panel-body nopadding">
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 padding-5 text-center">
+                        <span>序号</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 padding-5 text-center">
                         <span>错误码</span>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
@@ -197,7 +201,7 @@
                             <label style="width: 100px; text-align: right">反应时间：</label>
                             <label style="margin-left: 5px; width: 80px; font-weight: normal;">
                                 <span id="reaction_time_begin"></span>
-                                -
+                                <span id="reaction_time_split">-</span>
                                 <span id="reaction_time_end"></span>
                             </label>
                         </div>
@@ -205,9 +209,9 @@
                             <label style="width: 100px; text-align: right">空白时间：</label>
                             <label style="margin-left: 5px; width: 80px; font-weight: normal;">
                                 <span id="blank_time_begin"></span>
-                                -
+                                <span id="blank_time_split">-</span>
                                 <span id="blank_time_end"></span>
-                            </label>                            
+                            </label>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 text-center">
                             <label style="width: 100px; text-align: right">定标方法：</label>
@@ -250,6 +254,8 @@
         var rowtimer;
         $(document).ready(function () {
             InitMainTable();
+            InitDateTimePicker();
+
             $('#dtstart').datetimepicker({ format: 'YYYY-MM-DD HH:mm' });
             $('#dtend').datetimepicker({ format: 'YYYY-MM-DD HH:mm' });
             var now = new Date();
@@ -292,8 +298,9 @@
                 getFault();
             });
 
-            getModels();
+            //getModels();
             getRegion();
+            $('#quickquery').click();
         });
         //初始化bootstrap-table的内容
         function InitMainTable() {
@@ -364,32 +371,36 @@
                 columns: [
                     {
                         field: 'DeviceName',
-                        title: '仪器名称'
+                        title: '仪器名称',
+                        align: "center"
                     }, {
                         field: 'SIM',
                         title: 'SIM卡号',
-                        sortable: true
+                        align: "center"
                     }, {
                         field: 'SN',
                         title: '仪器序列号',
-                        sortable: true
+                        align: "center"
                     }, {
                         field: 'Model',
-                        title: '仪器型号'
+                        title: '仪器型号',
+                        align: "center"
                     }, {
                         field: 'Region',
-                        title: '装机区域'
+                        title: '装机区域',
+                        align: "center"
                     }, {
                         field: 'SESSION_ID',
                         title: '状态',
+                        align: "center",
                         formatter: function (value, row, index) {
-                            var div = "<div style='width:45px;'>" + value + "</div>";
+                            var div = "<span>" + value + "</span>";
                             return div;
                         }
                     }],
                 onLoadSuccess: function () {
                     if (type != 0) {
-                        tabletimer = setTimeout(freshTable, 30000);
+                        tabletimer = setTimeout(freshTable, 120000);
 
                         var r = $("[data-uniqueid='" + sn + "']");
                         r.css("background-color", "#C0C0C0");
@@ -402,7 +413,7 @@
                 },
                 onLoadError: function () {
                     clearTimeout(tabletimer);
-                    alert("数据加载失败！");
+                    //alert("数据加载失败！");
                 },
                 onSort: function (name, order) {
                     clearTimeout(tabletimer);
@@ -429,7 +440,7 @@
         }
 
         function getRowInfo() {
-            clearTimeout(rowtimer);           
+            clearTimeout(rowtimer);
             if (sn) {
                 $.ajax({
                     type: "post",
@@ -444,7 +455,7 @@
                         }
                         getFault();
                         freshSampleTable();
-                        rowtimer = setTimeout(getRowInfo, 13000);
+                        rowtimer = setTimeout(getRowInfo, 61000);
                     },
                     error: function (err) {
                         alert('获取数据出错.');
@@ -504,16 +515,20 @@
                     },
                     {
                         field: 'num',
-                        title: '项目编号'
+                        title: '项目编号',
+                        align: "center"
                     }, {
                         field: 'smpl',
-                        title: '样本数'
+                        title: '样本数',
+                        align: "center"
                     }, {
                         field: 'R1',
-                        title: 'R1试剂使用量'
+                        title: 'R1试剂使用量(mL)',
+                        align: "center"
                     }, {
                         field: 'R2',
-                        title: 'R2试剂使用量'
+                        title: 'R2试剂使用量(mL)',
+                        align: "center"
                     }, {
                         field: 'num',
                         title: '项目详情',
@@ -630,11 +645,20 @@
                         modal.find("#" + attribute).html(result[attribute]);
                     }
 
-                    if ($("#blank_time_begin").val() == "-1") $("#blank_time_begin").val("");
-                    if ($("#blank_time_end").val() == "-1") $("#blank_time_end").val("");
-                    if ($("#calibration_method").val() == "K因数法" && $("#k_factor_value").val() == "0") $("#k_factor_value").val("");
-                    if ($("#second_reagent_volume").val() == "0") $("#second_reagent_volume").val("");
-                    if ($("#sub_wavelength").val() == "0") $("#sub_wavelength").val("");
+                    if (modal.find("#blank_time_begin").html() == "-1") modal.find("#blank_time_begin").html("");
+                    if (modal.find("#blank_time_end").html() == "-1") modal.find("#blank_time_end").html("");
+                    if (modal.find("#calibration_method").html() != "K因数法" && modal.find("#k_factor_value").html() == "0") modal.find("#k_factor_value").html("");
+                    if (modal.find("#second_reagent_volume").html() == "0") modal.find("#second_reagent_volume").html("");
+                    if (modal.find("#sub_wavelength").html() == "0") modal.find("#sub_wavelength").html("");
+                    if (!modal.find("#blank_time_begin").html() && !modal.find("#blank_time_end").html())
+                    { modal.find("#blank_time_split").html(""); }
+                    else {
+                        modal.find("#blank_time_split").html("-");
+                    }
+
+                    if (modal.find("#sample_volume").html()) modal.find("#sample_volume").html(modal.find("#sample_volume").html() + " μL");
+                    if (modal.find("#first_reagent_volume").html()) modal.find("#first_reagent_volume").html(modal.find("#first_reagent_volume").html() + " μL");
+                    if (modal.find("#second_reagent_volume").html()) modal.find("#second_reagent_volume").html(modal.find("#second_reagent_volume").html() + " μL");
                 },
                 error: function (err) {
                 }

@@ -158,7 +158,7 @@
                 columns: [
                     {
                         field: 'DeviceName',
-                        title: '机器名'
+                        title: '仪器名称'
                     }, {
                         field: 'SIM',
                         title: 'SIM卡号',

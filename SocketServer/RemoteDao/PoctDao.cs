@@ -116,16 +116,16 @@ namespace RemoteDao
             {
                 item = info.category.poct.statistics.item[i];
 
-                string sql = "INSERT INTO poct_statistics_item(num,device_sn,smpl,card_consume) VALUES(?num,?sn,?smpl,?card_consume) "
-                           + "ON DUPLICATE KEY UPDATE ";
+                string sql = "INSERT INTO poct_statistics_item(num,device_sn,smpl,card_consume) VALUES(?num,?sn,?smpl,?card_consume) ";
+                //           + "ON DUPLICATE KEY UPDATE ";
 
-                if (item.smpl != null)
-                    sql += ",smpl = ?smpl";
-                if (item.card_consume != null)
-                    sql += ",card_consume = ?card_consume";
+                //if (item.smpl != null)
+                //    sql += ",smpl = ?smpl";
+                //if (item.card_consume != null)
+                //    sql += ",card_consume = ?card_consume";
 
-                sql += ";";
-                sql = sql.Replace("UPDATE ,", "UPDATE ");
+                //sql += ";";
+                //sql = sql.Replace("UPDATE ,", "UPDATE ");
 
                 MySqlParameter[] parameters = { new MySqlParameter("?num", MySqlDbType.VarChar),
                                                 new MySqlParameter("?sn", MySqlDbType.VarChar),

@@ -1,15 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="DeviceLog.aspx.cs" Inherits="MSTSC.Manage.Web.DeviceLog" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <link href="styles/bootstrap-datetimepicker/bootstrap-datetimepicker.css" rel="stylesheet" />
-    <script src="scripts/bootstrap-datetimepicker/bootstrap-datetimepicker.js"></script>
-    <script src="scripts/bootstrap-datetimepicker/bootstrap-datetimepicker.zh-CN.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <ul class="breadcrumb nomargin">
         <li class="active">日志查询</li>
     </ul>
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-right-10">
+    <div class="col-lg-11 col-md-11 col-sm-11 col-xs-12 padding-right-10">
         <div class="panel panel-info search-panel margin-bottom-10 padding-bottom-5">
             <div class="panel-body nopadding">
                 <hr class="nomargin" style="border-color: #cccccc; margin-left: 0px; margin-right: 0px;" />
@@ -18,12 +15,16 @@
                         <label>仪器类型</label>
                         <select id="selType" class="form-control margin-top-5 margin-bottom-5">
                             <option value="生化仪">生化仪</option>
+                            <option value="POCT">POCT</option>
                         </select>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 nopadding form-inline">
                         <label>仪器型号</label>
                         <select id="selModel" class="form-control margin-top-5 margin-bottom-5">
-                            <option value="0">请选择</option>
+                            <option value="ZS200">ZS200</option>
+                            <option value="ZS400">ZS400</option>
+                            <option value="Q7">Q7</option>
+                            <option value="Q8">Q8</option>
                         </select>
                     </div>
 
@@ -51,9 +52,9 @@
 
                     <div class="col-lg-5 col-md-6 col-sm-10 col-xs-12 nopadding form-inline">
                         <label>发生时间</label>
-                        <input id="dtStart" placeholder="开始时间" class="form-control margin-top-5 margin-bottom-5" style="width: 140px !important;" />
+                        <input id="dtstart" placeholder="开始时间" class="form-control margin-top-5 margin-bottom-5" style="width: 130px !important;" />
                         <label style="min-width: 5px;">-</label>
-                        <input id="dtEnd" placeholder="结束时间" class="form-control margin-top-5 margin-bottom-5" style="width: 140px !important;" />
+                        <input id="dtend" placeholder="结束时间" class="form-control margin-top-5 margin-bottom-5" style="width: 130px !important;" />
                     </div>
 
                     <div class="col-lg-4 col-md-4 col-sm-10 col-xs-12 nopadding form-inline">
@@ -80,7 +81,7 @@
                     <h5 class="modal-title">日志详情</h5>
                 </div>
                 <div class="modal-body">
-                    <div id="div_content" class="row" style="padding:10px; overflow:auto;">                        
+                    <div id="div_content" class="row" style="padding: 10px; overflow: auto;">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -104,6 +105,27 @@
             InitMainTable();
             InitDateTimePicker();
 
+            $('#dtstart').datetimepicker({ format: 'YYYY-MM-DD HH:mm' });
+            $('#dtend').datetimepicker({ format: 'YYYY-MM-DD HH:mm' });
+            var now = new Date();
+            $('#dtstart').val(now.Format("yyyy-MM-dd") + " 00:00");
+            $('#dtend').val(now.Format("yyyy-MM-dd") + " 23:59");
+
+            $("#selType").change(function () {
+                var type = $("#selType").val();
+                var opts = "";
+
+                if (type == "生化仪") {
+                    opts += "<option value=\"ZS200\">ZS200</option>";
+                    opts += "<option value=\"ZS400\">ZS400</option>";
+                } else if (type == "POCT") {
+                    opts += "<option value=\"Q7\">Q7</option>";
+                    opts += "<option value=\"Q8\">Q8</option>";
+                }
+
+                $("#selModel").html(opts);
+            });
+
             $('#query').click(function () {
                 type = 2;
                 var page = 1;
@@ -114,19 +136,19 @@
             });
 
             $('#export').click(function () {
-                var conditions = "{\"DeviceType\":\"生化仪"
+                var conditions = "{\"DeviceType\":\"" + $("#selType").val()
                         + "\",\"Model\":\"" + $("#selModel").val()
                         + "\",\"Region\":\"" + $("#selRegion").val()
                         + "\",\"DeviceName\":\"" + $("#DeviceName").val()
                         + "\",\"SIM\":\"" + $("#SIM").val()
                         + "\",\"SN\":\"" + $("#SN").val()
-                        + "\",\"dtStart\":\"" + $("#dtStart").val()
-                        + "\",\"dtEnd\":\"" + $("#dtEnd").val()
+                        + "\",\"dtStart\":\"" + $("#dtstart").val()
+                        + "\",\"dtEnd\":\"" + $("#dtend").val()
                         + "\"}";
                 window.open("Export.ashx?Action=bio_log&conditions=" + conditions, "_blank");
             });
 
-            getModels();
+            //getModels();
             getRegion();
         });
         //初始化bootstrap-table的内容
@@ -163,14 +185,14 @@
                     if (type == 0) {
                         return "{'conditions':'','rows':'0','page':'0','sort':'','sortOrder':''}";
                     }
-                    var conditions = "{\"DeviceType\":\"生化仪"
+                    var conditions = "{\"DeviceType\":\"" + $("#selType").val()
                         + "\",\"Model\":\"" + $("#selModel").val()
                         + "\",\"Region\":\"" + $("#selRegion").val()
                         + "\",\"DeviceName\":\"" + $("#DeviceName").val()
                         + "\",\"SIM\":\"" + $("#SIM").val()
                         + "\",\"SN\":\"" + $("#SN").val()
-                        + "\",\"dtStart\":\"" + $("#dtStart").val()
-                        + "\",\"dtEnd\":\"" + $("#dtEnd").val()
+                        + "\",\"dtStart\":\"" + $("#dtstart").val()
+                        + "\",\"dtEnd\":\"" + $("#dtend").val()
                         + "\"}";
 
                     rows = params.limit ? params.limit : rows;
@@ -203,7 +225,8 @@
                         }
                     }, {
                         field: 'DeviceName',
-                        title: '仪器名称'
+                        title: '仪器名称',
+                        align: 'center'
                     }, {
                         field: 'SIM',
                         title: 'SIM卡号',
@@ -211,14 +234,6 @@
                     }, {
                         field: 'SN',
                         title: '仪器序列号',
-                        align: 'center'
-                    }, {
-                        field: 'DeviceType',
-                        title: '仪器类型',
-                        align: 'center'
-                    }, {
-                        field: 'Model',
-                        title: '仪器型号',
                         align: 'center'
                     }, {
                         field: 'dtinsert',
@@ -283,8 +298,7 @@
                 dataType: "json",
                 success: function (data) {
                     var result = eval(data.d);
-
-                    var opts = "<option value=\"0\">请选择</option>";
+                    var opts = "";
                     for (res in result) {
                         opts += "<option value=\"" + result[res]['key'] + "\">" + result[res]['value'] + "</option>";
                     }
@@ -292,52 +306,6 @@
                 },
                 error: function (err) {
                 }
-            });
-        }
-
-        function InitDateTimePicker() {
-            $("#dtStart").datetimepicker({
-                format: 'yyyy-mm-dd hh:ii',  //格式  如果只有yyyy-mm-dd那就是0000-00-00
-                autoclose: true,//选择后是否自动关闭 
-                minView: 0,//最精准的时间选择为日期  0-分 1-时 2-日 3-月
-                language: 'zh-CN', //中文
-                weekStart: 1, //一周从星期几开始
-                todayBtn: 1,
-                autoclose: 1,
-                todayHighlight: 1,
-                startView: 2,
-                forceParse: 0,
-                // daysOfWeekDisabled:"1,2,3", //一周的周几不能选 格式为"1,2,3"  数组格式也行
-                todayBtn: true,  //在底部是否显示今天
-                todayHighlight: false, //今天是否高亮显示
-                keyboardNavigation: true, //方向图标改变日期  必须要有img文件夹 里面存放图标
-                showMeridian: false,  //是否出现 上下午
-                initialDate: new Date()
-                //startDate: "2017-01-01" //日期开始时间 也可以是new Date()只能选择以后的时间
-            }).on("changeDate", function () {
-                var start = $("#dtStart").val();
-                $("#end").datetimepicker("setStartDate", start);
-            });
-            $("#dtEnd").datetimepicker({
-                format: 'yyyy-mm-dd hh:ii',  //格式  如果只有yyyy-mm-dd那就是0000-00-00
-                autoclose: true,//选择后是否自动关闭 
-                minView: 0,//最精准的时间选择为日期  0-分 1-时 2-日 3-月
-                language: 'zh-CN', //中文
-                weekStart: 1, //一周从星期几开始
-                todayBtn: 1,
-                autoclose: 1,
-                todayHighlight: 1,
-                startView: 2,
-                forceParse: 0,
-                //daysOfWeekDisabled:"1,2,3", //一周的周几不能选
-                todayBtn: true,  //在底部是否显示今天
-                todayHighlight: false, //今天是否高亮显示
-                keyboardNavigation: true, //方向图标改变日期  必须要有img文件夹 里面存放图标
-                showMeridian: false  //是否出现 上下午
-                // startDate: "2017-01-01"  //开始时间  ENdDate 结束时间
-            }).on("changeDate", function () {
-                var end = $("#dtEnd").val();
-                $("#dtStart").datetimepicker("setEndDate", end);
             });
         }
 

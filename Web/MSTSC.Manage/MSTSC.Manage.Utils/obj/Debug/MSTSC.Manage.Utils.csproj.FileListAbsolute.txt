@@ -3,3 +3,5 @@ E:\WorkSpace\GitHub\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.Utils\bin\Debug\M
 E:\WorkSpace\GitHub\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.Utils\obj\Debug\MSTSC.Manage.Utils.dll
 E:\WorkSpace\GitHub\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.Utils\obj\Debug\MSTSC.Manage.Utils.pdb
 E:\WorkSpace\GitHub\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.Utils\obj\Debug\MSTSC.Manage.Utils.csprojResolveAssemblyReference.cache
+E:\WorkSpace\GitHub\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.Utils\bin\Debug\MSTSC.Manage.Model.dll
+E:\WorkSpace\GitHub\RemoteServer\Web\MSTSC.Manage\MSTSC.Manage.Utils\bin\Debug\MSTSC.Manage.Model.pdb

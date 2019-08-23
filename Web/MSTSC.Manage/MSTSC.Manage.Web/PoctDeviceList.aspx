@@ -12,7 +12,6 @@
                 <div class="quick-search-condition padding-5">
                     <div class="form-inline text-center">
                         <select id="selType" class="form-control margin-top-5 margin-bottom-5">
-                            <option value="0">请选择产品类型</option>
                             <option value="POCT">POCT</option>
                         </select>
                         <input type="text" id="querytext" class="form-control margin-top-5 margin-bottom-5" value="" style="width: 275px;" placeholder="请输入仪器名称、SIM卡号或仪器序列号" />
@@ -105,9 +104,9 @@
                 <div class="padding-top-10 padding-bottom-10" style="background-color: #d9eaf9;">
                     <div class="pull-right">
                         故障发生时间：  
-                        <input type="text" id="dtstart" style="width: 120px;" />
+                        <input type="text" id="dtstart" placeholder="开始时间" style="width: 120px;" />
                         -
-                        <input type="text" id="dtend" style="width: 120px;" />
+                        <input type="text" id="dtend" placeholder="结束时间" style="width: 120px;" />
                         <button type="button" id="faultSearch" class="btn btn-default btn-small margin-left-10" style="padding: 1px 5px;">查询</button>
                         <button type="button" id="faultExport" class="btn btn-default btn-small margin-left-5" style="padding: 1px 5px;">导 出</button>
                     </div>
@@ -130,7 +129,7 @@
     </div>
 
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog" style="width:700px;">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
@@ -140,11 +139,11 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-lg-5 col-md-5 col-sm-6 col-xs-6 padding-5 text-center">
+                        <div class="col-lg-4 col-md-5 col-sm-6 col-xs-6 padding-5">
                             <label style="width: 100px; text-align: right">项目编号：</label>
                             <label id="num" style="margin-left: 5px; width: 80px; font-weight: normal;"></label>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 form-inline text-center">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5 form-inline">
                             <label style="width: 100px; text-align: right">测试卡批次：</label>
                             <select id="selLot" style="width: 90px;" class="form-control margin-left-5"></select>
                             <button type="button" id="btnLot" class="btn btn-default">查询</button>
@@ -152,43 +151,43 @@
                     </div>
                     <hr style="margin: 5px auto;" />
                     <div class="row">
-                        <div class="col-lg-5 col-md-5 col-sm-6 col-xs-6 padding-5 text-center">
+                        <div class="col-lg-4 col-md-5 col-sm-6 col-xs-6 padding-5">
                             <label style="width: 100px; text-align: right">测试项目：</label>
                             <label id="card_name" style="margin-left: 5px; width: 80px; font-weight: normal;"></label>
                         </div>
-                        <div class="col-lg-5 col-md-5 col-sm-6 col-xs-6 padding-5 text-center">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5">
                             <label style="width: 100px; text-align: right">孵育时间：</label>
                             <label id="incubate_time" style="margin-left: 5px; width: 80px; font-weight: normal;"></label>
                         </div>
-                        <div class="col-lg-5 col-md-5 col-sm-6 col-xs-6 padding-5 text-center">
+                        <div class="col-lg-4 col-md-5 col-sm-6 col-xs-6 padding-5">
                             <label style="width: 100px; text-align: right">项目1名称：</label>
                             <label id="analyte_1" style="margin-left: 5px; width: 80px; font-weight: normal;"></label>
                         </div>
-                        <div class="col-lg-5 col-md-5 col-sm-6 col-xs-6 padding-5 text-center">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5">
                             <label style="width: 100px; text-align: right">项目1参数：</label>
                             <label id="analyte_1_params" style="margin-left: 5px; width: 80px; font-weight: normal;"></label>
                         </div>
-                        <div class="col-lg-5 col-md-5 col-sm-6 col-xs-6 padding-5 text-center">
+                        <div class="col-lg-4 col-md-5 col-sm-6 col-xs-6 padding-5">
                             <label style="width: 100px; text-align: right">项目2名称：</label>
                             <label id="analyte_2" style="margin-left: 5px; width: 80px; font-weight: normal;"></label>
                         </div>
-                        <div class="col-lg-5 col-md-5 col-sm-6 col-xs-6 padding-5 text-center">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5">
                             <label style="width: 100px; text-align: right">项目2参数：</label>
                             <label id="analyte_2_params" style="margin-left: 5px; width: 80px; font-weight: normal;"></label>
                         </div>
-                        <div class="col-lg-5 col-md-5 col-sm-6 col-xs-6 padding-5 text-center">
+                        <div class="col-lg-4 col-md-5 col-sm-6 col-xs-6 padding-5">
                             <label style="width: 100px; text-align: right">项目3名称：</label>
                             <label id="analyte_3" style="margin-left: 5px; width: 80px; font-weight: normal;"></label>
                         </div>
-                        <div class="col-lg-5 col-md-5 col-sm-6 col-xs-6 padding-5 text-center">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5">
                             <label style="width: 100px; text-align: right">项目3参数：</label>
                             <label id="analyte_3_params" style="margin-left: 5px; width: 80px; font-weight: normal;"></label>
                         </div>
-                        <div class="col-lg-5 col-md-5 col-sm-6 col-xs-6 padding-5 text-center">
+                        <div class="col-lg-4 col-md-5 col-sm-6 col-xs-6 padding-5">
                             <label style="width: 100px; text-align: right">T线数：</label>
                             <label id="signals" style="margin-left: 5px; width: 80px; font-weight: normal;"></label>
                         </div>
-                        <div class="col-lg-5 col-md-5 col-sm-6 col-xs-6 padding-5 text-center">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-5">
                             <label style="width: 100px; text-align: right">有效期：</label>
                             <label id="expiry" style="margin-left: 5px; width: 80px; font-weight: normal;"></label>
                         </div>
@@ -217,6 +216,8 @@
         var rowtimer;
         $(document).ready(function () {
             InitMainTable();
+            InitDateTimePicker();
+
             $('#dtstart').datetimepicker({ format: 'YYYY-MM-DD HH:mm' });
             $('#dtend').datetimepicker({ format: 'YYYY-MM-DD HH:mm' });
             var now = new Date();
@@ -265,8 +266,9 @@
                 getFault();
             });
 
-            getModels();
+            //getModels();
             getRegion();
+            $('#quickquery').click();
         });
         //初始化bootstrap-table的内容
         function InitMainTable() {
@@ -333,32 +335,36 @@
                 columns: [
                     {
                         field: 'DeviceName',
-                        title: '仪器名称'
+                        title: '仪器名称',
+                        align: "center"
                     }, {
                         field: 'SIM',
                         title: 'SIM卡号',
-                        sortable: true
+                        align: "center"
                     }, {
                         field: 'SN',
                         title: '仪器序列号',
-                        sortable: true
+                        align: "center"
                     }, {
                         field: 'Model',
-                        title: '仪器型号'
+                        title: '仪器型号',
+                        align: "center"
                     }, {
                         field: 'Region',
-                        title: '装机区域'
+                        title: '装机区域',
+                        align: "center"
                     }, {
                         field: 'SESSION_ID',
                         title: '状态',
+                        align: "center",
                         formatter: function (value, row, index) {
-                            var div = "<div style='width:45px;'>" + value + "</div>";
+                            var div = "<span>" + value + "</span>";
                             return div;
                         }
                     }],
                 onLoadSuccess: function () {
                     if (type != 0) {
-                        tabletimer = setTimeout(freshTable, 30000);
+                        tabletimer = setTimeout(freshTable, 120000);
 
                         var r = $("[data-uniqueid='" + sn + "']");
                         r.css("background-color", "#C0C0C0");
@@ -371,7 +377,7 @@
                 },
                 onLoadError: function () {
                     clearTimeout(tabletimer);
-                    alert("数据加载失败！");
+                    //alert("数据加载失败！");
                 },
                 onSort: function (name, order) {
                     clearTimeout(tabletimer);
@@ -413,7 +419,7 @@
                         }
                         getFault();
                         freshSampleTable();
-                        rowtimer = setTimeout(getRowInfo, 13000);
+                        rowtimer = setTimeout(getRowInfo, 61000);
                     },
                     error: function (err) {
                         alert('获取数据出错.');
@@ -473,13 +479,16 @@
                     },
                     {
                         field: 'num',
-                        title: '项目编号'
+                        title: '项目编号',
+                        align: "center"
                     }, {
                         field: 'smpl',
-                        title: '样本数'
+                        title: '样本数',
+                        align: "center"
                     }, {
                         field: 'card_consume',
-                        title: '测试卡消耗数'
+                        title: '测试卡消耗数',
+                        align: "center"
                     }, {
                         field: 'num',
                         title: '项目详情',
@@ -613,8 +622,10 @@
                 success: function (data) {
                     var result = eval("[" + data.d + "]")[0];
                     for (attribute in result) {
-                        if (modal.find("#" + attribute)) modal.find("#" + attribute).html(result[attribute]);
+                        if (modal.find("#" + attribute)) modal.find("#" + attribute).html(result[attribute]);                       
                     }
+
+                    if (modal.find("#incubate_time").html()) modal.find("#incubate_time").html(modal.find("#incubate_time").html() + " s");
                 },
                 error: function (err) {
                 }

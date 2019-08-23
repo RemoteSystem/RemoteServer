@@ -3,51 +3,57 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script src="scripts/bootstrap-table/bootstrap-table-export.js"></script>
     <script src="scripts/bootstrap-table/tableExport.js"></script>
+    <link href="https://cdn.bootcss.com/toastr.js/2.1.4/toastr.min.css" rel="stylesheet" />
+    <script src="https://cdn.bootcss.com/toastr.js/2.1.4/toastr.min.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <ul class="breadcrumb nomargin">
         <li class="active">POCT统计 -- 所有机器</li>
     </ul>
-    <div class="panel panel-info margin-5 padding-10">
-        <div class="panel-body nopadding">
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 padding-5">
-                <div class="form-inline">
-                    <span>仪器型号</span>
-                    <select id="selModel" class="form-control" style="min-width: 160px;">
-                        <option value="0">请选择</option>
-                    </select>
+    <div class="col-lg-11 col-md-11 col-sm-11 col-xs-12">
+        <div class="panel panel-info margin-5 padding-10">
+            <div class="panel-body nopadding">
+                <div class="pull-left padding-right-20 padding-bottom-10">
+                    <div class="form-inline">
+                        <span>仪器型号</span>
+                        <select id="selModel" class="form-control" style="width: 130px;">
+                            <option value="Q7">Q7</option>
+                            <option value="Q8">Q8</option>
+                        </select>
+                    </div>
+                </div>                
+                <div class="pull-left padding-right-20 padding-bottom-10">
+                    <div class="form-inline">
+                        <span>测试项目<span style="color: orangered">*</span></span>
+                        <input id="card" class="form-control" style="width: 130px;" />
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 padding-5">
-                <div class="form-inline">
-                    <span>仪器序列号</span>
-                    <input id="sn" class="form-control" />
+                <div class="pull-left padding-right-20 padding-bottom-10">
+                    <div class="form-inline">
+                        <span>仪器序列号</span>
+                        <input id="sn" class="form-control" style="width: 180px;" />
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 padding-5">
-                <div class="form-inline">
-                    <span>测试项目</span>
-                    <input id="card" class="form-control" />
+                 <div class="pull-left padding-right-20 padding-bottom-10">
+                    <div class="form-inline">
+                        <span>统计时间</span>
+                        <input id="dtstart" class="form-control" placeholder="开始时间" style="width: 130px;" />
+                        -
+                    <input id="dtend" class="form-control" placeholder="结束时间" style="width: 130px;" />
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 padding-5">
-                <div class="form-inline">
-                    <span>统计时间</span>
-                    <input id="dtstart" class="form-control" style="width:150px;" /> — 
-                    <input id="dtend" class="form-control" style="width:150px;" />
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 padding-5">
-                <div class="form-inline">
-                    <button type="button" id="btnSearch" class="btn btn-default btn-normal">查 询</button>
-                    <button type="button" id="btnExportyb" class="btn btn-default btn-normal margin-left-10">导出结果</button>
+                <div class="pull-left padding-right-20 padding-bottom-10">
+                    <div class="form-inline">
+                        <button type="button" id="btnSearch" class="btn btn-default btn-normal">查 询</button>
+                        <button type="button" id="btnExportyb" class="btn btn-default btn-normal margin-left-10">导出结果</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="panel padding-left-5 padding-right-5">
-        <table id="grid"></table>
+        <div class="panel padding-left-5 padding-right-5">
+            <table id="grid"></table>
+        </div>
     </div>
 
     <script type="text/javascript">
@@ -60,6 +66,9 @@
 
         $(document).ready(function () {
             InitMainTable();
+            toastr.options.positionClass = 'toast-top-center';
+            InitDateTimePicker();
+
             $('#dtstart').datetimepicker({ format: 'YYYY-MM-DD HH:mm' });
             $('#dtend').datetimepicker({ format: 'YYYY-MM-DD HH:mm' });
             var now = new Date();
@@ -67,11 +76,15 @@
             $('#dtend').val(now.Format("yyyy-MM-dd") + " 23:59");
 
             $("#selModel").change(function () {
-                freshTable();
+                //freshTable();
             });
 
             $("#btnSearch").click(function () {
-                freshTable();
+                if ($("#card").val()) {
+                    freshTable();
+                } else {
+                    toastr.error('请输入测试项目');
+                }
             });
 
             $("#btnExport").click(function () {
@@ -89,7 +102,7 @@
                 window.open("Export.ashx?Action=poct_all&conditions=" + conditions, "_blank");
             });
 
-            getModels();
+            //getModels();
         });
         //初始化bootstrap-table的内容
         function InitMainTable() {
@@ -159,11 +172,17 @@
                         formatter: function (value, row, index) {
                             return (page - 1) * rows + index + 1;
                         }
-                    },
-                    {
+                    }, {
                         field: 'DeviceName',
-                        title: '机器名',
+                        title: '仪器名称',
                         align: 'center'
+                    }, {
+                        field: 'dtupdate',
+                        title: '上报时间',
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            return value.replace("T", " ");
+                        }
                     }, {
                         field: 'SIM',
                         title: 'SIM卡号',
@@ -171,14 +190,6 @@
                     }, {
                         field: 'SN',
                         title: '仪器序列号',
-                        align: 'center'
-                    }, {
-                        field: 'Model',
-                        title: '仪器型号',
-                        align: 'center'
-                    }, {
-                        field: 'num',
-                        title: '项目编号',
                         align: 'center'
                     }, {
                         field: 'smpl',

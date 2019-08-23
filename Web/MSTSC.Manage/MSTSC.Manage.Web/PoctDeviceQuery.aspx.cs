@@ -1,5 +1,6 @@
 ﻿using MSTSC.Manage.BLL;
 using MSTSC.Manage.Model;
+using MSTSC.Manage.Utils;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -88,8 +89,10 @@ namespace MSTSC.Manage.Web
         [WebMethod]
         public static string getRegion()
         {
-            DeviceQueryBLL bll = new DeviceQueryBLL();
-            var result = bll.GetPoctRegion();
+            //DeviceQueryBLL bll = new DeviceQueryBLL();
+            //var result = bll.GetPoctRegion();
+
+            List<KeyValueModel> result = CommonUtils.getAllRegions();
 
             var retvalue = JsonConvert.SerializeObject(result).Replace("null", "\"\""); ;
             return retvalue;

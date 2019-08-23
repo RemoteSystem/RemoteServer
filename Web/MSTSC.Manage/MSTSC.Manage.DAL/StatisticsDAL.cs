@@ -440,10 +440,18 @@ FROM device_info,blood_count WHERE SN = device_sn {0}";
         public DataTable StatisticsAllBioDevicesDAL(QueryConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
         {
             StringBuilder whereSql = new StringBuilder();
-            string sql = @"SELECT IFNULL(d.DeviceName, '') AS DeviceName,d.SIM,d.SN,d.Model,c.num,c.smpl,c.R1,c.R2
+            //            string sql = @"SELECT CONCAT(IFNULL(d.Hospital,''),'_',IFNULL(d.Model,'')) as DeviceName,d.dtupdate,d.SIM,d.SN,SUM(c.smpl) AS smpl, SUM(c.R1) AS R1, SUM(c.R2) AS R2 
+            //	                FROM device_info d LEFT OUTER JOIN bio_statistics_item c 
+            //		            ON d.SN = c.device_sn WHERE d.DeviceType='生化仪' {0} GROUP BY SN 
+            //	                LIMIT " + (pagerInfo.PageSize * (pagerInfo.CurrenetPageIndex - 1)) + "," + pagerInfo.PageSize; ;
+
+            //            if (!string.IsNullOrEmpty(conditValue.SN))
+            //            {
+            string sql = @"SELECT CONCAT(IFNULL(d.Hospital,''),'_',IFNULL(d.Model,'')) as DeviceName,c.dtinsert as dtupdate,d.SIM,d.SN,c.smpl, c.R1, c.R2
 	                FROM device_info d LEFT OUTER JOIN bio_statistics_item c
-		            ON d.SN = c.device_sn WHERE d.DeviceType='生化仪' {0}
-	                LIMIT " + (pagerInfo.PageSize * (pagerInfo.CurrenetPageIndex - 1)) + "," + pagerInfo.PageSize; ;
+		            ON d.SN = c.device_sn WHERE d.DeviceType='生化仪' {0} ORDER BY c.dtinsert DESC 
+	                LIMIT " + (pagerInfo.PageSize * (pagerInfo.CurrenetPageIndex - 1)) + "," + pagerInfo.PageSize;
+            //}
 
             if (!string.IsNullOrEmpty(conditValue.Model))
             {
@@ -478,32 +486,42 @@ FROM device_info,blood_count WHERE SN = device_sn {0}";
 
         public int getBioDeviceCount(QueryConditionModel conditValue)
         {
-            string sql = @"SELECT count(1) FROM device_info d LEFT OUTER JOIN bio_statistics_item c ON d.SN = c.device_sn WHERE d.DeviceType='生化仪' ";
+            StringBuilder whereSql = new StringBuilder();
+            //            string sql = @"SELECT count(1) FROM (SELECT d.DeviceName,d.SIM,d.SN,SUM(c.smpl) AS smpl, SUM(c.R1) AS R1, SUM(c.R2) AS R2 
+            //	                FROM device_info d LEFT OUTER JOIN bio_statistics_item c
+            //		            ON d.SN = c.device_sn WHERE d.DeviceType='生化仪' {0} GROUP BY SN)t ";
+
+            //            if (!string.IsNullOrEmpty(conditValue.SN))
+            //            {
+            string sql = @"SELECT count(1) FROM (SELECT c.dtinsert,d.SN FROM device_info d LEFT OUTER JOIN bio_statistics_item c
+		            ON d.SN = c.device_sn WHERE d.DeviceType='生化仪' {0} )t ";
+            //}
 
             if (!string.IsNullOrEmpty(conditValue.Model))
             {
-                sql += @" AND d.Model='" + conditValue.Model + "'";
+                whereSql.Append(@" AND d.Model='" + conditValue.Model + "'");
             }
             if (!string.IsNullOrEmpty(conditValue.SN))
             {
-                sql += @" AND d.SN='" + conditValue.SN + "'";
+                whereSql.Append(@" AND d.SN='" + conditValue.SN + "'");
             }
             if (!string.IsNullOrEmpty(conditValue.Num))
             {
-                sql += @" AND c.num='" + conditValue.Num + "'";
+                whereSql.Append(@" AND c.num='" + conditValue.Num + "'");
             }
             if (!string.IsNullOrEmpty(conditValue.dtStart))
             {
-                sql += @" AND c.dtinsert>='" + conditValue.dtStart + "'";
+                whereSql.Append(@" AND c.dtinsert>='" + conditValue.dtStart + "'");
             }
             if (!string.IsNullOrEmpty(conditValue.dtEnd))
             {
-                sql += @" AND c.dtinsert<='" + conditValue.dtEnd + "'";
+                whereSql.Append(@" AND c.dtinsert<='" + conditValue.dtEnd + "'");
             }
 
+            string SqlCondit = string.Format(sql, whereSql.ToString());
             using (var conn = new MySqlConnection(Global.strConn))
             {
-                return conn.QuerySingle<int>(sql);
+                return conn.QuerySingle<int>(SqlCondit);
             }
         }
 
@@ -511,9 +529,9 @@ FROM device_info,blood_count WHERE SN = device_sn {0}";
         public DataTable BioStatisticsByAreaDAL(QueryConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
         {
             StringBuilder whereSql = new StringBuilder();
-            string sql = @"SELECT d.Region,bc.num, COUNT(d.SN) device_count, SUM(bc.smpl) AS smpl, SUM(bc.R1) AS R1, SUM(bc.R2) AS R2 
+            string sql = @"SELECT d.Region, COUNT(d.SN) device_count, SUM(bc.smpl) AS smpl, SUM(bc.R1) AS R1, SUM(bc.R2) AS R2 
                 FROM device_info d LEFT JOIN bio_statistics_item bc ON d.SN = bc.device_sn WHERE d.DeviceType ='生化仪' {0} 
-                GROUP BY Region,bc.num ORDER BY SN LIMIT " + (pagerInfo.PageSize * (pagerInfo.CurrenetPageIndex - 1)) + "," + pagerInfo.PageSize + ";";
+                GROUP BY Region ORDER BY SN LIMIT " + (pagerInfo.PageSize * (pagerInfo.CurrenetPageIndex - 1)) + "," + pagerInfo.PageSize + ";";
 
             if (!string.IsNullOrEmpty(conditValue.Model))
             {
@@ -551,7 +569,7 @@ FROM device_info,blood_count WHERE SN = device_sn {0}";
         {
             StringBuilder whereSql = new StringBuilder();
             string sql = @"SELECT COUNT(1) AS count FROM(SELECT d.Region,bc.num FROM device_info d 
-                           LEFT JOIN bio_statistics_item bc ON d.SN = bc.device_sn WHERE d.DeviceType ='生化仪' {0} GROUP BY Region,bc.num)t; ";
+                           LEFT JOIN bio_statistics_item bc ON d.SN = bc.device_sn WHERE d.DeviceType ='生化仪' {0} GROUP BY Region)t; ";
 
             if (!string.IsNullOrEmpty(conditValue.Model))
             {
@@ -584,10 +602,10 @@ FROM device_info,blood_count WHERE SN = device_sn {0}";
         public DataTable BioStatisticsByTypeDAL(QueryConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
         {
             StringBuilder whereSql = new StringBuilder();
-            string sql = @"SELECT case d.MachineType when 0 then '标准机' when 1 then '招标机' else '其他' end AS MachineType, bc.num,
+            string sql = @"SELECT case d.MachineType when 0 then '标准机' when 1 then '招标机' else '其他' end AS MachineType, 
                 COUNT(d.SN) device_count, SUM(bc.smpl) AS smpl, SUM(bc.R1) AS R1, SUM(bc.R2) AS R2 
                 FROM device_info d LEFT JOIN bio_statistics_item bc ON d.SN = bc.device_sn WHERE d.DeviceType ='生化仪' {0} 
-                GROUP BY MachineType,bc.num ORDER BY SN LIMIT " + (pagerInfo.PageSize * (pagerInfo.CurrenetPageIndex - 1)) + "," + pagerInfo.PageSize + ";";
+                GROUP BY MachineType ORDER BY SN LIMIT " + (pagerInfo.PageSize * (pagerInfo.CurrenetPageIndex - 1)) + "," + pagerInfo.PageSize + ";";
 
             if (!string.IsNullOrEmpty(conditValue.ProductSeries) && conditValue.ProductSeries == "1")//标准机
             {
@@ -633,7 +651,7 @@ FROM device_info,blood_count WHERE SN = device_sn {0}";
         {
             StringBuilder whereSql = new StringBuilder();
             string sql = @"SELECT COUNT(1) AS count FROM(SELECT d.MachineType, bc.num FROM device_info d 
-                           LEFT JOIN bio_statistics_item bc ON d.SN = bc.device_sn WHERE d.DeviceType ='生化仪' {0} GROUP BY MachineType,bc.num)t; ";
+                           LEFT JOIN bio_statistics_item bc ON d.SN = bc.device_sn WHERE d.DeviceType ='生化仪' {0} GROUP BY MachineType)t; ";
 
             if (!string.IsNullOrEmpty(conditValue.ProductSeries) && conditValue.ProductSeries == "1")//标准机
             {
@@ -675,7 +693,7 @@ FROM device_info,blood_count WHERE SN = device_sn {0}";
         public DataTable StatisticsLogsDAL(LogConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
         {
             StringBuilder whereSql = new StringBuilder();
-            string sql = @"SELECT d.DeviceName,d.SIM,d.SN,d.DeviceType,d.Model,dl.dtinsert,dl.content
+            string sql = @"SELECT CONCAT(IFNULL(d.Hospital,''),'_',IFNULL(d.Model,'')) as DeviceName,d.SIM,d.SN,dl.dtinsert,dl.content
                             FROM device_log dl LEFT JOIN device_info d ON dl.device_sn = d.SN {0}
                             ORDER BY dl.dtinsert DESC, dl.id LIMIT " + (pagerInfo.PageSize * (pagerInfo.CurrenetPageIndex - 1)) + "," + pagerInfo.PageSize + ";";
 

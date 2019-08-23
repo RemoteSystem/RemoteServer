@@ -16,8 +16,8 @@ namespace RemoteDao
 
         public static int UpdateOrSaveSession(BloodInfo info)
         {
-            string sql = "INSERT INTO device_info(SN,SIM,Region,Hospital,Address,Model,DeviceType,ProductSeries,ProductModel,OEM,Agent,ReagentType,FactoryDate,InstallDate,SoftVersion,last_poweroff_time,last_poweron_time,UpdateTime,sessionid,starttime) "
-                + "VALUES(?sn,?sim,?region,?hospoital,?address,?model,'血液细胞分析仪',?series,?pmodel,?oem,?agent,?reatype,?dtfactory,?dtinstall,?version,?last_poweroff_time,?last_poweron_time,?dtupdate,?id,?dt) "
+            string sql = "INSERT INTO device_info(SN,SIM,Region,Hospital,Address,Model,DeviceType,ProductSeries,ProductModel,OEM,Agent,ReagentType,FactoryDate,InstallDate,SoftVersion,last_poweroff_time,last_poweron_time,UpdateTime,dtupdate,sessionid,starttime) "
+                + "VALUES(?sn,?sim,?region,?hospoital,?address,?model,'血液细胞分析仪',?series,?pmodel,?oem,?agent,?reatype,?dtfactory,?dtinstall,?version,?last_poweroff_time,?last_poweron_time,?updatetime,?dtupdate,?id,?dt) "
                 + "ON DUPLICATE KEY UPDATE ";
 
             if (info.sim != null)
@@ -84,9 +84,11 @@ namespace RemoteDao
                 }
                 if (info.category.BLOOD.update_time != null && info.category.BLOOD.update_time != DateTime.MinValue)
                 {
-                    sql += ",UpdateTime = ?dtupdate";
+                    sql += ",UpdateTime = ?updatetime";
                 }
             }
+
+            sql += ",dtupdate = ?dtupdate ";
             sql += ",sessionid = ?id,starttime = ?dt; ";
             sql = sql.Replace("UPDATE ,", "UPDATE ");
 
@@ -106,6 +108,7 @@ namespace RemoteDao
                                             new MySqlParameter("?version", MySqlDbType.VarChar),
                                             new MySqlParameter("?last_poweroff_time", MySqlDbType.VarChar),
                                             new MySqlParameter("?last_poweron_time", MySqlDbType.VarChar),
+                                            new MySqlParameter("?updatetime", MySqlDbType.Timestamp),
                                             new MySqlParameter("?dtupdate", MySqlDbType.Timestamp),
                                             new MySqlParameter("?id", MySqlDbType.VarChar),
                                             new MySqlParameter("?dt", MySqlDbType.Timestamp)};
@@ -143,8 +146,9 @@ namespace RemoteDao
                 parameters[15].Value = info.category.BLOOD.last_poweron_time;
                 parameters[16].Value = info.category.BLOOD.update_time;
             }
-            parameters[17].Value = info.sessionid;
-            parameters[18].Value = info.starttime;
+            parameters[17].Value = DateTime.Now;
+            parameters[18].Value = info.sessionid;
+            parameters[19].Value = info.starttime;
 
             int num = MySqlHelper.ExecuteNonQuery(Conn, sql, parameters);
             return num;
@@ -152,8 +156,8 @@ namespace RemoteDao
 
         public static int UpdateOrSaveSessionForBio(BioInfo info)
         {
-            string sql = "INSERT INTO device_info(SN,SIM,Region,Hospital,Address,Model,DeviceType,MachineType,UpdateTime,sessionid,starttime) "
-                + "VALUES(?sn,?sim,?region,?hospoital,?address,?model,'生化仪',?machinetype,?dtupdate,?id,?dt) "
+            string sql = "INSERT INTO device_info(SN,SIM,Region,Hospital,Address,Model,DeviceType,MachineType,UpdateTime,dtupdate,sessionid,starttime) "
+                + "VALUES(?sn,?sim,?region,?hospoital,?address,?model,'生化仪',?machinetype,?updatetime,?dtupdate,?id,?dt) "
                 + "ON DUPLICATE KEY UPDATE ";
 
             if (info.sim != null)
@@ -181,9 +185,10 @@ namespace RemoteDao
             }
             if (info.update_time != null && info.update_time != DateTime.MinValue)
             {
-                sql += ",UpdateTime = ?dtupdate";
+                sql += ",UpdateTime = ?updatetime";
             }
-            
+
+            sql += ",dtupdate = ?dtupdate ";
             sql += ",sessionid = ?id,starttime = ?dt; ";
             sql = sql.Replace("UPDATE ,", "UPDATE ");
 
@@ -194,6 +199,7 @@ namespace RemoteDao
                                             new MySqlParameter("?address", MySqlDbType.VarChar),
                                             new MySqlParameter("?model", MySqlDbType.VarChar), 
                                             new MySqlParameter("?machinetype",MySqlDbType.Int32),
+                                            new MySqlParameter("?updatetime", MySqlDbType.Timestamp),
                                             new MySqlParameter("?dtupdate", MySqlDbType.Timestamp),
                                             new MySqlParameter("?id", MySqlDbType.VarChar),
                                             new MySqlParameter("?dt", MySqlDbType.Timestamp)};
@@ -205,8 +211,9 @@ namespace RemoteDao
             parameters[5].Value = info.model != null ? info.model.ToUpper() : null;
             parameters[6].Value = info.machine_type;
             parameters[7].Value = info.update_time;
-            parameters[8].Value = info.sessionid;
-            parameters[9].Value = info.starttime;
+            parameters[8].Value = DateTime.Now;
+            parameters[9].Value = info.sessionid;
+            parameters[10].Value = info.starttime;
 
             int num = MySqlHelper.ExecuteNonQuery(Conn, sql, parameters);
             return num;
@@ -214,8 +221,8 @@ namespace RemoteDao
 
         public static int UpdateOrSaveSessionForPoct(PoctInfo info)
         {
-            string sql = "INSERT INTO device_info(SN,SIM,Region,Hospital,Address,Model,DeviceType,MachineType,UpdateTime,sessionid,starttime) "
-                + "VALUES(?sn,?sim,?region,?hospoital,?address,?model,'POCT',?machinetype,?dtupdate,?id,?dt) "
+            string sql = "INSERT INTO device_info(SN,SIM,Region,Hospital,Address,Model,DeviceType,MachineType,UpdateTime,dtupdate,sessionid,starttime) "
+                + "VALUES(?sn,?sim,?region,?hospoital,?address,?model,'POCT',?machinetype,?updatetime,?dtupdate,?id,?dt) "
                 + "ON DUPLICATE KEY UPDATE ";
 
             if (info.sim != null)
@@ -244,9 +251,10 @@ namespace RemoteDao
             }
             if (info.update_time != null && info.update_time != DateTime.MinValue)
             {
-                sql += ",UpdateTime = ?dtupdate";
+                sql += ",UpdateTime = ?updatetime";
             }
 
+            sql += ",dtupdate = ?dtupdate ";
             sql += ",sessionid = ?id,starttime = ?dt; ";
             sql = sql.Replace("UPDATE ,", "UPDATE ");
 
@@ -257,6 +265,7 @@ namespace RemoteDao
                                             new MySqlParameter("?address", MySqlDbType.VarChar),
                                             new MySqlParameter("?model", MySqlDbType.VarChar), 
                                             new MySqlParameter("?machinetype",MySqlDbType.Int32),
+                                            new MySqlParameter("?updatetime", MySqlDbType.Timestamp),
                                             new MySqlParameter("?dtupdate", MySqlDbType.Timestamp),
                                             new MySqlParameter("?id", MySqlDbType.VarChar),
                                             new MySqlParameter("?dt", MySqlDbType.Timestamp)};
@@ -268,8 +277,9 @@ namespace RemoteDao
             parameters[5].Value = info.model != null ? info.model.ToUpper() : null;
             parameters[6].Value = info.machine_type;
             parameters[7].Value = info.update_time;
-            parameters[8].Value = info.sessionid;
-            parameters[9].Value = info.starttime;
+            parameters[8].Value = DateTime.Now;
+            parameters[9].Value = info.sessionid;
+            parameters[10].Value = info.starttime;
 
             int num = MySqlHelper.ExecuteNonQuery(Conn, sql, parameters);
             return num;

@@ -200,13 +200,14 @@ namespace MSTSC.Manage.Web
                         <li>POCT</li>
                     </ul>
                     <ul class='nav'>";
+
                     if (rights.IndexOf(",31") >= 0)
                     {
-                        menuText += "<li><a href='BioDeviceList.aspx'>仪器列表</a></li>";
+                        menuText += "<li><a href='PoctDeviceList.aspx'>仪器列表</a></li>";
                     }
                     if (rights.IndexOf(",32") >= 0)
                     {
-                        menuText += "<li><a href='BioDeviceQuery.aspx'>仪器查询</a></li>";
+                        menuText += "<li><a href='PoctDeviceQuery.aspx'>仪器查询</a></li>";
                     }
                     if (rights.IndexOf(",33") >= 0)
                     {
@@ -215,15 +216,15 @@ namespace MSTSC.Manage.Web
                            <ul class='sub-menu'>";
                         if (rights.IndexOf(",331") >= 0)
                         {
-                            menuText += "<li><a href='BioStatisticAllDevices.aspx'>所有机器</a></li>";
+                            menuText += "<li><a href='PoctStatisticAllDevices.aspx'>所有机器</a></li>";
                         }
                         if (rights.IndexOf(",332") >= 0)
                         {
-                            menuText += "<li><a href='BioStatisticByArea.aspx'>按区域统计</a></li>";
+                            menuText += "<li><a href='PoctStatisticByArea.aspx'>按区域统计</a></li>";
                         }
                         if (rights.IndexOf(",333") >= 0)
                         {
-                            menuText += "<li><a href='BioStatisticByType.aspx'>按机型统计</a></li>";
+                            menuText += "<li><a href='PoctStatisticByType.aspx'>按机型统计</a></li>";
                         }
                         if (rights.IndexOf(",334") >= 0)
                         {

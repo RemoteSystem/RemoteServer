@@ -412,7 +412,7 @@ bm.sampling_times_fault,bm.syringe_times_syringe_fault,bm.inject_times_fault,bm.
 
         public dynamic GetBioDeviceDetialDAL(string sn)
         {
-            string sql = @"SELECT d.devicename,d.SIM,d.SN,d.DeviceType,d.Model,d.Region,d.Address,d.Hospital,date_format(d.UpdateTime,'%Y-%m-%d %T') as UpdateTime,bs.sample
+            string sql = @"SELECT d.devicename,d.SIM,d.SN,d.DeviceType,d.Model,d.Region,d.Address,d.Hospital,date_format(d.dtupdate,'%Y-%m-%d %T') as UpdateTime,bs.sample
                         from device_info d left join bio_statistics bs on bs.device_sn = d.SN where d.SN='" + sn + "'";
             using (var conn = new MySqlConnection(Global.strConn))
             {
@@ -495,7 +495,7 @@ bm.sampling_times_fault,bm.syringe_times_syringe_fault,bm.inject_times_fault,bm.
 
         public dynamic GetPoctDeviceDetialDAL(string sn)
         {
-            string sql = @"SELECT d.devicename,d.SIM,d.SN,d.DeviceType,d.Model,d.Region,d.Address,d.Hospital,date_format(d.UpdateTime,'%Y-%m-%d %T') as UpdateTime,bs.sample
+            string sql = @"SELECT d.devicename,d.SIM,d.SN,d.DeviceType,d.Model,d.Region,d.Address,d.Hospital,date_format(d.dtupdate,'%Y-%m-%d %T') as UpdateTime,bs.sample
                         from device_info d left join poct_statistics bs on bs.device_sn = d.SN where d.SN='" + sn + "'";
             using (var conn = new MySqlConnection(Global.strConn))
             {

@@ -63,19 +63,19 @@ namespace MSTSC.Manage.Web
                     condition = JsonConvert.DeserializeObject<QueryConditionModel>(conditions.Replace("\"0\"", "\"\""));
                     dt = staticBll.StatisticsAllBioDevicesForExportBLL(condition);
                     fileName = "生化仪统计_所有机器";
-                    headers = new string[] { "仪器名", "SIM卡号", "仪器序列号", "仪器型号", "项目编号", "样本数", "R1消耗量", "R2消耗量" };
+                    headers = new string[] { "仪器名称", "上报时间", "SIM卡号", "仪器序列号", "样本数", "R1消耗量", "R2消耗量" };
                     break;
                 case "bio_area":
                     condition = JsonConvert.DeserializeObject<QueryConditionModel>(conditions.Replace("\"0\"", "\"\""));
                     dt = staticBll.BioStatisticsByAreaForExportBLL(condition);
                     fileName = "生化仪统计_按区域";
-                    headers = new string[] { "装机区域", "项目编号", "仪器总数", "样本数", "R1消耗量", "R2消耗量" };
+                    headers = new string[] { "装机区域", "仪器总数", "样本数", "R1消耗量", "R2消耗量" };
                     break;
                 case "bio_type":
                     condition = JsonConvert.DeserializeObject<QueryConditionModel>(conditions.Replace("\"0\"", "\"\""));
                     dt = staticBll.BioStatisticsByTypeForExportBLL(condition);
                     fileName = "生化仪统计_按机型";
-                    headers = new string[] { "机型", "项目编号", "仪器总数", "样本数", "R1消耗量", "R2消耗量" };
+                    headers = new string[] { "机型", "仪器总数", "样本数", "R1消耗量", "R2消耗量" };
                     break;
                 case "poct_fault":
                     condition = JsonConvert.DeserializeObject<QueryConditionModel>(conditions.Replace("\"0\"", "\"\""));
@@ -87,31 +87,31 @@ namespace MSTSC.Manage.Web
                     condition = JsonConvert.DeserializeObject<QueryConditionModel>(conditions.Replace("\"0\"", "\"\""));
                     dt = poctStaticBll.StatisticsAllPoctDevicesForExportBLL(condition);
                     fileName = "POCT统计_所有机器";
-                    headers = new string[] { "机器名", "SIM卡号", "仪器序列号", "仪器型号", "项目编号", "样本数", "测试卡消耗数" };
+                    headers = new string[] { "仪器名称", "上报时间", "SIM卡号", "仪器序列号", "样本数", "测试卡消耗数" };
                     break;
                 case "poct_area":
                     condition = JsonConvert.DeserializeObject<QueryConditionModel>(conditions.Replace("\"0\"", "\"\""));
                     dt = poctStaticBll.PoctStatisticsByAreaForExportBLL(condition);
                     fileName = "POCT统计_按区域";
-                    headers = new string[] { "装机区域", "项目编号", "仪器总数", "样本数", "测试卡消耗数" };
+                    headers = new string[] { "装机区域", "仪器总数", "样本数", "测试卡消耗数" };
                     break;
                 case "poct_type":
                     condition = JsonConvert.DeserializeObject<QueryConditionModel>(conditions.Replace("\"0\"", "\"\""));
                     dt = poctStaticBll.PoctStatisticsByTypeForExportBLL(condition);
                     fileName = "POCT统计_按机型";
-                    headers = new string[] { "机型", "项目编号", "仪器总数", "样本数", "测试卡消耗数" };
+                    headers = new string[] { "机型", "仪器总数", "样本数", "测试卡消耗数" };
                     break;
                 case "poct_all_num":
                     condition = JsonConvert.DeserializeObject<QueryConditionModel>(conditions.Replace("\"0\"", "\"\""));
                     dt = poctStaticBll.StatisticsAllPoctNumForExportBLL(condition);
                     fileName = "POCT统计_总量统计";
-                    headers = new string[] { "仪器型号", "测试项目", "项目编号", "样本数", "测试卡消耗数" };
+                    headers = new string[] { "仪器型号", "测试项目", "样本数", "测试卡消耗数" };
                     break;
                 case "bio_log":
                     LogConditionModel conditionModel = JsonConvert.DeserializeObject<LogConditionModel>(conditions.Replace("\"0\"", "\"\""));
                     dt = staticBll.StatisticsLogsForExportBLL(conditionModel);
                     fileName = "日志查询";
-                    headers = new string[] { "仪器名称", "SIM卡号", "仪器序列号", "仪器类型", "仪器型号", "发生时间", "日志内容" };
+                    headers = new string[] { "仪器名称", "SIM卡号", "仪器序列号", "发生时间", "日志内容" };
                     break;
             }
             ExportExcel(context, dt, headers, fileName + sn + "_" + DateTime.Now.ToString("yyyyMMddHHmmss"));
@@ -159,7 +159,7 @@ namespace MSTSC.Manage.Web
                 {
                     if (i == (cl - 1))
                     {
-                        ls_item += row[i].ToString().Replace("\n","").Replace("\t","") + "\n";
+                        ls_item += row[i].ToString().Replace("\n", "").Replace("\t", "") + "\n";
                     }
                     else
                     {
