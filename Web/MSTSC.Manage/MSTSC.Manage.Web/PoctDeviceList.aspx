@@ -102,11 +102,11 @@
                     <span class="panel-title">故障信息</span>
                 </div>
                 <div class="padding-top-10 padding-bottom-10" style="background-color: #d9eaf9;">
-                    <div class="pull-right">
+                    <div class="pull-right" style="min-width:450px;">
                         故障发生时间：  
-                        <input type="text" id="dtstart" placeholder="开始时间" style="width: 120px;" />
+                        <input type="text" id="dtstart" placeholder="开始时间" style="width: 100px;" />
                         -
-                        <input type="text" id="dtend" placeholder="结束时间" style="width: 120px;" />
+                        <input type="text" id="dtend" placeholder="结束时间" style="width: 100px;" />
                         <button type="button" id="faultSearch" class="btn btn-default btn-small margin-left-10" style="padding: 1px 5px;">查询</button>
                         <button type="button" id="faultExport" class="btn btn-default btn-small margin-left-5" style="padding: 1px 5px;">导 出</button>
                     </div>
@@ -218,11 +218,11 @@
             InitMainTable();
             InitDateTimePicker();
 
-            $('#dtstart').datetimepicker({ format: 'YYYY-MM-DD HH:mm' });
-            $('#dtend').datetimepicker({ format: 'YYYY-MM-DD HH:mm' });
+            $('#dtstart').datetimepicker({ format: 'YYYY-MM-DD' });
+            $('#dtend').datetimepicker({ format: 'YYYY-MM-DD' });
             var now = new Date();
-            $('#dtstart').val(now.Format("yyyy-MM-dd") + " 00:00");
-            $('#dtend').val(now.Format("yyyy-MM-dd") + " 23:59");
+            $('#dtstart').val(now.Format("yyyy-MM-dd"));
+            $('#dtend').val(now.Format("yyyy-MM-dd"));
 
             $('#quickquery').click(function () {
                 type = 1;
@@ -255,8 +255,8 @@
 
             $('#faultExport').click(function () {
                 if (sn) {
-                    var dtstart = $('#dtstart').val();
-                    var dtend = $('#dtend').val();
+                    var dtstart = $('#dtstart').val() + " 00:00";
+                    var dtend = $('#dtend').val() + " 23:59";
                     var conditions = "{'sn':'" + sn + "','dtstart':'" + dtstart + "','dtend':'" + dtend + "'}";
                     window.open("Export.ashx?Action=poct_fault&conditions=" + conditions, "_blank");
                 }
@@ -391,8 +391,8 @@
 
                     sn = row.SN;
                     var now = new Date();
-                    $('#dtstart').val(now.Format("yyyy-MM-dd") + " 00:00");
-                    $('#dtend').val(now.Format("yyyy-MM-dd") + " 23:59");
+                    $('#dtstart').val(now.Format("yyyy-MM-dd"));
+                    $('#dtend').val(now.Format("yyyy-MM-dd"));
                     getRowInfo();
                 }
             });
@@ -551,8 +551,8 @@
             if (!sn) {
                 return;
             }
-            var dtstart = $('#dtstart').val();
-            var dtend = $('#dtend').val();
+            var dtstart = $('#dtstart').val() + " 00:00";
+            var dtend = $('#dtend').val() + " 23:59";
             $.ajax({
                 type: "post",
                 url: "PoctDeviceQuery.aspx/getPoctDeviceFault",

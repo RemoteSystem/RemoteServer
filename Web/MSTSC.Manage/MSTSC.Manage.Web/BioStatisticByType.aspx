@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script src="scripts/bootstrap-table/bootstrap-table-export.js"></script>
     <script src="scripts/bootstrap-table/tableExport.js"></script>
-    <link href="https://cdn.bootcss.com/toastr.js/2.1.4/toastr.min.css" rel="stylesheet"/>
+    <link href="https://cdn.bootcss.com/toastr.js/2.1.4/toastr.min.css" rel="stylesheet" />
     <script src="https://cdn.bootcss.com/toastr.js/2.1.4/toastr.min.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -16,7 +16,7 @@
                 <div class="pull-left padding-right-20 padding-bottom-10">
                     <div class="form-inline">
                         <span>仪器型号</span>
-                        <select id="selModel" class="form-control" style="width: 140px;">
+                        <select id="selModel" class="form-control" style="width: 100px;">
                             <option value="ZS200">ZS200</option>
                             <option value="ZS400">ZS400</option>
                         </select>
@@ -25,7 +25,7 @@
                 <div class="pull-left padding-right-20 padding-bottom-10">
                     <div class="form-inline">
                         <span>机型</span>
-                        <select id="selType" class="form-control" style="width: 140px;">
+                        <select id="selType" class="form-control" style="width: 100px;">
                             <option value="1">标准机</option>
                             <option value="2">招标机</option>
                             <option value="3">其他</option>
@@ -34,16 +34,16 @@
                 </div>
                 <div class="pull-left padding-right-20 padding-bottom-10">
                     <div class="form-inline">
-                        <span>项目编号<span style="color:orangered">*</span></span>
-                        <input id="num" class="form-control" style="width: 140px;" />
+                        <span>项目编号<span style="color: orangered">*</span></span>
+                        <input id="num" class="form-control" style="width: 100px;" />
                     </div>
                 </div>
-                 <div class="pull-left padding-right-20 padding-bottom-10">
+                <div class="pull-left padding-right-20 padding-bottom-10">
                     <div class="form-inline">
                         <span>统计时间</span>
-                        <input id="dtstart" class="form-control" placeholder="开始时间" style="width: 140px;" />
+                        <input id="dtstart" class="form-control" placeholder="开始时间" style="width: 100px;" />
                         -
-                    <input id="dtend" class="form-control" placeholder="结束时间" style="width: 140px;" />
+                    <input id="dtend" class="form-control" placeholder="结束时间" style="width: 100px;" />
                     </div>
                 </div>
                 <div class="pull-left padding-right-20 padding-bottom-10">
@@ -73,11 +73,11 @@
             toastr.options.positionClass = 'toast-top-center';
             InitDateTimePicker();
 
-            $('#dtstart').datetimepicker({ format: 'YYYY-MM-DD HH:mm' });
-            $('#dtend').datetimepicker({ format: 'YYYY-MM-DD HH:mm' });
+            $('#dtstart').datetimepicker({ format: 'YYYY-MM-DD' });
+            $('#dtend').datetimepicker({ format: 'YYYY-MM-DD' });
             var now = new Date();
-            $('#dtstart').val(now.Format("yyyy-MM-dd") + " 00:00");
-            $('#dtend').val(now.Format("yyyy-MM-dd") + " 23:59");
+            $('#dtstart').val(now.Format("yyyy-MM-dd"));
+            $('#dtend').val(now.Format("yyyy-MM-dd"));
 
             $("#selModel").change(function () {
                 //freshTable();
@@ -100,8 +100,8 @@
                         + "\",\"Model\":\"" + $("#selModel").val()
                         + "\",\"ProductSeries\":\"" + $("#selType").val()
                         + "\",\"Num\":\"" + $("#num").val()
-                        + "\",\"dtStart\":\"" + $("#dtstart").val()
-                        + "\",\"dtEnd\":\"" + $("#dtend").val()
+                        + "\",\"dtStart\":\"" + $("#dtstart").val() + " 00:00"
+                        + "\",\"dtEnd\":\"" + $("#dtend").val() + " 23:59"
                         + "\"}";
                 window.open("Export.ashx?Action=bio_type&conditions=" + conditions, "_blank");
             });
@@ -147,8 +147,8 @@
                         + "\",\"Model\":\"" + $("#selModel").val()
                         + "\",\"ProductSeries\":\"" + $("#selType").val()
                         + "\",\"Num\":\"" + $("#num").val()
-                        + "\",\"dtStart\":\"" + $("#dtstart").val()
-                        + "\",\"dtEnd\":\"" + $("#dtend").val()
+                        + "\",\"dtStart\":\"" + $("#dtstart").val() + " 00:00"
+                        + "\",\"dtEnd\":\"" + $("#dtend").val() + " 23:59"
                         + "\"}";
 
                     rows = params.limit ? params.limit : rows;

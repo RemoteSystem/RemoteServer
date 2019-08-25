@@ -63,19 +63,19 @@ namespace MSTSC.Manage.Web
                     condition = JsonConvert.DeserializeObject<QueryConditionModel>(conditions.Replace("\"0\"", "\"\""));
                     dt = staticBll.StatisticsAllBioDevicesForExportBLL(condition);
                     fileName = "生化仪统计_所有机器";
-                    headers = new string[] { "仪器名称", "上报时间", "SIM卡号", "仪器序列号", "样本数", "R1消耗量", "R2消耗量" };
+                    headers = new string[] { "仪器名称", "上报时间", "SIM卡号", "仪器序列号", "样本数", "R1试剂使用量(mL)", "R2试剂使用量(mL)" };
                     break;
                 case "bio_area":
                     condition = JsonConvert.DeserializeObject<QueryConditionModel>(conditions.Replace("\"0\"", "\"\""));
                     dt = staticBll.BioStatisticsByAreaForExportBLL(condition);
                     fileName = "生化仪统计_按区域";
-                    headers = new string[] { "装机区域", "仪器总数", "样本数", "R1消耗量", "R2消耗量" };
+                    headers = new string[] { "装机区域", "仪器总数", "样本数", "R1试剂使用量(mL)", "R2试剂使用量(mL)" };
                     break;
                 case "bio_type":
                     condition = JsonConvert.DeserializeObject<QueryConditionModel>(conditions.Replace("\"0\"", "\"\""));
                     dt = staticBll.BioStatisticsByTypeForExportBLL(condition);
                     fileName = "生化仪统计_按机型";
-                    headers = new string[] { "机型", "仪器总数", "样本数", "R1消耗量", "R2消耗量" };
+                    headers = new string[] { "机型", "仪器总数", "样本数", "R1试剂使用量(mL)", "R2试剂使用量(mL)" };
                     break;
                 case "poct_fault":
                     condition = JsonConvert.DeserializeObject<QueryConditionModel>(conditions.Replace("\"0\"", "\"\""));
@@ -135,7 +135,17 @@ namespace MSTSC.Manage.Web
         /// <param name="FileName">文件名</param>
         public void ExportExcel(HttpContext context, DataTable dt, string[] headers, string FileName)
         {
-            if (dt.Rows.Count <= 0) return;
+            if (dt.Rows.Count <= 0)
+            {
+                context.Response.Clear();
+                context.Response.Charset = "UTF-8";
+                context.Response.Buffer = true;
+                context.Response.ContentEncoding = System.Text.Encoding.GetEncoding("UTF-8");
+                context.Response.Output.Write("<script language=javascript>alert('没有数据');window.close();</script>");
+                context.Response.Output.Flush();
+                context.Response.End();
+                return;
+            }
 
             context.Response.Clear();
             context.Response.Charset = "UTF-8";

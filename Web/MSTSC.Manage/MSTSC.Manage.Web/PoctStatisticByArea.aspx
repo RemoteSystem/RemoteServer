@@ -8,7 +8,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <ul class="breadcrumb nomargin">
-        <li class="active">统计 -- 按装机区域统计</li>
+        <li class="active">统计 -- 按区域统计</li>
     </ul>
     <div class="col-lg-11 col-md-11 col-sm-11 col-xs-12">
         <div class="panel panel-info margin-5 padding-10">
@@ -16,7 +16,7 @@
                 <div class="pull-left padding-right-20 padding-bottom-10">
                     <div class="form-inline">
                         <span>仪器型号</span>
-                        <select id="selModel" class="form-control" style="width: 140px;">
+                        <select id="selModel" class="form-control" style="width: 100px;">
                             <option value="Q7">Q7</option>
                             <option value="Q8">Q8</option>
                         </select>
@@ -25,7 +25,7 @@
                 <div class="pull-left padding-right-20 padding-bottom-10">
                     <div class="form-inline">
                         <span>装机区域</span>
-                        <select id="region" class="form-control" style="width: 140px;">
+                        <select id="region" class="form-control" style="width: 120px;">
                             <option value="0">请选择</option>
                         </select>
                     </div>
@@ -33,15 +33,15 @@
                 <div class="pull-left padding-right-20 padding-bottom-10">
                     <div class="form-inline">
                         <span>测试项目<span style="color: orangered">*</span></span>
-                        <input id="card" class="form-control" style="width: 140px;" />
+                        <input id="card" class="form-control" style="width: 100px;" />
                     </div>
                 </div>                
                  <div class="pull-left padding-right-20 padding-bottom-10">
                     <div class="form-inline">
                         <span>统计时间</span>
-                        <input id="dtstart" class="form-control" placeholder="开始时间" style="width: 140px;" />
+                        <input id="dtstart" class="form-control" placeholder="开始时间" style="width: 100px;" />
                         -
-                    <input id="dtend" class="form-control" placeholder="结束时间" style="width: 140px;" />
+                    <input id="dtend" class="form-control" placeholder="结束时间" style="width: 100px;" />
                     </div>
                 </div>
                 <div class="pull-left padding-right-20 padding-bottom-10">
@@ -71,11 +71,11 @@
             toastr.options.positionClass = 'toast-top-center';
             InitDateTimePicker();
 
-            $('#dtstart').datetimepicker({ format: 'YYYY-MM-DD HH:mm' });
-            $('#dtend').datetimepicker({ format: 'YYYY-MM-DD HH:mm' });
+            $('#dtstart').datetimepicker({ format: 'YYYY-MM-DD' });
+            $('#dtend').datetimepicker({ format: 'YYYY-MM-DD' });
             var now = new Date();
-            $('#dtstart').val(now.Format("yyyy-MM-dd") + " 00:00");
-            $('#dtend').val(now.Format("yyyy-MM-dd") + " 23:59");
+            $('#dtstart').val(now.Format("yyyy-MM-dd"));
+            $('#dtend').val(now.Format("yyyy-MM-dd"));
 
             $("#selModel").change(function () {
                 //freshTable();
@@ -102,8 +102,8 @@
                         + "\",\"Model\":\"" + $("#selModel").val()
                         + "\",\"Card\":\"" + $("#card").val()
                         + "\",\"Region\":\"" + $("#region").val()
-                        + "\",\"dtStart\":\"" + $("#dtstart").val()
-                        + "\",\"dtEnd\":\"" + $("#dtend").val()
+                        + "\",\"dtStart\":\"" + $("#dtstart").val() + " 00:00"
+                        + "\",\"dtEnd\":\"" + $("#dtend").val() + " 23:59"
                         + "\"}";
                 window.open("Export.ashx?Action=poct_area&conditions=" + conditions, "_blank");
             });
@@ -150,8 +150,8 @@
                         + "\",\"Model\":\"" + $("#selModel").val()
                         + "\",\"Card\":\"" + $("#card").val()
                         + "\",\"Region\":\"" + $("#region").val()
-                        + "\",\"dtStart\":\"" + $("#dtstart").val()
-                        + "\",\"dtEnd\":\"" + $("#dtend").val()
+                        + "\",\"dtStart\":\"" + $("#dtstart").val() + " 00:00"
+                        + "\",\"dtEnd\":\"" + $("#dtend").val() + " 23:59"
                         + "\"}";
 
                     rows = params.limit ? params.limit : rows;

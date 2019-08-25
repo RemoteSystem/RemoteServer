@@ -440,14 +440,14 @@ FROM device_info,blood_count WHERE SN = device_sn {0}";
         public DataTable StatisticsAllBioDevicesDAL(QueryConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
         {
             StringBuilder whereSql = new StringBuilder();
-            //            string sql = @"SELECT CONCAT(IFNULL(d.Hospital,''),'_',IFNULL(d.Model,'')) as DeviceName,d.dtupdate,d.SIM,d.SN,SUM(c.smpl) AS smpl, SUM(c.R1) AS R1, SUM(c.R2) AS R2 
+            //            string sql = @"SELECT d.DeviceName,d.dtupdate,d.SIM,d.SN,SUM(c.smpl) AS smpl, SUM(c.R1) AS R1, SUM(c.R2) AS R2 
             //	                FROM device_info d LEFT OUTER JOIN bio_statistics_item c 
             //		            ON d.SN = c.device_sn WHERE d.DeviceType='生化仪' {0} GROUP BY SN 
             //	                LIMIT " + (pagerInfo.PageSize * (pagerInfo.CurrenetPageIndex - 1)) + "," + pagerInfo.PageSize; ;
 
             //            if (!string.IsNullOrEmpty(conditValue.SN))
             //            {
-            string sql = @"SELECT CONCAT(IFNULL(d.Hospital,''),'_',IFNULL(d.Model,'')) as DeviceName,c.dtinsert as dtupdate,d.SIM,d.SN,c.smpl, c.R1, c.R2
+            string sql = @"SELECT d.DeviceName,c.dtinsert as dtupdate,d.SIM,d.SN,c.smpl, c.R1, c.R2
 	                FROM device_info d LEFT OUTER JOIN bio_statistics_item c
 		            ON d.SN = c.device_sn WHERE d.DeviceType='生化仪' {0} ORDER BY c.dtinsert DESC 
 	                LIMIT " + (pagerInfo.PageSize * (pagerInfo.CurrenetPageIndex - 1)) + "," + pagerInfo.PageSize;
@@ -693,7 +693,7 @@ FROM device_info,blood_count WHERE SN = device_sn {0}";
         public DataTable StatisticsLogsDAL(LogConditionModel conditValue, PagerInfo pagerInfo, SortInfo sortInfo)
         {
             StringBuilder whereSql = new StringBuilder();
-            string sql = @"SELECT CONCAT(IFNULL(d.Hospital,''),'_',IFNULL(d.Model,'')) as DeviceName,d.SIM,d.SN,dl.dtinsert,dl.content
+            string sql = @"SELECT d.DeviceName,d.SIM,d.SN,dl.dtinsert,dl.content
                             FROM device_log dl LEFT JOIN device_info d ON dl.device_sn = d.SN {0}
                             ORDER BY dl.dtinsert DESC, dl.id LIMIT " + (pagerInfo.PageSize * (pagerInfo.CurrenetPageIndex - 1)) + "," + pagerInfo.PageSize + ";";
 

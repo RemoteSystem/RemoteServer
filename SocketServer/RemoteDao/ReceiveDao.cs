@@ -156,78 +156,17 @@ namespace RemoteDao
 
         public static int UpdateOrSaveSessionForBio(BioInfo info)
         {
-            string sql = "INSERT INTO device_info(SN,SIM,Region,Hospital,Address,Model,DeviceType,MachineType,UpdateTime,dtupdate,sessionid,starttime) "
-                + "VALUES(?sn,?sim,?region,?hospoital,?address,?model,'生化仪',?machinetype,?updatetime,?dtupdate,?id,?dt) "
+            string sql = "INSERT INTO device_info(SN,DeviceName,SIM,Region,Hospital,Address,Model,DeviceType,MachineType,UpdateTime,dtupdate,sessionid,starttime) "
+                + "VALUES(?sn,?devicename,?sim,?region,?hospoital,?address,?model,'生化仪',?machinetype,?updatetime,?dtupdate,?id,?dt) "
                 + "ON DUPLICATE KEY UPDATE ";
 
             if (info.sim != null)
             {
                 sql += ",SIM = ?sim";
             }
-            if (info.region != null)
+            if (info.hospital != null && info.model != null)
             {
-                sql += ",Region = ?region";
-            }
-            if (info.hospital != null)
-            {
-                sql += ",Hospital = ?hospoital";
-            }
-            if (info.addr != null)
-            {
-                sql += ",Address = ?address";
-            }
-            if (info.model != null)
-            {
-                sql += ",Model = ?model";
-            }
-            if (info.machine_type != null) {
-                sql += ",MachineType = ?machinetype";
-            }
-            if (info.update_time != null && info.update_time != DateTime.MinValue)
-            {
-                sql += ",UpdateTime = ?updatetime";
-            }
-
-            sql += ",dtupdate = ?dtupdate ";
-            sql += ",sessionid = ?id,starttime = ?dt; ";
-            sql = sql.Replace("UPDATE ,", "UPDATE ");
-
-            MySqlParameter[] parameters = { new MySqlParameter("?sn", MySqlDbType.VarChar),
-                                            new MySqlParameter("?sim", MySqlDbType.VarChar),                                            
-                                            new MySqlParameter("?region", MySqlDbType.VarChar),                                            
-                                            new MySqlParameter("?hospoital", MySqlDbType.VarChar),
-                                            new MySqlParameter("?address", MySqlDbType.VarChar),
-                                            new MySqlParameter("?model", MySqlDbType.VarChar), 
-                                            new MySqlParameter("?machinetype",MySqlDbType.Int32),
-                                            new MySqlParameter("?updatetime", MySqlDbType.Timestamp),
-                                            new MySqlParameter("?dtupdate", MySqlDbType.Timestamp),
-                                            new MySqlParameter("?id", MySqlDbType.VarChar),
-                                            new MySqlParameter("?dt", MySqlDbType.Timestamp)};
-            parameters[0].Value = info.sn;
-            parameters[1].Value = info.sim;
-            parameters[2].Value = info.region;
-            parameters[3].Value = info.hospital;
-            parameters[4].Value = info.addr;
-            parameters[5].Value = info.model != null ? info.model.ToUpper() : null;
-            parameters[6].Value = info.machine_type;
-            parameters[7].Value = info.update_time;
-            parameters[8].Value = DateTime.Now;
-            parameters[9].Value = info.sessionid;
-            parameters[10].Value = info.starttime;
-
-            int num = MySqlHelper.ExecuteNonQuery(Conn, sql, parameters);
-            return num;
-        }
-
-        public static int UpdateOrSaveSessionForPoct(PoctInfo info)
-        {
-            string sql = "INSERT INTO device_info(SN,SIM,Region,Hospital,Address,Model,DeviceType,MachineType,UpdateTime,dtupdate,sessionid,starttime) "
-                + "VALUES(?sn,?sim,?region,?hospoital,?address,?model,'POCT',?machinetype,?updatetime,?dtupdate,?id,?dt) "
-                + "ON DUPLICATE KEY UPDATE ";
-
-            if (info.sim != null)
-            {
-                sql += ",SIM = ?sim";
+                sql += ",DeviceName = ?devicename";
             }
             if (info.region != null)
             {
@@ -259,6 +198,7 @@ namespace RemoteDao
             sql = sql.Replace("UPDATE ,", "UPDATE ");
 
             MySqlParameter[] parameters = { new MySqlParameter("?sn", MySqlDbType.VarChar),
+                                            new MySqlParameter("?devicename", MySqlDbType.VarChar),
                                             new MySqlParameter("?sim", MySqlDbType.VarChar),                                            
                                             new MySqlParameter("?region", MySqlDbType.VarChar),                                            
                                             new MySqlParameter("?hospoital", MySqlDbType.VarChar),
@@ -270,16 +210,89 @@ namespace RemoteDao
                                             new MySqlParameter("?id", MySqlDbType.VarChar),
                                             new MySqlParameter("?dt", MySqlDbType.Timestamp)};
             parameters[0].Value = info.sn;
-            parameters[1].Value = info.sim;
-            parameters[2].Value = info.region;
-            parameters[3].Value = info.hospital;
-            parameters[4].Value = info.addr;
-            parameters[5].Value = info.model != null ? info.model.ToUpper() : null;
-            parameters[6].Value = info.machine_type;
-            parameters[7].Value = info.update_time;
-            parameters[8].Value = DateTime.Now;
-            parameters[9].Value = info.sessionid;
-            parameters[10].Value = info.starttime;
+            parameters[1].Value = (string.IsNullOrEmpty(info.hospital) ? "" : info.hospital) + "_" + (string.IsNullOrEmpty(info.model) ? "" : info.model);
+            parameters[2].Value = info.sim;
+            parameters[3].Value = info.region;
+            parameters[4].Value = info.hospital;
+            parameters[5].Value = info.addr;
+            parameters[6].Value = info.model != null ? info.model.ToUpper() : null;
+            parameters[7].Value = info.machine_type;
+            parameters[8].Value = info.update_time;
+            parameters[9].Value = DateTime.Now;
+            parameters[10].Value = info.sessionid;
+            parameters[11].Value = info.starttime;
+
+            int num = MySqlHelper.ExecuteNonQuery(Conn, sql, parameters);
+            return num;
+        }
+
+        public static int UpdateOrSaveSessionForPoct(PoctInfo info)
+        {
+            string sql = "INSERT INTO device_info(SN,DeviceName,SIM,Region,Hospital,Address,Model,DeviceType,MachineType,UpdateTime,dtupdate,sessionid,starttime) "
+                + "VALUES(?sn,?devicename,?sim,?region,?hospoital,?address,?model,'POCT',?machinetype,?updatetime,?dtupdate,?id,?dt) "
+                + "ON DUPLICATE KEY UPDATE ";
+
+            if (info.sim != null)
+            {
+                sql += ",SIM = ?sim";
+            }
+            if (info.hospital != null && info.model != null)
+            {
+                sql += ",DeviceName = ?devicename";
+            }
+            if (info.region != null)
+            {
+                sql += ",Region = ?region";
+            }
+            if (info.hospital != null)
+            {
+                sql += ",Hospital = ?hospoital";
+            }
+            if (info.addr != null)
+            {
+                sql += ",Address = ?address";
+            }
+            if (info.model != null)
+            {
+                sql += ",Model = ?model";
+            }
+            if (info.machine_type != null)
+            {
+                sql += ",MachineType = ?machinetype";
+            }
+            if (info.update_time != null && info.update_time != DateTime.MinValue)
+            {
+                sql += ",UpdateTime = ?updatetime";
+            }
+
+            sql += ",dtupdate = ?dtupdate ";
+            sql += ",sessionid = ?id,starttime = ?dt; ";
+            sql = sql.Replace("UPDATE ,", "UPDATE ");
+
+            MySqlParameter[] parameters = { new MySqlParameter("?sn", MySqlDbType.VarChar),
+                                            new MySqlParameter("?devicename", MySqlDbType.VarChar),
+                                            new MySqlParameter("?sim", MySqlDbType.VarChar),                                            
+                                            new MySqlParameter("?region", MySqlDbType.VarChar),                                            
+                                            new MySqlParameter("?hospoital", MySqlDbType.VarChar),
+                                            new MySqlParameter("?address", MySqlDbType.VarChar),
+                                            new MySqlParameter("?model", MySqlDbType.VarChar), 
+                                            new MySqlParameter("?machinetype",MySqlDbType.Int32),
+                                            new MySqlParameter("?updatetime", MySqlDbType.Timestamp),
+                                            new MySqlParameter("?dtupdate", MySqlDbType.Timestamp),
+                                            new MySqlParameter("?id", MySqlDbType.VarChar),
+                                            new MySqlParameter("?dt", MySqlDbType.Timestamp)};
+            parameters[0].Value = info.sn;
+            parameters[1].Value = (string.IsNullOrEmpty(info.hospital) ? "" : info.hospital) + "_" + (string.IsNullOrEmpty(info.model) ? "" : info.model);
+            parameters[2].Value = info.sim;
+            parameters[3].Value = info.region;
+            parameters[4].Value = info.hospital;
+            parameters[5].Value = info.addr;
+            parameters[6].Value = info.model != null ? info.model.ToUpper() : null;
+            parameters[7].Value = info.machine_type;
+            parameters[8].Value = info.update_time;
+            parameters[9].Value = DateTime.Now;
+            parameters[10].Value = info.sessionid;
+            parameters[11].Value = info.starttime;
 
             int num = MySqlHelper.ExecuteNonQuery(Conn, sql, parameters);
             return num;

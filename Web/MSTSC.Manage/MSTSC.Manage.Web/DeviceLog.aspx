@@ -23,8 +23,6 @@
                         <select id="selModel" class="form-control margin-top-5 margin-bottom-5">
                             <option value="ZS200">ZS200</option>
                             <option value="ZS400">ZS400</option>
-                            <option value="Q7">Q7</option>
-                            <option value="Q8">Q8</option>
                         </select>
                     </div>
 
@@ -52,9 +50,9 @@
 
                     <div class="col-lg-5 col-md-6 col-sm-10 col-xs-12 nopadding form-inline">
                         <label>发生时间</label>
-                        <input id="dtstart" placeholder="开始时间" class="form-control margin-top-5 margin-bottom-5" style="width: 130px !important;" />
+                        <input id="dtstart" placeholder="开始时间" class="form-control margin-top-5 margin-bottom-5" style="width: 100px !important;" />
                         <label style="min-width: 5px;">-</label>
-                        <input id="dtend" placeholder="结束时间" class="form-control margin-top-5 margin-bottom-5" style="width: 130px !important;" />
+                        <input id="dtend" placeholder="结束时间" class="form-control margin-top-5 margin-bottom-5" style="width: 100px !important;" />
                     </div>
 
                     <div class="col-lg-4 col-md-4 col-sm-10 col-xs-12 nopadding form-inline">
@@ -105,11 +103,11 @@
             InitMainTable();
             InitDateTimePicker();
 
-            $('#dtstart').datetimepicker({ format: 'YYYY-MM-DD HH:mm' });
-            $('#dtend').datetimepicker({ format: 'YYYY-MM-DD HH:mm' });
+            $('#dtstart').datetimepicker({ format: 'YYYY-MM-DD' });
+            $('#dtend').datetimepicker({ format: 'YYYY-MM-DD' });
             var now = new Date();
-            $('#dtstart').val(now.Format("yyyy-MM-dd") + " 00:00");
-            $('#dtend').val(now.Format("yyyy-MM-dd") + " 23:59");
+            $('#dtstart').val(now.Format("yyyy-MM-dd"));
+            $('#dtend').val(now.Format("yyyy-MM-dd"));
 
             $("#selType").change(function () {
                 var type = $("#selType").val();
@@ -142,8 +140,8 @@
                         + "\",\"DeviceName\":\"" + $("#DeviceName").val()
                         + "\",\"SIM\":\"" + $("#SIM").val()
                         + "\",\"SN\":\"" + $("#SN").val()
-                        + "\",\"dtStart\":\"" + $("#dtstart").val()
-                        + "\",\"dtEnd\":\"" + $("#dtend").val()
+                        + "\",\"dtStart\":\"" + $("#dtstart").val() + " 00:00"
+                        + "\",\"dtEnd\":\"" + $("#dtend").val() + " 23:59"
                         + "\"}";
                 window.open("Export.ashx?Action=bio_log&conditions=" + conditions, "_blank");
             });
@@ -191,8 +189,8 @@
                         + "\",\"DeviceName\":\"" + $("#DeviceName").val()
                         + "\",\"SIM\":\"" + $("#SIM").val()
                         + "\",\"SN\":\"" + $("#SN").val()
-                        + "\",\"dtStart\":\"" + $("#dtstart").val()
-                        + "\",\"dtEnd\":\"" + $("#dtend").val()
+                        + "\",\"dtStart\":\"" + $("#dtstart").val() + " 00:00"
+                        + "\",\"dtEnd\":\"" + $("#dtend").val() + " 23:59"
                         + "\"}";
 
                     rows = params.limit ? params.limit : rows;
