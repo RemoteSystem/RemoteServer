@@ -69,13 +69,7 @@
         $(document).ready(function () {
             InitMainTable();
             toastr.options.positionClass = 'toast-top-center';
-            InitDateTimePicker();
-
-            $('#dtstart').datetimepicker({ format: 'YYYY-MM-DD' });
-            $('#dtend').datetimepicker({ format: 'YYYY-MM-DD' });
-            var now = new Date();
-            $('#dtstart').val(now.Format("yyyy-MM-dd"));
-            $('#dtend').val(now.Format("yyyy-MM-dd"));
+            InitDateTimeRangePicker();
 
             $("#selModel").change(function () {
                 //freshTable();

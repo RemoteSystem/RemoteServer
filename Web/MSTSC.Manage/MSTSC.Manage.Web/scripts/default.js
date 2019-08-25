@@ -111,10 +111,35 @@ Date.prototype.Format = function (fmt) {
     return fmt;
 };
 
-function InitDateTimePicker() {
-    //if (!$("#dtstart") || !$("#dtend")) {
-    //    return;
-    //}
+function InitDateTimeRangePicker() {
+    if ($("#dtstart") && $("#dtend")) {
+
+        $('#dtstart').datetimepicker({ format: 'YYYY-MM-DD' });
+        $('#dtend').datetimepicker({ format: 'YYYY-MM-DD' });
+        var now = new Date();
+        $('#dtstart').val(now.Format("yyyy-MM-dd"));
+        $('#dtend').val(now.Format("yyyy-MM-dd"));
+
+        $('#dtstart').bind('input propertychange change blur', function () {
+            debugger;
+            var oDate1 = new Date($(this).val());
+            var oDate2 = new Date($('#dtend').val());
+            if (oDate1.getTime() > oDate2.getTime()) {
+                $('#dtstart').val(oDate2.Format("yyyy-MM-dd"));
+                $('#dtend').val(oDate1.Format("yyyy-MM-dd"));
+            }
+        });
+        $('#dtend').bind('input propertychange change blur', function () {
+            var oDate1 = new Date($('#dtstart').val());
+            var oDate2 = new Date($(this).val());
+            if (oDate1.getTime() > oDate2.getTime()) {
+                $('#dtstart').val(oDate2.Format("yyyy-MM-dd"));
+                $('#dtend').val(oDate1.Format("yyyy-MM-dd"));
+            }
+        });
+
+        return;
+    }
 
     //$("#dtstart").datetimepicker({
     //    format: 'yyyy-mm-dd hh:ii',  //格式  如果只有yyyy-mm-dd那就是0000-00-00

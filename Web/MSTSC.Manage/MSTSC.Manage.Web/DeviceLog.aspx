@@ -101,13 +101,7 @@
 
         $(document).ready(function () {
             InitMainTable();
-            InitDateTimePicker();
-
-            $('#dtstart').datetimepicker({ format: 'YYYY-MM-DD' });
-            $('#dtend').datetimepicker({ format: 'YYYY-MM-DD' });
-            var now = new Date();
-            $('#dtstart').val(now.Format("yyyy-MM-dd"));
-            $('#dtend').val(now.Format("yyyy-MM-dd"));
+            InitDateTimeRangePicker();
 
             $("#selType").change(function () {
                 var type = $("#selType").val();
